@@ -91,7 +91,8 @@
     "wpackagist-plugin/mailchimp-for-wp": "*",
     "log1x/poet": "^2.0",
     "wp-sync-db/wp-sync-db-media-files": "dev-master",
-    "analogmemory/wp-sync-db": "1.6"
+    "analogmemory/wp-sync-db": "1.6",
+    "log1x/acf-composer": "^2.1"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.7.1",
