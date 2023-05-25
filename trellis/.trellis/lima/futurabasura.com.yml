@@ -1,0 +1,24 @@
+vmType: "vz"
+rosetta:
+  enabled: false
+images:
+- location: https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
+  arch: x86_64
+- location: https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-arm64.img
+  arch: aarch64
+
+mounts:
+- location: /Users/aitor/Documents/Sites/futurabasura.com/site
+  mountPoint: /srv/www/futurabasura.com/current
+  writable: true
+
+mountType: "virtiofs"
+networks:
+- vzNAT: true
+containerd:
+  user: false
+provision:
+- mode: system
+  script: |
+    #!/bin/bash
+    echo "127.0.0.1 $(hostname)" >> /etc/hosts
