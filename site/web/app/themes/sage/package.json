@@ -23,5 +23,11 @@
     "@roots/bud-tailwindcss": "6.12.2",
     "@roots/sage": "6.12.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@glidejs/glide": "^3.6.0",
+    "Select2": "^3.5.7",
+    "animejs": "^3.2.1",
+    "lightgallery": "^2.7.1",
+    "scrambling-text": "^1.2.0"
+  }
 }
