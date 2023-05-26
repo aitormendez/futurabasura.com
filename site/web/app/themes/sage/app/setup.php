@@ -24,6 +24,30 @@ add_action('wp_enqueue_scripts', function () {
  */
 add_action('enqueue_block_editor_assets', function () {
     bundle('editor')->enqueue();
+
+    $frases = get_field('frases', 'option');
+
+    if ($frases) {
+        $frases_array = [];
+        foreach ($frases as $frase) {
+            $frases_array[] = $frase['frase'];
+        };
+    }
+
+    $fondos = [
+        'f50x70v' => get_field('fondo_50x70v', 'option')['url'],
+        'f50x70h' => get_field('fondo_50x70h', 'option')['url'],
+        'f61x91v' => get_field('fondo_61x91v', 'option')['url'],
+        'f61x91h' => get_field('fondo_61x91h', 'option')['url'],
+    ];
+
+    $datos = array(
+        'homeUrl' => get_bloginfo('url'),
+        'frases' => $frases_array,
+        'fondos' => $fondos,
+    );
+
+    wp_localize_script('sage/app.js', 'fb', $datos);
 }, 100);
 
 /**
@@ -58,6 +82,10 @@ add_action('after_setup_theme', function () {
      */
     register_nav_menus([
         'primary_navigation' => __('Primary Navigation', 'sage'),
+        'info_navigation' => __('Info Navigation', 'sage'),
+        'social_navigation' => __('Social Navigation', 'sage'),
+        'shop_navigation' => __('Shop Navigation', 'sage'),
+        'contents_navigation' => __('Contents Navigation', 'sage'),
     ]);
 
     /**

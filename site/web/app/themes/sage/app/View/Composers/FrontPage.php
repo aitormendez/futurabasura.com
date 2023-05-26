@@ -4,7 +4,7 @@ namespace App\View\Composers;
 
 use Roots\Acorn\View\Composer;
 
-class App extends Composer
+class FrontPage extends Composer
 {
     /**
      * List of views served by this composer.
@@ -12,28 +12,29 @@ class App extends Composer
      * @var array
      */
     protected static $views = [
-        '*',
+        'front-page',
     ];
 
     /**
-     * Data to be passed to view before rendering.
+     * Data to be passed to view.
      *
      * @return array
      */
     public function with()
     {
         return [
-            'siteName' => $this->siteName(),
+            'hero_video' => $this->heroVideo(),
         ];
     }
 
-    /**
-     * Returns the site name.
-     *
-     * @return string
-     */
-    public function siteName()
+    public function heroVideo()
     {
-        return get_bloginfo('name', 'display');
+
+            $video_ID = get_field('hero_video', 'option');
+
+
+            return $video_ID;
+
     }
+
 }

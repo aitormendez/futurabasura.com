@@ -4,7 +4,7 @@ namespace App\View\Composers;
 
 use Roots\Acorn\View\Composer;
 
-class App extends Composer
+class Cart extends Composer
 {
     /**
      * List of views served by this composer.
@@ -12,28 +12,19 @@ class App extends Composer
      * @var array
      */
     protected static $views = [
-        '*',
+        'woocommerce.cart-totals',
     ];
 
     /**
-     * Data to be passed to view before rendering.
+     * Data to be passed to view.
      *
      * @return array
      */
     public function with()
     {
         return [
-            'siteName' => $this->siteName(),
+            // 'exp_cart_totals' => $this->artists(),
         ];
     }
 
-    /**
-     * Returns the site name.
-     *
-     * @return string
-     */
-    public function siteName()
-    {
-        return get_bloginfo('name', 'display');
-    }
 }
