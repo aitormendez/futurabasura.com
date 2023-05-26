@@ -156,9 +156,9 @@ return [
 
     'providers' => [
 
-        /*
-         * Framework Service Providers...
-         */
+            /*
+             * Framework Service Providers...
+             */
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -183,6 +183,7 @@ return [
         Roots\Acorn\Providers\AcornServiceProvider::class,
         Roots\Acorn\Providers\RouteServiceProvider::class,
         Roots\Acorn\View\ViewServiceProvider::class,
+        Log1x\Navi\Providers\NaviServiceProvider::class,
 
         /*
          * Package Service Providers...

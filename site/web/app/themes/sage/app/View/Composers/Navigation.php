@@ -56,7 +56,7 @@ class Navigation extends Composer
      */
     public function infoNavigation()
     {
-        if (Navi::build()->isEmpty()) {
+        if (Navi::build('info')->isEmpty()) {
             return;
         }
 
@@ -70,7 +70,7 @@ class Navigation extends Composer
      */
     public function socialNavigation()
     {
-        if (Navi::build()->isEmpty()) {
+        if (Navi::build('social')->isEmpty()) {
             return;
         }
 
@@ -84,7 +84,7 @@ class Navigation extends Composer
      */
     public function shopNavigation()
     {
-        if (Navi::build()->isEmpty()) {
+        if (Navi::build('shop')->isEmpty()) {
             return;
         }
 
@@ -98,7 +98,7 @@ class Navigation extends Composer
      */
     public function contentsNavigation()
     {
-        if (Navi::build()->isEmpty()) {
+        if (Navi::build('contents')->isEmpty()) {
             return;
         }
 
@@ -125,11 +125,12 @@ class Navigation extends Composer
     {
         $frases = get_field('frases', 'option');
 
-        if( $frases ) {
+        if ($frases) {
             $frases_array = [];
-            foreach( $frases as $frase ) {
+            foreach ($frases as $frase) {
                 $frases_array[] = $frase['frase'];
-            };
+            }
+            ;
         }
 
         return $frases_array[array_rand($frases_array)];
