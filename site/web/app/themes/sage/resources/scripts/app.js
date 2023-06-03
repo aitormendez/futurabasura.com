@@ -10,6 +10,11 @@ domReady(async () => {
     const { sliderHome } = await import('./sliderHome.js');
     sliderHome();
   }
+
+  if (document.body.classList.contains('tax-artist')) {
+    const { desplegarArtista } = await import('./shop.js');
+    desplegarArtista();
+  }
 });
 
 /**
