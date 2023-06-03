@@ -44,6 +44,11 @@ domReady(async () => {
     const { anadirAlCarroSimple } = await import('./simpleProduct.js');
     anadirAlCarroSimple();
   }
+
+  if (document.body.classList.contains('cart')) {
+    const { carrito } = await import('./cart.js');
+    carrito();
+  }
 });
 
 /**
