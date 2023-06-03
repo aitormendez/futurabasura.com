@@ -6,7 +6,6 @@ import Glide, {
 } from '@glidejs/glide/dist/glide.modular.esm.js';
 
 export function singleProductGallery() {
-  console.log('kjhkjhkjhkjhjkhjkhhjk');
   // galería de imágenes con Glide
   // ----------------------------------------------------
   let g = document.getElementById('glide'),

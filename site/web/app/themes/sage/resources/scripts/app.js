@@ -34,6 +34,16 @@ domReady(async () => {
     sliderProductosRelacionadosArtista();
     sliderProductosRelacionados();
   }
+
+  if (document.body.classList.contains('variable')) {
+    const { anadirAlCarroVariable } = await import('./variableProduct.js');
+    anadirAlCarroVariable();
+  }
+
+  if (document.body.classList.contains('simple')) {
+    const { anadirAlCarroSimple } = await import('./simpleProduct.js');
+    anadirAlCarroSimple();
+  }
 });
 
 /**

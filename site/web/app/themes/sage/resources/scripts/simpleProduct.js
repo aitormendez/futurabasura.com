@@ -1,25 +1,20 @@
 import {
   ftbs_product_quantity_increase,
-  ftbs_product_quantity_decrease
- } from './exports.js';
+  ftbs_product_quantity_decrease,
+} from './exports.js';
 
- $(() => {
-  if (document.body.classList.contains('simple')) {
+export function anadirAlCarroSimple() {
+  // Cantidad de productos a añadir al carro
+  // ----------------------------------------------------
 
-    // Cantidad de productos a añadir al carro
-    // ----------------------------------------------------
+  let btnAdd = $('#ftbs_variationsTableRowColumn_quantityInput_add'),
+    btnRemove = $('#ftbs_variationsTableRowColumn_quantityInput_remove');
 
-    let
-      btnAdd = $('#ftbs_variationsTableRowColumn_quantityInput_add'),
-      btnRemove = $('#ftbs_variationsTableRowColumn_quantityInput_remove');
+  btnAdd.click(function () {
+    ftbs_product_quantity_increase();
+  });
 
-    btnAdd.click(function(){
-      ftbs_product_quantity_increase();
-    });
-
-    btnRemove.click(function(){
-      ftbs_product_quantity_decrease();
-    });
-
-  }
-});
+  btnRemove.click(function () {
+    ftbs_product_quantity_decrease();
+  });
+}
