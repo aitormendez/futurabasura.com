@@ -1246,6 +1246,31 @@
           "name": "Rose 950",
           "slug": "rose-950",
           "color": "#4c0519"
+        },
+        {
+          "name": "Negro-fb",
+          "slug": "negro-fb",
+          "color": "#3e2b2f"
+        },
+        {
+          "name": "Gris-fb",
+          "slug": "gris-fb",
+          "color": "#ada3a4"
+        },
+        {
+          "name": "Allo",
+          "slug": "allo",
+          "color": "#ffff00"
+        },
+        {
+          "name": "Allo-claro",
+          "slug": "allo-claro",
+          "color": "#dbffe9"
+        },
+        {
+          "name": "Azul",
+          "slug": "azul",
+          "color": "#0000ff"
         }
       ]
     },
@@ -1272,14 +1297,14 @@
       "dropCap": false,
       "fontFamilies": [
         {
-          "name": "Ui-sans-serif",
+          "name": "Arial",
           "slug": "sans",
-          "fontFamily": "ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\""
+          "fontFamily": "arial,sans-serif"
         },
         {
-          "name": "Ui-serif",
+          "name": "Times-new-roman",
           "slug": "serif",
-          "fontFamily": "ui-serif,Georgia,Cambria,\"Times New Roman\",Times,serif"
+          "fontFamily": "times-new-roman,times,serif"
         },
         {
           "name": "Ui-monospace",

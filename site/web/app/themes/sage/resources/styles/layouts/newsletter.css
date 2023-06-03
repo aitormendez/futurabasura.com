@@ -1,0 +1,41 @@
+body.newsletter main {
+    .mc4wp-form {
+        .mc4wp-form-fields {
+            label {
+                display: none;
+            }
+
+            input {
+                width: 100%;
+                padding: 1.5rem;
+                padding-bottom: 1.5rem;
+                font-size: 2rem;
+                letter-spacing: 0.05em;
+                line-height: 1.2em;
+                text-align: center;
+                border-bottom: 1px solid black !important;
+                border-left: none;
+                border-right: none;
+                border-top: none;
+
+                &[type="email"] {
+                    border-top: 1px solid black !important;
+                }
+
+                &[type="submit"] {
+                    background-color: blue;
+                    color: #fff;
+                }
+                
+                &:focus {
+                    background-color: rgb(27, 27, 27);
+                    color: #fff;
+                }
+
+                &::placeholder { 
+                    color: rgb(182, 182, 182);
+                }
+            }
+        }
+    }
+}

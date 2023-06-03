@@ -1,0 +1,58 @@
+body.artists {
+  .article {
+    transition: color 0s !important;
+
+    h2 {
+      background-color: white;
+    }
+
+    .productos {
+      align-self: flex-start;
+
+      img {
+        max-width: 25vw;
+        max-height: 25vw;
+        width: auto;
+        height: auto;
+      }
+    }
+
+    &:hover {
+      h2 {
+        @apply bg-azul;
+      }
+
+      img {
+        filter: brightness(50%) sepia(100%) hue-rotate(190deg) saturate(500%);
+      }
+    }
+  }
+
+  @media (min-width: 786px) {
+    .article {
+      h2 {
+        width: 25vw;
+        height: 25vw;
+      }
+
+      .avatar {
+        img {
+          width: 25vw;
+          height: 25vw;
+        }
+      }
+
+      .productos {
+        align-self: flex-start;
+        width: 50%;
+
+        img {
+          max-width: 10vw;
+          max-height: 10vw;
+          width: auto;
+          height: auto;
+        }
+      }
+    }
+  }
+}

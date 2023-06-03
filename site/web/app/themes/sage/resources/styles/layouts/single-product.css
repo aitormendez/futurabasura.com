@@ -1,0 +1,48 @@
+.single-product {
+  form.cart {
+    width: 100%;
+
+    .ftbs_variationsTableRowColumn {
+      display: flex;
+      align-items: center;
+    }
+
+    .ftbs_variationsTableRowColumn_quantityInput {
+      width: 4rem;
+    }
+
+    .single_add_to_cart_button {
+      display: block;
+      width: 100%;
+      padding: 1em;
+      @apply bg-azul;
+      @apply tracking-widest;
+      color: #fff;
+      text-transform: uppercase;
+    }
+  }
+
+  @screen md {
+    .entry-summary {
+      padding: 2rem 3vw;
+    }
+  }
+
+  @screen lg {
+    .entry-summary {
+      padding: 2rem 5vw;
+    }
+  }
+
+  @screen xl {
+    .entry-summary {
+      padding: 2rem 7vw;
+    }
+  }
+
+  @screen xl {
+    .entry-summary {
+      padding: 2rem 9vw;
+    }
+  }
+}

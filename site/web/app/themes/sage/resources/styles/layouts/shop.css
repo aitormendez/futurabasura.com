@@ -1,0 +1,35 @@
+.post-type-archive-product,
+.tax-artist {
+
+  @media (min-width: 786px) {
+    .hero .description {
+      height: 3.8rem;
+      overflow: hidden;
+      transition:height 0.3s ease-out;
+    }
+
+    .producto {
+      img {
+        width: auto;
+        height: auto;
+        max-width: 25vw;
+        max-height: 25vw;
+      }
+
+      .hover {
+        opacity: 0;
+        transition: opacity 0.5s;
+
+        p {
+          font-size: 1vw;
+        }
+      }
+
+      &:hover {
+        .hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

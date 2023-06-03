@@ -1,0 +1,137 @@
+/* $glide-class: 'glide' !default;
+$glide-element-separator: '__' !default;
+$glide-modifier-separator: '--' !default;
+
+.#{$glide-class} {
+  $this: &;
+
+  $se: $glide-element-separator;
+  $sm: $glide-modifier-separator;
+
+  &#{$se}arrow {
+    position: absolute;
+    display: block;
+    top: 0;
+    height: 100%;
+    width: 15%;
+    z-index: 2;
+    background-color: #fff;
+    opacity: 0;
+    cursor: pointer;
+    font-size: 2rem;
+
+    &:hover {
+      outline: none;
+      opacity: 1;
+    }
+
+    &#{$sm}left {
+      left: 0;
+      text-align: right;
+    }
+
+    &#{$sm}right {
+      right: 0;
+      text-align: left;
+    }
+
+    &#{$sm}disabled {
+      opacity: 0.33;
+    }
+  }
+
+  &#{$se}bullets {
+    position: absolute;
+    z-index: 2;
+    bottom: 2em;
+    left: 50%;
+    display: inline-flex;
+    list-style: none;
+    transform: translateX(-50%);
+
+    .cruz-wrap {
+      display: none;
+      width: calc(1rem - 1px);
+      height: calc(1rem - 1px);
+      overflow: hidden;
+
+      .cruz {
+        display: flex;
+        flex-wrap: wrap;
+        width: 2rem;
+        height: 2rem;
+        transform: translateX(-27%) translateY(-27%) rotate(45deg);
+
+        div {
+          width: 50%;
+          height: 50%;
+
+          &.cruz1 {
+            border-right: 1px solid #000;
+            border-bottom: 1px solid #000;
+          }
+
+          &.cruz2 {
+            border-bottom: 1px solid #000;
+          }
+
+          &.cruz3 {
+            border-right: 1px solid #000;
+          }
+        }
+      }
+    }
+  }
+
+  &#{$se}bullet {
+    background-color:#fff;
+    width: 1rem;
+    height: 1rem;
+    padding: 0;
+    border: 1px solid #000;
+    cursor: pointer;
+    line-height: 0;
+    margin: 0 0.5rem;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      background-color: theme('colors.allo');
+    }
+
+    &#{$sm}active {
+      .cruz-wrap {
+        display: block;
+      }
+    }
+  }
+
+  &#{$sm}swipeable {
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+  }
+
+  &#{$sm}dragging {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+  }
+
+  a.prod {
+    .bg-hover {
+      visibility: hidden;
+      width: 100%;
+    }
+
+    &:hover .bg-hover {
+      visibility: visible;
+    }
+
+    .datos {
+      width: 25%;
+    }
+  }
+} */
