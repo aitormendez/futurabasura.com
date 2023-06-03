@@ -20,8 +20,8 @@ export function navigation() {
     gsap.to('#solapa li', {
       x: '52rem',
       stagger: 0.05,
-      duration: 0.5,
-      ease: 'elastic',
+      duration: 1,
+      ease: 'elastic.out(1, 0.3)',
     });
   }
 
