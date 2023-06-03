@@ -24,12 +24,15 @@ domReady(async () => {
     selectorArtista();
   }
 
-  if (
-    document.body.classList.contains('post-type-archive-product') ||
-    document.body.classList.contains('tax-artist')
-  ) {
-    const { inputsDropdown } = await import('./select2.js');
-    inputsDropdown();
+  if (document.body.classList.contains('single-product')) {
+    const { singleProductGallery } = await import('./singleProduct.js');
+    const { sliderProductosRelacionadosArtista } = await import(
+      './singleProduct.js'
+    );
+    const { sliderProductosRelacionados } = await import('./singleProduct.js');
+    singleProductGallery();
+    sliderProductosRelacionadosArtista();
+    sliderProductosRelacionados();
   }
 });
 
