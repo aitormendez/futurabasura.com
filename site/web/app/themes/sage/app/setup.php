@@ -13,9 +13,32 @@ use function Roots\bundle;
  *
  * @return void
  */
+
 add_action('wp_enqueue_scripts', function () {
-    bundle('app')->enqueue();
+
+    $frases = get_field('frases', 'option');
+
+    if ($frases) {
+        $frases_array = [];
+        foreach ($frases as $frase) {
+            $frases_array[] = $frase['frase'];
+        }
+        ;
+    }
+
+    bundle('app')->enqueue()->localize('fb', [
+        'fondos' => [
+            'f50x70v' => get_field('fondo_50x70v', 'option')['url'],
+            'f50x70h' => get_field('fondo_50x70h', 'option')['url'],
+            'f61x91v' => get_field('fondo_61x91v', 'option')['url'],
+            'f61x91h' => get_field('fondo_61x91h', 'option')['url'],
+        ],
+        'homeUrl' => get_bloginfo('url'),
+        'frases' => $frases_array,
+    ]);
 }, 100);
+
+
 
 /**
  * Register the theme assets with the block editor.
@@ -24,30 +47,6 @@ add_action('wp_enqueue_scripts', function () {
  */
 add_action('enqueue_block_editor_assets', function () {
     bundle('editor')->enqueue();
-
-    $frases = get_field('frases', 'option');
-
-    if ($frases) {
-        $frases_array = [];
-        foreach ($frases as $frase) {
-            $frases_array[] = $frase['frase'];
-        };
-    }
-
-    $fondos = [
-        'f50x70v' => get_field('fondo_50x70v', 'option')['url'],
-        'f50x70h' => get_field('fondo_50x70h', 'option')['url'],
-        'f61x91v' => get_field('fondo_61x91v', 'option')['url'],
-        'f61x91h' => get_field('fondo_61x91h', 'option')['url'],
-    ];
-
-    $datos = array(
-        'homeUrl' => get_bloginfo('url'),
-        'frases' => $frases_array,
-        'fondos' => $fondos,
-    );
-
-    wp_localize_script('sage/app.js', 'fb', $datos);
 }, 100);
 
 /**

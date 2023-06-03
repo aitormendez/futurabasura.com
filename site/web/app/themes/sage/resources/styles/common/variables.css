@@ -1,6 +1,8 @@
 :root {
-    --plyr-color-main: blue;
-    --plyr-control-radius: 0;
-    --plyr-badge-border-radius: 0;
-    --plyr-font-family: arial, sans-serif;
+  --plyr-color-main: blue;
+  --plyr-control-radius: 0;
+  --plyr-badge-border-radius: 0;
+  --plyr-font-family: arial, sans-serif;
+  --glide-element-separator: '__';
+  --glide-modifier-separator: '--';
 }

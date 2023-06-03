@@ -1,14 +1,5 @@
-/* $glide-class: 'glide' !default;
-$glide-element-separator: '__' !default;
-$glide-modifier-separator: '--' !default;
-
-.#{$glide-class} {
-  $this: &;
-
-  $se: $glide-element-separator;
-  $sm: $glide-modifier-separator;
-
-  &#{$se}arrow {
+.glide {
+  &__arrow {
     position: absolute;
     display: block;
     top: 0;
@@ -25,22 +16,22 @@ $glide-modifier-separator: '--' !default;
       opacity: 1;
     }
 
-    &#{$sm}left {
+    &--left {
       left: 0;
       text-align: right;
     }
 
-    &#{$sm}right {
+    &--right {
       right: 0;
       text-align: left;
     }
 
-    &#{$sm}disabled {
+    &--disabled {
       opacity: 0.33;
     }
   }
 
-  &#{$se}bullets {
+  &__bullets {
     position: absolute;
     z-index: 2;
     bottom: 2em;
@@ -83,8 +74,8 @@ $glide-modifier-separator: '--' !default;
     }
   }
 
-  &#{$se}bullet {
-    background-color:#fff;
+  &__bullet {
+    background-color: #fff;
     width: 1rem;
     height: 1rem;
     padding: 0;
@@ -101,20 +92,20 @@ $glide-modifier-separator: '--' !default;
       background-color: theme('colors.allo');
     }
 
-    &#{$sm}active {
+    &--active {
       .cruz-wrap {
         display: block;
       }
     }
   }
 
-  &#{$sm}swipeable {
+  &--swipeable {
     cursor: grab;
     cursor: -moz-grab;
     cursor: -webkit-grab;
   }
 
-  &#{$sm}dragging {
+  &--dragging {
     cursor: grabbing;
     cursor: -moz-grabbing;
     cursor: -webkit-grabbing;
@@ -134,4 +125,4 @@ $glide-modifier-separator: '--' !default;
       width: 25%;
     }
   }
-} */
+}
