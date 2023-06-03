@@ -15,6 +15,11 @@ domReady(async () => {
     const { desplegarArtista } = await import('./shop.js');
     desplegarArtista();
   }
+
+  if (document.body.classList.contains('post-type-archive-product')) {
+    const { selectorArtista } = await import('./shop.js');
+    selectorArtista();
+  }
 });
 
 /**

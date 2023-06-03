@@ -32,22 +32,22 @@ export function desplegarArtista() {
     element.setAttribute('data-collapsed', 'false');
   }
 
-  document
-    .querySelector('#toggle-button')
-    .addEventListener('click', function (e) {
-      var section = document.querySelector('.section.collapsible');
-      var isCollapsed = section.getAttribute('data-collapsed') === 'true';
+  const toggleBtn = document.querySelector('#toggle-button');
 
-      if (isCollapsed) {
-        expandSection(section);
-        section.setAttribute('data-collapsed', 'false');
-      } else {
-        collapseSection(section);
-      }
-    });
+  toggleBtn.addEventListener('click', function (e) {
+    var section = document.querySelector('.section.collapsible');
+    var isCollapsed = section.getAttribute('data-collapsed') === 'true';
+
+    if (isCollapsed) {
+      expandSection(section);
+      section.setAttribute('data-collapsed', 'false');
+    } else {
+      collapseSection(section);
+    }
+  });
 }
 
-if (document.body.classList.contains('post-type-archive-product')) {
+export function selectorArtista() {
   var select = '.dropdown_artist';
 
   function onProductTaxChange() {
