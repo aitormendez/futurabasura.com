@@ -11,7 +11,12 @@ domReady(async () => {
 
   if (mdMin.matches && document.body.classList.contains('home')) {
     const { sliderHome } = await import('./sliderHome.js');
+    const { ajustarAltoCupones, sliderContenidos, destacadoRepetido } =
+      await import('./frontPage.js');
     sliderHome();
+    ajustarAltoCupones();
+    sliderContenidos();
+    destacadoRepetido();
   }
 
   if (document.body.classList.contains('tax-artist')) {
@@ -48,6 +53,11 @@ domReady(async () => {
   if (document.body.classList.contains('cart')) {
     const { carrito } = await import('./cart.js');
     carrito();
+  }
+
+  if (document.body.classList.contains('woocommerce-shop')) {
+    const { infiniteScrollShop } = await import('./infiniteScroll.js');
+    infiniteScrollShop();
   }
 });
 

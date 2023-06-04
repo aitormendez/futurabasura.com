@@ -5,7 +5,6 @@ import Glide, {
 } from '@glidejs/glide/dist/glide.modular.esm.js';
 
 export function sliderHome() {
-  console.log(fb);
   let viewportWidth = $(window).width(),
     fondo = document.getElementById('fondo-slider'),
     slides = document.querySelectorAll('.glide__slide');

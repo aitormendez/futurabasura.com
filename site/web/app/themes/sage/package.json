@@ -30,6 +30,7 @@
     "Select2": "^3.5.7",
     "animejs": "^3.2.1",
     "gsap": "^3.11.5",
+    "infinite-scroll": "^4.0.1",
     "lightgallery": "^2.7.1",
     "scrambling-text": "^1.2.0"
   }

@@ -6,60 +6,61 @@ import Glide, {
 import anime, { random } from 'animejs';
 // import Plyr from 'plyr';
 
+export function ajustarAltoCupones() {
+  // ajustar alto cupones
+  // ----------------------------------------------------
+
+  let cupones = document.getElementsByClassName('cupon-wrap');
+
+  for (const c of cupones) {
+    let altoOrg = c.offsetHeight;
+    let alto = Math.ceil(altoOrg / 12) * 12;
+    c.style.height = alto + 'px';
+  }
+}
+
+export function sliderContenidos() {
+  // slider de contenidos (no el principal de productos)
+  // ----------------------------------------------------
+
+  let gals = document.querySelectorAll('.galeria .glide');
+
+  for (let i = 0; i < gals.length; i++) {
+    gals[i].id = 'gal' + i;
+
+    new Glide('#gal' + i, {
+      type: 'carousel',
+      autoplay: 2000,
+      animationDuration: 1000,
+      animationTimingFunc: 'linear',
+      gap: 0,
+    }).mount({
+      Controls,
+      Autoplay,
+      Keyboard,
+    });
+  }
+}
+
 $(() => {
   if (document.body.classList.contains('home')) {
     // Hero video
     // ----------------------------------------------------
-
     // const player = new Plyr('#player', {
     //   captions: {
     //     active: true,
     //   },
     // });
-
     // const pl = document.querySelector('#player').dataset.muted;
-
     // if (pl == 1) {
     //   player.on('ready', () => {
     //     player.muted = true;
     //   });
     // }
-
-    // ajustar alto cupones
-    // ----------------------------------------------------
-
-    let cupones = document.getElementsByClassName('cupon-wrap');
-
-    for (const c of cupones) {
-      let altoOrg = c.offsetHeight;
-      let alto = Math.ceil(altoOrg / 12) * 12;
-      c.style.height = alto + 'px';
-    }
-
-    // slider de contenidos (no el principal de productos)
-    // ----------------------------------------------------
-
-    let gals = document.querySelectorAll('.galeria .glide');
-
-    for (let i = 0; i < gals.length; i++) {
-      gals[i].id = 'gal' + i;
-
-      new Glide('#gal' + i, {
-        type: 'carousel',
-        autoplay: 2000,
-        animationDuration: 1000,
-        animationTimingFunc: 'linear',
-        gap: 0,
-      }).mount({
-        Controls,
-        Autoplay,
-        Keyboard,
-      });
-    }
   }
 });
 
-window.onload = function () {
+export function destacadoRepetido() {
   // ajustar alto de contenido con formato "repetido"
   // ----------------------------------------------------
 
@@ -137,4 +138,4 @@ window.onload = function () {
   //   colors.pause;
   // });
   // }
-};
+}
