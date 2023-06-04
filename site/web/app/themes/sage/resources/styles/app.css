@@ -22,6 +22,7 @@
 @import 'layouts/single-variable-product';
 @import 'componentes/select';
 @import 'componentes/forms';
+@import 'componentes/lightgallery';
 
 @import '@glidejs/glide/dist/css/glide.core.min.css';
 @import 'Select2/select2-bootstrap.css';

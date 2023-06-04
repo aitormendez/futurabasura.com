@@ -59,6 +59,14 @@ domReady(async () => {
     const { infiniteScrollShop } = await import('./infiniteScroll.js');
     infiniteScrollShop();
   }
+
+  if (
+    document.body.classList.contains('single-story') ||
+    document.body.classList.contains('single-project')
+  ) {
+    const { galeriaStory } = await import('./singleStory.js');
+    galeriaStory();
+  }
 });
 
 /**
