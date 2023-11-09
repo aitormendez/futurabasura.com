@@ -8,7 +8,6 @@ export function galeriaStory() {
     document.body.classList.contains('single-project')
   ) {
     let galerias = document.getElementsByClassName('lightbox');
-    console.log(galerias);
 
     for (let i = 0; i < galerias.length; i++) {
       galerias[i].id = 'gal' + i;

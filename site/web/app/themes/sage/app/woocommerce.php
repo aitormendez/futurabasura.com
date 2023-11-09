@@ -65,15 +65,6 @@ add_action( 'woocommerce_before_shop_loop', function() {
 
 
 /**
- * pruebas product loop.
- *
- */
-
- add_filter('woocommerce_shop_loop_item_title', function() {
-
- });
-
-/**
  * Eliminar estilos WC.
  */
 add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
@@ -170,4 +161,11 @@ add_filter( 'woocommerce_after_shipping_calculator', function()  {
     echo '<div class="text-xs">' . get_field('exp_car_totals', 'option') . '</div>';
 });
 
+// ajax add to cart
+// https://quadlayers.com/woocommerce-ajax-add-to-cart/
 
+// add_action('wp_enqueue_scripts', function() {
+//     if (function_exists('is_product') && is_product()) {
+//        wp_enqueue_script('custom_script', get_bloginfo('stylesheet_directory') . '/js/ajax_add_to_cart.js', array('jquery'),'1.0' );
+//     }
+// });

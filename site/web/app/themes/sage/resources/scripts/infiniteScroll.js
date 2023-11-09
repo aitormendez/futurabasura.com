@@ -1,4 +1,4 @@
-const InfiniteScroll = require('infinite-scroll');
+import InfiniteScroll from 'infinite-scroll';
 
 export function infiniteScrollShop() {
   let main = new InfiniteScroll('.infinite-scroll-container', {
