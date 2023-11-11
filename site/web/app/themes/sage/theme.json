@@ -1379,6 +1379,10 @@
           "size": "8rem"
         }
       ]
+    },
+    "layout": {
+      "contentSize": "768px",
+      "wideSize": "1024px"
     }
   }
 }

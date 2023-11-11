@@ -59,6 +59,10 @@ export default async (app) => {
     .set('settings.spacing.padding', true)
     .set('settings.spacing.units', ['px', '%', 'em', 'rem', 'vw', 'vh'])
     .set('settings.typography.customFontSize', false)
+    .set('settings.layout', {
+      contentSize: '768px',
+      wideSize: '1024px',
+    })
     .useTailwindColors()
     .useTailwindFontFamily()
     .useTailwindFontSize()

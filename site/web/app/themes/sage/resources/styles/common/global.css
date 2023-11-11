@@ -65,6 +65,22 @@ main {
       }
     }
   }
+
+  .contenido > * {
+    max-width: 768px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+    &.alignwide {
+      max-width: 1024px;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    &.alignfull {
+      max-width: none;
+    }
+  }
 }
 
 #fondo-slider {
