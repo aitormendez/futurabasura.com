@@ -9,7 +9,7 @@ wordpress_sites:
           - www.futurabasura.com
     local_path: ../site
     branch: main
-    repo: git@github.com:aitormendez/futurabasura.git
+    repo: git@github.com:aitormendez/futurabasura.com.git
     repo_subtree_path: site
     multisite:
       enabled: false
