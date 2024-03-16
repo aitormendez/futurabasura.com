@@ -1,0 +1,9 @@
+"@development":
+  ssh: "futurabasura.test"
+  path: "/srv/www/futurabasura.com/current/web/wp"
+"@production":
+  ssh: "web@138.68.131.95:22"
+  path: "/srv/www/futurabasura.com/current/web/wp"
+"@staging":
+  ssh: "web@161.35.170.45:22"
+  path: "/srv/www/stage.futurabasura.com/current/web/wp"

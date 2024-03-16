@@ -169,3 +169,33 @@ add_filter( 'woocommerce_after_shipping_calculator', function()  {
 //        wp_enqueue_script('custom_script', get_bloginfo('stylesheet_directory') . '/js/ajax_add_to_cart.js', array('jquery'),'1.0' );
 //     }
 // });
+
+
+/**
+ * Mostrar etiqueta "new in shop" en los productos de la portada de la tienda.
+ */
+add_action( 'woocommerce_before_shop_loop_item_title', 'mostrar_etiqueta_nuevo_producto', 15 );
+
+function mostrar_etiqueta_nuevo_producto() {
+    global $product;
+    // Verifica si el producto tiene la etiqueta "new in shop"
+    if ( has_term( 'new-in-shop', 'product_tag', $product->get_id() ) ) {
+        // Añade tu HTML personalizado para la etiqueta aquí
+        echo '<span class="new-in-shop-badge">New in Shop</span>';
+    }
+}
+
+/**
+ * Mostrar artista en los productos de la portada de la tienda.
+ */
+add_action( 'woocommerce_shop_loop_item_title', 'mostrar_artista_producto', 11 );
+
+function mostrar_artista_producto() {
+    global $product;
+    $artist_ids = wp_get_post_terms( $product->get_id(), 'artist', ['fields' => 'names'] );
+    // Comprueba si hay artistas asignados y los imprime
+    if ( !empty($artist_ids) ) {
+        echo '<div class="product-artist-names">' . join(', ', $artist_ids) . '</div>';
+    }
+}
+
