@@ -171,6 +171,9 @@ add_filter( 'woocommerce_after_shipping_calculator', function()  {
 // });
 
 
+// LOOP TIENDA
+// _________________________________________________________________________________________________
+
 /**
  * Mostrar etiqueta "new in shop" en los productos de la portada de la tienda.
  */
@@ -195,7 +198,115 @@ function mostrar_artista_producto() {
     $artist_ids = wp_get_post_terms( $product->get_id(), 'artist', ['fields' => 'names'] );
     // Comprueba si hay artistas asignados y los imprime
     if ( !empty($artist_ids) ) {
-        echo '<div class="product-artist-names">' . join(', ', $artist_ids) . '</div>';
+        echo '<div class="font-bugrino text-xl mt-3">' . join(', ', $artist_ids) . '</div>';
     }
 }
 
+
+
+/**
+ * Insert the opening anchor tag for products in the loop.
+ */
+// function woocommerce_template_loop_product_link_open() {
+//     global $product;
+
+//     $link = apply_filters('woocommerce_loop_product_link', get_the_permalink(), $product);
+
+//     // Verificar si la cookie existe y es igual a 'true'
+//     $is_mobile = isset($_COOKIE['is_mobile']) && $_COOKIE['is_mobile'] == 'true';
+
+//     if ($is_mobile) {
+//         echo '<a href="' . esc_url($link) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link mobile">';
+//     } else {
+//         echo '<a href="' . esc_url($link) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
+//     }
+// }
+
+/**
+ * mostrar tipo de impresión.
+ */
+function mostrar_tipo_producto() {
+    global $product;
+
+    // Usa un array para almacenar los tipos de impresión únicos
+    $print_types = array();
+
+    if ( $product->is_type( 'variable' ) ) {
+        // Para productos variables, recolecta todos los valores de tipos de impresión
+        $variations = $product->get_available_variations();
+        foreach ( $variations as $variation ) {
+            $variation_obj = new WC_Product_Variation( $variation['variation_id'] );
+            $print_type = $variation_obj->get_attribute( 'pa_product-type' );
+            if ( $print_type && !isset($print_types[$print_type]) ) {
+                // Solo añade el tipo de impresión si aún no ha sido añadido
+                $print_types[$print_type] = true;
+            }
+        }
+    } else {
+        // Para productos simples y otros tipos
+        $print_type = $product->get_attribute( 'pa_product-type' );
+        if ( $print_type ) {
+            $print_types[$print_type] = true;
+        }
+    }
+
+    // Muestra los tipos de impresión únicos
+    foreach ($print_types as $print_type => $value) {
+        echo '<div class="uppercase text-center border-b border-black w-full">' . esc_html( $print_type ) . '</div>';
+    }
+}
+
+
+/**
+ * mostrar información de producto en el loop de portada.
+ */
+
+ function mostrar_informacion_producto() {
+    global $product;
+
+    // Comprueba si el producto es variable
+    if ( $product->is_type( 'variable' ) ) {
+        $variations = $product->get_available_variations();
+        foreach ( $variations as $variation ) {
+            $variation_obj = new WC_Product_Variation($variation['variation_id']);
+            $format = $variation_obj->get_attribute('pa_format'); // Asume que el slug del atributo de formato es 'pa_format'
+            $price = $variation_obj->get_regular_price();
+            $sale_price = $variation_obj->get_sale_price();
+
+            echo '<li class="flex w-full justify-between border-t border-black px-2">';
+            echo '<span class="grow">' . ($format ? esc_html( $format ) . ' cm' : '') . '</span>';
+            if ( !empty($sale_price) && $sale_price < $price ) {
+                echo '<span class="mr-4"><del>' . wc_price( $price ) . '</del></span>';
+                echo '<span>' . wc_price( $sale_price ) . '</span>';
+            } else {
+                echo '<span></span>'; // Espacio para mantener la estructura cuando no hay precio de oferta
+                echo '<span>' . wc_price( $price ) . '</span>';
+            }
+            echo '</li>';
+        }
+    } else {
+        // Para productos simples y otros tipos
+        $format = $product->get_attribute('pa_format');
+        $price = $product->get_regular_price();
+        $sale_price = $product->get_sale_price();
+
+        echo '<li class="flex w-full justify-between border-t border-black px-2">';
+        echo '<span class="grow">' . ($format ? esc_html( $format ) . ' cm' : '') . '</span>';
+        if ( !empty($sale_price) && $sale_price < $price ) {
+            echo '<span class="mr-4"><del>' . wc_price( $price ) . '</del></span>';
+            echo '<span>' . wc_price( $sale_price ) . '</span>';
+        } else {
+            echo '<span></span>'; // Espacio para mantener la estructura cuando no hay precio de oferta
+            echo '<span>' . wc_price( $price ) . '</span>';
+        }
+        echo '</li>';
+    }
+}
+
+
+/**
+ * mostrar nombre de producto.
+ */
+function woocommerce_template_loop_product_title() {
+    echo '<h2 class=" uppercase text-center px-2 grow flex items-center ' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '">' . get_the_title() . '</h2>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+}

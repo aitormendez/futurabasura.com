@@ -4,7 +4,7 @@
 
 @include('partials.header')
 
-<main id="main" class="main">
+<main id="main" class="main font-fk">
     @yield('content')
 </main>
 

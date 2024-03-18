@@ -30,6 +30,8 @@ const config = {
       fontFamily: {
         sans: ['arial', 'sans-serif'],
         serif: ['times-new-roman', 'times', 'serif'],
+        bugrino: ['Bugrino', 'sans-serif'],
+        fk: ['FK Display', 'sans-serif'],
       },
       colors: {
         'negro-fb': '#3e2b2f',

@@ -2,6 +2,7 @@
 
 namespace App\View\Composers;
 
+
 use Roots\Acorn\View\Composer;
 
 class App extends Composer
@@ -24,6 +25,7 @@ class App extends Composer
     {
         return [
             'siteName' => $this->siteName(),
+            'isMobile' => $this->isMobile(),
         ];
     }
 
@@ -36,4 +38,9 @@ class App extends Composer
     {
         return get_bloginfo('name', 'display');
     }
+
+    public function isMobile()
+    {
+        return isset($_COOKIE['is_mobile']) && $_COOKIE['is_mobile'] == 'true';
+    }    
 }

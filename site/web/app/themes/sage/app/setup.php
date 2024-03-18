@@ -7,6 +7,7 @@
 namespace App;
 
 use function Roots\bundle;
+use Detection\MobileDetect;
 
 /**
  * Register the theme assets.
@@ -161,3 +162,13 @@ add_action('widgets_init', function () {
         'id' => 'sidebar-footer',
     ] + $config);
 });
+
+
+add_action('template_redirect', function() {
+    if (!isset($_COOKIE['is_mobile'])) {
+        $detect = new MobileDetect();
+        $isMobile = $detect->isMobile() && !$detect->isTablet();
+        setcookie('is_mobile', $isMobile ? 'true' : 'false', time() + 86400, '/'); // Expira en 1 día
+    }
+});
+

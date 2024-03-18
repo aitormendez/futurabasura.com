@@ -6,6 +6,7 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+@import 'fonts/fonts';
 @import 'layouts/header';
 @import 'layouts/front-page';
 @import 'layouts/footer';

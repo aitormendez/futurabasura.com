@@ -60,7 +60,7 @@
                     @while (have_posts())
                         @php
                             the_post();
-                            
+
                             /**
                              * Hook: woocommerce_shop_loop.
                              */
@@ -72,7 +72,7 @@
             </ul>
             @php
                 // woocommerce_product_loop_end();
-                
+
                 /**
                  * Hook: woocommerce_after_shop_loop.
                  *

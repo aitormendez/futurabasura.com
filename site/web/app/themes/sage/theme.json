@@ -1310,6 +1310,16 @@
           "fontFamily": "ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,\"Liberation Mono\",\"Courier New\",monospace",
           "name": "Ui-monospace",
           "slug": "mono"
+        },
+        {
+          "fontFamily": "Bugrino,sans-serif",
+          "name": "Bugrino",
+          "slug": "bugrino"
+        },
+        {
+          "fontFamily": "FK Display,sans-serif",
+          "name": "FK Display",
+          "slug": "fk"
         }
       ],
       "fontSizes": [
