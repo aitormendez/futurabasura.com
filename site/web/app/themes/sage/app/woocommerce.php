@@ -177,21 +177,20 @@ add_filter( 'woocommerce_after_shipping_calculator', function()  {
 /**
  * Mostrar etiqueta "new in shop" en los productos de la portada de la tienda.
  */
-add_action( 'woocommerce_before_shop_loop_item_title', 'mostrar_etiqueta_nuevo_producto', 15 );
+// add_action( 'woocommerce_before_shop_loop_item_title', 'mostrar_etiqueta_nuevo_producto', 15 );
 
-function mostrar_etiqueta_nuevo_producto() {
-    global $product;
-    // Verifica si el producto tiene la etiqueta "new in shop"
-    if ( has_term( 'new-in-shop', 'product_tag', $product->get_id() ) ) {
-        // Añade tu HTML personalizado para la etiqueta aquí
-        echo '<span class="new-in-shop-badge">New in Shop</span>';
-    }
-}
+// function mostrar_etiqueta_nuevo_producto() {
+//     global $product;
+//     // Verifica si el producto tiene la etiqueta "new in shop"
+//     if ( has_term( 'new-in-shop', 'product_tag', $product->get_id() ) ) {
+//         // Añade tu HTML personalizado para la etiqueta aquí
+//         echo '<span class="new-in-shop-badge">New in Shop</span>';
+//     }
+// }
 
 /**
  * Mostrar artista en los productos de la portada de la tienda.
  */
-add_action( 'woocommerce_shop_loop_item_title', 'mostrar_artista_producto', 11 );
 
 function mostrar_artista_producto() {
     global $product;
@@ -207,20 +206,20 @@ function mostrar_artista_producto() {
 /**
  * Insert the opening anchor tag for products in the loop.
  */
-// function woocommerce_template_loop_product_link_open() {
-//     global $product;
+function woocommerce_template_loop_product_link_open() {
+    global $product;
 
-//     $link = apply_filters('woocommerce_loop_product_link', get_the_permalink(), $product);
+    $link = apply_filters('woocommerce_loop_product_link', get_the_permalink(), $product);
 
-//     // Verificar si la cookie existe y es igual a 'true'
-//     $is_mobile = isset($_COOKIE['is_mobile']) && $_COOKIE['is_mobile'] == 'true';
+    // Verificar si la cookie existe y es igual a 'true'
+    $is_mobile = isset($_COOKIE['is_mobile']) && $_COOKIE['is_mobile'] == 'true';
 
-//     if ($is_mobile) {
-//         echo '<a href="' . esc_url($link) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link mobile">';
-//     } else {
-//         echo '<a href="' . esc_url($link) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link">';
-//     }
-// }
+    if ($is_mobile) {
+        echo '<a href="' . esc_url($link) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link mobile">';
+    } else {
+        echo '<a href="' . esc_url($link) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link card-inner">';
+    }
+}
 
 /**
  * mostrar tipo de impresión.
@@ -273,11 +272,11 @@ function mostrar_tipo_producto() {
             $price = $variation_obj->get_regular_price();
             $sale_price = $variation_obj->get_sale_price();
 
-            echo '<li class="flex w-full justify-between border-t border-black px-2">';
+            echo '<li class="flex w-full justify-between border-t border-black px-2 last:border-b text-sm tracking-wider">';
             echo '<span class="grow">' . ($format ? esc_html( $format ) . ' cm' : '') . '</span>';
             if ( !empty($sale_price) && $sale_price < $price ) {
                 echo '<span class="mr-4"><del>' . wc_price( $price ) . '</del></span>';
-                echo '<span>' . wc_price( $sale_price ) . '</span>';
+                echo '<span class="text-red-600">' . wc_price( $sale_price ) . '</span>';
             } else {
                 echo '<span></span>'; // Espacio para mantener la estructura cuando no hay precio de oferta
                 echo '<span>' . wc_price( $price ) . '</span>';
@@ -290,7 +289,7 @@ function mostrar_tipo_producto() {
         $price = $product->get_regular_price();
         $sale_price = $product->get_sale_price();
 
-        echo '<li class="flex w-full justify-between border-t border-black px-2">';
+        echo '<li class="flex w-full justify-between border-y border-black px-2 text-sm tracking-wider">';
         echo '<span class="grow">' . ($format ? esc_html( $format ) . ' cm' : '') . '</span>';
         if ( !empty($sale_price) && $sale_price < $price ) {
             echo '<span class="mr-4"><del>' . wc_price( $price ) . '</del></span>';
@@ -308,5 +307,33 @@ function mostrar_tipo_producto() {
  * mostrar nombre de producto.
  */
 function woocommerce_template_loop_product_title() {
-    echo '<h2 class=" uppercase text-center px-2 grow flex items-center ' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '">' . get_the_title() . '</h2>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    echo '<h2 class=" uppercase text-center px-2 grow flex items-center tracking-wider ' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '">' . get_the_title() . '</h2>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 }
+
+
+/**
+ * Renderizar thumbnail dentro de un div card-front.
+ */
+function renderizar_card_front() {
+    echo '<div class="card-front">';
+    echo woocommerce_get_product_thumbnail('large');
+    echo '</div>';
+}
+add_action('woocommerce_before_shop_loop_item_title', 'renderizar_card_front', 10);
+
+
+/**
+ * Renderizar metadatos dentro de un div card-back.
+ */
+function renderizar_card_back() {
+    echo '<div class="card-back bg-white pt-1 flex flex-col justify-between items-center">';
+    echo mostrar_tipo_producto();
+    echo mostrar_artista_producto();
+    woocommerce_template_loop_product_title(); // Esta función ya imprime por sí misma
+    echo '<ul class="w-full mb-4">';
+    echo mostrar_informacion_producto();
+    echo '</ul>';
+    echo '</div>'; // Fin de card-back
+}
+
+add_action('woocommerce_before_shop_loop_item_title', 'renderizar_card_back', 15);

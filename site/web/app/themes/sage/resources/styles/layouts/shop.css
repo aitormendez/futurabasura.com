@@ -6,6 +6,7 @@
   .card-inner {
     transition: transform 0.6s;
     transform-style: preserve-3d;
+    display: block;
   }
 
   .card:hover .card-inner {
@@ -28,5 +29,16 @@
 
   .card-back {
     transform: rotateY(180deg);
+  }
+
+  @media (min-width: 786px) {
+    .product .card-front {
+      img {
+        width: auto;
+        height: auto;
+        max-width: 25vw;
+        max-height: 25vw;
+      }
+    }
   }
 }
