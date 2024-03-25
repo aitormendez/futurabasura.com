@@ -36,6 +36,24 @@
       img {
         width: auto;
         height: auto;
+        max-width: 50vw;
+        max-height: 50vw;
+      }
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .product .card-front {
+      img {
+        max-width: 33.3vw;
+        max-height: 33.3vw;
+      }
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .product .card-front {
+      img {
         max-width: 25vw;
         max-height: 25vw;
       }

@@ -75,11 +75,6 @@ add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
 remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
 
 /**
- * Eliminar "Sale!".
- */
-remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_sale_flash', 10 );
-
-/**
  * Eliminar galería de producto.
  */
 remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_images', 20 );
@@ -155,7 +150,7 @@ function template_redirect_action() {
 
 
 /**
- * Eliminar reviews de single product y additional information tab.
+ * Mostrar totales de envío.
  */
 add_filter( 'woocommerce_after_shipping_calculator', function()  {
     echo '<div class="text-xs">' . get_field('exp_car_totals', 'option') . '</div>';
@@ -177,16 +172,18 @@ add_filter( 'woocommerce_after_shipping_calculator', function()  {
 /**
  * Mostrar etiqueta "new in shop" en los productos de la portada de la tienda.
  */
-// add_action( 'woocommerce_before_shop_loop_item_title', 'mostrar_etiqueta_nuevo_producto', 15 );
 
-// function mostrar_etiqueta_nuevo_producto() {
-//     global $product;
-//     // Verifica si el producto tiene la etiqueta "new in shop"
-//     if ( has_term( 'new-in-shop', 'product_tag', $product->get_id() ) ) {
-//         // Añade tu HTML personalizado para la etiqueta aquí
-//         echo '<span class="new-in-shop-badge">New in Shop</span>';
-//     }
-// }
+function mostrar_etiqueta_nuevo_producto() {
+    global $product;
+    // Verifica si el producto tiene la etiqueta "new in shop"
+    if ( has_term( 'new-in-shop', 'product_tag', $product->get_id() ) ) {
+        if (wp_is_mobile()) {
+            echo '<span class="absolute top-0 left-4 uppercase tracking-wider bg-yellow-300 px-2 pt-[0.2em]">New</span>';
+        } else {
+            echo '<span class="absolute top-0 left-0 uppercase tracking-wider bg-yellow-300 px-2 pt-[0.2em]">New</span>';
+        }
+    }
+}
 
 /**
  * Mostrar artista en los productos de la portada de la tienda.
@@ -197,7 +194,12 @@ function mostrar_artista_producto() {
     $artist_ids = wp_get_post_terms( $product->get_id(), 'artist', ['fields' => 'names'] );
     // Comprueba si hay artistas asignados y los imprime
     if ( !empty($artist_ids) ) {
-        echo '<div class="font-bugrino text-xl mt-3">' . join(', ', $artist_ids) . '</div>';
+        if (wp_is_mobile()) {
+            echo '<div class="font-bugrino text-lg my-3">' . join(', ', $artist_ids) . '</div>';
+
+        } else {
+            echo '<div class="font-bugrino text-[1.5vw] mt-3">' . join(', ', $artist_ids) . '</div>';
+        }
     }
 }
 
@@ -215,14 +217,14 @@ function woocommerce_template_loop_product_link_open() {
     $is_mobile = isset($_COOKIE['is_mobile']) && $_COOKIE['is_mobile'] == 'true';
 
     if ($is_mobile) {
-        echo '<a href="' . esc_url($link) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link mobile">';
+        echo '<a href="' . esc_url($link) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link !text-black">';
     } else {
-        echo '<a href="' . esc_url($link) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link card-inner">';
+        echo '<a href="' . esc_url($link) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link card-inner !text-black">';
     }
 }
 
 /**
- * mostrar tipo de impresión.
+ * mostrar tipo de impresión (ahora es tipo de producto).
  */
 function mostrar_tipo_producto() {
     global $product;
@@ -251,7 +253,11 @@ function mostrar_tipo_producto() {
 
     // Muestra los tipos de impresión únicos
     foreach ($print_types as $print_type => $value) {
-        echo '<div class="uppercase text-center border-b border-black w-full">' . esc_html( $print_type ) . '</div>';
+        if (wp_is_mobile()) {
+            echo '<div class="uppercase text-sm text-gray-400 text-center mb-2 w-full">' . esc_html( $print_type ) . '</div>';
+        } else {
+            echo '<div class="uppercase text-[1.1vw] text-center border-b border-black w-full">' . esc_html( $print_type ) . '</div>';
+        }
     }
 }
 
@@ -272,10 +278,16 @@ function mostrar_tipo_producto() {
             $price = $variation_obj->get_regular_price();
             $sale_price = $variation_obj->get_sale_price();
 
-            echo '<li class="flex w-full justify-between border-t border-black px-2 last:border-b text-sm tracking-wider">';
+            if (wp_is_mobile()) {
+                # code...
+                echo '<li class="flex w-full justify-between border-t border-black px-2 last:border-b text-sm tracking-wider">';
+            } else {
+                echo '<li class="flex w-full justify-between border-t border-black px-2 last:border-b text-[1vw] tracking-wider">';
+            }
+
             echo '<span class="grow">' . ($format ? esc_html( $format ) . ' cm' : '') . '</span>';
             if ( !empty($sale_price) && $sale_price < $price ) {
-                echo '<span class="mr-4"><del>' . wc_price( $price ) . '</del></span>';
+                echo '<span class="mr-2"><del>' . wc_price( $price ) . '</del></span>';
                 echo '<span class="text-red-600">' . wc_price( $sale_price ) . '</span>';
             } else {
                 echo '<span></span>'; // Espacio para mantener la estructura cuando no hay precio de oferta
@@ -289,7 +301,13 @@ function mostrar_tipo_producto() {
         $price = $product->get_regular_price();
         $sale_price = $product->get_sale_price();
 
-        echo '<li class="flex w-full justify-between border-y border-black px-2 text-sm tracking-wider">';
+        if (wp_is_mobile()) {
+            echo '<li class="flex w-full justify-between border-y border-black px-2 text-sm tracking-wider">';
+        } else {
+            echo '<li class="flex w-full justify-between border-y border-black px-2 text-[1vw] tracking-wider">';
+        }
+
+        
         echo '<span class="grow">' . ($format ? esc_html( $format ) . ' cm' : '') . '</span>';
         if ( !empty($sale_price) && $sale_price < $price ) {
             echo '<span class="mr-4"><del>' . wc_price( $price ) . '</del></span>';
@@ -307,7 +325,11 @@ function mostrar_tipo_producto() {
  * mostrar nombre de producto.
  */
 function woocommerce_template_loop_product_title() {
-    echo '<h2 class=" uppercase text-center px-2 grow flex items-center tracking-wider ' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '">' . get_the_title() . '</h2>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    if (wp_is_mobile()) {
+        echo '<h2 class="text-sm leading-tight uppercase text-center px-2 mb-20 items-center tracking-wider ' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '">' . get_the_title() . '</h2>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    } else {
+        echo '<h2 class="text-[1.2vw] leading-tight uppercase text-center px-2 grow flex items-center tracking-wider ' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '">' . get_the_title() . '</h2>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    }
 }
 
 
@@ -319,7 +341,7 @@ function renderizar_card_front() {
     echo woocommerce_get_product_thumbnail('large');
     echo '</div>';
 }
-add_action('woocommerce_before_shop_loop_item_title', 'renderizar_card_front', 10);
+
 
 
 /**
@@ -329,11 +351,59 @@ function renderizar_card_back() {
     echo '<div class="card-back bg-white pt-1 flex flex-col justify-between items-center">';
     echo mostrar_tipo_producto();
     echo mostrar_artista_producto();
-    woocommerce_template_loop_product_title(); // Esta función ya imprime por sí misma
+    woocommerce_template_loop_product_title();
     echo '<ul class="w-full mb-4">';
     echo mostrar_informacion_producto();
     echo '</ul>';
-    echo '</div>'; // Fin de card-back
+    echo '</div>';
 }
 
-add_action('woocommerce_before_shop_loop_item_title', 'renderizar_card_back', 15);
+/**
+ * Renderizar la imagen de producto con diferente marcado si es horizontal o vertical.
+ */
+function woocommerce_template_loop_product_thumbnail_mobile() {
+    $thumbnail_id = get_post_thumbnail_id();
+    $thumbnail_url = wp_get_attachment_image_src($thumbnail_id, 'full');
+    
+    if ($thumbnail_url) {
+        $width = $thumbnail_url[1];
+        $height = $thumbnail_url[2];
+
+        if ($width > $height) {
+            echo '<div class="horizontal">' . woocommerce_get_product_thumbnail('large') . '</div>';
+        } else {
+            echo '<div class="px-4">' . woocommerce_get_product_thumbnail('large') . '</div>';
+        }
+    } else {
+        // No hay imagen, podría renderizar un placeholder o dejar el espacio en blanco
+        echo '<div class="no-image">No Image Available</div>';
+    }
+}
+
+function renderizar_metadatos_mobile_shop_loop() {
+    echo '<div class="bg-white flex flex-col items-center mx-4">';
+    echo mostrar_artista_producto();
+    woocommerce_template_loop_product_title();
+    echo mostrar_tipo_producto();
+    echo '<ul class="w-full mb-4">';
+    echo mostrar_informacion_producto();
+    echo '</ul>';
+    echo '</div>';
+}
+
+
+/**
+ * acciones condicionales para móviles y para escritorio
+ */
+
+if ( wp_is_mobile() ) {
+    add_action('woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail_mobile', 10);
+    add_action('woocommerce_before_shop_loop_item_title', 'renderizar_metadatos_mobile_shop_loop', 15);
+    add_action( 'woocommerce_before_shop_loop_item_title', 'mostrar_etiqueta_nuevo_producto', 15 );
+    remove_action('woocommerce_before_shop_loop_item_title', 'renderizar_card_front', 10);
+    remove_action('woocommerce_before_shop_loop_item_title', 'renderizar_card_back', 15);
+} else {
+    add_action( 'woocommerce_before_shop_loop_item_title', 'mostrar_etiqueta_nuevo_producto', 15 );
+    add_action('woocommerce_before_shop_loop_item_title', 'renderizar_card_back', 15);
+    add_action('woocommerce_before_shop_loop_item_title', 'renderizar_card_front', 10);
+}
