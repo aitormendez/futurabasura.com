@@ -9,7 +9,7 @@
     display: block;
   }
 
-  .card:hover .card-inner {
+  .card-inner {
     transform: rotateY(180deg);
   }
 

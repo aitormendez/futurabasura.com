@@ -38,7 +38,7 @@ add_shortcode( 'product_tax_artist_dropdown', function( $atts ) {
         'taxonomy'   => $taxonomy,
         'name'       => $taxonomy,
         'class'      => 'dropdown_'.$taxonomy,
-     ] );
+    ] );
     return ob_get_clean();
 } );
 
@@ -230,33 +230,33 @@ function mostrar_tipo_producto() {
     global $product;
 
     // Usa un array para almacenar los tipos de impresión únicos
-    $print_types = array();
+    $product_types = array();
 
     if ( $product->is_type( 'variable' ) ) {
         // Para productos variables, recolecta todos los valores de tipos de impresión
         $variations = $product->get_available_variations();
         foreach ( $variations as $variation ) {
             $variation_obj = new WC_Product_Variation( $variation['variation_id'] );
-            $print_type = $variation_obj->get_attribute( 'pa_product-type' );
-            if ( $print_type && !isset($print_types[$print_type]) ) {
+            $product_type = $variation_obj->get_attribute( 'pa_product-type' );
+            if ( $product_type && !isset($product_types[$product_type]) ) {
                 // Solo añade el tipo de impresión si aún no ha sido añadido
-                $print_types[$print_type] = true;
+                $product_types[$product_type] = true;
             }
         }
     } else {
         // Para productos simples y otros tipos
-        $print_type = $product->get_attribute( 'pa_product-type' );
-        if ( $print_type ) {
-            $print_types[$print_type] = true;
+        $product_type = $product->get_attribute( 'pa_product-type' );
+        if ( $product_type ) {
+            $product_types[$product_type] = true;
         }
     }
 
     // Muestra los tipos de impresión únicos
-    foreach ($print_types as $print_type => $value) {
+    foreach ($product_types as $product_type => $value) {
         if (wp_is_mobile()) {
-            echo '<div class="uppercase text-sm text-gray-400 text-center mb-2 w-full">' . esc_html( $print_type ) . '</div>';
+            echo '<div class="uppercase text-sm text-gray-400 text-center mb-2 w-full">' . esc_html( $product_type ) . '</div>';
         } else {
-            echo '<div class="uppercase text-[1.1vw] text-center border-b border-black w-full">' . esc_html( $print_type ) . '</div>';
+            echo '<div class="uppercase text-[1.1vw] text-center border-b border-black w-full">' . esc_html( $product_type ) . '</div>';
         }
     }
 }
@@ -274,18 +274,49 @@ function mostrar_tipo_producto() {
         $variations = $product->get_available_variations();
         foreach ( $variations as $variation ) {
             $variation_obj = new WC_Product_Variation($variation['variation_id']);
-            $format = $variation_obj->get_attribute('pa_format'); // Asume que el slug del atributo de formato es 'pa_format'
-            $price = $variation_obj->get_regular_price();
-            $sale_price = $variation_obj->get_sale_price();
 
+            // Inicializa una cadena para los atributos
+            $attributes_str = '';
+
+            // Obtén todos los atributos de la variación
+            $attributes = $variation_obj->get_variation_attributes();
+
+            // Itera sobre cada atributo
+            foreach ( $attributes as $attribute_name => $attribute_value ) {
+                // Salta el atributo 'product type'
+                if ($attribute_name == 'attribute_pa_product-type') {
+                    continue;
+                }
+
+                // Obtiene el término del atributo para mostrar el nombre legible por humanos
+                // El valor original se debe buscar en los términos del atributo si es que existen
+                $term = get_term_by('slug', $attribute_value, str_replace('attribute_', '', $attribute_name));
+                $attribute_value_formatted = $term ? esc_html($term->name) : esc_html($attribute_value); // Usa el nombre del término si está disponible, de lo contrario usa el valor del atributo
+
+                // Añade "cm" si el atributo es 'pa_format'
+                if ($attribute_name == 'attribute_pa_format') {
+                    $attribute_value_formatted .= ' cm';
+                }
+
+                // Concatena este atributo con los anteriores
+                if (!empty($attributes_str)) {
+                    $attributes_str .= ', '; // Añade coma entre atributos
+                }
+                $attributes_str .= $attribute_value_formatted;
+            }
+
+            // HTML para mostrar los atributos
             if (wp_is_mobile()) {
-                # code...
                 echo '<li class="flex w-full justify-between border-t border-black px-2 last:border-b text-sm tracking-wider">';
             } else {
                 echo '<li class="flex w-full justify-between border-t border-black px-2 last:border-b text-[1vw] tracking-wider">';
             }
 
-            echo '<span class="grow">' . ($format ? esc_html( $format ) . ' cm' : '') . '</span>';
+            echo '<span class="grow">' . $attributes_str . '</span>';
+            
+            // Precios
+            $price = $variation_obj->get_regular_price();
+            $sale_price = $variation_obj->get_sale_price();
             if ( !empty($sale_price) && $sale_price < $price ) {
                 echo '<span class="mr-2"><del>' . wc_price( $price ) . '</del></span>';
                 echo '<span class="text-red-600">' . wc_price( $sale_price ) . '</span>';
@@ -295,20 +326,48 @@ function mostrar_tipo_producto() {
             }
             echo '</li>';
         }
+
     } else {
         // Para productos simples y otros tipos
-        $format = $product->get_attribute('pa_format');
-        $price = $product->get_regular_price();
-        $sale_price = $product->get_sale_price();
+        // Inicializa una cadena para los atributos
+        $attributes_str = '';
 
+        // Obtén todos los atributos del producto
+        $attributes = $product->get_attributes();
+
+        // Itera sobre cada atributo
+        foreach ( $attributes as $attribute_name => $attribute ) {
+            // Salta los atributos que no son visibles o son personalizados
+            if ( !$attribute->get_visible() || $attribute->get_variation() ) {
+                continue;
+            }
+
+            // Obtiene los términos del atributo
+            $attribute_values = $product->get_attribute($attribute_name);
+
+            // Separa múltiples valores con comas
+            $attribute_values_formatted = implode(', ', array_map('esc_html', explode(', ', $attribute_values)));
+
+            // Concatena este atributo con los anteriores, solo si $attributes_str no está vacío
+            if ( !empty($attributes_str) ) {
+                $attributes_str .= ', '; // Añade coma entre atributos solo si ya hay contenido en la cadena
+            }
+            $attributes_str .= $attribute_values_formatted;
+        }
+
+        // HTML para mostrar los atributos
         if (wp_is_mobile()) {
             echo '<li class="flex w-full justify-between border-y border-black px-2 text-sm tracking-wider">';
         } else {
+
             echo '<li class="flex w-full justify-between border-y border-black px-2 text-[1vw] tracking-wider">';
         }
 
-        
-        echo '<span class="grow">' . ($format ? esc_html( $format ) . ' cm' : '') . '</span>';
+        echo '<span class="grow">' . $attributes_str . '</span>';
+
+        // Precios
+        $price = $product->get_regular_price();
+        $sale_price = $product->get_sale_price();
         if ( !empty($sale_price) && $sale_price < $price ) {
             echo '<span class="mr-4"><del>' . wc_price( $price ) . '</del></span>';
             echo '<span>' . wc_price( $sale_price ) . '</span>';
