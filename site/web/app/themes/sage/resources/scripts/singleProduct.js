@@ -10,6 +10,9 @@ export function singleProductGallery() {
   // ----------------------------------------------------
   let g = document.getElementById('glide'),
     s = g.getElementsByClassName('slide'),
+    slidesReales = Array.from(s).filter(
+      (slide) => !slide.classList.contains('glide__slide--clone')
+    ),
     i = document.getElementById('indice');
 
   var glide = new Glide('.g-gallery', {
@@ -35,7 +38,8 @@ export function singleProductGallery() {
   });
 
   function indice() {
-    i.innerHTML = glide.index + 1 + ' / ' + (s.length - 2);
+    console.log(s.length);
+    i.innerHTML = glide.index + 1 + ' / ' + slidesReales.length;
   }
 
   function avanza() {
