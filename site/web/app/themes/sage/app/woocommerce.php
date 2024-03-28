@@ -405,7 +405,7 @@ function filtro_por_artista_desplegable(){
     echo '<form action="" method="GET">';
     echo '<select name="filtro_artist" onchange="this.form.submit()">';
     // La opción de "Ver Todos" sigue siendo necesaria para quitar el filtro
-    echo '<option value=""' . selected($selected_artist, '', false) . '>Todos los artistas</option>';
+    echo '<option value=""' . selected($selected_artist, '', false) . '>All artists</option>';
 
     foreach($terms as $term){
         // Comprobar si el término actual debe ser seleccionado basado en la selección anterior del usuario
