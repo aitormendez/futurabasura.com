@@ -1,59 +1,10 @@
 <?php
 
-
-/**
- * Shortcode con desplegable de artistas.
- *
- * @link https://stackoverflow.com/questions/56120607/make-a-dropdown-for-a-woocommerce-taxonomy-like-product-tags
- */
-
-add_shortcode( 'product_tax_artist_dropdown', function( $atts ) {
-    // Attributes
-    $atts = shortcode_atts(
-        [
-        'hide_empty'   => '1', // or '0'
-        'show_count'   => '1', // or '0'
-        'orderby'      => 'name', // or 'order'
-        'taxonomy'     => 'artist',
-        ],
-        $atts,
-        'product_tax_artist_dropdown'
-    );
-
-    global $wp_query;
-
-    $taxonomy      = $atts['taxonomy'];
-    $taxonomy_name = get_taxonomy( $taxonomy )->labels->singular_name;
-
-    ob_start();
-
-    wp_dropdown_categories( [
-        'hide_empty' => $atts['hide_empty'],
-        'show_count' => $atts['show_count'],
-        'orderby'    => $atts['orderby'],
-        'selected'           => isset( $wp_query->query_vars[$taxonomy] ) ? $wp_query->query_vars[$taxonomy] : '',
-        'show_option_none'   => sprintf( __( 'Select an %s', 'sage' ), $taxonomy_name ),
-        'option_none_value'  => '',
-        'value_field'        => 'slug',
-        'taxonomy'   => $taxonomy,
-        'name'       => $taxonomy,
-        'class'      => 'dropdown_'.$taxonomy,
-    ] );
-    return ob_get_clean();
-} );
-
 /**
  * Rodear filtros de la tienda con un div.filtros -- inicio.
  */
 add_action( 'woocommerce_before_shop_loop', function() {
     echo '<div class="relative flex flex-wrap justify-center p-6 filtros md:pt-12 md:pb-20">';
-}, 20 );
-
-
-add_action( 'woocommerce_before_shop_loop', function() {
-    echo '<form class="fb_artist-ordering woocommerce-ordering">';
-    echo do_shortcode('[product_tax_artist_dropdown]');
-    echo '</form>';
 }, 20 );
 
 /**
@@ -437,6 +388,57 @@ function renderizar_metadatos_mobile_shop_loop() {
     echo '</ul>';
     echo '</div>';
 }
+
+/**
+ * Agregar el desplegable de filtro al archivo de producto
+ */
+add_action('woocommerce_before_shop_loop', 'filtro_por_artista_desplegable', 20);
+function filtro_por_artista_desplegable(){
+    $terms = get_terms(array(
+        'taxonomy' => 'artist',
+        'hide_empty' => true,
+    ));
+
+    // Asegúrate de capturar el valor actual de la selección, si existe
+    $selected_artist = isset($_GET['filtro_artist']) ? $_GET['filtro_artist'] : '';
+
+    echo '<form action="" method="GET">';
+    echo '<select name="filtro_artist" onchange="this.form.submit()">';
+    // La opción de "Ver Todos" sigue siendo necesaria para quitar el filtro
+    echo '<option value=""' . selected($selected_artist, '', false) . '>Todos los artistas</option>';
+
+    foreach($terms as $term){
+        // Comprobar si el término actual debe ser seleccionado basado en la selección anterior del usuario
+        echo '<option value="' . esc_attr($term->slug) . '"' . selected($selected_artist, $term->slug, false) . '>' . esc_html($term->name) . '</option>';
+    }
+    echo '</select>';
+    echo '</form>';
+}
+
+// Filtrar productos según el artista seleccionado
+add_action('pre_get_posts', 'filtrar_productos_por_artista');
+
+function filtrar_productos_por_artista($query){
+    // Asegúrate de que estás modificando la consulta principal y en la página adecuada (tienda o archivo de productos)
+    if(is_admin() || !$query->is_main_query() || !is_post_type_archive('product')){
+        return;
+    }
+
+    if(isset($_GET['filtro_artist']) && !empty($_GET['filtro_artist'])){
+        $query->set('tax_query', array(
+            array(
+                'taxonomy' => 'artist',
+                'field'    => 'slug',
+                'terms'    => array($_GET['filtro_artist']),
+            ),
+        ));
+    }
+}
+
+
+
+
+
 
 
 /**
