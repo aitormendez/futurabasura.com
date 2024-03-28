@@ -59,4 +59,41 @@
       }
     }
   }
+
+  /* Estilizar el desplegable */
+  select[name='filtro_artist'],
+  select[name='orderby'] {
+    font-size: 16px;
+    padding: 8px 16px;
+    background-color: white; /* Color de fondo */
+    cursor: pointer; /* Cursor en forma de mano */
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.2em;
+    -webkit-appearance: none; /* Deshabilitar la apariencia por defecto en WebKit */
+    -moz-appearance: none; /* Deshabilitar la apariencia por defecto en Mozilla */
+    appearance: none; /* Deshabilitar la apariencia por defecto */
+  }
+
+  /* Estilizar el desplegable al pasar el ratón por encima */
+  select[name='filtro_artist']:hover,
+  select[name='orderby']:hover {
+    background-color: #ccff00; /* Cambiar el color del borde al pasar el ratón */
+  }
+
+  /* Estilizar el desplegable al estar enfocado */
+  select[name='filtro_artist']:focus,
+  select[name='orderby']:focus {
+    border: 1px solid #000;
+  }
+
+  select[name='filtro_artist'] option,
+  select[name='orderby'] option {
+    background-color: #fff; /* Color de fondo para las opciones */
+  }
+
+  select[name='filtro_artist'] option:hover,
+  select[name='orderby'] option:hover {
+    background-color: #e6ff02;
+  }
 }
