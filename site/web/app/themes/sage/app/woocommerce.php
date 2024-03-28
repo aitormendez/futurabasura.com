@@ -229,37 +229,20 @@ function woocommerce_template_loop_product_link_open() {
 function mostrar_tipo_producto() {
     global $product;
 
-    // Usa un array para almacenar los tipos de impresión únicos
-    $product_types = array();
+    // Almacenar el tipo de producto
+    $product_type = $product->get_attribute('pa_product-type');
 
-    if ( $product->is_type( 'variable' ) ) {
-        // Para productos variables, recolecta todos los valores de tipos de impresión
-        $variations = $product->get_available_variations();
-        foreach ( $variations as $variation ) {
-            $variation_obj = new WC_Product_Variation( $variation['variation_id'] );
-            $product_type = $variation_obj->get_attribute( 'pa_product-type' );
-            if ( $product_type && !isset($product_types[$product_type]) ) {
-                // Solo añade el tipo de impresión si aún no ha sido añadido
-                $product_types[$product_type] = true;
-            }
-        }
-    } else {
-        // Para productos simples y otros tipos
-        $product_type = $product->get_attribute( 'pa_product-type' );
-        if ( $product_type ) {
-            $product_types[$product_type] = true;
-        }
-    }
-
-    // Muestra los tipos de impresión únicos
-    foreach ($product_types as $product_type => $value) {
+    // Comprobar si el atributo de tipo de producto existe y mostrarlo
+    if ($product_type) {
+        // Determinar el estilo basado en si el usuario está en un dispositivo móvil
         if (wp_is_mobile()) {
-            echo '<div class="uppercase text-sm text-gray-400 text-center mb-2 w-full">' . esc_html( $product_type ) . '</div>';
+            echo '<div class="uppercase text-sm text-gray-400 text-center mb-2 w-full">' . esc_html($product_type) . '</div>';
         } else {
-            echo '<div class="uppercase text-[1.1vw] text-center border-b border-black w-full">' . esc_html( $product_type ) . '</div>';
+            echo '<div class="uppercase text-[1.1vw] text-center border-b border-black w-full">' . esc_html($product_type) . '</div>';
         }
     }
 }
+
 
 
 /**
