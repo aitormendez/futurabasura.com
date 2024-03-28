@@ -150,33 +150,64 @@ class SingleProduct extends Composer
 
             foreach ($product_variations_list as $idx => $variation) {
                 $variation_id = $variation["variation_id"];
-                $variable_product = wc_get_product($variation_id);
-                $variation_obj = wc_get_product( $variation_id );
+                $variation_obj = wc_get_product($variation_id);
+                
+                // Obtén los atributos de esta variación específica
+                $variation_attributes = $variation_obj->get_variation_attributes();
+                // Concatena los atributos y sus valores para mostrar
+                $attributes_string = [];
+                foreach ($variation_attributes as $attr_key => $attr_value) {
+                    $attribute_taxonomy = str_replace('attribute_', '', $attr_key);
+                    $attribute_label = wc_attribute_label($attribute_taxonomy);
 
+                    // Comprueba si el atributo actual es el "product type" para omitirlo
+                    if ($attribute_taxonomy !== 'pa_product-type' && $attribute_taxonomy !== 'product_type') { // Ajusta la clave de atributo según tu necesidad
+                        if($attr_value){ // Asegúrate de que el valor del atributo no esté vacío
+                            $attribute_value = get_term_by('slug', $attr_value, $attribute_taxonomy)->name;
+                            $attributes_string[] = $attribute_value;
+                        }
+                    }
+                }
+                $attributes_string = implode(', ', $attributes_string);
+
+            
                 $output[$idx] = [
-                    'product_type'  => $product_type,
-                    'variation_id'  => $variation_id,
-                    'variation_obj' => $variation_obj,
-                    'size_slug'     => implode(', ', $variation["attributes"]),
-                    'size'          => $variation_obj->get_attribute( 'format' ),
-                    'price'         => $variable_product->get_price(),
-                    'regular_price' => $variable_product->get_regular_price(),
-                    'is_on_sale'    => $variation_obj->is_on_sale(),
-                    'sale_price'    => $variable_product->get_sale_price(),
+                    'product_type'    => $product_type,
+                    'variation_id'    => $variation_id,
+                    'variation_obj'   => $variation_obj,
+                    'attributes'      => $attributes_string, // Usar esta cadena en lugar de 'size'
+                    'price'           => $variation_obj->get_price(),
+                    'regular_price'   => $variation_obj->get_regular_price(),
+                    'is_on_sale'      => $variation_obj->is_on_sale(),
+                    'sale_price'      => $variation_obj->get_sale_price(),
                 ];
             }
 
             return $output;
 
         } else {
-
-            $output = [];
-            $output[0] = [
-                'product_type' => $product_type,
-                'size'         => $product->get_attribute('format'),
-            ];
-
-            return $output;
+            $attributes = $product->get_attributes();
+        
+            // Recoger y concatenar todos los atributos excluyendo 'product_type'
+            $attributes_string = [];
+            foreach ($attributes as $attribute_name => $attribute) {
+                // Asegúrate de no incluir el atributo 'product_type'
+                if ($attribute_name != 'product_type') {
+                    $attributes_string[] = implode(', ', wc_get_product_terms($product->get_id(), $attribute_name, array('fields' => 'names')));
+                }
+            }
+            $attributes_string = implode(', ', $attributes_string);
+        
+            // El resto de tu lógica aquí...
+            if ($product_type == 'simple') {
+                $output = [];
+                $output[0] = [
+                    'product_type' => $product_type,
+                    'attributes'   => $attributes_string,
+                ];
+        
+                return $output;
+            }
         }
 
     }

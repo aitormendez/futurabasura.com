@@ -58,7 +58,7 @@ if ( ! $product->is_purchasable() ) {
               <input type="radio" name="attribute_pa_medidas" value="" checked="checked"  />
             </div>
             <div class="px-4 ftbs_variationsTableRowColumn ftbs_variationsTableRowColumn_size">
-              <span class="ftbsFontStyle4_blackSoft">{!! $variaciones[0]['size'] !!} CM</span>
+              <span class="ftbsFontStyle4_blackSoft">{!! $variaciones[0]['attributes'] !!}</span>
             </div>
             @if ($precio['is_on_sale'])
               <div class="flex items-center px-4 text-white bg-red-600 price-on-sale"><del>{{ $precio['regular_price'] }}</del> <del class="block woocommerce_price_euro_letter">&nbsp;EUR</del></div>
