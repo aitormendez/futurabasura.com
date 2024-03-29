@@ -22,15 +22,19 @@ export function dropdownFilter() {
       this.artists = fb.artists; // Asume que fb.artists incluye objetos con name y slug
       // Establece el artista seleccionado basado en la URL, si existe
       const urlParams = new URLSearchParams(window.location.search);
-      const artistSlug = urlParams.get('filtro_artist');
+      const artistSlug = urlParams.get('artist_filter'); // Asegúrate de que este parámetro coincida con el nombre que usas en la URL
       if (artistSlug) {
         const artist = this.artists.find((a) => a.slug === artistSlug);
         if (artist) {
           this.selectedSlug = artist.slug;
           this.selectedName = artist.name;
+        } else {
+          // Si el slug está presente pero no coincide con ningún artista, muestra texto predeterminado
+          this.selectedName = 'Select an artist';
         }
       }
     },
+
     applyFilter(slug) {
       this.selectedSlug = slug;
       const artist = this.artists.find((a) => a.slug === slug);
@@ -50,18 +54,28 @@ export const dropdownSort = () => {
     open: false,
     selected: 'Sorting by',
     options: [
-      { value: 'default', text: 'Default sorting' },
+      { value: '', text: 'Default sorting' },
       { value: 'date', text: 'Latest' },
-      { value: 'price', text: 'Price: low to hight' },
-      { value: 'price-desc', text: 'Price: hight to low' },
+      { value: 'price', text: 'Price: low to high' },
+      { value: 'price-desc', text: 'Price: high to low' },
     ],
-    fetchOptions() {
-      // Opcional: Aquí puedes dinámicamente buscar las opciones si son generadas por el backend o configurarlas manualmente como arriba.
+    init() {
+      // Establecer el criterio de ordenación seleccionado basado en la URL, si existe
+      const urlParams = new URLSearchParams(window.location.search);
+      const orderByValue = urlParams.get('orderby') || '';
+
+      // Buscar la opción correspondiente
+      const selectedOption = this.options.find(
+        (option) => option.value === orderByValue
+      );
+      if (selectedOption) {
+        this.selected = selectedOption.text;
+      }
     },
     applySort(sortValue) {
       const url = new URL(window.location);
       url.searchParams.set('orderby', sortValue);
-      window.location = url.href;
+      window.location.href = url.href;
     },
   };
 };
