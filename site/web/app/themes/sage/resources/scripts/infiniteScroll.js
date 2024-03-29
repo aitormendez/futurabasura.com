@@ -1,11 +1,12 @@
 import InfiniteScroll from 'infinite-scroll';
 
 export function infiniteScrollShop() {
+  console.log('infiniteScrollShop');
   let main = new InfiniteScroll('.infinite-scroll-container', {
-    path: '.page-numbers .next',
+    path: '.next',
     append: '.infinite-scroll-item',
     history: false,
-    hideNav: '.page-numbers',
+    hideNav: '.woocommerce-pagination',
     // button: '.view-more-button',
     // status: '.page-load-status',
   });

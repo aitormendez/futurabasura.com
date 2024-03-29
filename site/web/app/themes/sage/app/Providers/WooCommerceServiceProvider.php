@@ -44,17 +44,21 @@ class WooCommerceServiceProvider extends ServiceProvider
 
         add_action('woocommerce_before_shop_loop', function() {
             ?>
-            <div x-data="dropdownSort()" x-init="fetchOptions()" class="relative md:min-w-80 text-center">
-                <button @click="open = !open" x-text="selected" class="relative cursor-pointer bg-white uppercase tracking-[0.2em] px-3 py-2 text-sm w-full"></button>
-                <template x-if="open">
-                    <ul class="absolute left-0 bg-white z-10 w-full">
-                        <template x-for="option in options" :key="option.value">
-                            <li @click="applySort(option.value)" class="p-2 hover:bg-allo cursor-pointer leading-tight uppercase tracking-[0.2em] text-sm" x-text="option.text"></a></li>
-                        </template>
-                    </ul>
-                </template>
+            <div x-data="dropdownSort()" x-init="init()" class="relative md:min-w-80 text-center">
+                <!-- Aplicar @click.away en este nivel asegura que cualquier clic fuera del desplegable cerrará las opciones -->
+                <div @click.away="open = false" @click="open = !open" class="cursor-pointer bg-white uppercase tracking-[0.2em] px-3 py-2 text-sm w-full">
+                    <span x-text="selected"></span>
+                    <div x-show="open" class="absolute left-0 bg-white z-10 w-full">
+                        <ul>
+                            <template x-for="option in options" :key="option.value">
+                                <li @click="applySort(option.value)" class="p-2 hover:bg-allo cursor-pointer leading-tight uppercase tracking-[0.2em] text-sm" x-text="option.text"></li>
+                            </template>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <?php
+
             // EL SCRIPT ESTÁ EN SHOP.JS (dropdownSort).
         }, 26);
 
@@ -140,6 +144,9 @@ class WooCommerceServiceProvider extends ServiceProvider
         /**
          * acciones condicionales para móvil y para escritorio
          */
+
+         add_action('woocommerce_after_shop_loop', [$this, 'custom_woocommerce_next_page_link'], 10);
+
 
          add_action('pre_get_posts', [$this, 'apply_artist_filter_to_products_query']);
 
@@ -418,6 +425,10 @@ class WooCommerceServiceProvider extends ServiceProvider
         }
     }
 
+    /**
+     * Aplicar el filtro de artista al query de producto.
+     */   
+
     public function apply_artist_filter_to_products_query($query) {
         // Solo modifica la consulta en la tienda o páginas de archivo de productos y si hay un filtro aplicado
         if (!is_admin() && $query->is_main_query() && ($query->is_post_type_archive('product') || $query->is_product_category()) && isset($_GET['artist_filter']) && !empty($_GET['artist_filter'])) {
@@ -428,6 +439,22 @@ class WooCommerceServiceProvider extends ServiceProvider
                     'terms'    => array(sanitize_text_field($_GET['artist_filter'])),
                 ),
             ));
+        }
+    }
+    /**
+     * Generar el enlace de próxima página en portada de producto para infinite-scroll.
+     */  
+    public function custom_woocommerce_next_page_link() {
+        if (!is_shop() && !is_product_category() && !is_product_taxonomy()) return; // Asegúrate de que esto solo se ejecute en las páginas de la tienda
+        
+        global $wp_query;
+        if ($wp_query->max_num_pages <= 1) return; // No hay necesidad de paginación si solo hay una página
+    
+        $next_page_link = get_next_posts_page_link($wp_query->max_num_pages);
+        if ($next_page_link) {
+            echo '<nav class="woocommerce-pagination">';
+            echo '<a class="next" href="' . esc_url($next_page_link) . '">' . esc_html__('Next Page', 'woocommerce') . '</a>';
+            echo '</nav>';
         }
     }
 }

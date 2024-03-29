@@ -26,7 +26,7 @@ if (empty($product) || !$product->is_visible()) {
     return;
 }
 ?>
-<li <?php wc_product_class( wp_is_mobile() ? 'w-full flex justify-center mb-10' : 'card', $product); ?>>
+<li <?php wc_product_class( wp_is_mobile() ? 'infinite-scroll-item w-full flex justify-center mb-10' : 'infinite-scroll-item card', $product); ?>>
         @php     
             /**
              * Hook: woocommerce_before_shop_loop_item.
