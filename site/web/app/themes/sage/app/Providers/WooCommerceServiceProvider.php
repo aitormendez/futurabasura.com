@@ -42,6 +42,22 @@ class WooCommerceServiceProvider extends ServiceProvider
             // SCRIPT;
         }, 25);
 
+        add_action('woocommerce_before_shop_loop', function() {
+            ?>
+            <div x-data="dropdownSort()" x-init="fetchOptions()" class="relative">
+                <button @click="open = !open" x-text="selected" class="relative cursor-pointer bg-white uppercase tracking-[0.2em] px-3 py-2 text-sm"></button>
+                <template x-if="open">
+                    <ul class="absolute left-0 bg-white z-10">
+                        <template x-for="option in options" :key="option.value">
+                            <li @click="applySort(option.value)" class="p-2 hover:bg-allo cursor-pointer leading-tight uppercase tracking-[0.2em] text-sm" x-text="option.text"></a></li>
+                        </template>
+                    </ul>
+                </template>
+            </div>
+            <?php
+            // EL SCRIPT ESTÁ EN SHOP.JS (dropdownSort).
+        }, 26);
+
         /**
          * Rodear filtros de la tienda con un div.filtros -- inicio.
          */
@@ -103,19 +119,6 @@ class WooCommerceServiceProvider extends ServiceProvider
                 });
             }
         });
-
-        /**
-         * Eliminar ordenar por popularidad.
-         * https://www.pixelninja.me/remove-woocommerce-product-sorting-options/
-         */
-
-        // Customizes the WooCommerce product sorting options
-        // Available options are: menu_order, rating, date, popularity, price, price-desc
-
-        add_filter( "woocommerce_catalog_orderby", function( $orderby ) {
-            unset($orderby["popularity"]);
-            return $orderby;
-        }, 20 );
 
         /**
          * Mostrar totales de envío.

@@ -1,9 +1,10 @@
 import domReady from '@roots/sage/client/dom-ready';
 import { navigation } from './navigation.js';
 import Alpine from 'alpinejs';
-import { dropdownFilter } from './shop.js';
+import { dropdownFilter, dropdownSort } from './shop.js';
 window.Alpine = Alpine;
 window.dropdownFilter = dropdownFilter;
+window.dropdownSort = dropdownSort;
 Alpine.start();
 
 /**

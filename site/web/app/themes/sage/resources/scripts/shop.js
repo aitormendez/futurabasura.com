@@ -44,3 +44,24 @@ export function dropdownFilter() {
     },
   };
 }
+
+export const dropdownSort = () => {
+  return {
+    open: false,
+    selected: 'Sorting by',
+    options: [
+      { value: 'default', text: 'Default sorting' },
+      { value: 'date', text: 'Latest' },
+      { value: 'price', text: 'Price: low to hight' },
+      { value: 'price-desc', text: 'Price: hight to low' },
+    ],
+    fetchOptions() {
+      // Opcional: Aquí puedes dinámicamente buscar las opciones si son generadas por el backend o configurarlas manualmente como arriba.
+    },
+    applySort(sortValue) {
+      const url = new URL(window.location);
+      url.searchParams.set('orderby', sortValue);
+      window.location = url.href;
+    },
+  };
+};
