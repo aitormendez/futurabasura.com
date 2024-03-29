@@ -53,8 +53,10 @@
                 do_action('woocommerce_before_shop_loop');
                 
                 // woocommerce_product_loop_start();
-                
             @endphp
+
+
+
             <ul class="flex flex-wrap items-center justify-center infinite-scroll-container">
                 @if (wc_get_loop_prop('total'))
                     @while (have_posts())

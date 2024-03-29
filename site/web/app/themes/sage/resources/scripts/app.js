@@ -1,5 +1,10 @@
 import domReady from '@roots/sage/client/dom-ready';
 import { navigation } from './navigation.js';
+import Alpine from 'alpinejs';
+import { dropdownFilter } from './shop.js';
+window.Alpine = Alpine;
+window.dropdownFilter = dropdownFilter;
+Alpine.start();
 
 /**
  * Application entrypoint
@@ -24,10 +29,10 @@ domReady(async () => {
     desplegarArtista();
   }
 
-  if (document.body.classList.contains('post-type-archive-product')) {
-    const { selectorArtista } = await import('./shop.js');
-    selectorArtista();
-  }
+  // if (document.body.classList.contains('post-type-archive-product')) {
+  //   const { dropdownFilter } = await import('./shop.js');
+  //   dropdownFilter();
+  // }
 
   if (document.body.classList.contains('single-product')) {
     const { singleProductGallery } = await import('./singleProduct.js');

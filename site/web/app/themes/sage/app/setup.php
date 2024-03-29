@@ -23,9 +23,19 @@ add_action('wp_enqueue_scripts', function () {
         $frases_array = [];
         foreach ($frases as $frase) {
             $frases_array[] = $frase['frase'];
-        }
-        ;
+        };
     }
+
+    // Ahora que Alpine.js está encolado, puedes localizar tu script
+    $terms = get_terms([
+        'taxonomy' => 'artist',
+        'hide_empty' => false,
+    ]);
+
+    $artists = array_map(function($term) {
+        return ['name' => $term->name, 'slug' => $term->slug];
+    }, $terms);
+    
 
     bundle('app')->enqueue()->localize('fb', [
         'fondos' => [
@@ -36,6 +46,7 @@ add_action('wp_enqueue_scripts', function () {
         ],
         'homeUrl' => get_bloginfo('url'),
         'frases' => $frases_array,
+        'artists' => $artists,
     ]);
 }, 100);
 
@@ -171,4 +182,3 @@ add_action('widgets_init', function () {
 //         setcookie('is_mobile', $isMobile ? 'true' : 'false', time() + 86400, '/'); // Expira en 1 día
 //     }
 // });
-
