@@ -16,13 +16,13 @@ class WooCommerceServiceProvider extends ServiceProvider
         add_action('woocommerce_before_shop_loop', function () {
             echo <<<HTML
                 <div x-data="dropdownFilter()" x-init="init()">
-                    <div @click="open = !open" class="cursor-pointer bg-white uppercase tracking-[0.2em] px-3 py-2 text-sm">
+                    <div @click="open = !open" class="relative cursor-pointer bg-white uppercase tracking-[0.2em] px-3 py-2 text-sm">
                         <span x-text="selectedName === '' ? 'Select an artist' : selectedName"></span>
                         <div x-show="open" @click.away="open = false" class="absolute left-0 bg-white z-10">
                             <ul class="max-h-60 overflow-auto">
-                                <li @click="applyFilter('')" class="p-2 hover:bg-gray-100 cursor-pointer">All artists</li>
+                                <li @click="applyFilter('')" class="p-2 hover:bg-allo cursor-pointer">All artists</li>
                                 <template x-for="artist in artists" :key="artist.slug">
-                                    <li @click="applyFilter(artist.slug)" x-text="artist.name" class="p-2 hover:bg-gray-100 cursor-pointer"></li>
+                                    <li @click="applyFilter(artist.slug)" x-text="artist.name" class="p-2 hover:bg-allo cursor-pointer leading-tight"></li>
                                 </template>
                             </ul>
                         </div>
@@ -40,7 +40,7 @@ class WooCommerceServiceProvider extends ServiceProvider
             // }
             // </script>
             // SCRIPT;
-        });
+        }, 25);
 
         /**
          * Rodear filtros de la tienda con un div.filtros -- inicio.
