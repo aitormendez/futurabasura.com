@@ -15,10 +15,10 @@ class WooCommerceServiceProvider extends ServiceProvider
     {
         add_action('woocommerce_before_shop_loop', function () {
             echo <<<HTML
-                <div x-data="dropdownFilter()" x-init="init()">
-                    <div @click="open = !open" class="relative cursor-pointer bg-white uppercase tracking-[0.2em] px-3 py-2 text-sm">
+                <div x-data="dropdownFilter()" x-init="init()" class="md:min-w-80">
+                    <div @click="open = !open" class="relative cursor-pointer bg-white uppercase tracking-[0.2em] px-3 py-2 text-sm text-center">
                         <span x-text="selectedName === '' ? 'Select an artist' : selectedName"></span>
-                        <div x-show="open" @click.away="open = false" class="absolute left-0 bg-white z-10">
+                        <div x-show="open" @click.away="open = false" class="absolute left-0 bg-white z-10 w-full top-9">
                             <ul class="max-h-60 overflow-auto">
                                 <li @click="applyFilter('')" class="p-2 hover:bg-allo cursor-pointer">All artists</li>
                                 <template x-for="artist in artists" :key="artist.slug">
@@ -44,10 +44,10 @@ class WooCommerceServiceProvider extends ServiceProvider
 
         add_action('woocommerce_before_shop_loop', function() {
             ?>
-            <div x-data="dropdownSort()" x-init="fetchOptions()" class="relative">
-                <button @click="open = !open" x-text="selected" class="relative cursor-pointer bg-white uppercase tracking-[0.2em] px-3 py-2 text-sm"></button>
+            <div x-data="dropdownSort()" x-init="fetchOptions()" class="relative md:min-w-80 text-center">
+                <button @click="open = !open" x-text="selected" class="relative cursor-pointer bg-white uppercase tracking-[0.2em] px-3 py-2 text-sm w-full"></button>
                 <template x-if="open">
-                    <ul class="absolute left-0 bg-white z-10">
+                    <ul class="absolute left-0 bg-white z-10 w-full">
                         <template x-for="option in options" :key="option.value">
                             <li @click="applySort(option.value)" class="p-2 hover:bg-allo cursor-pointer leading-tight uppercase tracking-[0.2em] text-sm" x-text="option.text"></a></li>
                         </template>
