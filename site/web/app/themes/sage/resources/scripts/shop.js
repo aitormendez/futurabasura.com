@@ -36,14 +36,15 @@ export function dropdownFilter() {
     },
 
     applyFilter(slug) {
-      this.selectedSlug = slug;
-      const artist = this.artists.find((a) => a.slug === slug);
-      this.selectedName = artist ? artist.name : '';
-      this.open = false;
-      // Actualiza la URL con el filtro seleccionado o elimina el filtro si se seleccionó "All artists"
-      const newUrl = slug
-        ? `${fb.homeUrl}/shop/?artist_filter=${encodeURIComponent(slug)}`
-        : `${fb.homeUrl}/shop/`;
+      // Verificar si estamos en una página de taxonomía
+      const isTaxonomyPage = window.location.pathname.includes('/artists/');
+
+      // Construir la URL basada en si estamos o no en una página de taxonomía
+      const baseUrl = isTaxonomyPage
+        ? `${fb.homeUrl}/artists/`
+        : `${fb.homeUrl}/shop/?artist_filter=`;
+      const newUrl = slug ? `${baseUrl}${encodeURIComponent(slug)}` : baseUrl;
+
       window.location.href = newUrl;
     },
   };
