@@ -18,18 +18,27 @@ export function dropdownFilter() {
     selectedSlug: '',
     selectedName: '',
     artists: [],
+    bioLink: '',
+    bioLabel: '',
     init() {
       this.artists = fb.artists; // Asume que fb.artists incluye objetos con name y slug
-      // Establece el artista seleccionado basado en la URL, si existe
+      console.log(this.artists);
       const urlParams = new URLSearchParams(window.location.search);
-      const artistSlug = urlParams.get('artist_filter'); // Asegúrate de que este parámetro coincida con el nombre que usas en la URL
+      const artistSlug = urlParams.get('artist_filter');
       if (artistSlug) {
         const artist = this.artists.find((a) => a.slug === artistSlug);
         if (artist) {
           this.selectedSlug = artist.slug;
           this.selectedName = artist.name;
+          // Configura bioLink y bioLabel si estamos en la tienda
+          const isTaxonomyPage = window.location.pathname.includes('/artists/');
+          if (!isTaxonomyPage) {
+            this.bioLink = `${fb.homeUrl}/artists/${encodeURIComponent(
+              artist.slug
+            )}/`;
+            this.bioLabel = `bio: ${artist.name}`;
+          }
         } else {
-          // Si el slug está presente pero no coincide con ningún artista, muestra texto predeterminado
           this.selectedName = 'Select an artist';
         }
       }
@@ -40,11 +49,18 @@ export function dropdownFilter() {
       const isTaxonomyPage = window.location.pathname.includes('/artists/');
 
       // Construir la URL basada en si estamos o no en una página de taxonomía
-      const baseUrl = isTaxonomyPage
-        ? `${fb.homeUrl}/artists/`
-        : `${fb.homeUrl}/shop/?artist_filter=`;
-      const newUrl = slug ? `${baseUrl}${encodeURIComponent(slug)}` : baseUrl;
+      let newUrl;
+      if (isTaxonomyPage) {
+        // Si estamos viendo una taxonomía y se selecciona un artista, redirige a su página de taxonomía específica
+        newUrl = `${fb.homeUrl}/artists/${encodeURIComponent(slug)}/`; // Usando slug para construir la URL
+      } else {
+        // Si estamos en la tienda, aplica el filtro y permanece en la tienda
+        newUrl = slug
+          ? `${fb.homeUrl}/shop/?artist_filter=${encodeURIComponent(slug)}`
+          : `${fb.homeUrl}/shop/`;
+      }
 
+      // Redirige a la nueva URL
       window.location.href = newUrl;
     },
   };

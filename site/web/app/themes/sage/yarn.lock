@@ -6967,6 +6967,11 @@ swc-loader@0.2.3:
   resolved "https://registry.yarnpkg.com/swc-loader/-/swc-loader-0.2.3.tgz#6792f1c2e4c9ae9bf9b933b3e010210e270c186d"
   integrity sha512-D1p6XXURfSPleZZA/Lipb3A8pZ17fP4NObZvFCDjK/OKljroqDpPmsBdTraWhVBqUNpcWBQY1imWdoPScRlQ7A==
 
+tailwind-clip-path@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/tailwind-clip-path/-/tailwind-clip-path-1.0.0.tgz#2a1d41480cac00603b6c4504d597426f6b4d0c88"
+  integrity sha512-pac3BiCZCEKtX+3In4508PFcX2eZL7JwliZMtfYE0RoqFMjfbCVLmu+uuEFqn1y/f2vrOB5rY4XNcmaOSG1csw==
+
 tailwindcss@3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.4.0.tgz#045a9c474e6885ebd0436354e611a76af1c76839"

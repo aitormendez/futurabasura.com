@@ -97,6 +97,14 @@ const config = {
       };
       addComponents([textos, botones]);
     }),
+    plugin(function ({ addUtilities }) {
+      const newUtilities = {
+        '.clip-path-elipse': {
+          clipPath: 'ellipse(50% 50% at 50% 50%)',
+        },
+      };
+      addUtilities(newUtilities, ['responsive', 'hover']);
+    }),
   ],
 };
 
