@@ -30,8 +30,8 @@ class WooCommerceServiceProvider extends ServiceProvider
                         </div>
                     </div>
                     <template x-if="bioLink">
-                    <div class="clip-path-elipse absolute left-1/2 transform -translate-x-1/2 px-6 pt-[0.1em] m-4 uppercase bg-black text-white hover:bg-allo hover:text-black text-center tracking-[0.2em] text-sm">
-                        <a :href="bioLink" x-text="bioLabel" class="block p-2"></a>
+                    <div class="clip-path-elipse absolute left-1/2 transform -translate-x-1/2 px-6 pt-[0.1em] m-4 uppercase bg-black  hover:bg-allo text-center tracking-[0.2em] text-sm">
+                        <a :href="bioLink" x-text="bioLabel" class="block p-2  text-white  hover:text-black"></a>
                     </div>
                     </template>
                 </div>
