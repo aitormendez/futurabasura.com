@@ -145,10 +145,15 @@ class WooCommerceServiceProvider extends ServiceProvider
          * acciones condicionales para móvil y para escritorio
          */
 
-         add_action('woocommerce_after_shop_loop', [$this, 'custom_woocommerce_next_page_link'], 10);
+        // añadir tinyEMC a la descripción de la taxonomía artist.
+        add_action('artist_edit_form_fields', [$this, 'custom_taxonomy_description_field'], 10, 2);
 
+        // Ocultar campo descripción de la taxonomía artist sin editor TinyMCE por defecto.
+        add_action('admin_head', [$this, 'hide_standard_description_field']);
 
-         add_action('pre_get_posts', [$this, 'apply_artist_filter_to_products_query']);
+        add_action('woocommerce_after_shop_loop', [$this, 'custom_woocommerce_next_page_link'], 10);
+
+        add_action('pre_get_posts', [$this, 'apply_artist_filter_to_products_query']);
 
          // Remove the default WooCommerce product link open function
         remove_action('woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10);
@@ -185,7 +190,7 @@ class WooCommerceServiceProvider extends ServiceProvider
      * Mostrar artista en los productos de la portada de la tienda.
      */
 
-     private function mostrar_artista_producto() {
+    private function mostrar_artista_producto() {
         global $product;
         $artist_ids = wp_get_post_terms( $product->get_id(), 'artist', ['fields' => 'names'] );
         // Comprueba si hay artistas asignados y los imprime
@@ -457,4 +462,42 @@ class WooCommerceServiceProvider extends ServiceProvider
             echo '</nav>';
         }
     }
+
+    /**
+     * para añadir el editor TinyMCE al campo de descripción de la taxonomía.
+     */  
+    public function custom_taxonomy_description_field() {
+        ?>
+        <tr class="form-field term-description-wrap">
+            <th scope="row"><label for="description"><?php _e('Description'); ?></label></th>
+            <td><?php
+                // Utiliza wp_editor() para añadir el editor TinyMCE al campo de descripción
+                $settings = array(
+                    'textarea_name' => 'description',
+                    'quicktags' => array('buttons' => 'em,strong,link'),
+                    'tinymce' => true
+                );
+                wp_editor(html_entity_decode(get_term_field('description', (int) $_GET['tag_ID'], $_GET['taxonomy'], 'raw')), 'tag_description', $settings);
+                ?><br>
+                <span class="description"><?php _e('The description is not prominent by default; however, some themes may show it.'); ?></span>
+            </td>
+        </tr>
+        <?php
+    }
+
+    /**
+     * esconder campo por defecto para añadir el editor TinyMCE al campo de 
+     * descripción de la taxonomía. (complementa la función anterior)
+     */ 
+    function hide_standard_description_field() {
+        ?>
+        <script type="text/javascript">
+            jQuery(document).ready(function($) {
+                $('textarea#description').closest('.form-field').remove(); // Oculta el campo de descripción estándar
+            });
+        </script>
+        <?php
+    }
+    
+    
 }
