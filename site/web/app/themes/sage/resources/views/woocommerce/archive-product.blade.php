@@ -25,7 +25,7 @@
                 <div id="toggle-button" class="flex flex-wrap justify-center bg-white hero md:cursor-pointer">
                     <img src="{!! $artist_hero['hero_img']['url'] !!}" alt="{!! $artist_hero['hero_img']['alt'] !!}" srcset="{!! $artist_hero['hero_srcset'] !!}"
                         sizes="100vw" class="w-full">
-                    <div class="p-6 section collapsible description md:w-3/4">
+                    <div class="p-6 section collapsible description md:w-3/4 font-sans">
                         {!! $artist_hero['term']->description !!}
                     </div>
                 </div>
