@@ -471,3 +471,28 @@
 //     add_action('woocommerce_before_shop_loop_item_title', 'renderizar_card_back', 15);
 //     add_action('woocommerce_before_shop_loop_item_title', 'renderizar_card_front', 10);
 // }
+
+add_action('rest_api_init', function() {
+    register_rest_route('fb/v1', '/productos/', array(
+        'methods'  => 'GET',
+        'callback' => 'my_custom_endpoint_callback',
+        'permission_callback' => function () {
+            return current_user_can('edit_posts');
+        }
+    ));
+});
+
+function my_custom_endpoint_callback($request) {
+    $wc_key = getenv('WC_KEY');
+    $wc_secret = getenv('WC_SECRET');
+    $site_url = get_bloginfo('url');
+    $api_url = "{$site_url}/wp-json/wc/v3/products?consumer_key={$wc_key}&consumer_secret={$wc_secret}";
+
+    $response = wp_remote_get($api_url, array(
+        'headers' => array(
+            'Authorization' => 'Basic ' . base64_encode($wc_key . ':' . $wc_secret)
+        )
+    ));
+    $products = wp_remote_retrieve_body($response);
+    return new WP_REST_Response(json_decode($products), 200);
+}

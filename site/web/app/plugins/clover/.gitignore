@@ -1,8 +1,0 @@
-.budfiles
-node_modules
-yarn-error.log
-npm-debug.log
-vendor
-/test-results/
-/playwright-report/
-/playwright/.cache/

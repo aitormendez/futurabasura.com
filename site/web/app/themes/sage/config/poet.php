@@ -134,10 +134,10 @@ return [
     */
 
     'block_category' => [
-        // 'cta' => [
-        //     'title' => 'Call to Action',
-        //     'icon' => 'star-filled',
-        // ],
+        'fb' => [
+            'title' => 'Futura Basura',
+            // 'icon' => 'star-filled',
+        ],
     ],
 
     /*
