@@ -45,6 +45,7 @@ const Edit = ({ attributes, setAttributes }) => {
   };
 
   const updateLayout = (selectedLayout) => {
+    console.log('Updating layout to:', selectedLayout);
     setAttributes({ layout: selectedLayout });
   };
 
@@ -54,6 +55,16 @@ const Edit = ({ attributes, setAttributes }) => {
         <p>
           {__('Selected Product:', 'sage')}{' '}
           <strong>{selectedProductName}</strong>
+        </p>
+      )}
+      {layout && (
+        <p>
+          {__('Selected Layout:', 'sage')}{' '}
+          <strong>
+            {layout === 'layout1'
+              ? __('Layout 1', 'sage')
+              : __('Layout 2', 'sage')}
+          </strong>
         </p>
       )}
       <TextControl

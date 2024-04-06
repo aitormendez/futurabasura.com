@@ -129,7 +129,17 @@ return [
             'keywords' => ['product'],
             'post_types' => ['post', 'page'],
             'mode' => 'preview',
-            'render_template' => 'views/blocks/product.blade.php',
+            'attributes' => [
+                'layout' => [
+                    'default' => 'Layout 1',
+                    'type' => 'string',
+                ],
+                'productId' => [
+                    'default' => 0,
+                    'type' => 'number',
+                ],
+            ],
+            // 'render_template' => 'views/blocks/product.blade.php',
             // 'enqueue_style' => mix('styles/blocks/mi-bloque.css'),
             // 'enqueue_script' => mix('scripts/blocks/mi-bloque.js'),
         ],    
