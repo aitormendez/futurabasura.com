@@ -131,7 +131,7 @@ return [
             'mode' => 'preview',
             'attributes' => [
                 'layout' => [
-                    'default' => 'Layout 1',
+                    'default' => 'layout1',
                     'type' => 'string',
                 ],
                 'productId' => [

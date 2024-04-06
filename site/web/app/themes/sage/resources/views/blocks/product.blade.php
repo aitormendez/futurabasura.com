@@ -13,15 +13,22 @@
             $author_id = get_post_field('post_author', $product_id);
             $author = get_the_author_meta('display_name', $author_id);
         }
+        $layout = $data->layout; 
     @endphp
 
-    @if(isset($product))
-        <h2>{{ $name }}</h2>
-        <img src="{{ $image_url }}" alt="{{ $name }}">
-        <div>{{ $description }}</div>
-        <div>Price: {{ $price }}</div>
-        <div>Author: {{ $author }}</div>
-    @else
-        <p>Product not found.</p>
+    @if($layout === 'layout1')
+    Renderiza el layout 1
+        @if(isset($product))
+            <h2>{{ $name }}</h2>
+            <img src="{{ $image_url }}" alt="{{ $name }}">
+            <div>{{ $description }}</div>
+            <div>Price: {{ $price }}</div>
+            <div>Author: {{ $author }}</div>
+        @else
+            <p>Product not found.</p>
+        @endif
+    @elseif($layout === 'layout2')
+        Renderiza el layout 2
     @endif
 </div>
+
