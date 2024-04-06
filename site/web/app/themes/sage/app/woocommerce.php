@@ -472,27 +472,37 @@
 //     add_action('woocommerce_before_shop_loop_item_title', 'renderizar_card_front', 10);
 // }
 
-add_action('rest_api_init', function() {
-    register_rest_route('fb/v1', '/productos/', array(
-        'methods'  => 'GET',
-        'callback' => 'my_custom_endpoint_callback',
-        'permission_callback' => function () {
-            return current_user_can('edit_posts');
-        }
-    ));
-});
 
-function my_custom_endpoint_callback($request) {
-    $wc_key = getenv('WC_KEY');
-    $wc_secret = getenv('WC_SECRET');
-    $site_url = get_bloginfo('url');
-    $api_url = "{$site_url}/wp-json/wc/v3/products?consumer_key={$wc_key}&consumer_secret={$wc_secret}";
 
-    $response = wp_remote_get($api_url, array(
-        'headers' => array(
-            'Authorization' => 'Basic ' . base64_encode($wc_key . ':' . $wc_secret)
-        )
-    ));
-    $products = wp_remote_retrieve_body($response);
-    return new WP_REST_Response(json_decode($products), 200);
-}
+// /**
+//  * endpoint pesonalizado con autenticación
+//  */
+// add_action('rest_api_init', function() {
+//     register_rest_route('fb/v1', '/productos/', array(
+//         'methods'  => 'GET',
+//         'callback' => 'my_custom_endpoint_callback',
+//         'permission_callback' => '__return_true',
+//     ));
+// });
+
+// function my_custom_endpoint_callback($request) {
+//     $wc_key = getenv('WC_KEY');
+//     $wc_secret = getenv('WC_SECRET');
+//     $site_url = get_bloginfo('url');
+//     $api_url = "{$site_url}/wp-json/wc/v3/products?consumer_key={$wc_key}&consumer_secret={$wc_secret}";
+    
+
+//     $response = wp_remote_get($api_url, array('sslverify' => false));
+//     if (is_wp_error($response)) {
+//         error_log('Error al obtener productos: ' . $response->get_error_message());
+//         return new WP_REST_Response(['error' => $response->get_error_message()], 500);
+//     } else {
+//         $code = wp_remote_retrieve_response_code($response);
+//         if ($code != 200) {
+//             error_log("Código de respuesta: $code, Mensaje: " . wp_remote_retrieve_response_message($response));
+//             return new WP_REST_Response(['error' => 'La solicitud no fue exitosa. Código: ' . $code], $code);
+//         }
+//     }
+//     $products = wp_remote_retrieve_body($response);
+//     return new WP_REST_Response(json_decode($products), 200);
+// }

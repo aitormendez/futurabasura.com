@@ -22,12 +22,14 @@
     "@roots/bud": "6.20.0",
     "@roots/bud-tailwindcss": "6.20.0",
     "@roots/sage": "6.20.0",
+    "bud-mkcert": "^0.0.2",
     "tailwind-clip-path": "^1.0.0"
   },
   "dependencies": {
     "@glidejs/glide": "^3.6.0",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",
+    "@wordpress/api-fetch": "^6.52.0",
     "alpinejs": "^3.13.7",
     "animejs": "^3.2.1",
     "gsap": "^3.11.5",
