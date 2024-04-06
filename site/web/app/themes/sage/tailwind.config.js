@@ -33,13 +33,6 @@ const config = {
         bugrino: ['Bugrino', 'sans-serif'],
         fk: ['FK Display', 'sans-serif'],
       },
-      colors: {
-        'negro-fb': '#3e2b2f',
-        'gris-fb': '#ada3a4',
-        allo: '#ffff00',
-        'allo-claro': '#dbffe9',
-        azul: '#0000ff',
-      },
       backgroundImage: (theme) => ({
         fondo: "url('../images/bg.svg')",
         'tk-triangulo': "url('../images/triangulo-ticket.svg')",
@@ -48,6 +41,13 @@ const config = {
         'fondo-medio': "url('../images/bg-medio.svg')",
         punteado: "url('../images/punteado-cupon.svg')",
       }),
+    },
+    colors: {
+      'negro-fb': '#3e2b2f',
+      'gris-fb': '#ada3a4',
+      allo: '#ffff00',
+      'allo-claro': '#dbffe9',
+      azul: '#0000ff',
     },
   },
   variants: {

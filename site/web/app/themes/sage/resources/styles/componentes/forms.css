@@ -6,7 +6,6 @@ input {
   box-shadow: none !important;
 }
 
-
 footer {
   .formulario {
     @apply my-6;
@@ -16,8 +15,8 @@ footer {
         display: none;
       }
 
-      input[type="submit"] {
-        @apply text-azul bg-transparent;
+      input[type='submit'] {
+        /* @apply text-azul bg-transparent; */
       }
     }
   }

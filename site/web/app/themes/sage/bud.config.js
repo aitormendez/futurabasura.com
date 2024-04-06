@@ -46,7 +46,7 @@ export default async (app) => {
    * @see {@link https://developer.wordpress.org/block-editor/how-to-guides/themes/theme-json}
    */
   app.wpjson
-    .set('settings.color.custom', false)
+    .set('settings.color.custom', true)
     .set('settings.color.customDuotone', false)
     .set('settings.color.customGradient', false)
     .set('settings.color.defaultDuotone', false)
@@ -54,11 +54,11 @@ export default async (app) => {
     .set('settings.color.defaultPalette', false)
     .set('settings.color.duotone', [])
     .set('settings.custom.spacing', {})
-    .set('settings.custom.typography.font-size', {})
     .set('settings.custom.typography.line-height', {})
     .set('settings.spacing.padding', true)
+    .set('settings.spacing.margin', true)
     .set('settings.spacing.units', ['px', '%', 'em', 'rem', 'vw', 'vh'])
-    .set('settings.typography.customFontSize', true)
+    .set('settings.typography.customFontSize', false)
     .set('settings.layout', {
       contentSize: '768px',
       wideSize: '1024px',
