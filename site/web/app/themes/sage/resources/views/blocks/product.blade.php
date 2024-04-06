@@ -1,5 +1,4 @@
 <div class="product-block">
-    @dump($data)
     @php
         $product_id = $data->productId;
         $product = wc_get_product($product_id);
@@ -11,19 +10,22 @@
             $description = $product->get_description();
             $price = $product->get_price();
             $author_id = get_post_field('post_author', $product_id);
-            $author = get_the_author_meta('display_name', $author_id);
+            $artists_terms = wp_get_post_terms($product_id, 'artist');
         }
         $layout = $data->layout; 
     @endphp
 
     @if($layout === 'layout1')
-    Renderiza el layout 1
         @if(isset($product))
             <h2>{{ $name }}</h2>
             <img src="{{ $image_url }}" alt="{{ $name }}">
             <div>{{ $description }}</div>
             <div>Price: {{ $price }}</div>
-            <div>Author: {{ $author }}</div>
+            @if(!empty($artists_terms) && !is_wp_error($artists_terms))
+                @foreach($artists_terms as $term)
+                    <span>{{ $term->name }}</span>
+                @endforeach
+            @endif
         @else
             <p>Product not found.</p>
         @endif
