@@ -16,7 +16,7 @@ footer {
       }
 
       input[type='submit'] {
-        /* @apply text-azul bg-transparent; */
+        @apply text-azul bg-transparent;
       }
     }
   }

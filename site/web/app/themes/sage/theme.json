@@ -36,6 +36,21 @@
           "color": "#0000ff",
           "name": "Azul",
           "slug": "azul"
+        },
+        {
+          "color": "transparent",
+          "name": "Transparent",
+          "slug": "transparent"
+        },
+        {
+          "color": "white",
+          "name": "White",
+          "slug": "white"
+        },
+        {
+          "color": "black",
+          "name": "Black",
+          "slug": "black"
         }
       ]
     },
