@@ -22,6 +22,35 @@
     }
   }
 
+  .cfvsw-swatches-container {
+    gap: 0;
+    margin-bottom: 1em;
+
+    .cfvsw-swatches-option {
+      border-radius: 0 !important;
+      border-color: transparent;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-right: 0;
+    }
+
+    .cfvsw-label-option {
+      padding: 0.8em 1em 0.6em;
+    }
+
+    .cfvsw-selected-swatch {
+      border: 2px solid #1c32f7 !important;
+    }
+  }
+
+  .reset_variations {
+    display: block;
+    text-transform: uppercase;
+    padding: 1em;
+    letter-spacing: 0.05em;
+  }
+
   @screen md {
     .entry-summary {
       padding: 2rem 3vw;
