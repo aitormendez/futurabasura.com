@@ -14,7 +14,7 @@ footer {
     }
 
     .mc4wp-notice {
-        margin-top: 0.5rem;
+      margin-top: 0.5rem;
     }
   }
 
@@ -28,7 +28,7 @@ footer {
       input {
         margin-top: 0;
 
-        &[type="email"] {
+        &[type='email'] {
           margin-right: 1rem;
         }
       }

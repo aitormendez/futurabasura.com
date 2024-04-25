@@ -48,6 +48,7 @@ const config = {
       allo: '#ffff00',
       'allo-claro': '#dbffe9',
       azul: '#0000ff',
+      rojo: '#af0000',
       transparent: 'transparent',
       white: 'white',
       black: 'black',

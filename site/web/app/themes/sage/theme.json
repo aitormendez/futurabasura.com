@@ -38,6 +38,11 @@
           "slug": "azul"
         },
         {
+          "color": "#af0000",
+          "name": "Rojo",
+          "slug": "rojo"
+        },
+        {
           "color": "transparent",
           "name": "Transparent",
           "slug": "transparent"

@@ -54,7 +54,7 @@ if ( ! $product->is_purchasable() ) {
         <div class="inline-block" >
           <div class="flex justify-between my-3 text-sm bg-white pr-6 mr-6">
             @if ($precio['is_on_sale'])
-              <div class="flex items-center px-4 text-white bg-red-600 price-on-sale"><del>{{ $precio['regular_price'] }}</del> <del class="block woocommerce_price_euro_letter">&nbsp;EUR</del></div>
+              <div class="flex items-center px-4 text-rojo text-2xl price-on-sale"><del>{{ $precio['regular_price'] }}</del> <del class="block woocommerce_price_euro_letter">&nbsp;EUR</del></div>
             @endif
             <div class="py-4 px-8 text-2xl text-gris-fb">
               {!! $precio['price'] !!} <span>€</span>
