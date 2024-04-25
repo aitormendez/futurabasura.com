@@ -45,50 +45,33 @@ do_action( 'woocommerce_before_single_product' );
 	@endphp
 
 
-	<div class="w-1/3 text-center p-6 text-xl border-r-2 border-b-2 min-h-[20vw] bg-white">
-		<h2 class="mb-6 uppercase artista tracking-max font-bugrino"><a href="{{ $artista['link'] }}">{{ $artista['artista']->name }}</a></h2>
-		<h1 class="mb-6 font-bold product_title entry-title tracking-widest">{!! get_the_title() !!}</h1>
-	</div>
-
-	<div class="w-2/3 p-6 border-b-2 bg-white">
-		<div class="lg:max-w-lg">
-			{!! $post->post_excerpt !!}
-		</div>
-	</div>
-
-	<div class="flex flex-col items-center justify-between w-1/3 border-r-2 pt-6 bg-white">
-		<div class="uppercase">{{$product->get_attribute('Product Type')}}</div>
-		@if(has_post_thumbnail($post->ID))
-			@php
-				$thumbnail_id = get_post_thumbnail_id($post->ID);
-				$image_metadata = wp_get_attachment_metadata($thumbnail_id);
-				$is_horizontal = $image_metadata['width'] > $image_metadata['height'];
-			@endphp
-
-			<div class="product-featured-image {{ $is_horizontal ? 'w-full' : 'w-3/4' }}">
-				<img src="{{ get_the_post_thumbnail_url($post->ID, 'large') }}" alt="{{ get_the_title($post->ID) }}">
-			</div>
-		@endif
-	</div>
-
-	<div class="glide-wrap w-2/3">
-		<div id="glide" class="relative g-gallery">
-		<div class="glide__track" data-glide-el="track">
-			<ul class="glide__slides">
-			@foreach ($galeria as $item)
-			<li class="glide__slide slide">
-			<img src="{!! $item['att_url'] !!}" srcset="{!! $item['att_srcset'] !!}" @if ($item['has_alt']) alt="{!! $item['alt'][0] !!}" @endif sizes="(max-width: 792px) 100%, 50%">
-			</li>
-			@endforeach
-			</ul>
-		</div>
-		<div id="indice" class="absolute bottom-0 right-0 w-20 p-3 text-center bg-white"></div>
-		</div>
-	</div>
 
 
-	<div class="flex w-2/3 border-l-2 pt-10 ml-[33.3%]">
+  <div class="w-full glide-wrap md:w-1/2 md:order-2">
+    <div id="glide" class="relative g-gallery">
+      <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides">
+        @foreach ($galeria as $item)
+        <li class="glide__slide slide">
+          <img src="{!! $item['att_url'] !!}" srcset="{!! $item['att_srcset'] !!}" @if ($item['has_alt']) alt="{!! $item['alt'][0] !!}" @endif sizes="(max-width: 792px) 100%, 50%">
+        </li>
+        @endforeach
+        </ul>
+      </div>
+      <div id="indice" class="absolute bottom-0 right-0 w-20 p-3 text-center bg-white"></div>
+    </div>
+  </div>
 
+
+
+
+	<div class="flex flex-col items-center justify-end pt-8 m-6 md:m-0 sm:w-full summary entry-summary md:w-1/2">
+
+		<h2 class="mb-6 uppercase artista tracking-max"><a href="{{ $artista['link'] }}">{{ $artista['artista']->name }}</a></h2>
+
+		<h1 class="mb-6 font-bold product_title entry-title tracking-max">{!! get_the_title() !!}</h1>
+
+		<div class="mb-6 text-center excerpt">{!! $post->post_excerpt !!}</div>
 
 
 

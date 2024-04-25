@@ -19,7 +19,7 @@ class SingleProduct extends Composer
             'galeria' => $this->galeria(),
             'artista' => $this->artista(),
             'precio' => $this->precio(),
-            'variaciones' => $this->variaciones(),
+            // 'variaciones' => $this->variaciones(),
         ];
     }
 
@@ -99,9 +99,6 @@ class SingleProduct extends Composer
         } else {
             $rand_products_galleries = false;
         }
-
-
-
 
         return [
             'artista'       => $artist[0],
@@ -191,14 +188,12 @@ class SingleProduct extends Composer
             // Recoger y concatenar todos los atributos excluyendo 'product_type'
             $attributes_string = [];
             foreach ($attributes as $attribute_name => $attribute) {
-                // Asegúrate de no incluir el atributo 'product_type'
                 if ($attribute_name != 'product_type') {
                     $attributes_string[] = implode(', ', wc_get_product_terms($product->get_id(), $attribute_name, array('fields' => 'names')));
                 }
             }
             $attributes_string = implode(', ', $attributes_string);
         
-            // El resto de tu lógica aquí...
             if ($product_type == 'simple') {
                 $output = [];
                 $output[0] = [
@@ -211,7 +206,5 @@ class SingleProduct extends Composer
         }
 
     }
-
-
 
 }

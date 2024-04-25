@@ -38,7 +38,7 @@ if ( ! $product->is_purchasable() ) {
 
 		@php do_action( 'woocommerce_before_add_to_cart_button' ) @endphp
 
-    <div style="display: none;">
+    <div class="hidden">
       @php
         woocommerce_quantity_input([
           'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),
@@ -51,31 +51,33 @@ if ( ! $product->is_purchasable() ) {
       @php do_action( 'woocommerce_after_add_to_cart_quantity' ) @endphp
 
       {{-- tabla nueva --}}
-      <div class="ftbs_variationsTable">
-        <div id="ftbs_variationsTableRow_0" class="ftbs_variationsTableRow ftbs_variationsTableRowFirst" >
-          <div class="flex justify-between my-3 text-sm border border-black ftbs_variationsTableRowPadContainer">
-            <div class="invisible w-0 overflow-hidden ftbs_variationsTableRowColumn ftbs_variationsTableRowColumn_radio">
-              <input type="radio" name="attribute_pa_medidas" value="" checked="checked"  />
-            </div>
-            <div class="px-4 ftbs_variationsTableRowColumn ftbs_variationsTableRowColumn_size">
-              <span class="ftbsFontStyle4_blackSoft">{!! $variaciones[0]['attributes'] !!}</span>
-            </div>
+        <div class="inline-block" >
+          <div class="flex justify-between my-3 text-sm bg-white pr-6 mr-6">
             @if ($precio['is_on_sale'])
               <div class="flex items-center px-4 text-white bg-red-600 price-on-sale"><del>{{ $precio['regular_price'] }}</del> <del class="block woocommerce_price_euro_letter">&nbsp;EUR</del></div>
             @endif
-            <div class="px-4 ftbs_variationsTableRowColumn ftbs_variationsTableRowColumn_price">{!! $precio['price'] !!} &nbsp;EUR<span class="invisible">€</span></span>
+            <div class="py-4 px-8 text-2xl text-gris-fb">
+              {!! $precio['price'] !!} <span>€</span>
             </div>
-            <div class="relative ftbs_variationsTableRowColumn ftbs_variationsTableRowColumn_quantity">
-              <div id="ftbs_variationsTableRowColumn_quantityInput_add" class="cursor-pointer absolute leading-none top-0 right-0 py-1.5 px-2 select-none hover:text-azul text-center">&plus;</div>
-              <input class="block h-full p-4 font-bold border-none ftbs_variationsTableRowColumn_quantityInput text-azul" type="text" value="1"/>
-              <div id="ftbs_variationsTableRowColumn_quantityInput_remove" class="cursor-pointer absolute leading-none bottom-0 right-0 py-1.5 px-2 select-none hover:text-azul">&minus;</div>
+            <div class="flex quantity">
+              <div id="quantityInput_remove" class="cursor-pointer select-none hover:text-azul text-2xl h-full border-r-2 inline-flex items-center pr-6">
+                <svg width="19" height="2" viewBox="0 0 19 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 1L19 1" stroke="#3E2B2F" stroke-width="2"/>
+                </svg>                  
+              </div>
+              <input class="quantityInput border-none text-azul h-full w-28 text-2xl text-center" type="text" value="1"/>
+              <div id="quantityInput_add" class="cursor-pointer select-none hover:text-azul text-2xl border-l-2 inline-flex items-center pl-6">
+                <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 10L19 10" stroke="#3E2B2F" stroke-width="2"/>
+                <path d="M9.5 19.5L9.5 0.5" stroke="#3E2B2F" stroke-width="2"/>
+                </svg>
+              </div>
             </div>
           </div>
         </div>
-      </div>
       {{-- termina tabla nueva --}}
 
-		<button type="submit" name="add-to-cart" value="{{ $product->get_id() }}" class="single_add_to_cart_button button alt">{{ $product->single_add_to_cart_text() }}</button>
+		<button type="submit" name="add-to-cart" value="{{ $product->get_id() }}" class="px-20 py-3 bg-azul clip-path-elipse text-white uppercase tracking-max hover:bg-allo hover:text-black transition-colors">{{ $product->single_add_to_cart_text() }}</button>
 
 		@php do_action( 'woocommerce_after_add_to_cart_button' ); @endphp
 	</form>
@@ -83,3 +85,4 @@ if ( ! $product->is_purchasable() ) {
 	@php do_action( 'woocommerce_after_add_to_cart_form' ); @endphp
 
 @endif
+

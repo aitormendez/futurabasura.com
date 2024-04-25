@@ -19,7 +19,6 @@
 @extends('layouts.app')
 
 @section('content')
-  <main id="main" class="bg-white sm:mt-40 main">
 
       @php
           /**
@@ -50,6 +49,4 @@
           do_action( 'woocommerce_after_main_content' );
       @endphp
 
-
-  </main>
 @endsection

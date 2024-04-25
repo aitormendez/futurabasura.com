@@ -7,14 +7,31 @@ export function anadirAlCarroSimple() {
   // Cantidad de productos a añadir al carro
   // ----------------------------------------------------
 
-  let btnAdd = $('#ftbs_variationsTableRowColumn_quantityInput_add'),
-    btnRemove = $('#ftbs_variationsTableRowColumn_quantityInput_remove');
+  // Encuentra los botones de aumento y disminución
+  const btnAdd = document.getElementById('quantityInput_add');
+  const btnRemove = document.getElementById('quantityInput_remove');
 
-  btnAdd.click(function () {
-    ftbs_product_quantity_increase();
-  });
+  // Añade eventos de clic para aumentar y disminuir
+  if (btnAdd) {
+    btnAdd.addEventListener('click', function () {
+      ftbs_product_quantity_increase();
+    });
+  }
 
-  btnRemove.click(function () {
-    ftbs_product_quantity_decrease();
-  });
+  if (btnRemove) {
+    btnRemove.addEventListener('click', function () {
+      ftbs_product_quantity_decrease();
+    });
+  }
+}
+
+export function resetearHiddenInput() {
+  console.log('resetearHiddenInput');
+  var quantityInput = document.querySelector('.quantity input');
+  console.log(quantityInput);
+
+  // Restablecer el valor a 1 al cargar la página
+  if (quantityInput) {
+    quantityInput.value = 1;
+  }
 }

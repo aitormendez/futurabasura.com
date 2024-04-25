@@ -52,8 +52,11 @@ domReady(async () => {
   }
 
   if (document.body.classList.contains('simple')) {
-    const { anadirAlCarroSimple } = await import('./simpleProduct.js');
+    const { anadirAlCarroSimple, resetearHiddenInput } = await import(
+      './simpleProduct.js'
+    );
     anadirAlCarroSimple();
+    resetearHiddenInput();
   }
 
   if (document.body.classList.contains('cart')) {
