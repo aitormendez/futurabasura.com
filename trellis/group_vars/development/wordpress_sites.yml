@@ -4,15 +4,17 @@
 wordpress_sites:
   futurabasura.com:
     site_hosts:
-    - canonical: futurabasura.test
-      redirects:
-      - www.futurabasura.test
+      - canonical: futurabasura.test
+        redirects:
+          - www.futurabasura.test
     local_path: ../site
     admin_email: admin@futurabasura.test
     multisite:
       enabled: false
     ssl:
-      enabled: false
-      provider: self-signed
+      enabled: true
+      provider: manual
+      cert: /Users/aitor/Documents/Sites/futurabasura.com/letsencrypt/futurabasura.test+5.pem
+      key: /Users/aitor/Documents/Sites/futurabasura.com/letsencrypt/futurabasura.test+5-key.pem
     cache:
       enabled: false
