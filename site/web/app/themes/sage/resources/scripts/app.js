@@ -47,8 +47,11 @@ domReady(async () => {
   }
 
   if (document.body.classList.contains('variable')) {
-    const { anadirAlCarroVariable } = await import('./variableProduct.js');
-    anadirAlCarroVariable();
+    const { anadirAlCarroSimple, resetearHiddenInput } = await import(
+      './simpleProduct.js'
+    );
+    anadirAlCarroSimple();
+    resetearHiddenInput();
   }
 
   if (document.body.classList.contains('simple')) {

@@ -3,23 +3,6 @@
   .woocommerce-variation-description,
   .woocommerce-variation-availability,
   .woocommerce-variation-add-to-cart .qty {
-    /* display: none; */
+    display: none;
   }
-
-  /* .ftbs_variationsTableRowPadContainer {
-    @apply border-black;
-
-    &.ftbs_variationsTableRowPadContainer_inactive {
-      @apply border-gray-400;
-      @apply text-gray-400;
-
-      .price-on-sale {
-        @apply bg-red-400;
-      }
-
-      .ftbs_variationsTableRowColumn_quantity {
-        @apply invisible;
-      }
-    }
-  } */
 }
