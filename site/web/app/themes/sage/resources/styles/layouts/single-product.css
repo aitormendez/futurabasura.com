@@ -82,8 +82,39 @@
     .reset_variations {
       display: block;
       text-transform: uppercase;
-      padding: 1em;
       letter-spacing: 0.05em;
+      padding: 1rem;
+    }
+
+    .single_variation_wrap {
+      margin-top: 2rem;
+
+      .woocommerce-variation-price {
+        padding: 1rem;
+        background-color: #fff;
+        font-size: 2rem;
+      }
+
+      .woocommerce-variation {
+        color: blue;
+
+        > div {
+          display: inline-block;
+        }
+
+        del {
+          margin-right: 1rem;
+          color: #d50000;
+        }
+
+        ins {
+          text-decoration: none;
+        }
+
+        .woocommerce-variation-description {
+          display: none;
+        }
+      }
     }
   }
 
