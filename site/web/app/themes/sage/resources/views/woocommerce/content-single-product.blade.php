@@ -45,19 +45,17 @@ do_action( 'woocommerce_before_single_product' );
 	@endphp
 
 
-	<div class="w-1/3 text-center p-6 text-xl border-r-2 border-b-2 min-h-[20vw] bg-white">
-		<h2 class="mb-6 uppercase artista tracking-max font-bugrino"><a href="{{ $artista['link'] }}">{{ $artista['artista']->name }}</a></h2>
-		<h1 class="mb-6 font-bold product_title entry-title tracking-widest">{!! get_the_title() !!}</h1>
-	</div>
+	<div class="w-full flex flex-col items-center px-6 pt-20 pb-20 text-xl border-b-2 bg-white">
+		<h2 class="uppercase artista tracking-max font-bugrino text-3xl"><a href="{{ $artista['link'] }}">{{ $artista['artista']->name }}</a></h2>
+		<h1 class="my-10 font-bold product_title entry-title tracking-widest">{!! get_the_title() !!}</h1>
 
-	<div class="w-2/3 p-6 border-b-2 bg-white">
-		<div class="lg:max-w-lg">
+		<div class="excerpt text-md max-w-screen-sm text-center">
 			{!! $post->post_excerpt !!}
 		</div>
 	</div>
 
-	<div class="flex flex-col items-center justify-between w-1/3 border-r-2 pt-6 bg-white">
-		<div class="uppercase">{{$product->get_attribute('Product Type')}}</div>
+	<div class="relative flex justify-center items-center w-1/2 border-r-2 p-6 bg-white">
+		<div class="absolute uppercase w-full left-6 top-6">{{$product->get_attribute('Product Type')}}</div>
 		@if(has_post_thumbnail($post->ID))
 			@php
 				$thumbnail_id = get_post_thumbnail_id($post->ID);
@@ -65,13 +63,13 @@ do_action( 'woocommerce_before_single_product' );
 				$is_horizontal = $image_metadata['width'] > $image_metadata['height'];
 			@endphp
 
-			<div class="product-featured-image {{ $is_horizontal ? 'w-full' : 'w-3/4' }}">
+			<div class="product-featured-image {{ $is_horizontal ? 'w-3/4' : 'w-[40%]' }}">
 				<img src="{{ get_the_post_thumbnail_url($post->ID, 'large') }}" alt="{{ get_the_title($post->ID) }}">
 			</div>
 		@endif
 	</div>
 
-	<div class="glide-wrap w-2/3">
+	<div class="glide-wrap w-1/2">
 		<div id="glide" class="relative g-gallery">
 		<div class="glide__track" data-glide-el="track">
 			<ul class="glide__slides">
@@ -87,7 +85,7 @@ do_action( 'woocommerce_before_single_product' );
 	</div>
 
 
-	<div class="flex w-2/3 border-l-2 pt-10 ml-[33.3%]">
+	<div class="flexpt-10">
 
 
 

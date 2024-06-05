@@ -22,33 +22,69 @@
     }
   }
 
-  .cfvsw-swatches-container {
-    gap: 0;
-    margin-bottom: 1em;
+  form.variations_form {
+    table.variations {
+      border-collapse: separate;
+      border-spacing: 0 1em;
+      tbody > tr {
+        position: relative;
+        margin-bottom: 1rem;
 
-    .cfvsw-swatches-option {
-      border-radius: 0 !important;
-      border-color: transparent;
-      font-size: 1rem;
+        .label {
+          background-color: #fff;
+          height: 20px;
+          padding: 0 1rem;
+          text-align: left;
+          min-width: 200px;
+        }
+
+        .reset_variations {
+          position: absolute;
+          left: 0;
+        }
+
+        .cfvsw-swatches-container {
+          gap: 0;
+
+          .cfvsw-swatches-option {
+            padding: 4px;
+            border-color: transparent;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-right: 0;
+            border-left: 2px solid #000 !important;
+
+            .cfvsw-swatch-inner {
+              padding: 10px 15px 8px;
+              border: 2px solid transparent;
+              border-radius: 5px;
+            }
+
+            &.cfvsw-swatches-disabled .cfvsw-swatch-inner {
+              color: #ffb8b8;
+            }
+          }
+
+          .cfvsw-label-option {
+            /* padding: 0.8em 1em 0.6em; */
+          }
+
+          .cfvsw-selected-swatch {
+            .cfvsw-swatch-inner {
+              border-color: blue;
+            }
+          }
+        }
+      }
+    }
+
+    .reset_variations {
+      display: block;
       text-transform: uppercase;
+      padding: 1em;
       letter-spacing: 0.05em;
-      margin-right: 0;
     }
-
-    .cfvsw-label-option {
-      padding: 0.8em 1em 0.6em;
-    }
-
-    .cfvsw-selected-swatch {
-      border: 2px solid #1c32f7 !important;
-    }
-  }
-
-  .reset_variations {
-    display: block;
-    text-transform: uppercase;
-    padding: 1em;
-    letter-spacing: 0.05em;
   }
 
   @screen md {
