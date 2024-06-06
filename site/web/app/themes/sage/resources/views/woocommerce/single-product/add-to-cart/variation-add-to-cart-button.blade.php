@@ -29,15 +29,15 @@ global $product;
 	?>
 
 	<div class="inline-block" >
-		<div class="flex justify-between my-3 text-sm bg-white px-6 mr-6">
+		<div class="flex justify-between my-3 text-sm bg-white mr-6">
 		<div class="flex quantity">
-			<div id="quantityInput_remove" class="cursor-pointer select-none hover:text-azul text-2xl h-full border-r-2 inline-flex items-center pr-6">
+			<div id="quantityInput_remove" class="cursor-pointer select-none hover:bg-gris-claro-fb text-2xl h-full border-r-2 inline-flex items-center px-6">
 				<svg width="19" height="2" viewBox="0 0 19 2" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M0 1L19 1" stroke="#3E2B2F" stroke-width="2"/>
 				</svg>                  
 			</div>
 			<input class="quantityInput py-4 px-8 border-none text-azul h-full w-28 text-xl text-center" type="text" value="1"/>
-			<div id="quantityInput_add" class="cursor-pointer select-none hover:text-azul text-2xl border-l-2 inline-flex items-center pl-6">
+			<div id="quantityInput_add" class="cursor-pointer select-none hover:bg-gris-claro-fb text-2xl border-l-2 inline-flex items-center px-6">
 				<svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M0 10L19 10" stroke="#3E2B2F" stroke-width="2"/>
 					<path d="M9.5 19.5L9.5 0.5" stroke="#3E2B2F" stroke-width="2"/>

@@ -45,6 +45,7 @@ const config = {
     colors: {
       'negro-fb': '#3e2b2f',
       'gris-fb': '#ada3a4',
+      'gris-claro-fb': '#dfd1d2',
       allo: '#ffff00',
       'allo-claro': '#dbffe9',
       azul: '#0000ff',

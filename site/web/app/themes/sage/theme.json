@@ -23,6 +23,11 @@
           "slug": "gris-fb"
         },
         {
+          "color": "#dfd1d2",
+          "name": "Gris-claro-fb",
+          "slug": "gris-claro-fb"
+        },
+        {
           "color": "#ffff00",
           "name": "Allo",
           "slug": "allo"
