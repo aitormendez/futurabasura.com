@@ -3,7 +3,7 @@ import Glide, {
   Autoplay,
   Keyboard,
 } from '@glidejs/glide/dist/glide.modular.esm.js';
-import anime, { random } from 'animejs';
+import anime from 'animejs';
 // import Plyr from 'plyr';
 
 export function ajustarAltoCupones() {
@@ -80,7 +80,7 @@ export function destacadoRepetido() {
 
   for (let i = 0; i < titulos.length; i++) {
     const element = titulos[i];
-    element.addEventListener('mouseover', function (event) {
+    element.addEventListener('mouseover', function () {
       let randX = Math.floor(Math.random() * 100 - 50);
       let randY = Math.floor(Math.random() * 100 - 50);
       let rotate = Math.floor(Math.random() * 360 - 180);

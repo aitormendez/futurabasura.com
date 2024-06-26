@@ -1,3 +1,5 @@
+/* global fb */
+
 import Glide, {
   Controls,
   Autoplay,
@@ -5,7 +7,7 @@ import Glide, {
 } from '@glidejs/glide/dist/glide.modular.esm.js';
 
 export function sliderHome() {
-  let viewportWidth = $(window).width(),
+  let // viewportWidth = $(window).width(),
     fondo = document.getElementById('fondo-slider'),
     slides = document.querySelectorAll('.glide__slide');
 

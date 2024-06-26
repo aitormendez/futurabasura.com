@@ -1,3 +1,5 @@
+/* global fb */
+
 export function selectorArtista() {
   var select = '.dropdown_artist';
 

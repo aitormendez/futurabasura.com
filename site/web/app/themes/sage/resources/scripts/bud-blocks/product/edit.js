@@ -10,6 +10,7 @@ import {
 import { useEffect, useState } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 import { __ } from '@wordpress/i18n';
+import PropTypes from 'prop-types';
 
 const Edit = ({ attributes, setAttributes }) => {
   const { productId, layout } = attributes;
@@ -150,6 +151,14 @@ const Edit = ({ attributes, setAttributes }) => {
       )}
     </div>
   );
+};
+
+Edit.propTypes = {
+  attributes: PropTypes.shape({
+    productId: PropTypes.number,
+    layout: PropTypes.string,
+  }).isRequired,
+  setAttributes: PropTypes.func.isRequired,
 };
 
 export default Edit;

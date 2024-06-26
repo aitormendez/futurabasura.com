@@ -1,7 +1,7 @@
 import { gsap } from 'gsap';
 
 export function navigation() {
-  const menuBtn = document.getElementById('li-btn-menu');
+  // const menuBtn = document.getElementById('li-btn-menu');
   const btnMenuJS = document.getElementById('btn-menu');
   const btnCloseJS = document.getElementById('btn-close');
 

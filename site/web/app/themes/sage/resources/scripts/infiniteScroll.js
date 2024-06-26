@@ -2,7 +2,7 @@ import InfiniteScroll from 'infinite-scroll';
 
 export function infiniteScrollShop() {
   console.log('infiniteScrollShop');
-  let main = new InfiniteScroll('.infinite-scroll-container', {
+  new InfiniteScroll('.infinite-scroll-container', {
     path: '.next',
     append: '.infinite-scroll-item',
     history: false,

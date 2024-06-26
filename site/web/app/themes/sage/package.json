@@ -20,7 +20,9 @@
   },
   "devDependencies": {
     "@roots/bud": "6.23.0",
+    "@roots/bud-eslint": "^6.23.0",
     "@roots/bud-tailwindcss": "6.23.0",
+    "@roots/eslint-config": "^6.23.0",
     "@roots/sage": "6.23.0",
     "bud-mkcert": "^0.0.2",
     "tailwind-clip-path": "^1.0.0"
@@ -35,6 +37,7 @@
     "gsap": "^3.11.5",
     "infinite-scroll": "^4.0.1",
     "lightgallery": "^2.7.1",
+    "prop-types": "^15.8.1",
     "scrambling-text": "^1.2.0",
     "select2": "^4.1.0-rc.0"
   }
