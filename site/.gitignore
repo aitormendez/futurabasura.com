@@ -1,6 +1,7 @@
 # Application
 web/app/plugins/*
 !web/app/plugins/clover
+!web/app/plugins/mail-boxes-etc
 !web/app/plugins/.gitkeep
 web/app/mu-plugins/*/
 web/app/themes/twentytwentythree/
