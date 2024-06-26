@@ -393,7 +393,7 @@ class WooCommerceServiceProvider extends ServiceProvider
      * Renderizar la imagen de producto con diferente marcado si es horizontal o vertical.
      */
 
-     private function woocommerce_template_loop_product_thumbnail_mobile() {
+     public function woocommerce_template_loop_product_thumbnail_mobile() {
         $thumbnail_id = get_post_thumbnail_id();
         $thumbnail_url = wp_get_attachment_image_src($thumbnail_id, 'full');
         

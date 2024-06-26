@@ -45,16 +45,16 @@ do_action( 'woocommerce_before_single_product' );
 	@endphp
 
 
-	<div class="w-full flex flex-col items-center px-6 pt-20 pb-20 text-xl border-b-2 bg-white">
-		<h2 class="uppercase artista tracking-max font-bugrino text-3xl"><a href="{{ $artista['link'] }}">{{ $artista['artista']->name }}</a></h2>
-		<h1 class="my-10 font-bold product_title entry-title tracking-widest">{!! get_the_title() !!}</h1>
+	<div class="w-full flex flex-col items-center px-6 pt-20 pb-20 text-xl md:border-b-2 bg-white order-1 md:-order-none">
+		<h2 class="uppercase artista tracking-max font-bugrino text-2xl md:text-3xl text-center"><a href="{{ $artista['link'] }}">{{ $artista['artista']->name }}</a></h2>
+		<h1 class="my-10 font-bold product_title entry-title tracking-widest text-[1.1rem] md:text-md text-center">{!! get_the_title() !!}</h1>
 
-		<div class="excerpt text-md max-w-screen-sm text-center">
+		<div class="excerpt text-[1.1rem] md:text-md  max-w-screen-sm text-center">
 			{!! $post->post_excerpt !!}
 		</div>
 	</div>
 
-	<div class="relative flex justify-center items-center w-1/2 border-r-2 p-6 bg-white">
+	<div class="relative flex justify-center items-center w-full md:w-1/2 md:border-r-2 p-6 md:bg-white order-2 md:order-none">
 		<div class="absolute uppercase w-full left-6 top-6">{{$product->get_attribute('Product Type')}}</div>
 		@if(has_post_thumbnail($post->ID))
 			@php
@@ -69,15 +69,15 @@ do_action( 'woocommerce_before_single_product' );
 		@endif
 	</div>
 
-	<div class="glide-wrap w-1/2">
+	<div class="glide-wrap w-full md:w-1/2">
 		<div id="glide" class="relative g-gallery">
 		<div class="glide__track" data-glide-el="track">
 			<ul class="glide__slides">
-			@foreach ($galeria as $item)
-			<li class="glide__slide slide">
-			<img src="{!! $item['att_url'] !!}" srcset="{!! $item['att_srcset'] !!}" @if ($item['has_alt']) alt="{!! $item['alt'][0] !!}" @endif sizes="(max-width: 792px) 100%, 50%">
-			</li>
-			@endforeach
+				@foreach ($galeria as $item)
+					<li class="glide__slide slide">
+						<img src="{!! $item['att_url'] !!}" srcset="{!! $item['att_srcset'] !!}" @if ($item['has_alt']) alt="{!! $item['alt'][0] !!}" @endif sizes="(max-width: 792px) 100%, 50%">
+					</li>
+				@endforeach
 			</ul>
 		</div>
 		<div id="indice" class="absolute bottom-0 right-0 w-20 p-3 text-center bg-white"></div>
@@ -85,11 +85,7 @@ do_action( 'woocommerce_before_single_product' );
 	</div>
 
 
-	<div class="flexpt-10">
-
-
-
-
+	<div class="flex pt-10 order-3 md:order-none">
     	@php
   		/**
 		 * Hook: woocommerce_single_product_summary.
