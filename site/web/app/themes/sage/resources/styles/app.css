@@ -26,11 +26,14 @@
 @import 'componentes/lightgallery';
 
 @import '@glidejs/glide/dist/css/glide.core.min.css';
+
 /* @import 'Select2/select2-bootstrap.css'; */
 
 /* $lg-path-fonts: 'https://cdn.jsdelivr.net/npm/lightgallery@2.1.2/fonts';
 $lg-path-images: 'https://cdn.jsdelivr.net/npm/lightgallery@2.1.2/images'; */
 
 /* @import 'lightgallery/css/lightgallery-bundle.css'; */
+
 /* @import '@glidejs/glide/dist/css/glide.theme.min.css'; */
+
 /* @import '~plyr/src/sass/plyr.scss'; */

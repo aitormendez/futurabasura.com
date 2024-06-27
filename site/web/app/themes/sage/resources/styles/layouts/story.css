@@ -19,7 +19,7 @@
     }
   }
 
-  @media (min-width: 786px) {
+  @media (width < 786px) {
     article {
       header {
         .thumb,

@@ -7,16 +7,24 @@
  * @param {import('@roots/bud').Bud} app
  */
 export default async (app) => {
+  // Detect if we should only build CSS
+  const buildOnlyCSS = process.env.BUILD_ONLY_CSS === 'true';
+
   /**
    * Application assets & entrypoints
    *
    * @see {@link https://bud.js.org/docs/bud.entry}
    * @see {@link https://bud.js.org/docs/bud.assets}
    */
-  app
-    .entry('app', ['@scripts/app', '@styles/app'])
-    .entry('editor', ['@scripts/editor', '@styles/editor'])
-    .assets(['images']);
+  if (buildOnlyCSS) {
+    app.entry('app', ['@styles/app']).entry('editor', ['@styles/editor']);
+  } else {
+    app
+      .entry('app', ['@scripts/app', '@styles/app'])
+      .entry('editor', ['@scripts/editor', '@styles/editor']);
+  }
+
+  app.assets(['images']);
 
   /**
    * Set public path

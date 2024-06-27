@@ -101,14 +101,10 @@
 
   &--swipeable {
     cursor: grab;
-    cursor: -moz-grab;
-    cursor: -webkit-grab;
   }
 
   &--dragging {
     cursor: grabbing;
-    cursor: -moz-grabbing;
-    cursor: -webkit-grabbing;
   }
 
   a.prod {

@@ -1,6 +1,6 @@
 .post-type-archive-story,
 .post-type-archive-project {
-  @media (min-width: 786px) {
+  @media (width < 786px) {
     article {
       h2 {
         margin-left: 20vw;

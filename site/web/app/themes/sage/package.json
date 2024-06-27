@@ -11,6 +11,7 @@
   "scripts": {
     "dev": "bud dev",
     "build": "bud build",
+    "build:css": "BUILD_ONLY_CSS=true bud build",
     "translate": "yarn translate:pot && yarn translate:update",
     "translate:pot": "wp i18n make-pot . ./resources/lang/sage.pot --include=\"app,resources\"",
     "translate:update": "wp i18n update-po ./resources/lang/sage.pot ./resources/lang/*.po",
@@ -19,11 +20,12 @@
     "translate:mo": "wp i18n make-mo ./resources/lang ./resources/lang"
   },
   "devDependencies": {
-    "@roots/bud": "6.23.0",
-    "@roots/bud-eslint": "^6.23.0",
-    "@roots/bud-tailwindcss": "6.23.0",
-    "@roots/eslint-config": "^6.23.0",
-    "@roots/sage": "6.23.0",
+    "@roots/bud": "6.23.1",
+    "@roots/bud-eslint": "^6.23.1",
+    "@roots/bud-stylelint": "^6.23.1",
+    "@roots/bud-tailwindcss": "6.23.1",
+    "@roots/eslint-config": "^6.23.1",
+    "@roots/sage": "6.23.1",
     "bud-mkcert": "^0.0.2",
     "tailwind-clip-path": "^1.0.0"
   },

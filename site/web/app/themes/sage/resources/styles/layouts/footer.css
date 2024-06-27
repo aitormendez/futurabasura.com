@@ -18,7 +18,7 @@ footer {
     }
   }
 
-  @media (min-width: 640px) {
+  @media (width < 640px) {
     .mc4wp-form {
       .mc4wp-form-fields {
         display: flex;

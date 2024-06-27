@@ -17,6 +17,7 @@
       padding: 1em;
       @apply bg-azul;
       @apply tracking-widest;
+
       color: #fff;
       text-transform: uppercase;
     }
@@ -26,6 +27,7 @@
     table.variations {
       border-collapse: separate;
       border-spacing: 0 1em;
+
       tbody > tr {
         .label {
           height: 20px;

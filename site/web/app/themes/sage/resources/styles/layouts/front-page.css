@@ -28,7 +28,7 @@
     }
   }
 
-  @media (min-width: 786px) {
+  @media (width < 786px) {
     #destacados article {
       &.imagen a {
         img {
@@ -74,6 +74,7 @@
 
         &:hover {
           @apply bg-azul;
+
           color: #fff;
 
           img {
@@ -94,6 +95,7 @@
 
         a:hover {
           @apply bg-azul;
+
           color: #fff;
 
           img {
@@ -119,7 +121,7 @@
     }
   }
 
-  @media (min-width: 1024px) {
+  @media (width < 1024px) {
     #destacados article {
       &.imagen a {
         img {
@@ -153,7 +155,7 @@
     }
   }
 
-  @media (min-width: 1280px) {
+  @media (width < 1280px) {
     #destacados article {
       &.imagen a {
         img {
@@ -179,7 +181,7 @@
     }
   }
 
-  @media (min-width: 1536px) {
+  @media (width < 1536px) {
     #destacados article {
       &.imagen a {
         img {
