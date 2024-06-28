@@ -5,7 +5,7 @@
 # Copyright (c) Ben Word
 
 DEVDIR="web/app/uploads/"
-DEVSITE="http://futurabasura.test"
+DEVSITE="https://futurabasura.test"
 
 PRODDIR="web@futurabasura.com:/srv/www/futurabasura.com/shared/uploads/"
 PRODSITE="https://futurabasura.com"

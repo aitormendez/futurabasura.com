@@ -16,27 +16,9 @@ add_filter('excerpt_more', function () {
 });
 
 /**
- * Añadir la imagen del artista a una columna de la taxonomía en el editor.
+ * Add support for WooCommerce Subscription templates.
  */
-add_filter('manage_artist_custom_column', function ($content, $column_name, $term_id) {
-    $term = get_term($term_id, 'artist');
-    $avatar = get_field('artist_avatar', $term);
-
-    switch ($column_name) {
-        case 'artist_avatar':
-            if (is_array($avatar)) {
-                $content = '<img src="' . $avatar["url"] . '" style="max-width:100px">';
-            } else {
-                $content = __('This artist has no picture', 'sage');
-            }
-            break;
-        default:
-            break;
-    }
-    return $content;
-}, 10, 3);
-
-add_filter('manage_edit-artist_columns', function ($columns) {
-    $columns['artist_avatar'] = __('Avatar', 'sage');
-    return $columns;
+add_filter('sage-woocommerce/templates', function ($paths) {
+    $paths[] = WP_PLUGIN_DIR . '/woocommerce-subscriptions/templates/';
+    return $paths;
 });
