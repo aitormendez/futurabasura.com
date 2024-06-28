@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ca3b4f65a3bb5e4347946bab22184126",
+    "content-hash": "56e138385d82fe6d4442ecda1241174a",
     "packages": [
         {
             "name": "brick/math",
@@ -2022,27 +2022,25 @@
         },
         {
             "name": "log1x/acf-composer",
-            "version": "v2.1.0",
+            "version": "v3.0.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Log1x/acf-composer.git",
-                "reference": "71e2695277c4f96bb62bc59e158ee5a4a4754be6"
+                "reference": "284c40b61e6efeea0995f1c0951c9606b7d021e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Log1x/acf-composer/zipball/71e2695277c4f96bb62bc59e158ee5a4a4754be6",
-                "reference": "71e2695277c4f96bb62bc59e158ee5a4a4754be6",
+                "url": "https://api.github.com/repos/Log1x/acf-composer/zipball/284c40b61e6efeea0995f1c0951c9606b7d021e1",
+                "reference": "284c40b61e6efeea0995f1c0951c9606b7d021e1",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.3|^8.0",
+                "php": "^8.0",
                 "stoutlogic/acf-builder": "^1.11"
             },
             "require-dev": {
-                "squizlabs/php_codesniffer": "^3.5"
-            },
-            "suggest": {
-                "log1x/modern-acf-options": "Gives ACF option pages a much needed design overhaul."
+                "laravel/pint": "^1.14",
+                "roots/acorn": "^3.0|^4.0"
             },
             "type": "package",
             "extra": {
@@ -2070,7 +2068,7 @@
             "description": "Create fields, blocks, option pages, and widgets using ACF Builder and Sage 10",
             "support": {
                 "issues": "https://github.com/Log1x/acf-composer/issues",
-                "source": "https://github.com/Log1x/acf-composer/tree/v2.1.0"
+                "source": "https://github.com/Log1x/acf-composer/tree/v3.0.24"
             },
             "funding": [
                 {
@@ -2078,7 +2076,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-10-14T18:37:36+00:00"
+            "time": "2024-06-06T04:13:57+00:00"
         },
         {
             "name": "log1x/navi",
@@ -6008,10 +6006,10 @@
         },
         {
             "name": "wpengine/advanced-custom-fields-pro",
-            "version": "6.3.2.1",
+            "version": "6.3.3",
             "dist": {
                 "type": "zip",
-                "url": "https://connect.advancedcustomfields.com/v2/plugins/composer_download?p=pro&t=6.3.2.1"
+                "url": "https://connect.advancedcustomfields.com/v2/plugins/composer_download?p=pro&t=6.3.3"
             },
             "require": {
                 "composer/installers": "~1.0 || ~2.0"
