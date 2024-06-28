@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use Roots\Acorn\ServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
 class WooCommerceServiceProvider extends ServiceProvider
 {
