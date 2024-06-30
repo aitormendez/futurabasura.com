@@ -1,0 +1,13 @@
+@font-face {
+  font-family: Bugrino;
+  src: url('../fonts/bugrino/Bugrino-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FK Display';
+  src: url('../fonts/fkdisplay/FKDisplay-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}

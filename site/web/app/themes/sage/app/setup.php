@@ -7,12 +7,14 @@
 namespace App;
 
 use function Roots\bundle;
+use Detection\MobileDetect;
 
 /**
  * Register the theme assets.
  *
  * @return void
  */
+
 add_action('wp_enqueue_scripts', function () {
 
     $frases = get_field('frases', 'option');
@@ -44,9 +46,11 @@ add_action('wp_enqueue_scripts', function () {
         ],
         'homeUrl' => get_bloginfo('url'),
         'frases' => $frases_array,
-        // 'artists' => $artists,
+        'artists' => $artists,
     ]);
 }, 100);
+
+
 
 /**
  * Register the theme assets with the block editor.
@@ -64,6 +68,18 @@ add_action('enqueue_block_editor_assets', function () {
  */
 add_action('after_setup_theme', function () {
     /**
+     * Enable features from the Soil plugin if activated.
+     *
+     * @link https://roots.io/plugins/soil/
+     */
+    add_theme_support('soil', [
+        'clean-up',
+        'nav-walker',
+        'nice-search',
+        'relative-urls',
+    ]);
+
+    /**
      * Disable full-site editing support.
      *
      * @link https://wptavern.com/gutenberg-10-5-embeds-pdfs-adds-verse-block-color-options-and-introduces-new-patterns
@@ -77,6 +93,10 @@ add_action('after_setup_theme', function () {
      */
     register_nav_menus([
         'primary_navigation' => __('Primary Navigation', 'sage'),
+        'info_navigation' => __('Info Navigation', 'sage'),
+        'social_navigation' => __('Social Navigation', 'sage'),
+        'shop_navigation' => __('Shop Navigation', 'sage'),
+        'contents_navigation' => __('Contents Navigation', 'sage'),
     ]);
 
     /**
@@ -153,3 +173,12 @@ add_action('widgets_init', function () {
         'id' => 'sidebar-footer',
     ] + $config);
 });
+
+
+// add_action('template_redirect', function() {
+//     if (!isset($_COOKIE['is_mobile'])) {
+//         $detect = new MobileDetect();
+//         $isMobile = $detect->isMobile() && !$detect->isTablet();
+//         setcookie('is_mobile', $isMobile ? 'true' : 'false', time() + 86400, '/'); // Expira en 1 día
+//     }
+// });

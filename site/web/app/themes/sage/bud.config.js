@@ -1,36 +1,44 @@
 /**
  * Compiler configuration
  *
- * @see {@link https://roots.io/sage/docs sage documentation}
- * @see {@link https://bud.js.org/learn/config bud.js configuration guide}
+ * @see {@link https://roots.io/docs/sage sage documentation}
+ * @see {@link https://bud.js.org/guides/configure bud.js configuration guide}
  *
- * @type {import('@roots/bud').Config}
+ * @param {import('@roots/bud').Bud} app
  */
 export default async (app) => {
+  // Detect if we should only build CSS
+  const buildOnlyCSS = process.env.BUILD_ONLY_CSS === 'true';
+
   /**
    * Application assets & entrypoints
    *
-   * @see {@link https://bud.js.org/reference/bud.entry}
-   * @see {@link https://bud.js.org/reference/bud.assets}
+   * @see {@link https://bud.js.org/docs/bud.entry}
+   * @see {@link https://bud.js.org/docs/bud.assets}
    */
-  app
-    .entry('app', ['@scripts/app', '@styles/app'])
-    .entry('editor', ['@scripts/editor', '@styles/editor'])
-    .assets(['images']);
+  if (buildOnlyCSS) {
+    app.entry('app', ['@styles/app']).entry('editor', ['@styles/editor']);
+  } else {
+    app
+      .entry('app', ['@scripts/app', '@styles/app'])
+      .entry('editor', ['@scripts/editor', '@styles/editor']);
+  }
+
+  app.assets(['images']);
 
   /**
    * Set public path
    *
-   * @see {@link https://bud.js.org/reference/bud.setPublicPath}
+   * @see {@link https://bud.js.org/docs/bud.setPublicPath}
    */
   app.setPublicPath('/app/themes/sage/public/');
 
   /**
    * Development server settings
    *
-   * @see {@link https://bud.js.org/reference/bud.setUrl}
-   * @see {@link https://bud.js.org/reference/bud.setProxyUrl}
-   * @see {@link https://bud.js.org/reference/bud.watch}
+   * @see {@link https://bud.js.org/docs/bud.setUrl}
+   * @see {@link https://bud.js.org/docs/bud.setProxyUrl}
+   * @see {@link https://bud.js.org/docs/bud.watch}
    */
   app
     .setUrl('http://127.0.0.1:3000')
@@ -46,35 +54,29 @@ export default async (app) => {
    * @see {@link https://developer.wordpress.org/block-editor/how-to-guides/themes/theme-json}
    */
   app.wpjson
-    .setSettings({
-      background: {
-        backgroundImage: true,
-      },
-      color: {
-        custom: false,
-        customDuotone: false,
-        customGradient: false,
-        defaultDuotone: false,
-        defaultGradients: false,
-        defaultPalette: false,
-        duotone: [],
-      },
-      custom: {
-        spacing: {},
-        typography: {
-          'font-size': {},
-          'line-height': {},
-        },
-      },
-      spacing: {
-        padding: true,
-        units: ['px', '%', 'em', 'rem', 'vw', 'vh'],
-      },
-      typography: {
-        customFontSize: false,
-      },
+    .set('settings.color.custom', true)
+    .set('settings.color.customDuotone', false)
+    .set('settings.color.customGradient', false)
+    .set('settings.color.defaultDuotone', false)
+    .set('settings.color.defaultGradients', false)
+    .set('settings.color.defaultPalette', false)
+    .set('settings.color.duotone', [])
+    .set('settings.custom.spacing', {})
+    .set('settings.custom.typography.line-height', {})
+    .set('settings.spacing.padding', true)
+    .set('settings.spacing.margin', true)
+    .set('settings.spacing.units', ['px', '%', 'em', 'rem', 'vw', 'vh'])
+    .set('settings.typography.customFontSize', false)
+    .set('settings.layout', {
+      contentSize: '768px',
+      wideSize: '1024px',
     })
     .useTailwindColors()
     .useTailwindFontFamily()
-    .useTailwindFontSize();
+    .useTailwindFontSize()
+    .enable();
+
+  app.provide({
+    jquery: '$',
+  });
 };

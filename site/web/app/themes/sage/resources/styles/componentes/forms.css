@@ -1,0 +1,23 @@
+input:focus,
+input:focus-visible,
+input {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+footer {
+  .formulario {
+    @apply my-6;
+
+    form {
+      label {
+        display: none;
+      }
+
+      input[type='submit'] {
+        @apply text-azul bg-transparent;
+      }
+    }
+  }
+}

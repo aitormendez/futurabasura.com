@@ -12,18 +12,18 @@ return [
     |
     */
 
-'post' => [
-        'product' => [
-            'admin_cols' => [
-                'artist' => [
-                    'taxonomy' => 'artist'
-                ],
-                'slider' => array(
-                    'title' => 'Slider',
-                    'meta_key' => 'mostrar_en_slider',
-                ),
-            ],
-        ],
+    'post' => [
+        // 'product' => [
+        //     'admin_cols' => [
+        //         'artist' => [
+        //             'taxonomy' => 'artist'
+        //         ],
+        //         'slider' => array(
+        //             'title' => 'Slider',
+        //             'meta_key' => 'mostrar_en_slider',
+        //         ),
+        //     ],
+        // ],
         'story' => [
             'enter_title_here' => 'Título de la noticia',
             'menu_icon' => 'dashicons-megaphone',

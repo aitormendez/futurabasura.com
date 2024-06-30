@@ -26,12 +26,11 @@ class Post extends Composer
     {
         return [
             'title' => $this->title(),
-            'pagination' => $this->pagination(),
         ];
     }
 
     /**
-     * Retrieve the post title.
+     * Returns the post title.
      *
      * @return string
      */
@@ -50,12 +49,17 @@ class Post extends Composer
         }
 
         if (is_archive()) {
-            return get_the_archive_title();
+            if (is_archive('story')) {
+                return __('News', 'sage');
+            } else {
+                return get_the_archive_title();
+            }
+
         }
 
         if (is_search()) {
+            /* translators: %s is replaced with the search query */
             return sprintf(
-                /* translators: %s is replaced with the search query */
                 __('Search Results for %s', 'sage'),
                 get_search_query()
             );
@@ -66,19 +70,5 @@ class Post extends Composer
         }
 
         return get_the_title();
-    }
-
-    /**
-     * Retrieve the pagination links.
-     *
-     * @return string
-     */
-    public function pagination()
-    {
-        return wp_link_pages([
-            'echo' => 0,
-            'before' => '<p>'.__('Pages:', 'sage'),
-            'after' => '</p>',
-        ]);
     }
 }
