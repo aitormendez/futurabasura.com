@@ -33,8 +33,8 @@ export default async (app) => {
    * @see {@link https://bud.js.org/reference/bud.watch}
    */
   app
-    .setUrl('http://localhost:3000')
-    .setProxyUrl('http://example.test')
+    .setUrl('http://127.0.0.1:3000')
+    .setProxyUrl('https://futurabasura.test')
     .watch(['resources/views', 'app']);
 
   /**
