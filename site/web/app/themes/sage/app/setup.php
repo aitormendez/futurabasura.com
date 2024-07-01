@@ -7,16 +7,13 @@
 namespace App;
 
 use function Roots\bundle;
-use Detection\MobileDetect;
 
 /**
  * Register the theme assets.
  *
  * @return void
  */
-
 add_action('wp_enqueue_scripts', function () {
-
     $frases = get_field('frases', 'option');
 
     if ($frases) {
@@ -50,8 +47,6 @@ add_action('wp_enqueue_scripts', function () {
     ]);
 }, 100);
 
-
-
 /**
  * Register the theme assets with the block editor.
  *
@@ -67,18 +62,6 @@ add_action('enqueue_block_editor_assets', function () {
  * @return void
  */
 add_action('after_setup_theme', function () {
-    /**
-     * Enable features from the Soil plugin if activated.
-     *
-     * @link https://roots.io/plugins/soil/
-     */
-    add_theme_support('soil', [
-        'clean-up',
-        'nav-walker',
-        'nice-search',
-        'relative-urls',
-    ]);
-
     /**
      * Disable full-site editing support.
      *
@@ -174,11 +157,3 @@ add_action('widgets_init', function () {
     ] + $config);
 });
 
-
-// add_action('template_redirect', function() {
-//     if (!isset($_COOKIE['is_mobile'])) {
-//         $detect = new MobileDetect();
-//         $isMobile = $detect->isMobile() && !$detect->isTablet();
-//         setcookie('is_mobile', $isMobile ? 'true' : 'false', time() + 86400, '/'); // Expira en 1 día
-//     }
-// });

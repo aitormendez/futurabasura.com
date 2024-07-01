@@ -7,11 +7,17 @@ use Illuminate\Support\ServiceProvider;
 class WooCommerceServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap any application services.
-     *
-     * @return void
+     * Register services.
      */
-    public function boot()
+    public function register(): void
+    {
+        //
+    }
+
+    /**
+     * Bootstrap services.
+     */
+    public function boot(): void
     {
         add_action('woocommerce_before_shop_loop', function () {
             echo <<<HTML
@@ -193,11 +199,11 @@ class WooCommerceServiceProvider extends ServiceProvider
         }
     }
 
-    /**
+        /**
      * Mostrar etiqueta "new in shop" en los productos de la portada de la tienda.
      */
 
-    public function mostrar_etiqueta_nuevo_producto() {
+     public function mostrar_etiqueta_nuevo_producto() {
         global $product;
         // Verifica si el producto tiene la etiqueta "new in shop"
         if ( has_term( 'new-in-shop', 'product_tag', $product->get_id() ) ) {
@@ -536,6 +542,5 @@ class WooCommerceServiceProvider extends ServiceProvider
     //     $products = wp_remote_retrieve_body($response);
     //     return new WP_REST_Response(json_decode($products), 200);
     // }
-    
     
 }
