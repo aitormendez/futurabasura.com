@@ -1,4 +1,4 @@
-<div id="solapa" class="fixed top-0 z-40 w-screen h-screen py-8 pl-0 pr-8 bg-white sm:pr-16 sm:py-16">
+<div id="solapa" class="hidden fixed top-0 z-40 w-screen h-screen py-8 pl-0 pr-8 bg-white sm:pr-16 sm:py-16">
   <ul class="my-4 contents">
       @foreach ($contents_nav as $item)
           <li class="">
