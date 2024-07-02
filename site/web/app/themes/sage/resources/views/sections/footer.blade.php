@@ -37,8 +37,8 @@
 
   <div class="flex flex-wrap justify-center w-full mt-8 color">
       <span class="mb-10 font-serif text-4xl text-center md:text-9xl sm:text-6xl frase-footer"
-          style="color: @option('footer_color')">@option('footer_frase')</span>
-      <div class="flex items-end w-full h-56 p-1 mancha" style="background-color: @option('footer_color')">
+          style="color: {{ get_field('footer_color', 'option') }}">{{get_field('footer_frase', 'option')}}</span>
+      <div class="flex items-end w-full h-56 p-1 mancha" style="background-color: {{ get_field('footer_color', 'option') }}">
           <span class="text-xs uppercase">
               <a href="https://e451.net" class="text-black">451 web development</a>
           </span>
