@@ -120,7 +120,6 @@ return [
     */
 
     'block' => [
-        // 'sage/accordion',
         'sage/product' => [
             'title' => __('Product', 'sage'),
             'description' => __('Show a product', 'sage'),
