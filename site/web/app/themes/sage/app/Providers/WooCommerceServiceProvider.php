@@ -527,20 +527,4 @@ class WooCommerceServiceProvider extends ServiceProvider
         </script>
         <?php
     }
-    
-    // public function my_custom_endpoint_callback($request) {
-    //     $wc_key = getenv('WC_KEY');
-    //     $wc_secret = getenv('WC_SECRET');
-    //     $site_url = get_bloginfo('url');
-    //     $api_url = "{$site_url}/wp-json/wc/v3/products?consumer_key={$wc_key}&consumer_secret={$wc_secret}";
-    
-    //     $response = wp_remote_get($api_url, array(
-    //         'headers' => array(
-    //             'Authorization' => 'Basic ' . base64_encode($wc_key . ':' . $wc_secret)
-    //         )
-    //     ));
-    //     $products = wp_remote_retrieve_body($response);
-    //     return new WP_REST_Response(json_decode($products), 200);
-    // }
-    
 }

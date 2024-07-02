@@ -28,7 +28,7 @@
     height: 100%;
   }
 
-  @media (width < 786px) {
+  @media (width > 786px) {
     .product .card-front {
       img {
         width: auto;
@@ -39,7 +39,7 @@
     }
   }
 
-  @media (width < 1024px) {
+  @media (width > 1024px) {
     .product .card-front {
       img {
         max-width: 33.3vw;
@@ -48,7 +48,7 @@
     }
   }
 
-  @media (width < 1280px) {
+  @media (width > 1280px) {
     .product .card-front {
       img {
         max-width: 25vw;
