@@ -3,8 +3,6 @@
 --}}
 
 @extends('layouts.app')
-
-<main id="main" class="py-8 sm:mt-40 main">
   @section('content')
     @while(have_posts()) @php(the_post())
       @include('partials.page-header')
@@ -29,4 +27,3 @@
 
     @endforeach
   @endsection
-</main>

@@ -28,7 +28,7 @@ body.artists {
     }
   }
 
-  @media (width < 786px) {
+  @media (width > 786px) {
     .article {
       h2 {
         width: 25vw;
