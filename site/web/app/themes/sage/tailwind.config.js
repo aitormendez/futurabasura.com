@@ -41,6 +41,14 @@ const config = {
         'fondo-medio': "url('../images/bg-medio.svg')",
         punteado: "url('../images/punteado-cupon.svg')",
       }),
+      backgroundSize: {
+        auto: 'auto',
+        cover: 'cover',
+        contain: 'contain',
+        // puedes agregar más tamaños personalizados si lo necesitas
+        '50%': '50%',
+        '10px': '10px',
+      },
     },
     colors: {
       'negro-fb': '#3e2b2f',

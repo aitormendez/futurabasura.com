@@ -17,7 +17,7 @@
             @foreach ($destacados['posts'] as $destacado)
                 @include('partials.destacados-portada')
             @endforeach
-        </section>pwd
+        </section>
     @endif
 @endsection
 
