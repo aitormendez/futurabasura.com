@@ -1,35 +1,44 @@
 <div id="solapa" class="fixed top-0 z-40 w-screen h-screen py-8 pl-0 pr-8 bg-white sm:pr-16 sm:py-16">
   <ul class="my-4 contents">
-      @foreach ($contents_nav as $item)
-          <li class="">
-              <a href="{{ $item->url }}"
-                  class="text-sm tracking-widest text-black uppercase sm:text-xl">{{ $item->label }}</a>
-          </li>
-      @endforeach
+    @if (!empty($contents_nav))
+        @foreach ($contents_nav as $item)
+            <li class="">
+                <a href="{{ $item->url }}"
+                    class="text-sm tracking-widest text-black uppercase sm:text-xl">{{ $item->label }}</a>
+            </li>
+        @endforeach  
+    @endif
   </ul>
   <ul class="my-4 shop">
-      @foreach ($shop_nav as $item)
-          <li class="">
-              <a href="{{ $item->url }}"
-                  class="text-sm tracking-widest text-black uppercase sm:text-xl">{{ $item->label }}</a>
-          </li>
-      @endforeach
+    @if (!empty($shop_nav))        
+        @foreach ($shop_nav as $item)
+            <li class="">
+                <a href="{{ $item->url }}"
+                    class="text-sm tracking-widest text-black uppercase sm:text-xl">{{ $item->label }}</a>
+            </li>
+        @endforeach
+    @endif
   </ul>
   <ul class="my-4 social">
+    @if (!empty($social_nav))
+    @endif
       @foreach ($social_nav as $item)
           <li class="">
               <a href="{{ $item->url }}"
                   class="text-sm tracking-widest text-black uppercase sm:text-xl">{{ $item->label }}</a>
           </li>
       @endforeach
+        
   </ul>
   <ul class="my-4 info">
-      @foreach ($info_nav as $item)
-          <li class="">
-              <a href="{{ $item->url }}"
-                  class="text-sm tracking-widest text-black uppercase sm:text-xl">{{ $item->label }}</a>
-          </li>
-      @endforeach
+    @if (!empty($info_nav))
+        @foreach ($info_nav as $item)
+            <li class="">
+                <a href="{{ $item->url }}"
+                    class="text-sm tracking-widest text-black uppercase sm:text-xl">{{ $item->label }}</a>
+            </li>
+        @endforeach
+    @endif
   </ul>
   <a id="btn-close" href="#" class="absolute inline-block right-8 top-8 btn hover:bg-allo">CLOSE</a>
 </div>
@@ -42,11 +51,13 @@
                   {{ $frase }}
               </a>
           </li>
-          @foreach ($primary_nav as $item)
-              <li class="p-4 li-shop sm:pt-8">
-                  <a href="{{ $item->url }}" class="nav-item hover:text-allo">{{ $item->label }}</a>
-              </li>
-          @endforeach
+          @if (!empty($primary_nav))              
+            @foreach ($primary_nav as $item)
+                <li class="p-4 li-shop sm:pt-8">
+                    <a href="{{ $item->url }}" class="nav-item hover:text-allo">{{ $item->label }}</a>
+                </li>
+            @endforeach
+          @endif
           <li class="li-cart">
               <a href="/cart" class="flex cart-link nav-item hover:text-allo">
                   <div
