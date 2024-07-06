@@ -26,11 +26,14 @@
   },
   "dependencies": {
     "@glidejs/glide": "^3.6.1",
+    "@vidstack/react": "^1.11.25",
     "alpinejs": "^3.14.1",
     "animejs": "^3.2.2",
     "gsap": "^3.12.5",
+    "hls.js": "^1.5.13",
     "infinite-scroll": "^4.0.1",
     "lightgallery": "^2.7.2",
+    "media-icons": "^1.1.4",
     "prop-types": "^15.8.1",
     "scrambling-text": "^1.2.0"
   }

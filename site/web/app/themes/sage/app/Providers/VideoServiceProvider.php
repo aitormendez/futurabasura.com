@@ -53,33 +53,27 @@ class VideoServiceProvider extends ServiceProvider
         $apiKey = getenv('BUNNY_KEY');
         $libraryId = 265348;
         $pullZoneUrl = 'vz-9a0bcf65-610';
-
+    
         $response = wp_remote_get("https://video.bunnycdn.com/library/{$libraryId}/videos/{$videoId}", [
             'headers' => [
                 'AccessKey' => $apiKey,
             ],
         ]);
-
+    
         if (is_wp_error($response)) {
             return [];
         }
-
+    
         $body = wp_remote_retrieve_body($response);
         $data = json_decode($body, true);
-
+    
         if (isset($data['availableResolutions'])) {
-            $resolutions = explode(',', $data['availableResolutions']);
-            $videoUrls = [];
-            foreach ($resolutions as $resolution) {
-                $videoUrls[$resolution] = "https://{$pullZoneUrl}.b-cdn.net/{$videoId}/play_{$resolution}.mp4";
-            }
-
             return [
-                'videoUrls' => $videoUrls,
-                'thumbnailUrl' => "https://vz-9a0bcf65-610.b-cdn.net/{$videoId}/thumbnail.jpg",
+                'hlsUrl' => "https://{$pullZoneUrl}.b-cdn.net/{$videoId}/playlist.m3u8",
+                'thumbnailUrl' => "https://{$pullZoneUrl}.b-cdn.net/{$videoId}/thumbnail.jpg",
             ];
         }
-
+    
         return [];
     }
 }

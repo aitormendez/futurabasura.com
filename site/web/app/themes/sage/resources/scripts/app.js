@@ -4,6 +4,7 @@ import Alpine from 'alpinejs';
 import { dropdownFilter, dropdownSort } from './shop.js';
 import solapa from './solapa.js';
 import scramble from './scramble.js';
+import './components/video-player';
 window.Alpine = Alpine;
 window.dropdownFilter = dropdownFilter;
 window.dropdownSort = dropdownSort;
