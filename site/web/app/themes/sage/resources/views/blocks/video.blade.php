@@ -15,11 +15,9 @@
     }
 @endphp
 
-@dump($videoDetails)
-
 <div class="video-block">
     @if ($videoDetails && !empty($videoDetails['videoUrls']))
-        <video controls>
+        <video controls class="w-full">
             @foreach ($videoDetails['videoUrls'] as $resolution => $url)
                 <source src="{{ $url }}" type="video/mp4" label="{{ $resolution }}">
             @endforeach

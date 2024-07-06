@@ -52,6 +52,7 @@ class VideoServiceProvider extends ServiceProvider
     {
         $apiKey = getenv('BUNNY_KEY');
         $libraryId = 265348;
+        $pullZoneUrl = 'vz-9a0bcf65-610';
 
         $response = wp_remote_get("https://video.bunnycdn.com/library/{$libraryId}/videos/{$videoId}", [
             'headers' => [
@@ -70,7 +71,7 @@ class VideoServiceProvider extends ServiceProvider
             $resolutions = explode(',', $data['availableResolutions']);
             $videoUrls = [];
             foreach ($resolutions as $resolution) {
-                $videoUrls[$resolution] = "https://265348.b-cdn.net/{$videoId}/play_{$resolution}.mp4";
+                $videoUrls[$resolution] = "https://{$pullZoneUrl}.b-cdn.net/{$videoId}/play_{$resolution}.mp4";
             }
 
             return [
