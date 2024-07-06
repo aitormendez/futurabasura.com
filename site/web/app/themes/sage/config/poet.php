@@ -141,7 +141,25 @@ return [
             // 'render_template' => 'views/blocks/product.blade.php',
             // 'enqueue_style' => mix('styles/blocks/mi-bloque.css'),
             // 'enqueue_script' => mix('scripts/blocks/mi-bloque.js'),
-        ],    
+        ],
+        'sage/video' => [
+            'title' => __('Video', 'sage'),
+            'description' => __('Show a video from bunny.net', 'sage'),
+            'category' => 'fb',
+            'icon' => '<svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M10 8.64v6.72L15.27 12L10 8.64M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>',
+            'keywords' => ['video', 'bunny'],
+            'post_types' => ['post', 'page'],
+            'mode' => 'preview',
+            'attributes' => [
+                'videoUrl' => [
+                    'default' => '',
+                    'type' => 'string',
+                ],
+            ],
+            // 'render_template' => 'views/blocks/video.blade.php',
+            // 'enqueue_style' => mix('styles/blocks/video.css'),
+            // 'enqueue_script' => mix('scripts/blocks/video.js'),
+        ],     
     ],
 
     /*

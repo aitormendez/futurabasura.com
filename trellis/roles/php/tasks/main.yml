@@ -1,4 +1,10 @@
 ---
+- name: Download CA certificates file for cURL
+  get_url:
+    url: https://curl.se/ca/cacert.pem
+    dest: /etc/ssl/certs/cacert.pem
+    mode: "0644"
+
 - name: Add PHP PPA
   apt_repository:
     repo: "ppa:ondrej/php"
@@ -46,14 +52,14 @@
   template:
     src: php-fpm.ini.j2
     dest: /etc/php/{{ php_version }}/fpm/php.ini
-    mode: '0644'
+    mode: "0644"
   notify: reload php-fpm
 
 - name: Copy PHP CLI configuration file
   template:
     src: php-cli.ini.j2
     dest: /etc/php/{{ php_version }}/cli/php.ini
-    mode: '0644'
+    mode: "0644"
 
 - name: Change ImageMagick policy.xml to allow for PDFs
   replace:

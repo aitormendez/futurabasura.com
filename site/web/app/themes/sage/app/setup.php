@@ -44,6 +44,7 @@ add_action('wp_enqueue_scripts', function () {
         'homeUrl' => get_bloginfo('url'),
         'frases' => $frases_array,
         'artists' => $artists,
+        'bunny_api_key' => env('BUNNY_KEY'),
     ]);
 }, 100);
 
@@ -156,4 +157,3 @@ add_action('widgets_init', function () {
         'id' => 'sidebar-footer',
     ] + $config);
 });
-
