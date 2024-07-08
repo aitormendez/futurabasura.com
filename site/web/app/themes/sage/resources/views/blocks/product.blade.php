@@ -1,5 +1,7 @@
 <div class="product-block">
-    @php
+    @dump($data)
+    {{-- @dump($data->productId) --}}
+    {{-- @php
         $product_id = $data->productId;
         $product = wc_get_product($product_id);
 
@@ -31,5 +33,5 @@
         @endif
     @elseif($layout === 'layout2')
         Renderiza el layout 2
-    @endif
+    @endif --}}
 </div>

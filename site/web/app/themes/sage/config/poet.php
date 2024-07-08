@@ -123,21 +123,9 @@ return [
         'sage/product' => [
             'title' => __('Product', 'sage'),
             'description' => __('Show a product', 'sage'),
-            'category' => 'fb',
-            'icon' => '<svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>',
             'keywords' => ['product'],
             'post_types' => ['post', 'page'],
             'mode' => 'preview',
-            'attributes' => [
-                'layout' => [
-                    'default' => 'layout1',
-                    'type' => 'string',
-                ],
-                'productId' => [
-                    'default' => 0,
-                    'type' => 'number',
-                ],
-            ],
             // 'render_template' => 'views/blocks/product.blade.php',
             // 'enqueue_style' => mix('styles/blocks/mi-bloque.css'),
             // 'enqueue_script' => mix('scripts/blocks/mi-bloque.js'),
@@ -145,21 +133,13 @@ return [
         'sage/video' => [
             'title' => __('Video', 'sage'),
             'description' => __('Show a video from bunny.net', 'sage'),
-            'category' => 'fb',
-            'icon' => '<svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M10 8.64v6.72L15.27 12L10 8.64M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>',
             'keywords' => ['video', 'bunny'],
-            'post_types' => ['post', 'page'],
+            'post_types' => ['post', 'page', 'artist'],
             'mode' => 'preview',
-            'attributes' => [
-                'videoUrl' => [
-                    'default' => '',
-                    'type' => 'string',
-                ],
-            ],
             // 'render_template' => 'views/blocks/video.blade.php',
             // 'enqueue_style' => mix('styles/blocks/video.css'),
             // 'enqueue_script' => mix('scripts/blocks/video.js'),
-        ],     
+        ],
     ],
 
     /*
@@ -175,7 +155,7 @@ return [
     'block_category' => [
         'fb' => [
             'title' => 'Futura Basura',
-            // 'icon' => 'star-filled',
+            'icon' => 'star-filled',
         ],
     ],
 

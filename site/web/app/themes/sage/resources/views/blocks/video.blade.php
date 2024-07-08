@@ -1,8 +1,7 @@
-<div class="video-block">
-    @php
+@php
         $videoId = isset($data->videoId) ? $data->videoId : null;
         $videoDetails = null;
-
+        
         if ($videoId) {
             $response = wp_remote_get("https://futurabasura.test/wp-json/fb/v1/video-resolutions?video_id={$videoId}", [
                 'sslverify' => false,
@@ -12,8 +11,9 @@
                 $videoDetails = json_decode($body, true);
             }
         }
-    @endphp
-
+        @endphp
+@dump($data)
+<div class="video-block {{ isset($data->align) ? $data->align : '' }}">
     @if ($videoDetails && !empty($videoDetails['hlsUrl']))
         <div id="video-player-{{ $videoId }}" data-video-id="{{ $videoId }}" data-thumbnail-url="{{ $videoDetails['thumbnailUrl'] }}"></div>
     @else

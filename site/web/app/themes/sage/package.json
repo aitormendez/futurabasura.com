@@ -27,6 +27,9 @@
   "dependencies": {
     "@glidejs/glide": "^3.6.1",
     "@vidstack/react": "^1.11.25",
+    "@wordpress/blocks": "^13.2.0",
+    "@wordpress/element": "^6.2.0",
+    "@wordpress/icons": "^10.2.0",
     "alpinejs": "^3.14.1",
     "animejs": "^3.2.2",
     "gsap": "^3.12.5",
