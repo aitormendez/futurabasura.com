@@ -39,6 +39,7 @@ const VideoPlayer = ({
           loop={loop}
           muted={muted}
           controls={controls}
+          className="w-full"
         />
       </MediaProvider>
     </MediaPlayer>

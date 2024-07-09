@@ -32,6 +32,7 @@
         data-muted="{{ $muted ? 'true' : 'false' }}"
         data-controls="{{ $controls ? 'true' : 'false' }}"
         data-playsinline="{{ $playsInline ? 'true' : 'false' }}"
+        class="w-full"
         ></div>
     @else
         <p>{{ __('No video ID provided or no video resolutions found.', 'sage') }}</p>
