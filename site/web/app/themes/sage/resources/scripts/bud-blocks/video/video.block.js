@@ -26,6 +26,26 @@ export default {
       type: 'string',
       default: 'none',
     },
+    autoplay: {
+      type: 'boolean',
+      default: false,
+    },
+    loop: {
+      type: 'boolean',
+      default: false,
+    },
+    muted: {
+      type: 'boolean',
+      default: false,
+    },
+    controls: {
+      type: 'boolean',
+      default: true,
+    },
+    playsInline: {
+      type: 'boolean',
+      default: true,
+    },
   },
   supports: {
     align: ['wide', 'full'],
