@@ -70,7 +70,17 @@ const EditVideo = ({ attributes, setAttributes }) => {
         onChange={(url) => setAttributes({ thumbnailUrl: url })}
         placeholder={__('Leave blank to use the default poster', 'sage')}
       />
-      {videoId && <VideoPlayer videoId={videoId} thumbnailUrl={thumbnailUrl} />}
+      {videoId && (
+        <VideoPlayer
+          videoId={videoId}
+          thumbnailUrl={thumbnailUrl}
+          autoplay={autoplay}
+          loop={loop}
+          muted={muted}
+          controls={controls}
+          playsInline={playsInline}
+        />
+      )}
     </div>
   );
 };

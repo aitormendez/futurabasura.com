@@ -1,4 +1,4 @@
-import EditVideo from './edit-video';
+import EditVideo from './EditVideo';
 import { SVG, Path } from '@wordpress/components';
 // import { video } from '@wordpress/icons';
 
