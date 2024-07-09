@@ -150,23 +150,6 @@ class WooCommerceServiceProvider extends ServiceProvider
          */
 
         add_action( 'woocommerce_before_shop_loop_item_title', [$this, 'mostrar_etiqueta_nuevo_producto'], 15 );
-
-
-
-
-        /**
-         * Crear custom endpoint autenticado para REST API de WooCommerce.
-         */
-        // add_action('rest_api_init', function() {
-        //     register_rest_route('fb/v1', '/productos/', array(
-        //         'methods'  => 'GET',
-        //         'callback' => [$this, 'my_custom_endpoint_callback'],
-        //         'permission_callback' => function () {
-        //             return current_user_can('edit_posts');
-        //         }
-        //     ));
-        // });
-        
         
         
 

@@ -3,7 +3,8 @@
     $videoDetails = null;
 
     if ($videoId) {
-        $response = wp_remote_get("{$siteUrl}/wp-json/fb/v1/video-resolutions?video_id={$videoId}", [
+        $siteUrl = home_url();
+        $response = wp_remote_get("{{$siteUrl}}/wp-json/fb/v1/video-resolutions?video_id={$videoId}", [
             'sslverify' => false,
         ]);
         if (!is_wp_error($response)) {
