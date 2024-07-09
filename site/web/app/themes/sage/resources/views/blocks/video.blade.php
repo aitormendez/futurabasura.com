@@ -3,7 +3,7 @@
     $videoDetails = null;
 
     if ($videoId) {
-        $response = wp_remote_get("https://futurabasura.test/wp-json/fb/v1/video-resolutions?video_id={$videoId}", [
+        $response = wp_remote_get("{$siteUrl}/wp-json/fb/v1/video-resolutions?video_id={$videoId}", [
             'sslverify' => false,
         ]);
         if (!is_wp_error($response)) {
