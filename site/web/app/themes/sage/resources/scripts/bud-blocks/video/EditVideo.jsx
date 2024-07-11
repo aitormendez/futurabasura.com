@@ -9,7 +9,7 @@ import { InspectorControls, BlockControls } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import PropTypes from 'prop-types';
 import { useEffect } from '@wordpress/element';
-import VideoPlayer from '../../components/VideoPlayer';
+import VideoPlayer from '../../components/video/VideoPlayer';
 
 const EditVideo = ({ attributes, setAttributes }) => {
   const {
