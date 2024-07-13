@@ -128,7 +128,7 @@ main {
   display: flex !important;
 }
 
-video:not([width]):not([height]),
+/* video:not([width]):not([height]),
 iframe:not([width]):not([height]) {
   aspect-ratio: auto !important;
-}
+} */
