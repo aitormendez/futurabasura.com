@@ -126,9 +126,9 @@ main {
 /* [data-media-player][data-view-type='video'] {
   aspect-ratio: auto !important;
   display: flex !important;
-} */
+}
 
-/* video:not([width]):not([height]),
+video:not([width]):not([height]),
 iframe:not([width]):not([height]) {
   aspect-ratio: auto !important;
 } */
