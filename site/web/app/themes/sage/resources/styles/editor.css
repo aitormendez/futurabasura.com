@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .wp-block[data-type='sage/video'] video {
   width: 100%;
 }

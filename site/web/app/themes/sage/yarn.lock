@@ -8843,6 +8843,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lucide-react@npm:^0.407.0":
+  version: 0.407.0
+  resolution: "lucide-react@npm:0.407.0"
+  peerDependencies:
+    react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/d9305d0558d432fb283e96210877f5054b08ccca700280d6f0ac09a41baafb2e3392e89f4596eceadbcabfcaf67edc9c744cdf6132e74341a2eb11f620b6f48a
+  languageName: node
+  linkType: hard
+
 "make-fetch-happen@npm:^13.0.0":
   version: 13.0.1
   resolution: "make-fetch-happen@npm:13.0.1"
@@ -11672,6 +11681,7 @@ __metadata:
     hls.js: "npm:^1.5.13"
     infinite-scroll: "npm:^4.0.1"
     lightgallery: "npm:^2.7.2"
+    lucide-react: "npm:^0.407.0"
     media-icons: "npm:^1.1.4"
     prop-types: "npm:^15.8.1"
     radix-ui: "npm:^1.0.1"

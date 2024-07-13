@@ -3,7 +3,11 @@ import plugin from 'tailwindcss/plugin.js';
 
 /** @type {import('tailwindcss').Config} config */
 const config = {
-  content: ['./index.php', './app/**/*.php', './resources/**/*.{php,vue,js}'],
+  content: [
+    './index.php',
+    './app/**/*.php',
+    './resources/**/*.{php,vue,js,jsx,ts,tsx}',
+  ],
   theme: {
     fill: (theme) => ({
       red: theme('colors.red.600'),
@@ -61,10 +65,13 @@ const config = {
       transparent: 'transparent',
       white: 'white',
       black: 'black',
+      'media-brand': 'rgb(var(--media-brand) / <alpha-value>)',
+      'media-focus': 'rgb(var(--media-focus) / <alpha-value>)',
     },
   },
   variants: {
     extend: {
+      opacity: ['hover', 'focus', 'group-hover'],
       borderWidth: ['last'],
     },
   },

@@ -33,7 +33,7 @@ const VideoPlayer = ({
 
   return (
     <MediaPlayer
-      className="w-full aspect-video bg-slate-900 text-white font-sans overflow-hidden ring-media-focus data-[focus]:ring-4"
+      className="w-full aspect-video bg-slate-900 text-white font-sans overflow-hidden rounded-md ring-media-focus data-[focus]:ring-4"
       title="Video"
       src={`https://vz-9a0bcf65-610.b-cdn.net/${videoId}/playlist.m3u8`}
       crossOrigin
@@ -48,7 +48,7 @@ const VideoPlayer = ({
     >
       <MediaProvider>
         <Poster
-          className="absolute inset-0 block h-full w-full opacity-0 transition-opacity data-[visible]:opacity-100 object-cover"
+          className="absolute inset-0 block h-full w-full rounded-md opacity-0 transition-opacity data-[visible]:opacity-100 object-cover"
           src={thumbnailUrl}
           alt="Video thumbnail"
         />

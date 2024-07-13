@@ -97,6 +97,16 @@
           "color": "black",
           "name": "Black",
           "slug": "black"
+        },
+        {
+          "color": "rgb(var(--media-brand) / 1)",
+          "name": "Media-brand",
+          "slug": "media-brand"
+        },
+        {
+          "color": "rgb(var(--media-focus) / 1)",
+          "name": "Media-focus",
+          "slug": "media-focus"
         }
       ]
     },
