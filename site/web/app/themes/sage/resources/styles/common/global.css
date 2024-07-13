@@ -123,10 +123,10 @@ main {
 
 /* Bloque de video bunny.net */
 
-[data-media-player][data-view-type='video'] {
+/* [data-media-player][data-view-type='video'] {
   aspect-ratio: auto !important;
   display: flex !important;
-}
+} */
 
 /* video:not([width]):not([height]),
 iframe:not([width]):not([height]) {
