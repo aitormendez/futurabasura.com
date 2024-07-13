@@ -120,3 +120,15 @@ main {
 /* .clip-path-elipse {
   clip-path: ellipse(50% 50% at 50% 50%);
 } */
+
+/* Bloque de video bunny.net */
+
+[data-media-player][data-view-type='video'] {
+  aspect-ratio: auto !important;
+  display: flex !important;
+}
+
+video:not([width]):not([height]),
+iframe:not([width]):not([height]) {
+  aspect-ratio: auto !important;
+}
