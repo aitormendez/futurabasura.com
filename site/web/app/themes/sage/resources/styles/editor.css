@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --media-brand: 245 245 245;
+  --media-focus: 78 156 246;
+}
+
 .wp-block[data-type='sage/video'] video {
   width: 100%;
 }
@@ -10,16 +15,9 @@
 
 [data-media-player][data-view-type='video'] {
   aspect-ratio: auto !important;
-  display: flex !important;
 }
 
 video:not([width]):not([height]),
 iframe:not([width]):not([height]) {
   aspect-ratio: auto !important;
-  width: 100% !important;
 }
-
-/* [data-media-provider] {
-  position: relative !important;
-  width: 100% !important;
-} */
