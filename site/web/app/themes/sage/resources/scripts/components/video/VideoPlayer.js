@@ -18,6 +18,7 @@ const VideoPlayer = ({
   loop,
   muted,
   playsInline,
+  controls,
 }) => {
   const playerRef = useRef(null);
 
@@ -53,7 +54,8 @@ const VideoPlayer = ({
           alt="Video thumbnail"
         />
       </MediaProvider>
-      <VideoLayout />
+      {controls && <VideoLayout />}
+      {controls && <test />}
     </MediaPlayer>
   );
 };
