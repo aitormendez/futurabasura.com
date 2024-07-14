@@ -136,4 +136,5 @@ iframe:not([width]):not([height]) {
 
 [data-media-provider] {
   position: relative !important;
+  width: 100% !important;
 }
