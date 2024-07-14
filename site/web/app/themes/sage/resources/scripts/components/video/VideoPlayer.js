@@ -20,8 +20,6 @@ const VideoPlayer = ({
   playsInline,
   controls,
 }) => {
-  const playerRef = useRef(null);
-
   function onProviderChange(provider, nativeEvent) {
     if (isHLSProvider(provider)) {
       provider.config = {};
@@ -42,10 +40,8 @@ const VideoPlayer = ({
       autoPlay={autoplay}
       loop={loop}
       muted={muted}
-      controls={false} // Desactiva los controles del navegador
       onProviderChange={onProviderChange}
       onCanPlay={onCanPlay}
-      ref={playerRef}
     >
       <MediaProvider>
         <Poster
