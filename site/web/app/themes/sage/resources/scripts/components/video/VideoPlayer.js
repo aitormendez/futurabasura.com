@@ -32,7 +32,7 @@ const VideoPlayer = ({
 
   return (
     <MediaPlayer
-      className="w-full aspect-video bg-slate-900 text-white font-sans overflow-hidden ring-media-focus data-[focus]:ring-4"
+      className="relative w-full aspect-video bg-slate-900 text-white font-sans overflow-hidden ring-media-focus data-[focus]:ring-4"
       title="Video"
       src={`https://vz-9a0bcf65-610.b-cdn.net/${videoId}/playlist.m3u8`}
       crossOrigin
