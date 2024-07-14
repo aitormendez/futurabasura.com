@@ -5,3 +5,21 @@
 .wp-block[data-type='sage/video'] video {
   width: 100%;
 }
+
+/* Bloque de video bunny.net */
+
+[data-media-player][data-view-type='video'] {
+  aspect-ratio: auto !important;
+  display: flex !important;
+}
+
+video:not([width]):not([height]),
+iframe:not([width]):not([height]) {
+  aspect-ratio: auto !important;
+  width: 100% !important;
+}
+
+/* [data-media-provider] {
+  position: relative !important;
+  width: 100% !important;
+} */
