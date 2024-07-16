@@ -36,7 +36,7 @@ class VideoServiceProvider extends ServiceProvider
     public function getVideoResolutionsRest($data)
     {
         $videoId = $data->get_param('video_id');
-        $libraryId = $data->get_param('library_id') ?? 265348; // Usar el valor por defecto si no se proporciona
+        $libraryId = $data->get_param('library_id') ?? 265348;
     
         if (!$videoId) {
             return new WP_Error('no_video_id', 'No video ID provided', ['status' => 400]);

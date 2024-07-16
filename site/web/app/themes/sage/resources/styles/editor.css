@@ -21,3 +21,9 @@ video:not([width]):not([height]),
 iframe:not([width]):not([height]) {
   aspect-ratio: auto !important;
 }
+
+.feather-icon {
+  fill: none !important;
+  stroke: currentColor;
+  stroke-width: 2px;
+}
