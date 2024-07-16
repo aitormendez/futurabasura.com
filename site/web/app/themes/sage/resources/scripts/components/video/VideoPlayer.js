@@ -51,7 +51,6 @@ const VideoPlayer = ({
         />
       </MediaProvider>
       {controls && <VideoLayout />}
-      {controls && <test />}
     </MediaPlayer>
   );
 };

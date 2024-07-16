@@ -7,11 +7,11 @@
   --media-focus: 78 156 246;
 }
 
+/* Bloque de video bunny.net */
+
 .wp-block[data-type='sage/video'] video {
   width: 100%;
 }
-
-/* Bloque de video bunny.net */
 
 [data-media-player][data-view-type='video'] {
   aspect-ratio: auto !important;

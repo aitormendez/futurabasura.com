@@ -1,5 +1,6 @@
 @php
     $videoId = isset($data->videoId) ? $data->videoId : null;
+    $thumbnailUrl = isset($data->thumbnailUrl) ? $data->thumbnailUrl : null;
     $videoDetails = null;
 
     if ($videoId) {
@@ -19,6 +20,9 @@
     $muted = $data->muted ?? false;
     $controls = $data->controls ?? true;
     $playsInline = $data->playsInline ?? true;
+
+    // Usa el poster personalizado si está disponible, de lo contrario usa el poster por defecto
+    $posterUrl = $thumbnailUrl ?: ($videoDetails['thumbnailUrl'] ?? '');
 @endphp
 
 <div class="video-block {{ isset($data->align) ? $data->align : '' }}">
@@ -26,7 +30,7 @@
         <div
         id="video-player-{{ $videoId }}"
         data-video-id="{{ $videoId }}"
-        data-thumbnail-url="{{ $videoDetails['thumbnailUrl'] }}"
+        data-thumbnail-url="{{ $posterUrl }}"
         data-autoplay="{{ $autoplay ? 'true' : 'false' }}"
         data-loop="{{ $loop ? 'true' : 'false' }}"
         data-muted="{{ $muted ? 'true' : 'false' }}"

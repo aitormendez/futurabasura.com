@@ -2,10 +2,13 @@ import {
   TextControl,
   PanelBody,
   ToggleControl,
-  ToolbarGroup,
-  ToolbarButton,
+  Button,
 } from '@wordpress/components';
-import { InspectorControls, BlockControls } from '@wordpress/block-editor';
+import {
+  InspectorControls,
+  MediaUpload,
+  MediaUploadCheck,
+} from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import PropTypes from 'prop-types';
 import { useEffect } from '@wordpress/element';
@@ -22,6 +25,10 @@ const EditVideo = ({ attributes, setAttributes }) => {
     controls,
     playsInline,
   } = attributes;
+
+  const removeImage = () => {
+    setAttributes({ thumbnailUrl: '' });
+  };
 
   useEffect(() => {
     // Realiza cualquier inicialización necesaria aquí.
@@ -63,13 +70,38 @@ const EditVideo = ({ attributes, setAttributes }) => {
         value={videoId}
         onChange={(id) => setAttributes({ videoId: id })}
         placeholder={__('Enter Bunny.net video ID...', 'sage')}
+        className="m-4"
       />
-      <TextControl
-        label={__('Thumbnail URL', 'sage')}
-        value={thumbnailUrl}
-        onChange={(url) => setAttributes({ thumbnailUrl: url })}
-        placeholder={__('Leave blank to use the default poster', 'sage')}
-      />
+      <MediaUploadCheck>
+        <MediaUpload
+          onSelect={(media) => setAttributes({ thumbnailUrl: media.url })}
+          allowedTypes={['image']}
+          render={({ open }) => (
+            <div>
+              {thumbnailUrl ? (
+                <div>
+                  <img
+                    src={thumbnailUrl}
+                    alt={__('Thumbnail', 'sage')}
+                    className="block w-60 mx-4 mt-4"
+                  />
+                  <Button onClick={open} variant="secondary" className="m-4">
+                    {__('Change Thumbnail', 'sage')}
+                  </Button>
+                  <Button onClick={removeImage} variant="destructive">
+                    {__('Remove Thumbnail', 'sage')}
+                  </Button>
+                </div>
+              ) : (
+                <Button variant="secondary" onClick={open} className="m-4">
+                  {__('Select Thumbnail', 'sage')}
+                </Button>
+              )}
+            </div>
+          )}
+        />
+      </MediaUploadCheck>
+
       {videoId && (
         <VideoPlayer
           videoId={videoId}
