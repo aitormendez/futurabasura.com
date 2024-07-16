@@ -24,6 +24,7 @@ const EditVideo = ({ attributes, setAttributes }) => {
     muted,
     controls,
     playsInline,
+    libraryId,
   } = attributes;
 
   const removeImage = () => {
@@ -70,6 +71,13 @@ const EditVideo = ({ attributes, setAttributes }) => {
         value={videoId}
         onChange={(id) => setAttributes({ videoId: id })}
         placeholder={__('Enter Bunny.net video ID...', 'sage')}
+        className="m-4"
+      />
+      <TextControl
+        label={__('Library ID', 'sage')}
+        value={libraryId}
+        onChange={(id) => setAttributes({ libraryId: id })}
+        placeholder={__('Leave blank to get default library', 'sage')}
         className="m-4"
       />
       <MediaUploadCheck>

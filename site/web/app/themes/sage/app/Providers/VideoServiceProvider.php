@@ -36,22 +36,24 @@ class VideoServiceProvider extends ServiceProvider
     public function getVideoResolutionsRest($data)
     {
         $videoId = $data->get_param('video_id');
+        $libraryId = $data->get_param('library_id') ?? 265348; // Usar el valor por defecto si no se proporciona
+    
         if (!$videoId) {
             return new WP_Error('no_video_id', 'No video ID provided', ['status' => 400]);
         }
-
-        $videoDetails = $this->getVideoDetails($videoId);
+    
+        $videoDetails = $this->getVideoDetails($videoId, $libraryId);
         if (empty($videoDetails)) {
             return new WP_Error('no_encodings', 'No video resolutions found', ['status' => 404]);
         }
-
+    
         return rest_ensure_response($videoDetails);
     }
+    
 
-    public function getVideoDetails($videoId)
+    public function getVideoDetails($videoId, $libraryId)
     {
         $apiKey = getenv('BUNNY_KEY');
-        $libraryId = 265348;
         $pullZoneUrl = 'vz-9a0bcf65-610';
     
         $response = wp_remote_get("https://video.bunnycdn.com/library/{$libraryId}/videos/{$videoId}", [
@@ -76,4 +78,5 @@ class VideoServiceProvider extends ServiceProvider
     
         return [];
     }
+    
 }

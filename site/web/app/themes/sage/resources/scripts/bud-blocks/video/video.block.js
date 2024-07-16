@@ -14,6 +14,10 @@ export default {
   category: `fb`,
   icon: CustomIcon,
   attributes: {
+    libraryId: {
+      type: 'string',
+      default: '265348',
+    },
     videoId: {
       type: 'string',
       default: '',
