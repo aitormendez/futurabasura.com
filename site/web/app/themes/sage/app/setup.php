@@ -47,6 +47,20 @@ add_action('wp_enqueue_scripts', function () {
     ]);
 }, 100);
 
+/*
+ * Add frontend styles as editor styles.
+ *
+ * @return void
+ */
+// add_action('after_setup_theme', function () {
+//     // add app frontend styles as editor styles
+//     bundle('app')->editorStyles();
+
+//     // enqueue app editor-only styles, extracted from app frontend styles
+//     $relEditorAppOnlyCssPath = asset('editor/app.css')->relativePath(get_theme_file_path());
+//     add_editor_style($relEditorAppOnlyCssPath);
+// });
+
 /**
  * Register the theme assets with the block editor.
  *
