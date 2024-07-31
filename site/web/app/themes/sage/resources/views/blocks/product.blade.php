@@ -1,8 +1,8 @@
 <div class="product-block">
     @dump($data)
-    {{-- @dump($data->productId) --}}
-    {{-- @php
+    @php
         $product_id = $data->productId;
+        $layout = isset($data->layout) ? $data->layout : 'layout1';
         $product = wc_get_product($product_id);
 
         if ($product) {
@@ -14,7 +14,6 @@
             $author_id = get_post_field('post_author', $product_id);
             $artists_terms = wp_get_post_terms($product_id, 'artist');
         }
-        $layout = $data->layout; 
     @endphp
 
     @if($layout === 'layout1')
@@ -33,5 +32,5 @@
         @endif
     @elseif($layout === 'layout2')
         Renderiza el layout 2
-    @endif --}}
+    @endif
 </div>

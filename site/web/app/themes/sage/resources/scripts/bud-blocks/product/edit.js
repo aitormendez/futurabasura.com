@@ -13,7 +13,7 @@ import { __ } from '@wordpress/i18n';
 import PropTypes from 'prop-types';
 
 const Edit = ({ attributes, setAttributes }) => {
-  const { productId, layout } = attributes;
+  const { productId, layout = 'layout1' } = attributes;
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
