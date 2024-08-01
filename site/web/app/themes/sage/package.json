@@ -9,6 +9,7 @@
   },
   "type": "module",
   "scripts": {
+    "bud:doctor": "bud doctor",
     "dev": "bud dev",
     "build": "bud build",
     "translate": "npm run translate:pot && npm run translate:update",
@@ -19,9 +20,9 @@
     "translate:mo": "wp i18n make-mo ./resources/lang ./resources/lang"
   },
   "devDependencies": {
-    "@roots/bud": "6.20.0",
-    "@roots/bud-tailwindcss": "6.20.0",
-    "@roots/sage": "6.20.0",
+    "@roots/bud": "6.23.1",
+    "@roots/bud-tailwindcss": "6.23.1",
+    "@roots/sage": "6.23.1",
     "@tailwindcss/typography": "^0.5.13"
   },
   "dependencies": {
