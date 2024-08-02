@@ -2,9 +2,9 @@ vmType: "vz"
 rosetta:
   enabled: false
 images:
-- location: https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
+- location: https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img
   arch: x86_64
-- location: https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-arm64.img
+- location: https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-arm64.img
   arch: aarch64
 
 mounts:

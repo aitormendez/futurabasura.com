@@ -1,5 +1,6 @@
-# Created by trellis-cli v1.11.0
-# Documentation: https://roots.io/trellis/docs/wordpress-sites/
+# Documentation: https://roots.io/trellis/docs/remote-server-setup/
+# `wordpress_sites` options: https://roots.io/trellis/docs/wordpress-sites
+# Define accompanying passwords/secrets in group_vars/production/vault.yml
 
 wordpress_sites:
   futurabasura.com:
@@ -17,4 +18,6 @@ wordpress_sites:
       enabled: true
       provider: letsencrypt
     cache:
+      enabled: false
+    xmlrpc:
       enabled: false
