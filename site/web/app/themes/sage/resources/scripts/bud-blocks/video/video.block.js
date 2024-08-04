@@ -50,6 +50,17 @@ export default {
       type: 'boolean',
       default: true,
     },
+    style: {
+      type: 'object',
+      default: {
+        border: {
+          color: '',
+          radius: '0px',
+          style: 'solid',
+          width: '1px',
+        },
+      },
+    },
   },
   supports: {
     align: ['wide', 'full'],

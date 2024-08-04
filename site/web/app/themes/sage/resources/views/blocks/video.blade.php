@@ -23,9 +23,15 @@
 
     // Usa el poster personalizado si está disponible, de lo contrario usa el poster por defecto
     $posterUrl = $thumbnailUrl ?: ($videoDetails['thumbnailUrl'] ?? '');
+
+    // Estilos de borde
+    $borderColor = $data->style['border']['color'] ?? 'initial';
+    $borderRadius = $data->style['border']['radius'] ?? '0';
+    $borderStyle = $data->style['border']['style'] ?? 'solid';
+    $borderWidth = $data->style['border']['width'] ?? '1px';
 @endphp
 
-<div class="video-block {{ isset($data->align) ? $data->align : '' }}">
+<div class="video-block overflow-hidden {{ isset($data->align) ? $data->align : '' }}" style="border-color: {{ $borderColor }}; border-radius: {{ $borderRadius }}; border-style: {{ $borderStyle }}; border-width: {{ $borderWidth }};">
     @if ($videoDetails && !empty($videoDetails['hlsUrl']))
         <div
         id="video-player-{{ $videoId }}"

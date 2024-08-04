@@ -84,6 +84,36 @@ export default async (app) => {
         customFontSize: false,
       },
       alignWide: true,
+      appearanceTools: true,
+      border: {
+        color: true,
+        radius: true,
+        style: true,
+        width: true,
+      },
+      color: {
+        link: true,
+        palette: [
+          {
+            name: 'Black',
+            slug: 'black',
+            color: '#000000',
+          },
+          {
+            name: 'White',
+            slug: 'white',
+            color: '#FFFFFF',
+          },
+        ],
+      },
+      spacing: {
+        blockGap: true,
+        margin: true,
+        padding: true,
+      },
+      typography: {
+        lineHeight: true,
+      },
     })
     .useTailwindColors()
     .useTailwindFontFamily()

@@ -125,7 +125,6 @@ return [
             'description' => __('Show a product', 'sage'),
             'keywords' => ['product'],
             'post_types' => ['post', 'page'],
-            'mode' => 'preview',
             // 'render_template' => 'views/blocks/product.blade.php',
             // 'enqueue_style' => mix('styles/blocks/mi-bloque.css'),
             // 'enqueue_script' => mix('scripts/blocks/mi-bloque.js'),
@@ -135,7 +134,6 @@ return [
             'description' => __('Show a video from bunny.net', 'sage'),
             'keywords' => ['video', 'bunny'],
             'post_types' => ['post', 'page', 'artist'],
-            'mode' => 'preview',
             // 'render_template' => 'views/blocks/video.blade.php',
             // 'enqueue_style' => mix('styles/blocks/video.css'),
             // 'enqueue_script' => mix('scripts/blocks/video.js'),
@@ -178,11 +176,14 @@ return [
     */
 
     'block_pattern' => [
-        // 'sage/hero' => [
-        //     'title' => 'Page Hero',
-        //     'description' => 'Draw attention to the main focus of the page, and highlight key CTAs',
-        //     'categories' => ['all'],
-        // ],
+        'sage/video_retro' => [
+            'title' => 'Video Retro',
+            'description' => 'Video estilo retro',
+            'categories' => ['all', 'fb'],
+            'content' => '<!-- wp:group {"align":"full","style":{"spacing":{"padding":{"top":"var:preset|spacing|40","bottom":"var:preset|spacing|40","left":"var:preset|spacing|40","right":"var:preset|spacing|40"}}},"backgroundColor":"gris-claro-fb","layout":{"type":"default"}} -->
+<div class="wp-block-group alignfull has-gris-claro-fb-background-color has-background" style="padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)"><!-- wp:sage/video {"videoId":"54055946-fab4-474a-9195-e35272f7e265","align":"full","muted":true,"style":{"border":{"color":"","radius":"10px","style":"solid","width":"1px"}}} /--></div>
+<!-- /wp:group -->',
+        ],
     ],
 
     /*
@@ -198,6 +199,9 @@ return [
     'block_pattern_category' => [
         'all' => [
             'label' => 'All Patterns',
+        ],
+        'fb' => [
+            'label' => 'Futura Basura',
         ],
     ],
 

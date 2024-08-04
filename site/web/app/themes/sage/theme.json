@@ -8,45 +8,15 @@
       "wideSize": "1200px"
     },
     "spacing": {
+      "blockGap": true,
       "margin": true,
-      "padding": true,
-      "blockGap": null,
-      "units": [
-        "px",
-        "em",
-        "rem",
-        "vh",
-        "vw"
-      ],
-      "spacingSizes": [
-        {
-          "name": "Small",
-          "slug": "small",
-          "size": "8px"
-        },
-        {
-          "name": "Medium",
-          "slug": "medium",
-          "size": "16px"
-        },
-        {
-          "name": "Large",
-          "slug": "large",
-          "size": "32px"
-        }
-      ]
+      "padding": true
     },
     "background": {
       "backgroundImage": true
     },
     "color": {
-      "custom": false,
-      "customDuotone": false,
-      "customGradient": false,
-      "defaultDuotone": false,
-      "defaultGradients": false,
-      "defaultPalette": false,
-      "duotone": [],
+      "link": true,
       "palette": [
         {
           "color": "#3e2b2f",
@@ -117,7 +87,7 @@
       }
     },
     "typography": {
-      "customFontSize": false,
+      "lineHeight": true,
       "fontFamilies": [
         {
           "fontFamily": "arial,sans-serif",
@@ -213,6 +183,13 @@
         }
       ]
     },
-    "alignWide": true
+    "alignWide": true,
+    "appearanceTools": true,
+    "border": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    }
   }
 }

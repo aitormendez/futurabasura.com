@@ -5,8 +5,8 @@ import {
   Button,
   ToolbarGroup,
   ToolbarButton,
-  __experimentalBorderControl as BorderControl,
-  __experimentalUnitControl as UnitControl,
+  SelectControl,
+  ColorPalette,
 } from '@wordpress/components';
 import {
   InspectorControls,
@@ -24,6 +24,7 @@ const EditVideo = ({ attributes, setAttributes }) => {
   const {
     videoId,
     thumbnailUrl,
+    align,
     autoplay,
     loop,
     muted,
@@ -33,24 +34,16 @@ const EditVideo = ({ attributes, setAttributes }) => {
     style,
   } = attributes;
 
-  const [isEditing, setIsEditing] = useState(true); // Estado para alternar entre edición y previsualización
+  const [isEditing, setIsEditing] = useState(true);
 
   const removeImage = () => {
     setAttributes({ thumbnailUrl: '' });
   };
 
-  useEffect(() => {
-    // Realiza cualquier inicialización necesaria aquí.
-  }, [videoId]);
-
-  const colors = [
-    { name: 'Black', color: '#000000' },
-    { name: 'White', color: '#FFFFFF' },
-    // Añade más colores según sea necesario
-  ];
+  useEffect(() => {}, [videoId]);
 
   return (
-    <>
+    <div>
       <BlockControls>
         <ToolbarGroup>
           <ToolbarButton
@@ -99,50 +92,55 @@ const EditVideo = ({ attributes, setAttributes }) => {
           />
         </PanelBody>
         <PanelBody title={__('Style Settings', 'sage')}>
-          <PanelBody title={__('Style Settings', 'sage')}>
-            <BorderControl
-              colors={colors}
-              label={__('Border', 'sage')}
-              value={{
-                color: style.border.color,
-                style: style.border.style,
-                width: style.border.width,
-                radius: style.border.radius,
-              }}
-              withSlider={true}
-              width="100px"
-              onChange={(newBorder) => {
-                setAttributes({
-                  style: {
-                    ...style,
-                    border: {
-                      color: newBorder.color,
-                      style: newBorder.style,
-                      width: newBorder.width,
-                      radius: newBorder.radius,
-                    },
-                  },
-                });
-              }}
-            />
-            <UnitControl
-              label={__('Border Radius', 'sage')}
-              value={style.border.radius}
-              onChange={(newRadius) => {
-                setAttributes({
-                  style: {
-                    ...style,
-                    border: {
-                      ...style.border,
-                      radius: newRadius,
-                    },
-                  },
-                });
-              }}
-            />
-          </PanelBody>
+          <SelectControl
+            label={__('Border Style', 'sage')}
+            value={style.borderStyle}
+            options={[
+              { label: __('None', 'sage'), value: 'none' },
+              { label: __('Solid', 'sage'), value: 'solid' },
+              { label: __('Dashed', 'sage'), value: 'dashed' },
+              { label: __('Dotted', 'sage'), value: 'dotted' },
+            ]}
+            onChange={(value) =>
+              setAttributes({ style: { ...style, borderStyle: value } })
+            }
+          />
+          <SelectControl
+            label={__('Border Width', 'sage')}
+            value={style.borderWidth}
+            options={[
+              { label: __('None', 'sage'), value: '0' },
+              { label: __('Thin', 'sage'), value: '1px' },
+              { label: __('Medium', 'sage'), value: '2px' },
+              { label: __('Thick', 'sage'), value: '3px' },
+            ]}
+            onChange={(value) =>
+              setAttributes({ style: { ...style, borderWidth: value } })
+            }
+          />
+          <ColorPalette
+            label={__('Border Color', 'sage')}
+            value={style.borderColor}
+            onChange={(value) =>
+              setAttributes({ style: { ...style, borderColor: value } })
+            }
+          />
+          <SelectControl
+            label={__('Border Radius', 'sage')}
+            value={style.borderRadius}
+            options={[
+              { label: __('None', 'sage'), value: '0' },
+              { label: __('Small', 'sage'), value: '5px' },
+              { label: __('Medium', 'sage'), value: '10px' },
+              { label: __('Large', 'sage'), value: '20px' },
+            ]}
+            onChange={(value) =>
+              setAttributes({ style: { ...style, borderRadius: value } })
+            }
+          />
         </PanelBody>
       </InspectorControls>
+
       {isEditing ? (
         <>
           <TextControl
@@ -206,7 +204,7 @@ const EditVideo = ({ attributes, setAttributes }) => {
           />
         )
       )}
-    </>
+    </div>
   );
 };
 
@@ -220,7 +218,7 @@ EditVideo.propTypes = {
     muted: PropTypes.bool,
     controls: PropTypes.bool,
     playsInline: PropTypes.bool,
-    libraryId: PropTypes.string,
+    libraryId: PropTypes.string, // Añadir aquí
   }).isRequired,
   setAttributes: PropTypes.func.isRequired,
 };
