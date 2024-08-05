@@ -9,6 +9,7 @@ import {
   TextControl,
   PanelBody,
   ColorPalette,
+  RangeControl,
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
@@ -16,8 +17,13 @@ import { Marquee } from '@devnomic/marquee';
 import '@devnomic/marquee/dist/index.css';
 
 const Edit = ({ attributes, setAttributes }) => {
-  const { marqueeText, backgroundColor, pillBackgroundColor, textColor } =
-    attributes;
+  const {
+    marqueeText,
+    backgroundColor,
+    pillBackgroundColor,
+    textColor,
+    speed,
+  } = attributes;
   const [isPreview, setIsPreview] = useState(false);
 
   const togglePreview = () => setIsPreview((prev) => !prev);
@@ -36,6 +42,10 @@ const Edit = ({ attributes, setAttributes }) => {
 
   const onChangeTextColor = (newColor) => {
     setAttributes({ textColor: newColor });
+  };
+
+  const onChangeSpeed = (newSpeed) => {
+    setAttributes({ speed: newSpeed });
   };
 
   return (
@@ -68,10 +78,24 @@ const Edit = ({ attributes, setAttributes }) => {
         <PanelBody title={__('Text Color', 'sage')} initialOpen={true}>
           <ColorPalette value={textColor} onChange={onChangeTextColor} />
         </PanelBody>
+        <PanelBody title={__('Speed', 'sage')} initialOpen={true}>
+          <RangeControl
+            label={__('Marquee Speed', 'sage')}
+            value={speed}
+            onChange={onChangeSpeed}
+            min={1}
+            max={20}
+          />
+        </PanelBody>
       </InspectorControls>
 
       {isPreview ? (
-        <Marquee fade={true} direction="left" pauseOnHover={true}>
+        <Marquee
+          fade={true}
+          direction="left"
+          pauseOnHover={true}
+          className={`gap-[1rem] [--duration:${speed}s]`}
+        >
           <div>{marqueeText}</div>
         </Marquee>
       ) : (

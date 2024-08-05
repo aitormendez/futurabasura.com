@@ -37,6 +37,10 @@ export default {
       type: 'string',
       default: '#000000',
     },
+    speed: {
+      type: 'number',
+      default: 10,
+    },
   },
   supports: {
     align: ['wide', 'full'],

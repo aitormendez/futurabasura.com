@@ -4,7 +4,7 @@ import { Marquee } from '@devnomic/marquee';
 import '@devnomic/marquee/dist/index.css';
 
 export function marquee() {
-  const MarqueeBlock = ({ text, pillBackgroundColor, textColor }) => {
+  const MarqueeBlock = ({ text, pillBackgroundColor, textColor, speed }) => {
     const containerRef = useRef(null);
     const textRef = useRef(null);
     const [repeatedText, setRepeatedText] = useState(text);
@@ -37,8 +37,7 @@ export function marquee() {
         style={{ backgroundColor: pillBackgroundColor }}
       >
         <Marquee
-          className="gap-[1rem] [--duration:10s]"
-          innerClassName="gap-[3rem] [--gap:3rem]"
+          className={`gap-[0.5rem] [--duration:25s]`}
           fade={false}
           direction="left"
           pauseOnHover={true}
@@ -62,6 +61,7 @@ export function marquee() {
       'data-pill-background-color'
     );
     const textColor = element.getAttribute('data-text-color');
+    const speed = element.getAttribute('data-speed');
     const root = createRoot(element);
     root.render(
       <MarqueeBlock
@@ -69,6 +69,7 @@ export function marquee() {
         backgroundColor={backgroundColor}
         pillBackgroundColor={pillBackgroundColor}
         textColor={textColor}
+        speed={speed}
       />
     );
   });
