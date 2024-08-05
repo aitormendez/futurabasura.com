@@ -143,6 +143,12 @@ if (file_exists($env_config)) {
     require_once $env_config;
 }
 
+/**
+ * Memory Limit
+ */
+Config::define('WP_MEMORY_LIMIT', '512M');
+Config::define('WP_MAX_MEMORY_LIMIT', '1024');
+
 Config::apply();
 
 /**
