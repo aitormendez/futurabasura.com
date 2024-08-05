@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "32391fe10e9f300c73430658f50f397b",
+    "content-hash": "44e4203728298b339f8510a34fca76f7",
     "packages": [
         {
             "name": "brick/math",
@@ -2574,30 +2574,34 @@
         },
         {
             "name": "log1x/sage-svg",
-            "version": "v1.1.2",
+            "version": "v2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Log1x/sage-svg.git",
-                "reference": "c04ac4f8adf8ecf4f04784d79b2f3cd0b98dc82d"
+                "reference": "257b533cf69975951401c66b62fc7bab8821c94d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Log1x/sage-svg/zipball/c04ac4f8adf8ecf4f04784d79b2f3cd0b98dc82d",
-                "reference": "c04ac4f8adf8ecf4f04784d79b2f3cd0b98dc82d",
+                "url": "https://api.github.com/repos/Log1x/sage-svg/zipball/257b533cf69975951401c66b62fc7bab8821c94d",
+                "reference": "257b533cf69975951401c66b62fc7bab8821c94d",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.4|^8.0"
+                "php": "^8.1"
             },
             "require-dev": {
-                "squizlabs/php_codesniffer": "^3.5"
+                "laravel/pint": "^1.16",
+                "roots/acorn": "^4.3"
             },
             "type": "package",
             "extra": {
                 "acorn": {
                     "providers": [
                         "Log1x\\SageSvg\\SageSvgServiceProvider"
-                    ]
+                    ],
+                    "aliases": {
+                        "SageSvg": "Log1x\\SageSvg\\Facades\\SageSvg"
+                    }
                 }
             },
             "autoload": {
@@ -2626,7 +2630,7 @@
             ],
             "support": {
                 "issues": "https://github.com/log1x/sage-svg/issues",
-                "source": "https://github.com/Log1x/sage-svg/tree/v1.1.2"
+                "source": "https://github.com/Log1x/sage-svg/tree/v2.0.1"
             },
             "funding": [
                 {
@@ -2634,7 +2638,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-11-16T23:08:10+00:00"
+            "time": "2024-07-28T16:53:54+00:00"
         },
         {
             "name": "monolog/monolog",

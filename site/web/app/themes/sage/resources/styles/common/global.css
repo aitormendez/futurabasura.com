@@ -73,11 +73,13 @@ main {
     margin-right: auto !important;
 
     &.alignwide,
+    &.align-wide,
     &.wide {
       max-width: 1200px;
     }
 
     &.alignfull,
+    &.align-full,
     &.full {
       max-width: none;
     }

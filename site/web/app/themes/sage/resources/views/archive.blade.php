@@ -21,7 +21,7 @@
   </main>
 @endsection
 
-@section('sidebar')
+{{-- @section('sidebar')
   @include('partials.sidebar')
 
-@endsection
+@endsection --}}

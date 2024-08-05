@@ -89,3 +89,16 @@ iframe:not([width]):not([height]) {
 .editor-styles-wrapper a:hover {
   color: #000;
 }
+
+/* Estilos para marquee block */
+
+/* .marquee-block {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.marquee-content {
+  display: inline-block;
+  padding-right: 10px;
+} */

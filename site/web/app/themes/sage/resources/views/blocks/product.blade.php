@@ -1,5 +1,4 @@
 <div class="product-block">
-    @dump($data)
     @php
         $product_id = $data->productId;
         $layout = isset($data->layout) ? $data->layout : 'layout1';

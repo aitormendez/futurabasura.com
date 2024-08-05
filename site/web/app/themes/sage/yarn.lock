@@ -799,6 +799,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@devnomic/marquee@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@devnomic/marquee@npm:1.0.2"
+  dependencies:
+    clsx: "npm:^2.1.0"
+    tailwind-merge: "npm:^2.2.0"
+  checksum: 10c0/f80e4697533145748df91f3f2f9fdd608ac9990483a1a939500ec1ac6f5c9a97fccfae63a0fbec9f4f2620c3351c801afa55c61843d24072e1b60397b5eb46ef
+  languageName: node
+  linkType: hard
+
 "@floating-ui/core@npm:^1.6.0":
   version: 1.6.4
   resolution: "@floating-ui/core@npm:1.6.4"
@@ -4559,7 +4569,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^2.1.1":
+"clsx@npm:^2.1.0, clsx@npm:^2.1.1":
   version: 2.1.1
   resolution: "clsx@npm:2.1.1"
   checksum: 10c0/c4c8eb865f8c82baab07e71bfa8897c73454881c4f99d6bc81585aecd7c441746c1399d08363dc096c550cceaf97bd4ce1e8854e1771e9998d9f94c4fe075839
@@ -10099,6 +10109,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "sage@workspace:."
   dependencies:
+    "@devnomic/marquee": "npm:^1.0.2"
     "@glidejs/glide": "npm:^3.6.1"
     "@roots/bud": "npm:6.23.1"
     "@roots/bud-tailwindcss": "npm:6.23.1"
@@ -10792,6 +10803,13 @@ __metadata:
     "@swc/core": ^1.2.147
     webpack: ">=2"
   checksum: 10c0/b06926c5cb153931589c2166aa4c7c052cc53c68758acdda480d1eb59ecddf7d74b168e33166c4f807cc9dbae4395de9d80a14ad43e265fffaa775638abf71ce
+  languageName: node
+  linkType: hard
+
+"tailwind-merge@npm:^2.2.0":
+  version: 2.4.0
+  resolution: "tailwind-merge@npm:2.4.0"
+  checksum: 10c0/77bd20647d08db78a0bdf7b57d4b904479aee7727f44570f8834d62a1aa56f42d7ae68ac959e3d610c9f188aa164eeefb6c43df4f0c8bb7cfc3418e1575bfecb
   languageName: node
   linkType: hard
 

@@ -26,6 +26,7 @@
     "@tailwindcss/typography": "^0.5.13"
   },
   "dependencies": {
+    "@devnomic/marquee": "^1.0.2",
     "@glidejs/glide": "^3.6.1",
     "@vidstack/react": "^1.11.25",
     "@wordpress/blocks": "^13.2.0",

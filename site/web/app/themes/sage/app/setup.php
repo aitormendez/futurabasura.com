@@ -171,3 +171,16 @@ add_action('widgets_init', function () {
     ] + $config);
 });
 
+
+
+/**
+ * Enqueues the marquee script if the 'sage/marquee' block is present.
+ *
+ * @return void
+ */
+
+// add_action('enqueue_block_assets', function() {
+//     if (has_block('sage/marquee')) {
+//         wp_enqueue_script('marquee-js', get_template_directory_uri() . '/resources/scripts/bud-blocks/marquee/marquee.js', array('wp-blocks', 'wp-element', 'wp-editor'), filemtime(get_template_directory() . '/resources/scripts/bud-blocks/marquee/marquee.js'), true);
+//     }
+// });
