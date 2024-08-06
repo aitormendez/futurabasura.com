@@ -37,17 +37,16 @@ export function marquee() {
     }, [text]);
 
     // Construcción dinámica de la clase
-    const clase = `gap-[0.5rem] [--duration:${speed}s]`;
+    const clase = `gap-[0.5rem] [--duration:15s]`;
 
     return (
       <div
         ref={containerRef}
-        className="marquee-container rounded-3xl"
+        className="marquee-container overflow-hidden rounded-3xl"
         style={{ backgroundColor: pillBackgroundColor }}
       >
         <Marquee
           className={clase}
-          innerClassName="gap-[3rem] [--gap:3rem]"
           fade={false}
           direction="left"
           pauseOnHover={true}
