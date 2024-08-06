@@ -50,7 +50,7 @@ const EditVideo = ({ attributes, setAttributes }) => {
   ];
 
   return (
-    <>
+    <div>
       <BlockControls>
         <ToolbarGroup>
           <ToolbarButton
@@ -206,7 +206,7 @@ const EditVideo = ({ attributes, setAttributes }) => {
           />
         )
       )}
-    </>
+    </div>
   );
 };
 

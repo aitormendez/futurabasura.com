@@ -17,7 +17,9 @@ const config = {
       typography: {
         DEFAULT: {
           css: {
+            lineHeight: '1.2',
             maxWidth: 'auto,',
+            color: '#000',
             'a:link': {
               'text-decoration': 'none',
               color: '#0000ff',
