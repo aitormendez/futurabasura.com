@@ -13,15 +13,17 @@
       {!! get_search_form(false) !!}
     @endif
 
-    @while(have_posts()) @php(the_post())
-      @includeFirst(['partials.content-' . get_post_type(), 'partials.content'])
-    @endwhile
+    <div class="infinite-scroll-container">
+      @while(have_posts()) @php(the_post())
+        @includeFirst(['partials.content-' . get_post_type(), 'partials.content'])
+      @endwhile
+    </div>
 
     {!! get_the_posts_navigation() !!}
   </main>
 @endsection
 
 {{-- @section('sidebar')
-  @include('partials.sidebar')
+  @include('sections.sidebar')
 
 @endsection --}}

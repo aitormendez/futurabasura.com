@@ -40,10 +40,13 @@ domReady(async () => {
   //   desplegarArtista();
   // }
 
-  // if (document.body.classList.contains('post-type-archive-product')) {
-  //   const { dropdownFilter } = await import('./shop.js');
-  //   dropdownFilter();
-  // }
+  if (
+    document.body.classList.contains('post-type-archive-story') ||
+    document.body.classList.contains('post-type-archive-project')
+  ) {
+    const { infiniteScrollArchives } = await import('./infiniteScroll.js');
+    infiniteScrollArchives();
+  }
 
   if (document.body.classList.contains('single-product')) {
     const { singleProductGallery } = await import('./singleProduct.js');
