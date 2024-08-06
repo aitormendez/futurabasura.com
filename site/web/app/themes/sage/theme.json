@@ -113,6 +113,11 @@
           "fontFamily": "FK Display,sans-serif",
           "name": "FK Display",
           "slug": "fk"
+        },
+        {
+          "fontFamily": "ArialBlack,sans-serif",
+          "name": "ArialBlack",
+          "slug": "arialblack"
         }
       ],
       "fontSizes": [

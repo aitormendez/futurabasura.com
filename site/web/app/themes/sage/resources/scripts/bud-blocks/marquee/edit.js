@@ -10,11 +10,25 @@ import {
   PanelBody,
   ColorPalette,
   RangeControl,
+  SelectControl,
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { Marquee } from '@devnomic/marquee';
 import '@devnomic/marquee/dist/index.css';
+
+const fontFamilies = [
+  { label: 'Arial', value: 'arial,sans-serif' },
+  { label: 'Times New Roman', value: 'times-new-roman,times,serif' },
+  {
+    label: 'Ui-monospace',
+    value:
+      'ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace',
+  },
+  { label: 'Bugrino', value: 'Bugrino,sans-serif' },
+  { label: 'FK Display', value: 'FK Display,sans-serif' },
+  { label: 'ArialBlack', value: 'ArialBlack,sans-serif' },
+];
 
 const Edit = ({ attributes, setAttributes }) => {
   const {
@@ -23,6 +37,7 @@ const Edit = ({ attributes, setAttributes }) => {
     pillBackgroundColor,
     textColor,
     speed,
+    fontFamily,
   } = attributes;
   const [isPreview, setIsPreview] = useState(false);
 
@@ -46,6 +61,10 @@ const Edit = ({ attributes, setAttributes }) => {
 
   const onChangeSpeed = (newSpeed) => {
     setAttributes({ speed: newSpeed });
+  };
+
+  const onChangeFontFamily = (newFontFamily) => {
+    setAttributes({ fontFamily: newFontFamily });
   };
 
   return (
@@ -87,6 +106,14 @@ const Edit = ({ attributes, setAttributes }) => {
             max={20}
           />
         </PanelBody>
+        <PanelBody title={__('Font Family', 'sage')} initialOpen={true}>
+          <SelectControl
+            label={__('Font Family', 'sage')}
+            value={fontFamily}
+            options={fontFamilies}
+            onChange={onChangeFontFamily}
+          />
+        </PanelBody>
       </InspectorControls>
 
       {isPreview ? (
@@ -94,9 +121,9 @@ const Edit = ({ attributes, setAttributes }) => {
           fade={true}
           direction="left"
           pauseOnHover={true}
-          className={`gap-[1rem] [--duration:${speed}s]`}
+          className={`gap-[0.5rem] [--duration:${speed}s]`}
         >
-          <div>{marqueeText}</div>
+          <div style={{ fontFamily }}>{marqueeText}</div>
         </Marquee>
       ) : (
         <div>

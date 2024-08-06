@@ -173,14 +173,12 @@ add_action('widgets_init', function () {
 
 
 
-/**
- * Enqueues the marquee script if the 'sage/marquee' block is present.
- *
- * @return void
- */
 
-// add_action('enqueue_block_assets', function() {
-//     if (has_block('sage/marquee')) {
-//         wp_enqueue_script('marquee-js', get_template_directory_uri() . '/resources/scripts/bud-blocks/marquee/marquee.js', array('wp-blocks', 'wp-element', 'wp-editor'), filemtime(get_template_directory() . '/resources/scripts/bud-blocks/marquee/marquee.js'), true);
-//     }
-// });
+
+add_action('after_setup_theme', function () {
+    // Add frontend styles as editor styles
+    // Must be added by relative path (not remote URI)
+    // (@see https://core.trac.wordpress.org/ticket/55728#ticket)
+    $relCssPath = asset('app.css')->relativePath(get_theme_file_path());
+    add_editor_style($relCssPath);
+});

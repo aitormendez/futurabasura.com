@@ -36,6 +36,7 @@ const config = {
         serif: ['times-new-roman', 'times', 'serif'],
         bugrino: ['Bugrino', 'sans-serif'],
         fk: ['FK Display', 'sans-serif'],
+        arialblack: ['ArialBlack', 'sans-serif'],
       },
       backgroundImage: (theme) => ({
         fondo: "url('../images/bg.svg')",

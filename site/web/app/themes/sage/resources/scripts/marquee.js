@@ -4,7 +4,13 @@ import { Marquee } from '@devnomic/marquee';
 import '@devnomic/marquee/dist/index.css';
 
 export function marquee() {
-  const MarqueeBlock = ({ text, pillBackgroundColor, textColor, speed }) => {
+  const MarqueeBlock = ({
+    text,
+    pillBackgroundColor,
+    textColor,
+    speed,
+    fontFamily,
+  }) => {
     const containerRef = useRef(null);
     const textRef = useRef(null);
     const [repeatedText, setRepeatedText] = useState(text);
@@ -30,6 +36,9 @@ export function marquee() {
       setRepeatedText(repeated);
     }, [text]);
 
+    // Construcción dinámica de la clase
+    const clase = `gap-[0.5rem] [--duration:${speed}s]`;
+
     return (
       <div
         ref={containerRef}
@@ -37,7 +46,8 @@ export function marquee() {
         style={{ backgroundColor: pillBackgroundColor }}
       >
         <Marquee
-          className={`gap-[0.5rem] [--duration:25s]`}
+          className={clase}
+          innerClassName="gap-[3rem] [--gap:3rem]"
           fade={false}
           direction="left"
           pauseOnHover={true}
@@ -45,7 +55,7 @@ export function marquee() {
           <p
             ref={textRef}
             className="text-2xl inline-block"
-            style={{ color: textColor }}
+            style={{ color: textColor, fontFamily: fontFamily }}
           >
             {repeatedText}
           </p>
@@ -62,6 +72,7 @@ export function marquee() {
     );
     const textColor = element.getAttribute('data-text-color');
     const speed = element.getAttribute('data-speed');
+    const fontFamily = element.getAttribute('data-font-family');
     const root = createRoot(element);
     root.render(
       <MarqueeBlock
@@ -70,6 +81,7 @@ export function marquee() {
         pillBackgroundColor={pillBackgroundColor}
         textColor={textColor}
         speed={speed}
+        fontFamily={fontFamily}
       />
     );
   });

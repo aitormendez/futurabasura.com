@@ -41,6 +41,10 @@ export default {
       type: 'number',
       default: 10,
     },
+    fontFamily: {
+      type: 'string',
+      default: 'ArialBlack, sans-serif',
+    },
   },
   supports: {
     align: ['wide', 'full'],

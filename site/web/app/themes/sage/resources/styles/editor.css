@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'ArialBlack';
+  src: url('../fonts/arialblack/ArialBlack.woff2') format('woff2'),
+    url('../fonts/arialblack/ArialBlack.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --media-brand: 245 245 245;
   --media-focus: 78 156 246;
@@ -89,16 +97,3 @@ iframe:not([width]):not([height]) {
 .editor-styles-wrapper a:hover {
   color: #000;
 }
-
-/* Estilos para marquee block */
-
-/* .marquee-block {
-  overflow: hidden;
-  white-space: nowrap;
-  position: relative;
-}
-
-.marquee-content {
-  display: inline-block;
-  padding-right: 10px;
-} */
