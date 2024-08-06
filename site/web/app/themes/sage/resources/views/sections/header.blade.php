@@ -46,7 +46,7 @@
 <header class="top-0 z-30 flex w-full banner">
   <nav class="w-full">
       <ul class="flex">
-          <li class="inline-block p-4 li-brand sm:block sm:pt-8">
+          <li class="inline-block p-4 li-brand sm:block sm:pt-8 max-w-[70%]">
               <a id="brand" class="brand nav-item hover:text-allo"" href="{{ home_url('/') }}">
                   {{ $frase }}
               </a>
