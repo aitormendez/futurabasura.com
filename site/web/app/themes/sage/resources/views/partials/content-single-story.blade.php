@@ -8,7 +8,7 @@
       </div>
     </div>
     <aside>
-      <a href="/stories" class="leading-none md:absolute page-header-font text-azul ml-7 md:ml-0">
+      <a href="/stories" class="leading-none md:absolute page-header-font text-azul ml-7 md:ml-4">
         {!! __('News', 'sage') !!}
       </a>
     </aside>
@@ -19,7 +19,7 @@
     @include('partials/entry-meta')
   </header>
 
-  <div class="font-serif leading-tight entry-content bg-white md:mt-3 pt-6">
+  <div class="font-serif leading-tight entry-content bg-white md:mt-3 px-6 md:px-0 pt-6">
     <div class="md:ml-[20vw] md:max-w-[50vw] prose">
       @php(the_content())
     </div>
