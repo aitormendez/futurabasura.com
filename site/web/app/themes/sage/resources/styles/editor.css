@@ -97,3 +97,8 @@ iframe:not([width]):not([height]) {
 .editor-styles-wrapper a:hover {
   color: #000;
 }
+
+/* Estilos para componente URLInput del marquee */
+.block-editor-url-input__input {
+  width: 100% !important;
+}

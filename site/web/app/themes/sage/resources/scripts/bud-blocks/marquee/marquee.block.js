@@ -47,7 +47,7 @@ export default {
     },
     linkUrl: {
       type: 'string',
-      default: '#',
+      default: '',
     },
   },
   supports: {

@@ -150,27 +150,27 @@ const Edit = ({ attributes, setAttributes }) => {
       </InspectorControls>
 
       {isPreview ? (
-        <a
-          href={linkUrl}
+        <div
+          className="marque p-4"
           ref={containerRef}
-          className="block marquee-container overflow-hidden rounded-3xl"
-          style={{ backgroundColor: pillBackgroundColor }}
+          style={{ backgroundColor: backgroundColor }}
         >
-          <Marquee
-            fade={false}
-            direction="left"
-            pauseOnHover={true}
-            className={`gap-[0.5rem] [--duration:${speed}s]`}
+          <div
+            className="marquee marquee-container rounded-3xl"
+            style={{ backgroundColor: pillBackgroundColor }}
           >
-            <p
-              ref={textRef}
-              className="text-2xl inline-block"
-              style={{ fontFamily, color: textColor }}
+            <Marquee
+              fade={false}
+              direction="left"
+              pauseOnHover={true}
+              className={`gap-[0.5rem] [--duration:${speed}s]`}
             >
-              {repeatedText}
-            </p>
-          </Marquee>
-        </a>
+              <p ref={textRef} style={{ fontFamily, color: textColor }}>
+                {repeatedText}
+              </p>
+            </Marquee>
+          </div>
+        </div>
       ) : (
         <div>
           <TextControl
@@ -183,7 +183,7 @@ const Edit = ({ attributes, setAttributes }) => {
             label={__('Link URL', 'sage')}
             value={linkUrl}
             onChange={onChangeLinkUrl}
-            placeholder={__('Add your link here...', 'sage')}
+            placeholder={__('Add your link here or type to search', 'sage')}
           />
         </div>
       )}
