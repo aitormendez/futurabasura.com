@@ -1,16 +1,3 @@
-#solapa {
-  left: -100vw;
-
-  ul li {
-    position: relative;
-    left: -50rem;
-
-    a {
-      display: inline-block;
-    }
-  }
-}
-
 .banner {
   nav {
     ul {

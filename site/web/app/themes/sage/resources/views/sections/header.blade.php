@@ -1,45 +1,45 @@
-<div id="solapa" class="fixed top-0 z-40 w-screen h-screen py-8 pl-0 pr-8 bg-white sm:pr-16 sm:py-16">
-  <ul class="my-4 contents">
+<div id="solapa" class="fixed top-0 z-40 w-screen h-screen bg-white pointer-events-none flex flex-col justify-center items-center md:flex-row flex-wrap">
+  <ul class="my-4 contenidos flex flex-col items-center md:mx-12">
     @if (!empty($contents_nav))
         @foreach ($contents_nav as $item)
-            <li class="">
+            <li class="border">
                 <a href="{{ $item->url }}"
-                    class="text-sm tracking-widest text-black uppercase sm:text-xl">{{ $item->label }}</a>
+                    class="inline-block px-4 pt-3 pb-2 text-sm tracking-widest text-black bg-white hover:bg-allo uppercase sm:text-xl">{{ $item->label }}</a>
             </li>
         @endforeach  
     @endif
   </ul>
-  <ul class="my-4 shop">
+  <ul class="my-4 shop flex flex-col items-center md:mx-12">
     @if (!empty($shop_nav))        
         @foreach ($shop_nav as $item)
-            <li class="">
+            <li class="border">
                 <a href="{{ $item->url }}"
-                    class="text-sm tracking-widest text-black uppercase sm:text-xl">{{ $item->label }}</a>
+                    class="inline-block px-4 pt-3 pb-2 text-sm tracking-widest text-black bg-white hover:bg-allo uppercase sm:text-xl">{{ $item->label }}</a>
             </li>
         @endforeach
     @endif
   </ul>
-  <ul class="my-4 social">
+  <ul class="my-4 social  flex flex-col items-center md:mx-12">
     @if (!empty($social_nav))
     @endif
       @foreach ($social_nav as $item)
-          <li class="">
+          <li class="border">
               <a href="{{ $item->url }}"
-                  class="text-sm tracking-widest text-black uppercase sm:text-xl">{{ $item->label }}</a>
+                  class="inline-block px-4 pt-3 pb-2 text-sm tracking-widest text-black bg-white hover:bg-allo uppercase sm:text-xl">{{ $item->label }}</a>
           </li>
       @endforeach
         
   </ul>
-  <ul class="my-4 info">
+  {{-- <ul class="my-4 info  flex flex-col items-center md:mx-12">
     @if (!empty($info_nav))
         @foreach ($info_nav as $item)
-            <li class="">
+            <li class="border">
                 <a href="{{ $item->url }}"
-                    class="text-sm tracking-widest text-black uppercase sm:text-xl">{{ $item->label }}</a>
+                    class="inline-block px-4 pt-3 pb-2 text-sm tracking-widest text-black bg-white hover:bg-allo uppercase sm:text-xl">{{ $item->label }}</a>
             </li>
         @endforeach
     @endif
-  </ul>
+  </ul> --}}
   <a id="btn-close" href="#" class="absolute inline-block right-8 top-8 btn hover:bg-allo">CLOSE</a>
 </div>
 

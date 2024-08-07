@@ -2,7 +2,6 @@ import domReady from '@roots/sage/client/dom-ready';
 import { navigation } from './navigation.js';
 import Alpine from 'alpinejs';
 import { dropdownFilter, dropdownSort } from './shop.js';
-import solapa from './solapa.js';
 import scramble from './scramble.js';
 import './components/video/video-player.js';
 window.Alpine = Alpine;
@@ -17,7 +16,6 @@ domReady(async () => {
   const mdMin = window.matchMedia('(min-width: 768px)');
 
   navigation();
-  solapa();
   scramble();
 
   if (mdMin.matches && document.body.classList.contains('home')) {
