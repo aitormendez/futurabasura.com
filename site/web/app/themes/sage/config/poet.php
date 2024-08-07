@@ -94,6 +94,7 @@ return [
         'artist' => [
             'links' => ['product'],
             'meta_box' => 'dropdown',
+            'hierarchical' => false,
         ],
     ],
 

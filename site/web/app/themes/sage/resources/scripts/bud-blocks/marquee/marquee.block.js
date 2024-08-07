@@ -45,6 +45,10 @@ export default {
       type: 'string',
       default: 'ArialBlack, sans-serif',
     },
+    linkUrl: {
+      type: 'string',
+      default: '#',
+    },
   },
   supports: {
     align: ['wide', 'full'],

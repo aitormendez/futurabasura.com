@@ -10,6 +10,7 @@ export function marquee() {
     textColor,
     speed,
     fontFamily,
+    linkUrl,
   }) => {
     const containerRef = useRef(null);
     const textRef = useRef(null);
@@ -37,12 +38,13 @@ export function marquee() {
     }, [text]);
 
     // Construcción dinámica de la clase
-    const clase = `gap-[0.5rem] [--duration:15s]`;
+    const clase = `gap-[0.5rem] [--duration:${speed}s]`;
 
     return (
-      <div
+      <a
+        href={linkUrl}
         ref={containerRef}
-        className="marquee-container overflow-hidden rounded-3xl"
+        className="block marquee-container overflow-hidden rounded-3xl"
         style={{ backgroundColor: pillBackgroundColor }}
       >
         <Marquee
@@ -59,7 +61,7 @@ export function marquee() {
             {repeatedText}
           </p>
         </Marquee>
-      </div>
+      </a>
     );
   };
 
@@ -72,6 +74,7 @@ export function marquee() {
     const textColor = element.getAttribute('data-text-color');
     const speed = element.getAttribute('data-speed');
     const fontFamily = element.getAttribute('data-font-family');
+    const linkUrl = element.getAttribute('data-link-url');
     const root = createRoot(element);
     root.render(
       <MarqueeBlock
@@ -81,6 +84,7 @@ export function marquee() {
         textColor={textColor}
         speed={speed}
         fontFamily={fontFamily}
+        linkUrl={linkUrl}
       />
     );
   });

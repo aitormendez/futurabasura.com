@@ -2,6 +2,7 @@ import {
   useBlockProps,
   BlockControls,
   InspectorControls,
+  URLInput,
 } from '@wordpress/block-editor';
 import {
   ToolbarGroup,
@@ -38,6 +39,7 @@ const Edit = ({ attributes, setAttributes }) => {
     textColor,
     speed,
     fontFamily,
+    linkUrl,
   } = attributes;
   const [isPreview, setIsPreview] = useState(false);
   const containerRef = useRef(null);
@@ -69,6 +71,10 @@ const Edit = ({ attributes, setAttributes }) => {
 
   const onChangeFontFamily = (newFontFamily) => {
     setAttributes({ fontFamily: newFontFamily });
+  };
+
+  const onChangeLinkUrl = (newLinkUrl) => {
+    setAttributes({ linkUrl: newLinkUrl });
   };
 
   useEffect(() => {
@@ -144,27 +150,27 @@ const Edit = ({ attributes, setAttributes }) => {
       </InspectorControls>
 
       {isPreview ? (
-        <div
-          className="marque p-4"
+        <a
+          href={linkUrl}
           ref={containerRef}
-          style={{ backgroundColor: backgroundColor }}
+          className="block marquee-container overflow-hidden rounded-3xl"
+          style={{ backgroundColor: pillBackgroundColor }}
         >
-          <div
-            className="marquee marquee-container rounded-3xl"
-            style={{ backgroundColor: pillBackgroundColor }}
+          <Marquee
+            fade={false}
+            direction="left"
+            pauseOnHover={true}
+            className={`gap-[0.5rem] [--duration:${speed}s]`}
           >
-            <Marquee
-              fade={false}
-              direction="left"
-              pauseOnHover={true}
-              className={`gap-[0.5rem] [--duration:${speed}s]`}
+            <p
+              ref={textRef}
+              className="text-2xl inline-block"
+              style={{ fontFamily, color: textColor }}
             >
-              <p ref={textRef} style={{ fontFamily, color: textColor }}>
-                {repeatedText}
-              </p>
-            </Marquee>
-          </div>
-        </div>
+              {repeatedText}
+            </p>
+          </Marquee>
+        </a>
       ) : (
         <div>
           <TextControl
@@ -172,6 +178,12 @@ const Edit = ({ attributes, setAttributes }) => {
             value={marqueeText}
             onChange={onChangeMarqueeText}
             placeholder={__('Add your marquee text here...', 'sage')}
+          />
+          <URLInput
+            label={__('Link URL', 'sage')}
+            value={linkUrl}
+            onChange={onChangeLinkUrl}
+            placeholder={__('Add your link here...', 'sage')}
           />
         </div>
       )}
