@@ -9,7 +9,7 @@
         @endforeach  
     @endif
   </ul>
-  <ul class="my-4 shop flex flex-col items-center md:mx-12">
+  {{-- <ul class="my-4 shop flex flex-col items-center md:mx-12">
     @if (!empty($shop_nav))        
         @foreach ($shop_nav as $item)
             <li class="border">
@@ -18,7 +18,7 @@
             </li>
         @endforeach
     @endif
-  </ul>
+  </ul> --}}
   <ul class="my-4 social  flex flex-col items-center md:mx-12">
     @if (!empty($social_nav))
     @endif
