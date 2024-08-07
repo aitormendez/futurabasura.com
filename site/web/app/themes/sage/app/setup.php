@@ -97,6 +97,7 @@ add_action('after_setup_theme', function () {
         'shop_footer_navigation' => __('Shop Footer Navigation', 'sage'),
         'contents_navigation' => __('Contents Navigation', 'sage'),
         'footer_pages_navigation' => __('Footer Pages Navigation', 'sage'),
+        'legal_navigation' => __('Legal Navigation', 'sage'),
     ]);
 
     /**
