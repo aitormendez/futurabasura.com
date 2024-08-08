@@ -40,6 +40,7 @@
             {!! wpautop(get_field('footer_texto_mancha', 'option')) !!}
         </div>
     </div>
+    {{-- /desktop --}}
 
     {{-- mobile --}}
     <div class="flex md:!hidden flex-wrap w-full font-bugrino">
@@ -62,9 +63,52 @@
             </div>
         </div>
     </div>
+    {{-- /mobile --}}
+
+    {{-- desktop --}}
+    <div class="hidden md:flex flex-wrap bg-white w-full my-6 pb-6">
+        <ul class="p-6 font-bugrino flex gap-4 w-full text-xl justify-center mb-20">
+            @foreach ($legal_nav as $item)
+                <li class="">
+                    <a href="{{ $item->url }}" class="hover:text-azul">{{ $item->label }}</a>
+                </li>
+            @endforeach
+        </ul>
+
+        <div class="w-2/3 pl-6">
+            <div>
+                {!! wpautop(get_field('footer_texto_legal', 'option')) !!}
+            </div>
+            <div class="columns-2 mt-12 text-xs uppercase max-w-[600px]">
+                {!! get_field('footer_creditos', 'option') !!}
+            </div>
+        </div>
+        <div class="flex flex-col w-1/3 items-end pr-6 justify-between">
+            <a class="hover:text-azul" href="https://www.instagram.com/futurabasura/">
+                <x-fab-instagram class="w-8" alt="instagram"/>
+            </a>
+            <a href="mailto:alwaysopen@futurabasura.com" class="email font-arialblack hover:text-azul">alwaysopen@futurabasura.com</a>
+        </div>
+
+        <div class="iconos w-full flex justify-center mt-16 gap-8">
+            <x-fab-cc-visa class="w-12" alt="Visa"/>
+            <x-custom-paypal class="w-16" alt="Bizum"/>
+            <x-fab-cc-mastercard class="w-12" alt="Mastercard"/>
+            <x-fab-apple-pay class="w-14" alt="Apple Pay"/>
+            <x-fab-google-pay class="w-14" alt="Google Pay"/>
+            <x-custom-bizum class="w-20" alt="Bizum"/>
 
 
-    <div class="flex justify-center w-full mb-10 footer-hole">@svg('images.hole-outline')</div>
+        </div>
+    </div>
+    {{-- /desktop --}}
+
+    {{-- mobile --}}
+    <div class="flex md:!hidden flex-wrap w-full">
+        
+    </div>
+    {{-- /mobile --}}
+
 
     {{-- <div class="w-full max-w-screen-md px-4 mx-auto formulario">
         <div class="flex flex-wrap items-center px-6 py-4 bg-white border border-black sm:flex-nowrap formu">

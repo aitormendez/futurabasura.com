@@ -138,6 +138,17 @@ class Opciones extends Field
                         'instructions' => 'Este texto aparecerá sobre la mancha de color del footer',
                         'rows' => '5',
                     ])
+                    ->addTextarea('footer_texto_legal', [
+                        'label' => 'Texto legal',
+                        'instructions' => 'Este texto aparecerá en la parte de abajo del footer',
+                        'rows' => '9',
+                    ])
+                    ->addWysiwyg('footer_creditos', [
+                        'label' => 'Crédito',
+                        'instructions' => 'Este texto aparecerá en la parte de abajo del footer',
+                        'toolbar' => 'basic',
+                        'rows' => '9',
+                    ])
                 ;
 
         return $options->build();

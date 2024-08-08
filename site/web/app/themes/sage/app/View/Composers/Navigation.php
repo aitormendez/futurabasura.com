@@ -30,6 +30,7 @@ class Navigation extends Composer
             'social_nav' => $this->socialNavigation(),
             'shop_nav' => $this->shopNavigation(),
             'contents_nav' => $this->contentsNavigation(),
+            'legal_nav' => $this->legalNavigation(),
             'items_cart' => $this->itemsInCart(),
             'frase' => $this->frase(),
         ];
@@ -103,6 +104,20 @@ class Navigation extends Composer
         }
 
         return Navi::build('contents')->toArray();
+    }
+
+    /**
+     * Returns the legal navigation.
+     *
+     * @return array
+     */
+    public function legalNavigation()
+    {
+        if (Navi::build('legal')->isEmpty()) {
+            return;
+        }
+
+        return Navi::build('legal')->toArray();
     }
 
     /**
