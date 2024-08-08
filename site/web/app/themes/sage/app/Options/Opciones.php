@@ -130,11 +130,14 @@ class Opciones extends Field
                 ->addTab('Footer', ['placement' => 'left'])
                     ->addColorPicker('footer_color', [
                         'label' => 'Color footer',
-                        'instructions' => 'Se aplica en la mancha de color del footer y en la frase',
+                        'instructions' => 'Se aplica en la mancha de color del footer',
                         'default_value' => '#FFEE38',
                     ])
-                    ->addText('footer_frase')
-
+                    ->addTextarea('footer_texto_mancha', [
+                        'label' => 'Texto color',
+                        'instructions' => 'Este texto aparecerá sobre la mancha de color del footer',
+                        'rows' => '5',
+                    ])
                 ;
 
         return $options->build();

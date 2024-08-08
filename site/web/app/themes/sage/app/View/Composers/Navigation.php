@@ -26,7 +26,7 @@ class Navigation extends Composer
     {
         return [
             'primary_nav' => $this->navigation(),
-            'info_nav' => $this->infoNavigation(),
+            'footer_pages_nav' => $this->footerPagesNavigation(),
             'social_nav' => $this->socialNavigation(),
             'shop_nav' => $this->shopNavigation(),
             'contents_nav' => $this->contentsNavigation(),
@@ -54,13 +54,13 @@ class Navigation extends Composer
      *
      * @return array
      */
-    public function infoNavigation()
+    public function footerPagesNavigation()
     {
-        if (Navi::build('info')->isEmpty()) {
+        if (Navi::build('footer_pages_navigation')->isEmpty()) {
             return;
         }
 
-        return Navi::build('info')->toArray();
+        return Navi::build('footer_pages_navigation')->toArray();
     }
 
     /**
