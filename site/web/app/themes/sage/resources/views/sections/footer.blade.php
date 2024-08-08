@@ -33,7 +33,7 @@
 
     {{-- desktop --}}
     <div class="hidden md:flex flex-col justify-between items-center w-full md:w-1/2 md:border-l border-black p-6 font-bugrino" style="background-color: {{ get_field('footer_color', 'option') }}">
-        <div class="w-1/3 mt-[3vw]">
+        <div class="w-1/3 mt-[5vw]">
             @svg('images.logo-fb')
         </div>
         <div class="text-xl text-center mb-[3vw]">
