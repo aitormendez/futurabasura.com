@@ -47,16 +47,14 @@
         <div class="arriba flex flex-wrap w-full h-[50vw] my-4">
             <div class="izq flex justify-end items-stretch w-1/2 bg-white">
                 <div class="w-[10vw] border-r border-black" style="background-color: {{ get_field('footer_color', 'option') }}"></div>
-
             </div>
             <div class="der flex justify-center items-center w-1/2" style="background-color: {{ get_field('footer_color', 'option') }}">
                     @svg('images.logo-fb', 'w-1/2')
             </div>
         </div>
-        <div class="abajo flex flex-wrap w-full h-[50vw] mb-4">
+        <div class="abajo flex flex-wrap w-full h-[50vw]">
             <div class="izq flex justify-end items-stretch w-1/2 bg-white">
                 <div class="w-[10vw] border-r border-black" style="background-color: {{ get_field('footer_color', 'option') }}"></div>
-
             </div>
             <div class="der flex w-1/2 text-sm p-4" style="background-color: {{ get_field('footer_color', 'option') }}">
                 {!! wpautop(get_field('footer_texto_mancha', 'option')) !!}
@@ -99,15 +97,49 @@
             <x-fab-apple-pay class="w-14" alt="Apple Pay"/>
             <x-fab-google-pay class="w-14" alt="Google Pay"/>
             <x-custom-bizum class="w-20" alt="Bizum"/>
-
-
         </div>
     </div>
     {{-- /desktop --}}
 
     {{-- mobile --}}
-    <div class="flex md:!hidden flex-wrap w-full">
-        
+    <div class="flex md:!hidden flex-wrap w-full bg-white">
+        <div class="arriba flex flex-wrap w-full h-[20px]">
+            <div class="izq flex justify-end items-stretch w-1/2 bg-white">
+                <div class="w-[10vw] border-r border-black" style="background-color: {{ get_field('footer_color', 'option') }}"></div>
+            </div>
+            <div class="der flex justify-center items-center w-1/2" style="background-color: {{ get_field('footer_color', 'option') }}">
+            </div>
+        </div>
+
+        <ul class="px-6 font-bugrino flex flex-col w-1/2">
+            @foreach ($legal_nav as $item)
+                <li class="">
+                    <a href="{{ $item->url }}" class="hover:text-azul">{{ $item->label }}</a>
+                </li>
+            @endforeach
+        </ul>
+
+        <div class="w-full text-sm pl-6 mt-6">
+            <a href="mailto:alwaysopen@futurabasura.com" class="email font-arialblack hover:text-azul">alwaysopen@futurabasura.com</a>
+        </div>
+
+        <div class="iconos w-full flex justify-center mt-16 gap-4 px-6">
+            <x-fab-cc-visa class="w-12" alt="Visa"/>
+            <x-custom-paypal class="w-16" alt="Bizum"/>
+            <x-fab-cc-mastercard class="w-12" alt="Mastercard"/>
+            <x-fab-apple-pay class="w-14" alt="Apple Pay"/>
+            <x-fab-google-pay class="w-14" alt="Google Pay"/>
+            <x-custom-bizum class="w-20" alt="Bizum"/>
+        </div>
+
+        <div class="w-full p-6 text-xs">
+            <div>
+                {!! wpautop(get_field('footer_texto_legal', 'option')) !!}
+            </div>
+            <div class="columns-2 mt-12 text-xs uppercase max-w-[600px]">
+                {!! get_field('footer_creditos', 'option') !!}
+            </div>
+        </div>
     </div>
     {{-- /mobile --}}
 
