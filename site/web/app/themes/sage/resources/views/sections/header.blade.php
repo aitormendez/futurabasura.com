@@ -2,7 +2,7 @@
   <ul class="my-4 contenidos flex flex-col items-center md:mx-12">
     @if (!empty($contents_nav))
         @foreach ($contents_nav as $item)
-            <li class="border">
+            <li class="border border-black">
                 <a href="{{ $item->url }}"
                     class="inline-block px-4 pt-3 pb-2 text-sm tracking-widest text-black bg-white hover:bg-allo uppercase sm:text-xl">{{ $item->label }}</a>
             </li>
@@ -12,7 +12,7 @@
   {{-- <ul class="my-4 shop flex flex-col items-center md:mx-12">
     @if (!empty($shop_nav))        
         @foreach ($shop_nav as $item)
-            <li class="border">
+            <li class="border border-black">
                 <a href="{{ $item->url }}"
                     class="inline-block px-4 pt-3 pb-2 text-sm tracking-widest text-black bg-white hover:bg-allo uppercase sm:text-xl">{{ $item->label }}</a>
             </li>
@@ -23,7 +23,7 @@
     @if (!empty($social_nav))
     @endif
       @foreach ($social_nav as $item)
-          <li class="border">
+          <li class="border border-black">
               <a href="{{ $item->url }}"
                   class="inline-block px-4 pt-3 pb-2 text-sm tracking-widest text-black bg-white hover:bg-allo uppercase sm:text-xl">{{ $item->label }}</a>
           </li>
@@ -33,7 +33,7 @@
   {{-- <ul class="my-4 info  flex flex-col items-center md:mx-12">
     @if (!empty($info_nav))
         @foreach ($info_nav as $item)
-            <li class="border">
+            <li class="border border-black">
                 <a href="{{ $item->url }}"
                     class="inline-block px-4 pt-3 pb-2 text-sm tracking-widest text-black bg-white hover:bg-allo uppercase sm:text-xl">{{ $item->label }}</a>
             </li>
