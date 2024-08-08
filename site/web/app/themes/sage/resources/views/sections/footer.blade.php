@@ -65,6 +65,8 @@
     </div>
     {{-- /mobile --}}
 
+    <div class="flex justify-center w-full mb-10 footer-hole my-12 md:my-20">@svg('images.hole-outline', 'w-1/2 md:w-[15vw]')</div>
+
     {{-- desktop --}}
     <div class="hidden md:flex flex-wrap bg-white w-full my-6 pb-6">
         <ul class="p-6 font-bugrino flex gap-4 w-full text-xl justify-center mb-20">
