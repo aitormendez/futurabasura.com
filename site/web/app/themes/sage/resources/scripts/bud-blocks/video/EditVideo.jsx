@@ -99,48 +99,46 @@ const EditVideo = ({ attributes, setAttributes }) => {
           />
         </PanelBody>
         <PanelBody title={__('Style Settings', 'sage')}>
-          <PanelBody title={__('Style Settings', 'sage')}>
-            <BorderControl
-              colors={colors}
-              label={__('Border', 'sage')}
-              value={{
-                color: style.border.color,
-                style: style.border.style,
-                width: style.border.width,
-                radius: style.border.radius,
-              }}
-              withSlider={true}
-              width="100px"
-              onChange={(newBorder) => {
-                setAttributes({
-                  style: {
-                    ...style,
-                    border: {
-                      color: newBorder.color,
-                      style: newBorder.style,
-                      width: newBorder.width,
-                      radius: newBorder.radius,
-                    },
+          <BorderControl
+            colors={colors}
+            label={__('Border', 'sage')}
+            value={{
+              color: style.border.color,
+              style: style.border.style,
+              width: style.border.width,
+              radius: style.border.radius,
+            }}
+            withSlider={true}
+            width="100px"
+            onChange={(newBorder) => {
+              setAttributes({
+                style: {
+                  ...style,
+                  border: {
+                    color: newBorder.color,
+                    style: newBorder.style,
+                    width: newBorder.width,
+                    radius: newBorder.radius,
                   },
-                });
-              }}
-            />
-            <UnitControl
-              label={__('Border Radius', 'sage')}
-              value={style.border.radius}
-              onChange={(newRadius) => {
-                setAttributes({
-                  style: {
-                    ...style,
-                    border: {
-                      ...style.border,
-                      radius: newRadius,
-                    },
+                },
+              });
+            }}
+          />
+          <UnitControl
+            label={__('Border Radius', 'sage')}
+            value={style.border.radius}
+            onChange={(newRadius) => {
+              setAttributes({
+                style: {
+                  ...style,
+                  border: {
+                    ...style.border,
+                    radius: newRadius,
                   },
-                });
-              }}
-            />
-          </PanelBody>
+                },
+              });
+            }}
+          />
         </PanelBody>
       </InspectorControls>
       {isEditing ? (
