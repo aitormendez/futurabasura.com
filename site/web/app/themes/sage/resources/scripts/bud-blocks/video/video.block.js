@@ -50,23 +50,24 @@ export default {
       type: 'boolean',
       default: true,
     },
-    style: {
-      type: 'object',
-      default: {
-        border: {
-          color: '',
-          radius: '0px',
-          style: 'solid',
-          width: '1px',
-        },
-      },
-    },
   },
   supports: {
     align: ['wide', 'full'],
     spacing: {
       margin: false,
       padding: false,
+    },
+    __experimentalBorder: {
+      color: true,
+      radius: true,
+      style: true,
+      width: true,
+      __experimentalDefaultControls: {
+        color: true,
+        radius: true,
+        style: true,
+        width: true,
+      },
     },
   },
   edit: EditVideo,

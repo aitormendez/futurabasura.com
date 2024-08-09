@@ -5,14 +5,13 @@ import {
   Button,
   ToolbarGroup,
   ToolbarButton,
-  __experimentalBorderControl as BorderControl,
-  __experimentalUnitControl as UnitControl,
 } from '@wordpress/components';
 import {
   InspectorControls,
   BlockControls,
   MediaUpload,
   MediaUploadCheck,
+  useBlockProps,
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import PropTypes from 'prop-types';
@@ -32,6 +31,8 @@ const EditVideo = ({ attributes, setAttributes }) => {
     libraryId,
     style,
   } = attributes;
+
+  const blockProps = useBlockProps();
 
   const [isEditing, setIsEditing] = useState(true); // Estado para alternar entre edición y previsualización
 
@@ -70,6 +71,7 @@ const EditVideo = ({ attributes, setAttributes }) => {
           />
         </ToolbarGroup>
       </BlockControls>
+
       <InspectorControls>
         <PanelBody title={__('Video Settings', 'sage')}>
           <ToggleControl
@@ -96,48 +98,6 @@ const EditVideo = ({ attributes, setAttributes }) => {
             label={__('Play Inline', 'sage')}
             checked={playsInline}
             onChange={(value) => setAttributes({ playsInline: value })}
-          />
-        </PanelBody>
-        <PanelBody title={__('Style Settings', 'sage')}>
-          <BorderControl
-            colors={colors}
-            label={__('Border', 'sage')}
-            value={{
-              color: style.border.color,
-              style: style.border.style,
-              width: style.border.width,
-              radius: style.border.radius,
-            }}
-            withSlider={true}
-            width="100px"
-            onChange={(newBorder) => {
-              setAttributes({
-                style: {
-                  ...style,
-                  border: {
-                    color: newBorder.color,
-                    style: newBorder.style,
-                    width: newBorder.width,
-                    radius: newBorder.radius,
-                  },
-                },
-              });
-            }}
-          />
-          <UnitControl
-            label={__('Border Radius', 'sage')}
-            value={style.border.radius}
-            onChange={(newRadius) => {
-              setAttributes({
-                style: {
-                  ...style,
-                  border: {
-                    ...style.border,
-                    radius: newRadius,
-                  },
-                },
-              });
-            }}
           />
         </PanelBody>
       </InspectorControls>
@@ -201,6 +161,7 @@ const EditVideo = ({ attributes, setAttributes }) => {
             muted={muted}
             controls={controls}
             playsInline={playsInline}
+            q
           />
         )
       )}
