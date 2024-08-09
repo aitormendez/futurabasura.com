@@ -24,6 +24,10 @@ export default {
       type: 'string',
       default: 'layout1',
     },
+    backgroundColor: {
+      type: 'string',
+      default: '#ffff00',
+    },
   },
   edit: Edit,
   save: () => null,

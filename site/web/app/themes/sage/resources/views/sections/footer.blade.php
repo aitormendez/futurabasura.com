@@ -144,10 +144,10 @@
     {{-- /mobile --}}
 
 
-    {{-- <div class="w-full max-w-screen-md px-4 mx-auto formulario">
+    <div class="w-full max-w-screen-md px-4 mx-auto formulario">
         <div class="flex flex-wrap items-center px-6 py-4 bg-white border border-black sm:flex-nowrap formu">
             <h3 class="text-sm tracking-widest sm:mr-10">NEWSLETTER</h3>
             {!! do_shortcode('[mc4wp_form id="474"]') !!}
         </div>
-    </div> --}}
+    </div>
 </footer>

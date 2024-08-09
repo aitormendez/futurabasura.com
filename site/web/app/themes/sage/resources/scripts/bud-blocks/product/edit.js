@@ -1,6 +1,10 @@
 import { debounce } from 'lodash';
-import { BlockControls } from '@wordpress/block-editor';
-import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
+import {
+  BlockControls,
+  InspectorControls,
+  PanelColorSettings,
+} from '@wordpress/block-editor';
+import { ToolbarGroup, ToolbarButton, PanelBody } from '@wordpress/components';
 
 import {
   SelectControl,
@@ -13,7 +17,7 @@ import { __ } from '@wordpress/i18n';
 import PropTypes from 'prop-types';
 
 const Edit = ({ attributes, setAttributes }) => {
-  const { productId, layout = 'layout1' } = attributes;
+  const { productId, layout = 'layout1', backgroundColor } = attributes;
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -28,7 +32,6 @@ const Edit = ({ attributes, setAttributes }) => {
           setProducts(products);
           setFilteredProducts(products);
 
-          // Si hay un producto seleccionado, actualiza el nombre seleccionado
           if (productId) {
             const selectedProduct = products.find(
               (product) => product.id === productId
@@ -39,7 +42,6 @@ const Edit = ({ attributes, setAttributes }) => {
           }
         })
         .catch((error) => {
-          // Maneja los errores, por ejemplo, actualizando el estado con un mensaje de error
           console.error('Error al cargar productos:', error);
         });
     };
@@ -47,7 +49,6 @@ const Edit = ({ attributes, setAttributes }) => {
     fetchInitialProducts();
   }, [productId]);
 
-  // Ajusta la función de búsqueda para usar debouncing
   const debouncedFetchProducts = debounce((searchTerm, setProducts) => {
     apiFetch({
       path: `/wc/v3/products?search=${encodeURIComponent(
@@ -56,11 +57,10 @@ const Edit = ({ attributes, setAttributes }) => {
     }).then((products) => {
       setProducts(products);
     });
-  }, 300); // Espera 300ms después de que el usuario deje de escribir para hacer la llamada
+  }, 300);
 
   useEffect(() => {
     if (!searchTerm) {
-      // Si no hay término de búsqueda, tal vez quieras cargar todos los productos o ninguno
       return;
     }
 
@@ -99,11 +99,24 @@ const Edit = ({ attributes, setAttributes }) => {
         </ToolbarGroup>
       </BlockControls>
 
+      <InspectorControls>
+        <PanelBody title={__('Settings', 'sage')}>
+          <PanelColorSettings
+            title={__('Background Color', 'sage')}
+            colorSettings={[
+              {
+                value: backgroundColor,
+                onChange: (color) => setAttributes({ backgroundColor: color }),
+                label: __('Background Color', 'sage'),
+              },
+            ]}
+          />
+        </PanelBody>
+      </InspectorControls>
+
       {isPreview ? (
-        // Componente para la vista previa
         <p>{__('Preview Mode', 'sage')}</p>
       ) : (
-        // Formulario o componentes para la edición
         <div>
           {selectedProductName && (
             <p>
@@ -157,6 +170,7 @@ Edit.propTypes = {
   attributes: PropTypes.shape({
     productId: PropTypes.number,
     layout: PropTypes.string,
+    backgroundColor: PropTypes.string,
   }).isRequired,
   setAttributes: PropTypes.func.isRequired,
 };
