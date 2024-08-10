@@ -183,3 +183,15 @@ add_action('after_setup_theme', function () {
     $relCssPath = asset('app.css')->relativePath(get_theme_file_path());
     add_editor_style($relCssPath);
 });
+
+
+/**
+ * Desactivar la librería de fuentes.
+ *
+ * @link https://developer.wordpress.org/block-editor/reference-guides/filters/editor-filters/#disable-the-font-library
+ */
+// add_filter( 'block_editor_settings_all', function ( $settings ) {
+//     $settings['fontLibraryEnabled'] = false;
+//     return $settings;
+// });
+

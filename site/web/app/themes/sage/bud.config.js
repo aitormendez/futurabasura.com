@@ -83,7 +83,6 @@ export default async (app) => {
       typography: {
         customFontSize: false,
       },
-      alignWide: true,
       appearanceTools: true,
       border: {
         color: true,

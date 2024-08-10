@@ -27,16 +27,37 @@ export default {
       type: 'string',
       default: 'Test text',
     },
+    fontFamily: {
+      type: 'string',
+      default: 'Arial,sans-serif',
+    },
+    backgroundColor: {
+      type: 'string',
+      default: '#ffffff',
+    },
+    titleColor: {
+      type: 'string',
+      default: '#000000',
+    },
+    autoplay: {
+      type: 'boolean',
+      default: true,
+    },
+    autoplayTime: {
+      type: 'number',
+      default: 2000,
+    },
+    mobileSlides: {
+      type: 'number',
+      default: 1,
+    },
+    desktopSlides: {
+      type: 'number',
+      default: 3,
+    },
   },
   supports: {
     align: ['wide', 'full'],
-    color: true,
-    typography: {
-      fontSize: true,
-      lineHeight: true,
-      textAlign: true,
-      __experimentalFontFamily: true,
-    },
   },
   edit: Edit,
   save: () => null,
