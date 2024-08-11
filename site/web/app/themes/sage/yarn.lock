@@ -10131,6 +10131,7 @@ __metadata:
     radix-ui: "npm:^1.0.1"
     react-feather: "npm:^2.0.10"
     scrambling-text: "npm:^1.2.0"
+    swiper: "npm:^11.1.9"
   languageName: unknown
   linkType: soft
 
@@ -10803,6 +10804,13 @@ __metadata:
     "@swc/core": ^1.2.147
     webpack: ">=2"
   checksum: 10c0/b06926c5cb153931589c2166aa4c7c052cc53c68758acdda480d1eb59ecddf7d74b168e33166c4f807cc9dbae4395de9d80a14ad43e265fffaa775638abf71ce
+  languageName: node
+  linkType: hard
+
+"swiper@npm:^11.1.9":
+  version: 11.1.9
+  resolution: "swiper@npm:11.1.9"
+  checksum: 10c0/75666f358c78bedf69f3db9ee83c4f4213bf7e87d42708bb3b87a11f7a85da13e73444f670e6ee1d35642a35c889241c8c525033621965345199f42cb141e616
   languageName: node
   linkType: hard
 

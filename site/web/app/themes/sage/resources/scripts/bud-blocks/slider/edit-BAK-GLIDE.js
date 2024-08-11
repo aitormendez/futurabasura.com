@@ -4,8 +4,10 @@ import {
   InnerBlocks,
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
-import { useRef } from 'react';
-import { useSelect } from '@wordpress/data';
+import { useEffect, useRef } from 'react';
+import { useSelect } from '@wordpress/data'; // Aquí se importa useSelect
+import Glide, { Autoplay, Keyboard } from '@glidejs/glide';
+import { Controls } from '@glidejs/glide/dist/glide.modular.esm';
 import {
   PanelBody,
   ColorPalette,
@@ -13,11 +15,6 @@ import {
   ToggleControl,
   RangeControl,
 } from '@wordpress/components';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
-
-// Import Swiper styles
-import 'swiper/css';
 
 const Edit = ({ attributes, setAttributes }) => {
   const {
@@ -29,9 +26,8 @@ const Edit = ({ attributes, setAttributes }) => {
     autoplayTime,
     mobileSlides,
     desktopSlides,
-    slideNumber,
   } = attributes;
-  const swiperInstanceRef = useRef(null);
+  const glideRef = useRef(null);
 
   // Obtener las familias tipográficas desde theme.json
   const fontFamilies = useSelect((select) => {
@@ -46,29 +42,29 @@ const Edit = ({ attributes, setAttributes }) => {
   }));
 
   // Monitorizar los cambios en InnerBlocks
-  //   const innerBlocks = useSelect((select) =>
-  //     select('core/block-editor').getBlocks()
-  //   );
+  const innerBlocks = useSelect((select) =>
+    select('core/block-editor').getBlocks()
+  );
 
-  // Generar slides dinámicamente según el valor de slideNumber
-  const slides = Array.from({ length: slideNumber }, (_, index) => (
-    <SwiperSlide key={index} className="h-20 bg-blue-200">
-      <InnerBlocks />
-    </SwiperSlide>
-  ));
+  useEffect(() => {
+    if (glideRef.current) {
+      const glide = new Glide(glideRef.current, {
+        type: 'carousel',
+        perView: desktopSlides,
+        focusAt: 'center',
+        autoplay: autoplay ? autoplayTime : false,
+        breakpoints: {
+          800: {
+            perView: mobileSlides,
+          },
+        },
+      });
 
-  // navegación
-  const handleNext = () => {
-    if (swiperInstanceRef.current) {
-      swiperInstanceRef.current.slideNext();
+      glide.mount({ Controls });
+
+      return () => glide.destroy(); // Cleanup para evitar fugas de memoria
     }
-  };
-
-  const handlePrev = () => {
-    if (swiperInstanceRef.current) {
-      swiperInstanceRef.current.slidePrev();
-    }
-  };
+  }, [desktopSlides, mobileSlides, autoplay, autoplayTime, innerBlocks]);
 
   return (
     <>
@@ -102,13 +98,6 @@ const Edit = ({ attributes, setAttributes }) => {
           title={__('Slider Settings', 'textdomain')}
           initialOpen={false}
         >
-          <RangeControl
-            label={__('Number of Slides', 'textdomain')}
-            value={slideNumber}
-            onChange={(newNumber) => setAttributes({ slideNumber: newNumber })}
-            min={1}
-            max={10}
-          />
           <ToggleControl
             label={__('Autoplay', 'textdomain')}
             checked={autoplay}
@@ -141,7 +130,7 @@ const Edit = ({ attributes, setAttributes }) => {
           />
         </PanelBody>
       </InspectorControls>
-      <div className="w-full min-h-[200px]">
+      <div className="w-full min-h-20">
         <div className="p-4" style={{ backgroundColor }}>
           <RichText
             className="!m-0 text-center"
@@ -156,29 +145,43 @@ const Edit = ({ attributes, setAttributes }) => {
           />
         </div>
 
-        <Swiper
-          onSwiper={(swiper) => {
-            swiperInstanceRef.current = swiper;
-          }}
-          slidesPerView={3}
-          modules={[Autoplay]}
-          navigation
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-          }}
-          loop={true}
-          style={{ backgroundColor }}
-        >
-          {slides}
-        </Swiper>
-        <div className="flex justify-between py-4">
-          <button onClick={handlePrev} className="p-2">
-            Prev
-          </button>
-          <button onClick={handleNext} className=" p-2">
-            Next
-          </button>
+        <div ref={glideRef} className="glide">
+          <div className="glide__track" data-glide-el="track">
+            <ul className="glide__slides" style={{ backgroundColor }}>
+              <InnerBlocks allowedBlocks={['sage/slide']} />
+            </ul>
+          </div>
+          <div className="flex justify-between py-3" data-glide-el="controls">
+            <button className="w-1/2 max-w-[100px]" data-glide-dir="<">
+              <svg
+                viewBox="0 0 92 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M92 12L2 12" stroke="#3E2B2F" stroke-width="2" />
+                <path
+                  d="M12.9601 1L1.99999 11.9602L12.6066 22.5668"
+                  stroke="#3E2B2F"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+            <button className="w-1/2 max-w-[100px]" data-glide-dir=">">
+              <svg
+                width="92"
+                height="24"
+                viewBox="0 0 92 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0 11.5668L90 11.5668M79.0399 22.5668L90 11.6066L79.3934 1"
+                  stroke="#3E2B2F"
+                  stroke-width="2"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </>

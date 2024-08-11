@@ -55,6 +55,10 @@ export default {
       type: 'number',
       default: 3,
     },
+    slideNumber: {
+      type: 'number',
+      default: 3,
+    },
   },
   supports: {
     align: ['wide', 'full'],
