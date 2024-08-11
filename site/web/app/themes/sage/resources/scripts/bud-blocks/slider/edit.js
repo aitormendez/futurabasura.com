@@ -4,7 +4,7 @@ import {
   InnerBlocks,
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useSelect } from '@wordpress/data';
 import {
   PanelBody,
@@ -39,16 +39,10 @@ const Edit = ({ attributes, setAttributes }) => {
     return settings.__experimentalFeatures.typography?.fontFamilies.theme || [];
   }, []);
 
-  // Convertir las familias tipográficas a un formato que el SelectControl pueda utilizar
   const fontFamilyOptions = fontFamilies.map((font) => ({
     label: font.name,
     value: font.fontFamily,
   }));
-
-  // Monitorizar los cambios en InnerBlocks
-  //   const innerBlocks = useSelect((select) =>
-  //     select('core/block-editor').getBlocks()
-  //   );
 
   // Generar slides dinámicamente según el valor de slideNumber
   const slides = Array.from({ length: slideNumber }, (_, index) => (
@@ -70,37 +64,42 @@ const Edit = ({ attributes, setAttributes }) => {
     }
   };
 
+  // Actualizar Swiper cuando cambian autoplay, autoplayTime, mobileSlides o desktopSlides
+  useEffect(() => {
+    if (swiperInstanceRef.current) {
+      const swiper = swiperInstanceRef.current;
+      swiper.params.autoplay = autoplay
+        ? {
+            delay: autoplayTime,
+            disableOnInteraction: false,
+          }
+        : false;
+
+      swiper.params.breakpoints = {
+        640: {
+          slidesPerView: mobileSlides,
+        },
+        1024: {
+          slidesPerView: desktopSlides,
+        },
+      };
+
+      swiper.update();
+
+      if (autoplay) {
+        swiper.autoplay.start();
+      } else {
+        swiper.autoplay.stop();
+      }
+    }
+  }, [autoplay, autoplayTime, mobileSlides, desktopSlides]);
+
   return (
     <>
       <InspectorControls>
         <PanelBody
-          title={__('Background Color', 'textdomain')}
-          initialOpen={true}
-        >
-          <ColorPalette
-            value={backgroundColor}
-            onChange={(newColor) =>
-              setAttributes({ backgroundColor: newColor })
-            }
-          />
-        </PanelBody>
-        <PanelBody title={__('Title Color', 'textdomain')} initialOpen={true}>
-          <ColorPalette
-            value={textColor}
-            onChange={(newColor) => setAttributes({ textColor: newColor })}
-          />
-        </PanelBody>
-        <PanelBody title={__('Font Family', 'textdomain')} initialOpen={false}>
-          <SelectControl
-            label={__('Select Font Family', 'textdomain')}
-            value={fontFamily}
-            options={fontFamilyOptions}
-            onChange={(newFont) => setAttributes({ fontFamily: newFont })}
-          />
-        </PanelBody>
-        <PanelBody
           title={__('Slider Settings', 'textdomain')}
-          initialOpen={false}
+          initialOpen={true}
         >
           <RangeControl
             label={__('Number of Slides', 'textdomain')}
@@ -140,6 +139,31 @@ const Edit = ({ attributes, setAttributes }) => {
             max={5}
           />
         </PanelBody>
+        <PanelBody
+          title={__('Background Color', 'textdomain')}
+          initialOpen={true}
+        >
+          <ColorPalette
+            value={backgroundColor}
+            onChange={(newColor) =>
+              setAttributes({ backgroundColor: newColor })
+            }
+          />
+        </PanelBody>
+        <PanelBody title={__('Title Color', 'textdomain')} initialOpen={true}>
+          <ColorPalette
+            value={textColor}
+            onChange={(newColor) => setAttributes({ textColor: newColor })}
+          />
+        </PanelBody>
+        <PanelBody title={__('Font Family', 'textdomain')} initialOpen={false}>
+          <SelectControl
+            label={__('Select Font Family', 'textdomain')}
+            value={fontFamily}
+            options={fontFamilyOptions}
+            onChange={(newFont) => setAttributes({ fontFamily: newFont })}
+          />
+        </PanelBody>
       </InspectorControls>
       <div className="w-full min-h-[200px]">
         <div className="p-4" style={{ backgroundColor }}>
@@ -160,14 +184,22 @@ const Edit = ({ attributes, setAttributes }) => {
           onSwiper={(swiper) => {
             swiperInstanceRef.current = swiper;
           }}
-          slidesPerView={3}
+          slidesPerView={desktopSlides} // Esto se actualizará según el valor en useEffect
           modules={[Autoplay]}
-          navigation
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-          }}
+          autoplay={
+            autoplay
+              ? { delay: autoplayTime, disableOnInteraction: false }
+              : false
+          }
           loop={true}
+          breakpoints={{
+            640: {
+              slidesPerView: mobileSlides,
+            },
+            1024: {
+              slidesPerView: desktopSlides,
+            },
+          }}
           style={{ backgroundColor }}
         >
           {slides}
