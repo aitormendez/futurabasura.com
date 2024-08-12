@@ -1,4 +1,5 @@
 import Edit from './edit';
+import { InnerBlocks } from '@wordpress/block-editor';
 
 const CustomIcon = (
   <svg
@@ -64,5 +65,5 @@ export default {
     align: ['wide', 'full'],
   },
   edit: Edit,
-  save: () => null,
+  save: (props) => <InnerBlocks.Content />,
 };

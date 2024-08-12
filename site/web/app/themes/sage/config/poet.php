@@ -139,6 +139,18 @@ return [
             'keywords' => ['marquee'],
             'post_types' => ['post', 'page', 'artist'],
         ],
+        'sage/slider' => [
+            'title' => __('Slider', 'sage'),
+            'description' => __('Slider', 'sage'),
+            'keywords' => ['slider'],
+            'post_types' => ['post', 'page', 'artist'],
+        ],
+        'sage/slide' => [
+            'title' => __('Slide', 'sage'),
+            'description' => __('Slide', 'sage'),
+            'keywords' => ['slide'],
+            'post_types' => ['post', 'page', 'artist'],
+        ],
     ],
 
     /*
