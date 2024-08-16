@@ -26,6 +26,7 @@ if (empty($product) || !$product->is_visible()) {
     return;
 }
 ?>
+
 <li <?php wc_product_class( wp_is_mobile() ? 'infinite-scroll-item w-full flex justify-center mb-10' : 'infinite-scroll-item card', $product); ?>>
         @php     
             /**
