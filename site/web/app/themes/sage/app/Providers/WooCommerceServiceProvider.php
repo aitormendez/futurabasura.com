@@ -19,6 +19,7 @@ class WooCommerceServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        //desplegable artistas
         add_action('woocommerce_before_shop_loop', function () {
             echo <<<HTML
                 <div x-data="dropdownFilter()" x-init="init()">
@@ -56,13 +57,14 @@ class WooCommerceServiceProvider extends ServiceProvider
             // SCRIPT;
         }, 25);
 
+        // desplegable ordenar
         add_action('woocommerce_before_shop_loop', function() {
             ?>
             <div x-data="dropdownSort()" x-init="init()" class="relative md:min-w-80 text-center">
                 <!-- Aplicar @click.away en este nivel asegura que cualquier clic fuera del desplegable cerrará las opciones -->
                 <div @click.away="open = false" @click="open = !open" class="cursor-pointer bg-white uppercase tracking-[0.2em] px-3 py-2 text-sm w-full">
                     <span x-text="selected"></span>
-                    <div x-show="open" class="absolute left-0 bg-white z-10 w-full">
+                    <div x-show="open" class="absolute left-0 bg-white z-10 w-full top-0">
                         <ul>
                             <template x-for="option in options" :key="option.value">
                                 <li @click="applySort(option.value)" class="p-2 hover:bg-allo cursor-pointer leading-tight uppercase tracking-[0.2em] text-sm" x-text="option.text"></li>
@@ -75,6 +77,72 @@ class WooCommerceServiceProvider extends ServiceProvider
 
             // EL SCRIPT ESTÁ EN SHOP.JS (dropdownSort).
         }, 26);
+
+        // desplegable categoría de producto (product_cat)
+        add_action('woocommerce_before_shop_loop', function () {
+            echo <<<HTML
+                <div x-data="dropdownCategory()" x-init="init()">
+                    <div class="md:min-w-80">
+                        <div @click="open = !open" class="relative cursor-pointer bg-white uppercase tracking-[0.2em] px-3 py-2 text-sm text-center">
+                            <span x-text="selectedCategory === '' ? 'Select a category' : selectedCategory"></span>
+                            <div x-show="open" @click.away="open = false" class="absolute left-0 bg-white z-10 w-full top-9">
+                                <ul class="max-h-60 overflow-auto">
+                                    <li @click="applyCategoryFilter('')" class="p-2 hover:bg-allo cursor-pointer">All categories</li>
+                                    <template x-for="category in categories" :key="category.slug">
+                                        <li @click="applyCategoryFilter(category.slug, category.name)" x-text="category.name" class="p-2 hover:bg-allo cursor-pointer leading-tight"></li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            HTML;
+    
+            // Obtener las categorías excluyendo "uncategorized"
+            $categories = get_terms([
+                'taxonomy' => 'product_cat',
+                'hide_empty' => true,
+                'exclude' => [get_term_by('slug', 'uncategorized', 'product_cat')->term_id], // Excluir el término "uncategorized"
+            ]);
+    
+            $categories_js = array_map(function($category) {
+                return [
+                    'slug' => $category->slug,
+                    'name' => $category->name,
+                ];
+            }, $categories);
+    
+            echo "<script>
+                function dropdownCategory() {
+                    return {
+                        open: false,
+                        selectedCategory: '',
+                        categories: " . json_encode($categories_js) . ",
+                        applyCategoryFilter(slug, name) {
+                            this.selectedCategory = name || 'All categories';
+                            const params = new URLSearchParams(window.location.search);
+                            if (slug) {
+                                params.set('product_cat', slug);
+                            } else {
+                                params.delete('product_cat');
+                            }
+                            window.location.search = params.toString();
+                        },
+                        init() {
+                            const params = new URLSearchParams(window.location.search);
+                            const selectedSlug = params.get('product_cat');
+                            const selectedCategory = this.categories.find(category => category.slug === selectedSlug);
+                            if (selectedCategory) {
+                                this.selectedCategory = selectedCategory.name;
+                            }
+                        }
+                    }
+                }
+            </script>";
+        }, 24);
+    
+
+        
 
         /**
          * Rodear filtros de la tienda con un div.filtros -- inicio.
