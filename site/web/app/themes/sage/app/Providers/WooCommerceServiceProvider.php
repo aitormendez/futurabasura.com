@@ -23,14 +23,14 @@ class WooCommerceServiceProvider extends ServiceProvider
         add_action('woocommerce_before_shop_loop', function () {
             echo <<<HTML
                 <div x-data="dropdownFilter()" x-init="init()">
-                    <div class="md:min-w-80">
-                        <div @click="open = !open" class="relative cursor-pointer bg-white uppercase tracking-[0.2em] px-3 py-2 text-sm text-center">
-                            <span x-text="selectedName === '' ? 'Select an artist' : selectedName"></span>
-                            <div x-show="open" @click.away="open = false" class="absolute left-0 bg-white z-10 w-full top-9">
-                                <ul class="max-h-60 overflow-auto">
-                                    <li @click="applyFilter('')" class="p-2 hover:bg-allo cursor-pointer">All artists</li>
+                    <div class="md:min-w-64">
+                        <div @click="open = !open" class="relative cursor-pointer bg-white uppercase tracking-[0.2em] text-center">
+                            <span class="block text-shadow text-white text-xl px-3 py-2" x-text="selectedName === '' ? 'By artist' : selectedName"></span>
+                            <div x-show="open" @click.away="open = false" class="absolute left-0 bg-white z-10 w-full">
+                                <ul class="max-h-60 overflow-auto py-6">
+                                    <li @click="applyFilter('')" class="p-2 hover:bg-allo cursor-pointer border-y text-xs">All artists</li>
                                     <template x-for="artist in artists" :key="artist.slug">
-                                        <li @click="applyFilter(artist.slug, artist.name)" x-text="artist.name" class="p-2 hover:bg-allo cursor-pointer leading-tight"></li>
+                                        <li @click="applyFilter(artist.slug, artist.name)" x-text="artist.name" class="p-2 hover:bg-allo cursor-pointer leading-tight border-b text-xs"></li>
                                     </template>
                                 </ul>
                             </div>
@@ -62,12 +62,12 @@ class WooCommerceServiceProvider extends ServiceProvider
             ?>
             <div x-data="dropdownSort()" x-init="init()" class="relative md:min-w-80 text-center">
                 <!-- Aplicar @click.away en este nivel asegura que cualquier clic fuera del desplegable cerrará las opciones -->
-                <div @click.away="open = false" @click="open = !open" class="cursor-pointer bg-white uppercase tracking-[0.2em] px-3 py-2 text-sm w-full">
-                    <span x-text="selected"></span>
-                    <div x-show="open" class="absolute left-0 bg-white z-10 w-full top-0">
+                <div @click.away="open = false" @click="open = !open" class="cursor-pointer bg-white uppercase tracking-[0.2em] w-full">
+                    <span class="block text-shadow text-white text-xl px-3 py-2" x-text="selected"></span>
+                    <div x-show="open" class="absolute left-0 bg-white z-10 w-full py-6">
                         <ul>
                             <template x-for="option in options" :key="option.value">
-                                <li @click="applySort(option.value)" class="p-2 hover:bg-allo cursor-pointer leading-tight uppercase tracking-[0.2em] text-sm" x-text="option.text"></li>
+                                <li @click="applySort(option.value)" class="p-2 hover:bg-allo cursor-pointer leading-tight uppercase tracking-[0.2em] border-b text-xs first:border-t" x-text="option.text"></li>
                             </template>
                         </ul>
                     </div>
@@ -82,14 +82,14 @@ class WooCommerceServiceProvider extends ServiceProvider
         add_action('woocommerce_before_shop_loop', function () {
             echo <<<HTML
                 <div x-data="dropdownCategory()" x-init="init()">
-                    <div class="md:min-w-80">
-                        <div @click="open = !open" class="relative cursor-pointer bg-white uppercase tracking-[0.2em] px-3 py-2 text-sm text-center">
-                            <span x-text="selectedCategory === '' ? 'Select a category' : selectedCategory"></span>
-                            <div x-show="open" @click.away="open = false" class="absolute left-0 bg-white z-10 w-full top-9">
-                                <ul class="max-h-60 overflow-auto">
-                                    <li @click="applyCategoryFilter('')" class="p-2 hover:bg-allo cursor-pointer">All categories</li>
+                    <div class="md:min-w-64">
+                        <div @click="open = !open" class="relative cursor-pointer bg-white uppercase tracking-[0.2em] text-center">
+                            <span class="block text-shadow text-white text-xl px-3 py-2" x-text="selectedCategory === '' ? 'By product' : selectedCategory"></span>
+                            <div x-show="open" @click.away="open = false" class="absolute left-0 bg-white z-10 w-full">
+                                <ul class="max-h-60 overflow-auto py-6">
+                                    <li @click="applyCategoryFilter('')" class="p-2 hover:bg-allo cursor-pointer border-y text-xs">All products</li>
                                     <template x-for="category in categories" :key="category.slug">
-                                        <li @click="applyCategoryFilter(category.slug, category.name)" x-text="category.name" class="p-2 hover:bg-allo cursor-pointer leading-tight"></li>
+                                        <li @click="applyCategoryFilter(category.slug, category.name)" x-text="category.name" class="p-2 hover:bg-allo cursor-pointer leading-tight border-b text-xs"></li>
                                     </template>
                                 </ul>
                             </div>

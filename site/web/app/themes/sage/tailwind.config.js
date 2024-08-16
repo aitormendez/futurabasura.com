@@ -125,6 +125,9 @@ const config = {
         '.clip-path-elipse': {
           clipPath: 'ellipse(50% 50% at 50% 50%)',
         },
+        '.text-shadow': {
+          textShadow: '0.1em 0.1em 0 #000',
+        },
       };
       addUtilities(newUtilities, ['responsive', 'hover']);
     }),
