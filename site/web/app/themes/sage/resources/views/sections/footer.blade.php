@@ -46,7 +46,7 @@
     <div class="flex md:!hidden flex-wrap w-full font-bugrino">
         <div class="arriba flex flex-wrap w-full h-[50vw] my-4">
             <div class="izq flex justify-end items-stretch w-1/2 bg-white">
-                <div class="w-[10vw] border-r border-black border-2" style="background-color: {{ get_field('footer_color', 'option') }}"></div>
+                <div class="w-[10vw] border-r-2 border-black" style="background-color: {{ get_field('footer_color', 'option') }}"></div>
             </div>
             <div class="der flex justify-center items-center w-1/2" style="background-color: {{ get_field('footer_color', 'option') }}">
                     @svg('images.logo-fb', 'w-1/2')
@@ -54,7 +54,7 @@
         </div>
         <div class="abajo flex flex-wrap w-full h-[50vw]">
             <div class="izq flex justify-end items-stretch w-1/2 bg-white">
-                <div class="w-[10vw] border-r border-black border-2" style="background-color: {{ get_field('footer_color', 'option') }}"></div>
+                <div class="w-[10vw] border-r-2 border-black" style="background-color: {{ get_field('footer_color', 'option') }}"></div>
             </div>
             <div class="der flex w-1/2 text-sm p-4" style="background-color: {{ get_field('footer_color', 'option') }}">
                 {!! wpautop(get_field('footer_texto_mancha', 'option')) !!}
@@ -105,7 +105,7 @@
     <div class="flex md:!hidden flex-wrap w-full bg-white">
         <div class="arriba flex flex-wrap w-full h-[20px]">
             <div class="izq flex justify-end items-stretch w-1/2 bg-white">
-                <div class="w-[10vw] border-r border-black border-2" style="background-color: {{ get_field('footer_color', 'option') }}"></div>
+                <div class="w-[10vw] border-r-2 border-black" style="background-color: {{ get_field('footer_color', 'option') }}"></div>
             </div>
             <div class="der flex justify-center items-center w-1/2" style="background-color: {{ get_field('footer_color', 'option') }}">
             </div>
