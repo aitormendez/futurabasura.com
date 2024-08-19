@@ -14,9 +14,15 @@ const config = {
       'allo-claro': theme('colors.allo-claro'),
     }),
     extend: {
-      typography: {
+      typography: ({ theme }) => ({
+        fb: {
+          css: {
+            '--tw-prose-links': theme('colors.azul'),
+          },
+        },
         DEFAULT: {
           css: {
+            fontFamily: theme('fontFamily.serif').join(', '),
             lineHeight: '1.2',
             maxWidth: 'auto,',
             color: '#000',
@@ -29,7 +35,7 @@ const config = {
             },
           },
         },
-      },
+      }),
       letterSpacing: {
         max: '.25em',
       },
