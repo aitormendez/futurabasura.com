@@ -69,7 +69,7 @@
 
     <div class="flex w-full flex-col items-center md:flex-row md:bg-white formulario mt-12 mb-20">
         <div
-            class="flex flex-col justify-center items-center sombra w-[25vw] leading-relaxed text-lg py-6 grow-0 shrink-0">
+            class="flex flex-col justify-center items-center sombra w-[25vw] leading-relaxed text-lg py-6 md:py-0 grow-0 shrink-0">
             <span>Join</span><span>newsletter</span>
         </div>
         <div class="flex bg-white md:border-l-2 border-black w-full">
