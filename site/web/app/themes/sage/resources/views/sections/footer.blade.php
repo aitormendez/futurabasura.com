@@ -67,7 +67,7 @@
     </div>
     {{-- /mobile --}}
 
-    <div class="flex w-full flex-col md:flex-row items-center md:bg-white formulario mt-12 mb-20">
+    <div class="flex w-full md:flex-row flex-col items-center md:bg-white formulario mt-12 mb-20">
         <div
             class="flex flex-col justify-center items-center sombra w-[25vw] leading-relaxed text-lg py-6 md:py-0 grow-0 shrink-0">
             <span>Join</span><span>newsletter</span>
