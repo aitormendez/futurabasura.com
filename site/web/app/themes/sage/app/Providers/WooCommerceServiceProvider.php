@@ -290,16 +290,29 @@ class WooCommerceServiceProvider extends ServiceProvider
     private function mostrar_tipo_producto() {
         global $product;
 
-        // Almacenar el tipo de producto
-        $product_type = $product->get_attribute('pa_product-type');
+        // Obtener las categorías del producto
+        $product_cats = wp_get_post_terms($product->get_id(), 'product_cat', array('fields' => 'all'));
 
-        // Comprobar si el atributo de tipo de producto existe y mostrarlo
-        if ($product_type) {
-            // Determinar el estilo basado en si el usuario está en un dispositivo móvil
-            if (wp_is_mobile()) {
-                echo '<div class="uppercase text-sm text-gray-400 text-center mb-2 w-full">' . esc_html($product_type) . '</div>';
-            } else {
-                echo '<div class="uppercase text-[1.1vw] text-center border-b border-black w-full">' . esc_html($product_type) . '</div>';
+        if (!empty($product_cats)) {
+            $categorias_filtradas = array();
+
+            // Filtrar las categorías, excluyendo "Uncategorized"
+            foreach ($product_cats as $category) {
+                if ($category->slug !== 'uncategorized') {
+                    $categorias_filtradas[] = $category->name;
+                }
+            }
+
+            // Si hay categorías filtradas, mostrar la primera (puedes adaptar esto según tu necesidad)
+            if (!empty($categorias_filtradas)) {
+                $product_type = esc_html($categorias_filtradas[0]);
+
+                // Determinar el estilo basado en si el usuario está en un dispositivo móvil
+                if (wp_is_mobile()) {
+                    echo '<div class="uppercase text-sm text-gray-400 text-center mb-2 w-full">' . $product_type . '</div>';
+                } else {
+                    echo '<div class="uppercase text-[1.1vw] text-center border-b border-black w-full">' . $product_type . '</div>';
+                }
             }
         }
     }
