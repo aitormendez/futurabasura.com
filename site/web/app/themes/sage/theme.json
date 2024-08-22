@@ -49,6 +49,11 @@
           "slug": "azul"
         },
         {
+          "color": "#00ffff",
+          "name": "Azul-claro",
+          "slug": "azul-claro"
+        },
+        {
           "color": "#af0000",
           "name": "Rojo",
           "slug": "rojo"

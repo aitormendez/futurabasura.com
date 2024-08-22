@@ -70,6 +70,7 @@ const config = {
       allo: '#ffff00',
       'allo-claro': '#dbffe9',
       azul: '#0000ff',
+      'azul-claro': '#00ffff',
       rojo: '#af0000',
       transparent: 'transparent',
       white: 'white',
@@ -88,6 +89,13 @@ const config = {
     typography,
     plugin(function ({ addComponents }) {
       const textos = {
+        '.sombra': {
+          textShadow: '0.1em 0.1em 0 #000',
+          textTransform: 'uppercase',
+          letterSpacing: '0.2em',
+          lineHeight: '1em',
+          color: '#fff',
+        },
         '.nav-item': {
           textShadow: '0.1em 0.1em 0 #000',
           textTransform: 'uppercase',

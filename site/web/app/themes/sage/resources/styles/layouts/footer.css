@@ -1,9 +1,5 @@
 footer {
-  .frase-footer {
-    letter-spacing: -0.1em;
-  }
-
-  .mc4wp-form {
+  /* .mc4wp-form {
     width: 100%;
 
     input {
@@ -33,5 +29,5 @@ footer {
         }
       }
     }
-  }
+  } */
 }

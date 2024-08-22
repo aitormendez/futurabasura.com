@@ -5,19 +5,3 @@ input {
   outline: none !important;
   box-shadow: none !important;
 }
-
-footer {
-  .formulario {
-    @apply my-6;
-
-    form {
-      label {
-        display: none;
-      }
-
-      input[type='submit'] {
-        @apply text-azul bg-transparent;
-      }
-    }
-  }
-}
