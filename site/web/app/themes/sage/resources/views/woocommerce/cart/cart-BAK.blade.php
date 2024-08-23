@@ -1,5 +1,7 @@
 @php
 /**
+* ES CART BLADE PERO SUSTITUYENDO LA TABLA HTML POR DIVS
+*
 * Cart Page
 *
 * This template can be overridden by copying it to yourtheme/woocommerce/cart/cart.php.
@@ -10,9 +12,9 @@
 * happen. When this occurs the version of the template file will be bumped and
 * the readme will list any important changes.
 *
-* @see https://woocommerce.com/document/template-structure/
+* @see https://docs.woocommerce.com/document/template-structure/
 * @package WooCommerce\Templates
-* @version 7.9.0
+* @version 3.8.0
 */
 
 defined( 'ABSPATH' ) || exit;
@@ -20,16 +22,16 @@ defined( 'ABSPATH' ) || exit;
 do_action( 'woocommerce_before_cart' );
 @endphp
 
-<form class="woocommerce-cart-form" action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">
-  <?php do_action( 'woocommerce_before_cart_table' ); ?>
+<form class="woocommerce-cart-form" action="{{ wc_get_cart_url() }}" method="post">
+  @php do_action( 'woocommerce_before_cart_table' ) @endphp
 
   {{-- nueva tabla --}}
-  <div class="ticket">
+
+  <div class="ticket font-sans">
     <div class="w-full ticket-head">
       <div class="w-full ticket-triangulo bg-tk-triangulo"></div>
       <div class="w-full h-10 mb-2 bg-allo-claro"></div>
     </div>
-
     <div class="tk-body">
       @foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item )
       @php
@@ -38,26 +40,19 @@ do_action( 'woocommerce_before_cart' );
       $cart_item_key );
       $artista = get_the_terms( $product_id, 'artist',)[0]->name;
       $product_item = $cart_item['data'];
-      /**
-      * Filter the product name.
-      *
-      * @since 2.1.0
-      * @param string $product_name Name of the product in the cart.
-      * @param array $cart_item The product in the cart.
-      * @param string $cart_item_key Key for the product in the cart.
-      */
-      $product_name = apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key );
       @endphp
+
+
       @if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters(
       'woocommerce_cart_item_visible', true, $cart_item, $cart_item_key ) )
       @php
       $product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ?
       $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
       @endphp
-
       {{-- row --}}
       <div
         class="tracking-wider text-gray-600 mb-2 flex justify-between tk-row bg-allo-claro woocommerce-cart-form__cart-item {{ apply_filters( 'woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key ) }}">
+
         <div class="flex flex-wrap justify-between w-full md:nowrap md:justify-start col-1">
           {{-- thumbnail --}}
           <div class="p-6 tk-cell product-thumbnail">
@@ -74,7 +69,6 @@ do_action( 'woocommerce_before_cart' );
             @endphp
             @endif
           </div>
-          {{-- / thumbnail --}}
 
           {{-- datos de producto --}}
           <div class="order-2 w-full px-6 md:pl-0 md:pt-6 md:order-1 md:w-auto tk-cell product-data leading-tight">
@@ -113,12 +107,12 @@ do_action( 'woocommerce_before_cart' );
 
             <div class="hidden product-price md:block"
               data-title="{{ esc_attr( translate( 'Price', 'woocommerce' )) }}">
-              @php
-              echo apply_filters( 'woocommerce_cart_item_price', WC()->cart->get_product_price( $_product ), $cart_item,
-              $cart_item_key ); // PHPCS: XSS ok.
-              @endphp
+              <?php
+                    echo apply_filters( 'woocommerce_cart_item_price', WC()->cart->get_product_price( $_product ), $cart_item, $cart_item_key ); // PHPCS: XSS ok.
+                  ?>
             </div>
           </div>
+
           <div class="order-3 w-1/2 pb-3 pl-6 italic product-meta md:hidden">
             <div class="tk-cell product-price" data-title="{{ esc_attr( translate( 'Price', 'woocommerce' )) }}">
               <?php
@@ -126,41 +120,34 @@ do_action( 'woocommerce_before_cart' );
                   ?>
             </div>
           </div>
-          {{-- / datos de producto --}}
 
           {{-- input quantity --}}
           <div class="flex items-center order-1 md:bg-white tk-cell product-quantity"
             data-title="{{ esc_attr( translate( 'Quantity', 'woocommerce' )) }}">
             @if ( $_product->is_sold_individually() )
             @php
-            $min_quantity = 1;
-            $max_quantity = 1;
+            $product_quantity = sprintf( '1 <input type="hidden" name="cart[%s][qty]" value="1" />', $cart_item_key );
             @endphp
             @else
             @php
-            $min_quantity = 0;
-            $max_quantity = $_product->get_max_purchase_quantity();
-            @endphp
-            @endif
-
-            @php
             $product_quantity = woocommerce_quantity_input(
             array(
+            'input_id' => "ftbsCartProduct_".$cart_item["product_id"],
             'input_name' => "cart[{$cart_item_key}][qty]",
             'input_value' => $cart_item['quantity'],
-            'max_value' => $max_quantity,
-            'min_value' => $min_quantity,
-            'product_name' => $product_name,
-            'classes' => 'h-full text-2xl text-center text-blue-700 font-bold cartQuantityInput bg-transparent
+            'max_value' => $_product->get_max_purchase_quantity(),
+            'min_value' => '0',
+            'product_name' => $_product->get_name(),
+            'classes' => 'h-full text-2xl text-center text-blue-700 font-bold ftbsCartQuantityInput bg-transparent
             md:bg-white'
             ),
             $_product,
             false
             );
             @endphp
+            @endif
 
             {!! apply_filters( 'woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item ) !!}
-
             <div class="flex flex-col text-2xl botones-qty">
               <div
                 class="product-quantity-add cursor-pointer leading-none py-1.5 px-2 select-none hover:text-azul text-center">
@@ -169,26 +156,34 @@ do_action( 'woocommerce_before_cart' );
                 &minus;</div>
             </div>
           </div>
-          {{-- / input quantity --}}
 
-          {{-- remove item --}}
-          <div class="flex items-center justify-center col-2 product-remove">
-            <a href="{!! esc_url( wc_get_cart_remove_url( $cart_item_key ) ) !!}"
-              aria-label="{!! esc_html__( 'Remove this item', 'woocommerce' ) !!}"
-              data-product_id="{!! esc_attr( $product_id ) !!}"
-              data-product_sku="{!! esc_attr( $_product->get_sku() ) !!}"
-              class="flex items-center w-full h-full p-3 border border-red-600">
-              @svg('images.waste', 'fill-red w-full')
-            </a>
+          <div
+            class="self-end justify-end order-4 pb-3 italic font-bold md:pb-0 md:self-center tk-cell product-subtotal md:flex"
+            data-title="{{ __( translate( 'Subtotal', 'woocommerce' )) }}">
+            {!! apply_filters( 'woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal( $_product,
+            $cart_item['quantity'] ), $cart_item, $cart_item_key ) !!}
           </div>
-          {{-- / remove item --}}
-
         </div>
+
+        {{-- /col-1 --}}
+
+        <div class="flex items-center justify-center col-2 product-remove">
+          <a href="{!! esc_url( wc_get_cart_remove_url( $cart_item_key ) ) !!}"
+            aria-label="{!! esc_html__( 'Remove this item', 'woocommerce' ) !!}"
+            data-product_id="{!! esc_attr( $product_id ) !!}"
+            data-product_sku="{!! esc_attr( $_product->get_sku() ) !!}"
+            class="flex items-center w-full h-full p-3 border border-red-600">
+            @svg('images.waste', 'fill-red w-full')
+          </a>
+        </div>
+
+
       </div>
       @endif
       @endforeach
 
-      {{-- row cupón --}}
+      <?php do_action( 'woocommerce_cart_contents' ); ?>
+
       <div class="tk-row">
         <div class="tk-cell actions">
 
@@ -227,31 +222,35 @@ do_action( 'woocommerce_before_cart' );
           @endphp
         </div>
       </div>
+
+      @php do_action( 'woocommerce_after_cart_contents' ) @endphp
+
     </div>
+
   </div>
 
+  {{-- termina nueva tabla --}}
 
-
-
-
-  {{-- / nueva tabla --}}
-
-
-  <?php do_action( 'woocommerce_after_cart_table' ); ?>
+  @php do_action( 'woocommerce_after_cart_table' ) @endphp
 </form>
 
-<?php do_action( 'woocommerce_before_cart_collaterals' ); ?>
+@php do_action( 'woocommerce_before_cart_collaterals' ) @endphp
 
 <div class="cart-collaterals">
-  <?php
-		/**
-		 * Cart collaterals hook.
-		 *
-		 * @hooked woocommerce_cross_sell_display
-		 * @hooked woocommerce_cart_totals - 10
-		 */
-		do_action( 'woocommerce_cart_collaterals' );
-	?>
+  @php
+  /**
+  * Cart collaterals hook.
+  *
+  * @hooked woocommerce_cross_sell_display
+  * @hooked woocommerce_cart_totals - 10
+  */
+  do_action( 'woocommerce_cart_collaterals' );
+  @endphp
+  <div class="w-full ticket-head">
+    <div class="w-full ticket-triangulo bg-tk-triangulo-down"></div>
+  </div>
 </div>
 
-<?php do_action( 'woocommerce_after_cart' ); ?>
+<div class="w-full ticket-head bg-tk-triangulo-down"></div>
+
+@php do_action( 'woocommerce_after_cart' ) @endphp

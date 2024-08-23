@@ -7,6 +7,7 @@
 namespace App;
 
 use function Roots\bundle;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Register the theme assets.
@@ -195,3 +196,41 @@ add_action('after_setup_theme', function () {
 //     return $settings;
 // });
 
+
+
+/**
+ * Esto es para detectar y escribir en el log cuándo se redirige el carrito.
+ *
+ * @link https://developer.wordpress.org/reference/functions/wp_redirect/
+ */
+
+// add_filter('wp_redirect', function ($location, $status) {
+//     if (is_cart()) {
+//         $backtrace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 10); // Limita la profundidad de la traza a 10 niveles
+//         $trace_log = [];
+
+//         foreach ($backtrace as $trace) {
+//             $trace_log[] = (isset($trace['file']) ? $trace['file'] : '[Sin archivo]') . ' en línea ' . (isset($trace['line']) ? $trace['line'] : '[Sin línea]');
+//         }
+
+//         Log::warning('Redirección en el carrito a: ' . $location);
+//         Log::warning('Traza de la redirección: ' . implode(" -> ", $trace_log));
+//     }
+
+//     return $location; // Asegúrate de devolver la URL para que la redirección continúe.
+// }, 10, 2);
+
+
+/**
+ * Desactivar la redirección ccanónicaanéis en la página del carrito.
+ * Es para poder usar el dev server en la página del carrito
+ * 
+ * @link https://developer.wordpress.org/reference/functions/redirect_canonical/
+ * 
+ */
+add_filter('redirect_canonical', function ($redirect_url) {
+    if (is_cart()) {
+        return false; // Desactiva la redirección canónica en la página del carrito
+    }
+    return $redirect_url;
+});

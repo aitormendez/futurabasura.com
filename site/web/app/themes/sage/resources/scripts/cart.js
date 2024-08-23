@@ -1,50 +1,45 @@
 export function carrito() {
-  let btnActualizar = $("[name='update_cart']");
+  const quantityContainers = document.querySelectorAll('.botones-qty');
 
-  // actualizar carrito al cambiar cantidad
-  function actualizar() {
-    btnActualizar.trigger('click');
-  }
+  quantityContainers.forEach(function (container) {
+    const input = container
+      .closest('.tk-row')
+      .querySelector('.cartQuantityInput');
 
-  $('.ftbsCartQuantityInput').change(function () {
-    actualizar();
-  });
+    const incrementButton = container.querySelector('.product-quantity-add');
+    incrementButton.addEventListener('click', function () {
+      let currentValue = parseInt(input.value);
+      const maxValue = parseInt(input.getAttribute('max')) || 9999;
 
-  // aumentar y reducir cantidad con botones personalizados
+      if (currentValue < maxValue) {
+        currentValue++;
+        input.value = currentValue;
+        input.dispatchEvent(new Event('change'));
+      }
+    });
 
-  $('.product-quantity-add').each(function () {
-    let id = $(this)
-      .parent('.botones-qty')
-      .siblings('.quantity')
-      .find('.ftbsCartQuantityInput')
-      .attr('id');
-    $(this).click(function () {
-      ftbsCartIncreaseProduct(id);
+    const decrementButton = container.querySelector('.product-quantity-remove');
+    decrementButton.addEventListener('click', function () {
+      let currentValue = parseInt(input.value);
+      const minValue = parseInt(input.getAttribute('min')) || 0;
+
+      if (currentValue > minValue) {
+        currentValue--;
+        input.value = currentValue;
+        input.dispatchEvent(new Event('change'));
+      }
     });
   });
 
-  $('.product-quantity-remove').each(function () {
-    let id = $(this)
-      .parent('.botones-qty')
-      .siblings('.quantity')
-      .find('.ftbsCartQuantityInput')
-      .attr('id');
-    $(this).click(function () {
-      ftbsCartDecreaseProduct(id);
+  document.querySelectorAll('.cartQuantityInput').forEach(function (input) {
+    input.addEventListener('change', function () {
+      const updateCartButton = document.querySelector(
+        'button[name="update_cart"]'
+      );
+      if (updateCartButton) {
+        updateCartButton.disabled = false; // Forzar la habilitación del botón
+        updateCartButton.click();
+      }
     });
   });
-
-  function ftbsCartIncreaseProduct(id) {
-    let curr = parseInt($('#' + id).val());
-    $('#' + id).val(++curr);
-    $("[name='update_cart']").prop('disabled', false);
-    actualizar();
-  }
-
-  function ftbsCartDecreaseProduct(id) {
-    let curr = parseInt($('#' + id).val());
-    $('#' + id).val(--curr);
-    $("[name='update_cart']").prop('disabled', false);
-    actualizar();
-  }
 }
