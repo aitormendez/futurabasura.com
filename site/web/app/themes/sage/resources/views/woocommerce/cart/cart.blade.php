@@ -57,10 +57,10 @@ do_action( 'woocommerce_before_cart' );
 
       {{-- row --}}
       <div
-        class="tracking-wider text-gray-600 mb-2 flex justify-between tk-row bg-allo-claro woocommerce-cart-form__cart-item {{ apply_filters( 'woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key ) }}">
+        class="tracking-wider text-gray-600 mb-2 flex justify-between tk-row bg-allo-claro woocommerce-cart-form__cart-item font-sans {{ apply_filters( 'woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key ) }}">
         <div class="flex flex-wrap justify-between w-full md:nowrap md:justify-start col-1">
           {{-- thumbnail --}}
-          <div class="p-6 tk-cell product-thumbnail">
+          <div class="p-6 tk-cell product-thumbnail w-1/4">
             @php
             $thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item,
             $cart_item_key );
@@ -77,7 +77,7 @@ do_action( 'woocommerce_before_cart' );
           {{-- / thumbnail --}}
 
           {{-- datos de producto --}}
-          <div class="order-2 w-full px-6 md:pl-0 md:pt-6 md:order-1 md:w-auto tk-cell product-data leading-tight">
+          <div class="order-2 w-full px-6 md:pl-0 md:pt-6 md:order-1 md:w-1/3 tk-cell product-data leading-tight">
             <div class="product-name" data-title="{{ esc_attr( translate( 'Product', 'woocommerce' )) }}">
 
               @if ( ! $product_permalink )
@@ -171,20 +171,29 @@ do_action( 'woocommerce_before_cart' );
           </div>
           {{-- / input quantity --}}
 
-          {{-- remove item --}}
-          <div class="flex items-center justify-center col-2 product-remove">
-            <a href="{!! esc_url( wc_get_cart_remove_url( $cart_item_key ) ) !!}"
-              aria-label="{!! esc_html__( 'Remove this item', 'woocommerce' ) !!}"
-              data-product_id="{!! esc_attr( $product_id ) !!}"
-              data-product_sku="{!! esc_attr( $_product->get_sku() ) !!}"
-              class="flex items-center w-full h-full p-3 border border-red-600">
-              @svg('images.waste', 'fill-red w-full')
-            </a>
+          {{-- subtotal --}}
+          <div
+            class="self-end justify-end order-4 pb-3 italic font-bold md:pb-0 md:self-center tk-cell product-subtotal md:flex md:ml-12"
+            data-title="{{ __( translate( 'Subtotal', 'woocommerce' )) }}">
+            {!! apply_filters( 'woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal( $_product,
+            $cart_item['quantity'] ), $cart_item, $cart_item_key ) !!}
           </div>
-          {{-- / remove item --}}
-
+          {{-- / subtotal --}}
         </div>
+
+        {{-- remove item --}}
+        <div class="flex items-center justify-center col-2 product-remove">
+          <a href="{!! esc_url( wc_get_cart_remove_url( $cart_item_key ) ) !!}"
+            aria-label="{!! esc_html__( 'Remove this item', 'woocommerce' ) !!}"
+            data-product_id="{!! esc_attr( $product_id ) !!}"
+            data-product_sku="{!! esc_attr( $_product->get_sku() ) !!}"
+            class="flex items-center w-full h-full p-3 border border-red-600">
+            @svg('images.waste', 'fill-rojo w-full')
+          </a>
+        </div>
+        {{-- / remove item --}}
       </div>
+      {{-- / row --}}
       @endif
       @endforeach
 

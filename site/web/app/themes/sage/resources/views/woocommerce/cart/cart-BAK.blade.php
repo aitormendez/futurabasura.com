@@ -173,7 +173,7 @@ do_action( 'woocommerce_before_cart' );
             data-product_id="{!! esc_attr( $product_id ) !!}"
             data-product_sku="{!! esc_attr( $_product->get_sku() ) !!}"
             class="flex items-center w-full h-full p-3 border border-red-600">
-            @svg('images.waste', 'fill-red w-full')
+            @svg('images.waste', 'fill-rojo w-full')
           </a>
         </div>
 

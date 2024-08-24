@@ -42,4 +42,19 @@ export function carrito() {
       }
     });
   });
+
+  // Manejo del botón de eliminar producto
+  const removeLinks = document.querySelectorAll('.product-remove a');
+  removeLinks.forEach(function (link) {
+    link.addEventListener('click', function (event) {
+      event.preventDefault(); // Evitar la acción predeterminada del enlace
+
+      // Desactivar interacción en la página
+      document.body.style.pointerEvents = 'none';
+      document.body.style.opacity = '0.5';
+
+      // Redirigir a la URL de eliminación para que WooCommerce procese la eliminación
+      window.location.href = this.href;
+    });
+  });
 }
