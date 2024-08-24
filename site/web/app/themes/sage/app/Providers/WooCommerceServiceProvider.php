@@ -207,7 +207,7 @@ class WooCommerceServiceProvider extends ServiceProvider
         });
 
         /**
-         * Mostrar totales de envío.
+         * Mostrar nota legal.
          */
         add_filter( 'woocommerce_after_shipping_calculator', function()  {
             echo '<div class="text-xs">' . get_field('exp_car_totals', 'option') . '</div>';

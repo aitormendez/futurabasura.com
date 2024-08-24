@@ -11,9 +11,11 @@ const config = {
   theme: {
     fill: (theme) => ({
       red: theme('colors.red.600'),
-      'allo-claro': theme('colors.allo-claro'),
     }),
     extend: {
+      fill: (theme) => ({
+        rojo: theme('colors.rojo'),
+      }),
       typography: ({ theme }) => ({
         fb: {
           css: {
