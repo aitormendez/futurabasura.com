@@ -29,7 +29,7 @@
     <div class="table w-full">
         <div class="table-row-group">
             <div class="table-row">
-                <div class="table-cell w-1/4 border-b-2 border-black p-4 pl-12 font-bold">
+                <div class="table-cell w-1/5 border-b-2 border-black p-4 font-bold md:w-1/4 md:pl-12">
                     {{ __('Subtotal', 'woocommerce') }}
                 </div>
                 <div class="table-cell border-b-2 border-black p-4">
@@ -39,7 +39,7 @@
 
             @foreach (WC()->cart->get_coupons() as $code => $coupon)
                 <div class="table-row">
-                    <div class="table-cell w-1/4 border-b-2 border-black p-4 pl-12 font-bold">
+                    <div class="table-cell w-1/5 border-b-2 border-black p-4 font-bold md:w-1/4 md:pl-12">
                         {{ wc_cart_totals_coupon_label($coupon) }}
                     </div>
                     <div class="table-cell border-b-2 border-black p-4">
@@ -49,11 +49,11 @@
             @endforeach
 
             @if (WC()->cart->needs_shipping() && WC()->cart->show_shipping())
-                <div class="row-shipping table-row">
-                    <div class="table-cell w-1/4 border-b-2 border-black p-4 pl-12 font-bold">
+                <div class="row-shipping woocommerce-shipping-calculator table-row">
+                    <div class="table-cell w-1/5 border-b-2 border-black p-4 font-bold md:w-1/4 md:pl-12">
                         Shipping
                     </div>
-                    <div class="table-cell w-full border-b-2 border-black p-4">
+                    <div class="table-cell w-full border-b-2 border-black py-4 md:px-4">
                         @php
                             do_action('woocommerce_cart_totals_before_shipping');
                             wc_cart_totals_shipping_html();
@@ -62,19 +62,21 @@
                     </div>
                 </div>
             @elseif (WC()->cart->needs_shipping() && 'yes' === get_option('woocommerce_enable_shipping_calc'))
-                <div class="table-cell w-1/4 border-b-2 border-black p-4 pl-12 font-bold">
-                    Shipping
-                </div>
-                <div class="table-cell w-full border-b-2 border-black p-4">
-                    @php
-                        woocommerce_shipping_calculator();
-                    @endphp
+                <div class="row-shipping woocommerce-shipping-calculator table-row">
+                    <div class="table-cell w-1/5 border-b-2 border-black p-4 font-bold md:w-1/4 md:pl-12">
+                        Shipping
+                    </div>
+                    <div class="table-cell w-full border-b-2 border-black py-4 md:px-4">
+                        @php
+                            woocommerce_shipping_calculator();
+                        @endphp
+                    </div>
                 </div>
             @endif
 
             @foreach (WC()->cart->get_fees() as $fee)
                 <div class="table-row">
-                    <div class="table-cell w-1/4 border-b-2 border-black p-4 pl-12 font-bold">
+                    <div class="table-cell w-1/5 border-b-2 border-black p-4 font-bold md:w-1/4 md:pl-12">
                         {{ $fee->name }}
                     </div>
                     <div class="table-cell border-b-2 border-black p-4">
@@ -103,7 +105,7 @@
                 @if ('itemized' === get_option('woocommerce_tax_total_display'))
                     @foreach (WC()->cart->get_tax_totals() as $code => $tax)
                         <div class="tax-rate tax-rate-<?php echo esc_attr(sanitize_title($code)); ?> table-row">
-                            <div class="table-cell w-1/4 border-b-2 border-black p-4 pl-12 font-bold">
+                            <div class="table-cell w-1/5 border-b-2 border-black p-4 font-bold md:w-1/4 md:pl-12">
                                 {{ $tax->label }} {!! $estimated_text !!}
                             </div>
                             <div class="table-cell border-b-2 border-black p-4">
@@ -113,7 +115,7 @@
                     @endforeach
                 @else
                     <div class="tax-total table-row">
-                        <div class="table-cell w-1/4 border-b-2 border-black p-4 pl-12 font-bold">
+                        <div class="table-cell w-1/5 border-b-2 border-black p-4 font-bold md:w-1/4 md:pl-12">
                             {{ WC()->countries->tax_or_vat() }}{!! $estimated_text !!}
                         </div>
                         <div class="table-cell border-b-2 border-black p-4">
@@ -126,7 +128,7 @@
             <?php do_action('woocommerce_cart_totals_before_order_total'); ?>
 
             <div class="table-row text-2xl">
-                <div class="table-cell w-1/4 p-4 pl-12 font-bold">
+                <div class="table-cell w-1/5 p-4 pl-12 font-bold md:w-1/4">
                     {{ __('Total', 'woocommerce') }}
                 </div>
                 <div class="table-cell border-black p-4">
