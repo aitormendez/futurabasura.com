@@ -37,30 +37,35 @@ export function marquee() {
       setRepeatedText(repeated);
     }, [text]);
 
-    // Construcción dinámica de la clase
-    const clase = `gap-[0.5rem] [--duration:${speed}s]`;
-
     return (
       <a
         href={linkUrl}
         ref={containerRef}
-        className="block marquee-container overflow-hidden rounded-3xl"
+        className="block marquee-container overflow-hidden rounded-3xl not-prose"
         style={{ backgroundColor: pillBackgroundColor }}
       >
-        <Marquee
-          className={clase}
-          fade={false}
-          direction="left"
-          pauseOnHover={true}
+        <div
+          className="group flex overflow-hidden flex-row gap-[0.5rem]"
+          style={{ '--duration': `${speed}s` }}
         >
-          <p
-            ref={textRef}
-            className="text-2xl inline-block"
-            style={{ color: textColor, fontFamily: fontFamily }}
-          >
-            {repeatedText}
-          </p>
-        </Marquee>
+          <div className="flex justify-around gap-[1rem] [--gap:1rem] shrink-0 animate-marquee-left flex-row group-hover:[animation-play-state:paused]">
+            <p
+              ref={textRef}
+              className="text-2xl inline-block"
+              style={{ color: textColor, fontFamily: fontFamily }}
+            >
+              {repeatedText}
+            </p>
+          </div>
+          <div className="flex justify-around gap-[1rem] [--gap:1rem] shrink-0 animate-marquee-left flex-row group-hover:[animation-play-state:paused]">
+            <p
+              className="text-2xl inline-block"
+              style={{ color: textColor, fontFamily: fontFamily }}
+            >
+              {repeatedText}
+            </p>
+          </div>
+        </div>
       </a>
     );
   };
@@ -72,7 +77,7 @@ export function marquee() {
       'data-pill-background-color'
     );
     const textColor = element.getAttribute('data-text-color');
-    const speed = element.getAttribute('data-speed');
+    const speed = parseFloat(element.getAttribute('data-speed')) || 10;
     const fontFamily = element.getAttribute('data-font-family');
     const linkUrl = element.getAttribute('data-link-url');
     const root = createRoot(element);
