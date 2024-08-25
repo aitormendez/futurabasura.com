@@ -1,74 +1,89 @@
 @php
-/**
- * Checkout Form
- *
- * This template can be overridden by copying it to yourtheme/woocommerce/checkout/form-checkout.php.
- *
- * HOWEVER, on occasion WooCommerce will need to update template files and you
- * (the theme developer) will need to copy the new files to your theme to
- * maintain compatibility. We try to do this as little as possible, but it does
- * happen. When this occurs the version of the template file will be bumped and
- * the readme will list any important changes.
- *
- * @see https://docs.woocommerce.com/document/template-structure/
- * @package WooCommerce\Templates
- * @version 3.5.0
- */
+    /**
+     * Shipping Methods Display
+     *
+     * In 2.1 we show methods per package. This allows for multiple methods per order if so desired.
+     *
+     * This template can be overridden by copying it to yourtheme/woocommerce/cart/cart-shipping.php.
+     *
+     * HOWEVER, on occasion WooCommerce will need to update template files and you
+     * (the theme developer) will need to copy the new files to your theme to
+     * maintain compatibility. We try to do this as little as possible, but it does
+     * happen. When this occurs the version of the template file will be bumped and
+     * the readme will list any important changes.
+     *
+     * @see https://woocommerce.com/document/template-structure/
+     * @package WooCommerce\Templates
+     * @version 8.8.0
+     */
+@endphp
 
- @endphp
-@if ( ! defined( 'ABSPATH' ) )
-	@php exit @endphp
-@endif
-<div class="w-full ticket-head">
-  <div class="w-full ticket-triangulo bg-tk-triangulo"></div>
-  <div class="w-full h-10 bg-allo-claro"></div>
-</div>
-
-@php do_action( 'woocommerce_before_checkout_form', $checkout ); @endphp
-
-{{-- If checkout registration is disabled and not logged in, the user cannot checkout. --}}
-@if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_required() && ! is_user_logged_in() )
-	{{ apply_filters( 'woocommerce_checkout_must_be_logged_in_message', __( 'You must be logged in to checkout.', 'woocommerce' ) ) }}
-	@php return @endphp
+@if (!defined('ABSPATH'))
+    @php exit; @endphp
 @endif
 
-<form name="checkout" method="post" class="p-6 checkout woocommerce-checkout bg-allo-claro" action="{!! esc_url( wc_get_checkout_url() ) !!}" enctype="multipart/form-data">
+{{-- Acción personalizada antes de mostrar el formulario de checkout --}}
+@php do_action('woocommerce_before_checkout_form', $checkout); @endphp
 
-	@if ( $checkout->get_checkout_fields() )
+{{-- Si el registro de checkout está deshabilitado y el usuario no está logueado --}}
+@if (!$checkout->is_registration_enabled() && $checkout->is_registration_required() && !is_user_logged_in())
+    <p>{{ __('You must be logged in to checkout.', 'woocommerce') }}</p>
+    @php return; @endphp
+@endif
 
-		@php do_action( 'woocommerce_checkout_before_customer_details' ); @endphp
 
-		<div class="col2-set" id="customer_details">
-			<div class="col-1">
-				@php do_action( 'woocommerce_checkout_billing' ) @endphp
-			</div>
+<form name="checkout" method="post" class="checkout woocommerce-checkout font-sans" action="{{ wc_get_checkout_url() }}"
+    enctype="multipart/form-data">
 
-			<div class="col-2">
-				@php do_action( 'woocommerce_checkout_shipping' ) @endphp
-			</div>
-		</div>
+    {{-- ticket --}}
+    <div class="ticket">
+        <div class="ticket-head w-full">
+            <div class="ticket-triangulo w-full bg-tk-triangulo"></div>
+            <div class="h-10 w-full bg-allo-claro"></div>
+        </div>
+        <div class="tk-body bg-allo-claro">
+            @if ($checkout->get_checkout_fields())
+                {{-- Acción personalizada antes de los detalles del cliente --}}
+                @php do_action('woocommerce_checkout_before_customer_details'); @endphp
 
-		@php do_action( 'woocommerce_checkout_after_customer_details' ) @endphp
+                <div class="col2-set flex w-full flex-col md:!flex-row" id="customer_details">
+                    <div class="col-1 px-4 md:w-1/2">
+                        {{-- Acción personalizada para la sección de facturación --}}
+                        @php do_action('woocommerce_checkout_billing'); @endphp
+                    </div>
+                    <div class="col-2 px-4 md:w-1/2">
+                        {{-- Acción personalizada para la sección de envío --}}
+                        @php do_action('woocommerce_checkout_shipping'); @endphp
+                    </div>
+                </div>
 
-	@endif
+                {{-- Acción personalizada después de los detalles del cliente --}}
+                @php do_action('woocommerce_checkout_after_customer_details'); @endphp
+            @endif
 
-	@php do_action( 'woocommerce_checkout_before_order_review_heading' ) @endphp
+            {{-- Acción personalizada antes del título de la revisión de la orden --}}
+            @php do_action('woocommerce_checkout_before_order_review_heading'); @endphp
 
-	<h3 id="order_review_heading">{{ __( 'Your order', 'woocommerce' ) }}</h3>
+            <h3 class="ml-4 mt-14" id="order_review_heading">{{ __('Your order', 'woocommerce') }}</h3>
 
-	@php do_action( 'woocommerce_checkout_before_order_review' ) @endphp
+            {{-- Acción personalizada antes de la revisión de la orden --}}
+            @php do_action('woocommerce_checkout_before_order_review'); @endphp
 
-	<div id="order_review" class="woocommerce-checkout-review-order">
-		@php do_action( 'woocommerce_checkout_order_review' ) @endphp
-	</div>
+            <div id="order_review" class="woocommerce-checkout-review-order">
+                {{-- Acción personalizada para la revisión de la orden --}}
+                @php do_action('woocommerce_checkout_order_review'); @endphp
+            </div>
 
-	@php do_action( 'woocommerce_checkout_after_order_review' ) @endphp
+            {{-- Acción personalizada después de la revisión de la orden --}}
+            @php do_action('woocommerce_checkout_after_order_review'); @endphp
+        </div>
+        <div class="ticket-head w-full">
+            <div class="h-10 w-full bg-allo-claro"></div>
+            <div class="ticket-triangulo w-full bg-tk-triangulo-down"></div>
+        </div>
+    </div>
 
 </form>
 
-@php do_action( 'woocommerce_after_checkout_form', $checkout ) @endphp
-
-<div class="w-full ticket-head">
-  <div class="w-full h-10 bg-allo-claro"></div>
-  <div class="w-full ticket-triangulo bg-tk-triangulo-down"></div>
-</div>
+{{-- Acción personalizada después de mostrar el formulario de checkout --}}
+@php do_action('woocommerce_after_checkout_form', $checkout); @endphp

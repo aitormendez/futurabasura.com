@@ -1,44 +1,63 @@
 @php
-/**
- * Checkout coupon form
- *
- * This template can be overridden by copying it to yourtheme/woocommerce/checkout/form-coupon.php.
- *
- * HOWEVER, on occasion WooCommerce will need to update template files and you
- * (the theme developer) will need to copy the new files to your theme to
- * maintain compatibility. We try to do this as little as possible, but it does
- * happen. When this occurs the version of the template file will be bumped and
- * the readme will list any important changes.
- *
- * @see https://docs.woocommerce.com/document/template-structure/
- * @package WooCommerce\Templates
- * @version 3.4.4
- */
+    /**
+     * Checkout coupon form
+     *
+     * This template can be overridden by copying it to yourtheme/woocommerce/checkout/form-coupon.php.
+     *
+     * HOWEVER, on occasion WooCommerce will need to update template files and you
+     * (the theme developer) will need to copy the new files to your theme to
+     * maintain compatibility. We try to do this as little as possible, but it does
+     * happen. When this occurs the version of the template file will be bumped and
+     * the readme will list any important changes.
+     *
+     * @see https://woocommerce.com/document/template-structure/
+     * @package WooCommerce\Templates
+     * @version 7.0.1
+     */
 
-defined( 'ABSPATH' ) || exit;
+    defined('ABSPATH') || exit();
 @endphp
 
-@if ( ! wc_coupons_enabled() ) { // @codingStandardsIgnoreLine.
-	@php return @endphp
-@endif
+@php
+    if (!wc_coupons_enabled()) {
+        return;
+    }
+@endphp
 
-<div class="p-6 tracking-wider cupon bg-allo-claro">
-  <div class="woocommerce-form-coupon-toggle">
-    @php wc_print_notice( apply_filters( 'woocommerce_checkout_coupon_message', esc_html__( 'Have a coupon?', 'woocommerce' ) . ' <a href="#" class="showcoupon">' . esc_html__( 'Click here to enter your code', 'woocommerce' ) . '</a>' ), 'notice' ) @endphp
-  </div>
+<div class="woocommerce-form-coupon-toggle font-sans">
+    {!! wc_print_notice(
+        apply_filters(
+            'woocommerce_checkout_coupon_message',
+            __('Have a coupon?', 'woocommerce') .
+                ' <a href="#" class="showcoupon text-azul">' .
+                __('Click here to enter your code', 'woocommerce') .
+                '</a>',
+        ),
+        'notice',
+    ) !!}
+</div>
 
-  <form class="checkout_coupon woocommerce-form-coupon" method="post" style="display:none">
+<form class="checkout_coupon woocommerce-form-coupon flex flex-col items-center font-sans" method="post"
+    style="display:none">
 
-    <p>{{  __( 'If you have a coupon code, please apply it below.', 'woocommerce' ) }}</p>
+    <p class="mb-6">{{ __('If you have a coupon code, please apply it below.', 'woocommerce') }}</p>
 
-    <p class="my-6 form-row form-row-first">
-      <input type="text" name="coupon_code" class="w-full text-center input-text" placeholder="{{  __( 'Coupon code', 'woocommerce' ) }}" id="coupon_code" value="" />
+    <p class="form-row form-row-first">
+        <label for="coupon_code" class="screen-reader-text">{{ __('Coupon:', 'woocommerce') }}</label>
+
+    <div class="border-2 border-black">
+        <input type="text" name="coupon_code"
+            class="input-text input-text h-24 w-full bg-transparent text-center font-bold tracking-wider text-rojo"
+            placeholder="{{ __('Coupon code', 'woocommerce') }}" id="coupon_code" value="" />
+    </div>
     </p>
 
     <p class="form-row form-row-last">
-      <button type="submit" class="button btn" name="apply_coupon" value="{{  __( 'Apply coupon', 'woocommerce' ) }}">{{ __( 'Apply coupon', 'woocommerce' ) }}</button>
+        <button type="submit"
+            class="texts-sm button{{ wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : '' }} mb-14 mt-6 rounded !bg-azul px-4 py-2 uppercase tracking-wider text-white hover:!bg-allo hover:text-black"
+            name="apply_coupon"
+            value="{{ __('Apply coupon', 'woocommerce') }}">{{ __('Apply coupon', 'woocommerce') }}</button>
     </p>
 
     <div class="clear"></div>
-  </form>
-</div>
+</form>

@@ -20,7 +20,7 @@ do_action('woocommerce_before_cart'); ?>
 <form class="woocommerce-cart-form" action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post">
     <?php do_action('woocommerce_before_cart_table'); ?>
 
-    {{-- nueva tabla --}}
+    {{-- ticket --}}
     <div class="ticket">
         <div class="ticket-head w-full">
             <div class="ticket-triangulo w-full bg-tk-triangulo"></div>
@@ -241,7 +241,7 @@ do_action('woocommerce_before_cart'); ?>
                                         for="coupon_code">{{ esc_attr(translate('Coupon', 'woocommerce')) }}</label>
 
                                     <input type="text" name="coupon_code"
-                                        class="text-red-600 input-text h-36 w-full bg-transparent text-center font-bold tracking-wider"
+                                        class="input-text h-36 w-full bg-transparent text-center font-bold tracking-wider text-rojo"
                                         id="coupon_code" value=""
                                         placeholder="{{ esc_attr(translate('Coupon code', 'woocommerce')) }}" />
 
@@ -292,7 +292,7 @@ do_action('woocommerce_before_cart'); ?>
         </div>
     </div>
 
-    {{-- / nueva tabla --}}
+    {{-- / ticket --}}
 
     <?php do_action('woocommerce_after_cart_table'); ?>
 </form>

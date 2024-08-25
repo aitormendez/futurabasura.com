@@ -99,7 +99,7 @@ main {
 .woocommerce-message,
 .woocommerce-error,
 .woocommerce-info {
-  @apply bg-allo;
+  @apply bg-allo font-sans;
 
   padding: 1em;
   border: 1px solid #000;
@@ -113,6 +113,10 @@ main {
     margin-left: 0;
     margin-right: 0;
  } */
+
+  a {
+    @apply text-azul;
+  }
 }
 
 .woocommerce-Price-currencySymbol {

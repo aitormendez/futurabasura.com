@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Marquee } from '@devnomic/marquee';
+// import { Marquee } from '@devnomic/marquee';
 import '@devnomic/marquee/dist/index.css';
 
 export function marquee() {
