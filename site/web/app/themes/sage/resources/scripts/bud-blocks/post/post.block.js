@@ -33,6 +33,9 @@ export default {
       default: '#ffff00',
     },
   },
+  supports: {
+    align: ['wide', 'full'],
+  },
   edit: Edit,
   save: () => null,
 };

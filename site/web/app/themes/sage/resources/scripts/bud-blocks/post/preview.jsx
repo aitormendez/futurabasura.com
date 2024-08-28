@@ -8,6 +8,9 @@ const Preview = ({
   image_orientation = 'horizontal',
   backgroundColor = '#ffffff',
   artists_terms = [],
+  excerpt = 'This is a sample excerpt.',
+  align = '',
+  post_type_label = 'Projects',
 }) => {
   return (
     <div className="preview-block">
@@ -47,8 +50,31 @@ const Preview = ({
       )}
 
       {layout === 'layout2' && (
-        <div className="layout2-preview">
-          <p>{name} - Layout 2 Preview</p>
+        <div
+          className={`not-prose ${align} mx-6 flex border-y-2 border-black py-4 md:flex-row`}
+        >
+          <div
+            style={{ backgroundColor }}
+            className="flex flex-col justify-between p-6  w-full md:w-1/2"
+          >
+            <div className="font-bugrino font-light">{post_type_label}</div>
+            <div className="my-6 text-center font-arialblack text-sm">
+              {name}
+            </div>
+            <div
+              className="text-center font-fk text-sm"
+              dangerouslySetInnerHTML={{ __html: excerpt }}
+            ></div>
+          </div>
+          <div className="flex h-full items-center justify-center  w-full md:w-1/2">
+            <img
+              src={image_url}
+              alt={name}
+              className={
+                image_orientation === 'horizontal' ? 'w-full' : 'w-2/3'
+              }
+            />
+          </div>
         </div>
       )}
     </div>

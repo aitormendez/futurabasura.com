@@ -143,6 +143,10 @@ return [
                     'type' => 'string',
                     'default' => '#ffff00',
                 ],
+                'align' => [
+                    'type' => 'string',
+                    'default' => '', // Puedes usar '' como valor por defecto para no aplicar ninguna alineación
+                ],
             ],
         ],
         'sage/video' => [

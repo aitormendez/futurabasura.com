@@ -25,6 +25,7 @@ const Edit = ({ attributes, setAttributes }) => {
     layout = 'layout1',
     backgroundColor = '#ffffff',
     image_url = 'https://via.placeholder.com/150',
+    align = '',
   } = attributes;
 
   const [isPreview, setIsPreview] = useState(false);
@@ -32,12 +33,14 @@ const Edit = ({ attributes, setAttributes }) => {
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedPostName, setSelectedPostName] = useState('');
+  const [excerpt, setExcerpt] = useState('This is a sample excerpt.');
+  const [postTypeLabel, setPostTypeLabel] = useState('Projects');
 
   const togglePreview = () => setIsPreview((prev) => !prev);
 
   const image_orientation = 'horizontal';
 
-  // Definir la función handleBackgroundColorChange
+  // Función para manejar el cambio del color de fondo
   const handleBackgroundColorChange = (newColor) => {
     setAttributes({ backgroundColor: newColor });
   };
@@ -58,6 +61,21 @@ const Edit = ({ attributes, setAttributes }) => {
                 selectedPost.name || selectedPost.title.rendered,
               );
 
+              // Obtener y actualizar el excerpt
+              setExcerpt(
+                selectedPost.excerpt?.rendered || 'El post no tiene excerpt',
+              );
+
+              // Actualizar el postTypeLabel
+              const postTypeLabels = {
+                post: 'Posts',
+                page: 'Pages',
+                project: 'Projects',
+                story: 'Stories',
+                product: 'Products',
+              };
+              setPostTypeLabel(postTypeLabels[contentType] || 'Content');
+
               // Hacer una llamada a la API para obtener la URL de la imagen destacada
               if (selectedPost.featured_media) {
                 apiFetch({
@@ -66,7 +84,6 @@ const Edit = ({ attributes, setAttributes }) => {
                   .then((media) => {
                     const imageUrl =
                       media.source_url || 'https://via.placeholder.com/150';
-                    console.log('Image URL:', imageUrl); // Verifica si se obtiene la URL correcta
                     setAttributes({ image_url: imageUrl });
                   })
                   .catch((error) => {
@@ -120,11 +137,22 @@ const Edit = ({ attributes, setAttributes }) => {
 
   const updatePost = (selectedId) => {
     const post = posts.find((post) => post.id.toString() === selectedId);
-    console.log('Selected Post:', post); // Verifica la estructura de los datos del post
-
     if (post) {
       setAttributes({ postId: parseInt(selectedId) });
       setSelectedPostName(post.name || post.title.rendered);
+
+      // Obtener y actualizar el excerpt
+      setExcerpt(post.excerpt?.rendered || 'El post no tiene excerpt');
+
+      // Actualizar el postTypeLabel
+      const postTypeLabels = {
+        post: 'Posts',
+        page: 'Pages',
+        project: 'Projects',
+        story: 'Stories',
+        product: 'Products',
+      };
+      setPostTypeLabel(postTypeLabels[contentType] || 'Content');
 
       // Si post.featured_media es un ID, haz una solicitud para obtener la imagen
       if (post.featured_media) {
@@ -132,7 +160,6 @@ const Edit = ({ attributes, setAttributes }) => {
           .then((media) => {
             const imageUrl =
               media.source_url || 'https://via.placeholder.com/150';
-            console.log('Image URL:', imageUrl); // Verifica si se obtiene la URL correcta
             setAttributes({ image_url: imageUrl });
           })
           .catch((error) => {
@@ -140,7 +167,6 @@ const Edit = ({ attributes, setAttributes }) => {
             setAttributes({ image_url: 'https://via.placeholder.com/150' });
           });
       } else {
-        // Si no hay featured_media, usa el placeholder
         setAttributes({ image_url: 'https://via.placeholder.com/150' });
       }
     }
@@ -194,6 +220,9 @@ const Edit = ({ attributes, setAttributes }) => {
           image_url={image_url}
           image_orientation={image_orientation}
           backgroundColor={backgroundColor}
+          excerpt={excerpt}
+          align={align}
+          post_type_label={postTypeLabel}
         />
       ) : (
         <div>
@@ -243,6 +272,7 @@ Edit.propTypes = {
     layout: PropTypes.string,
     backgroundColor: PropTypes.string,
     image_url: PropTypes.string,
+    align: PropTypes.string,
   }).isRequired,
   setAttributes: PropTypes.func.isRequired,
 };

@@ -1,9 +1,8 @@
-@dump($data)
-{{-- 
 @php
     $post_id = $data->postId;
     $layout = $data->layout ?? 'layout1';
     $post_type = $data->contentType ?? 'product';
+    $align = $data->align ?? '';
 
     if ($post_type === 'product') {
         $post = wc_get_product($post_id);
@@ -17,8 +16,7 @@
         $image_url = wp_get_attachment_image_url($image_id, 'full');
         $image_srcset = wp_get_attachment_image_srcset($image_id, 'full');
         $image_meta = wp_get_attachment_metadata($image_id);
-        $description =
-            $post_type === 'product' ? $post->get_description() : apply_filters('the_content', $post->post_content);
+        $excerpt = has_excerpt($post_id) ? get_the_excerpt($post_id) : 'El post no tiene excerpt';
         $price = $post_type === 'product' ? $post->get_price() : null;
         $artists_terms = wp_get_post_terms($post_id, 'artist');
 
@@ -29,11 +27,22 @@
             $image_orientation = 'vertical';
         }
     }
+
+    // Convertir el tipo de post en su forma plural
+    $post_type_plural = [
+        'post' => 'Posts',
+        'page' => 'Pages',
+        'project' => 'Projects',
+        'story' => 'Stories',
+        'product' => 'Products',
+    ];
+
+    $post_type_label = $post_type_plural[$post_type] ?? ucfirst($post_type) . 's';
 @endphp
 
-@if ($layout === 'layout1')
-    @if (isset($post))
-        <div class="product-block flex aspect-[50/60] w-full !max-w-none md:aspect-[100/50]">
+@if (isset($post))
+    @if ($layout === 'layout1')
+        <div class="flex aspect-[50/60] w-full !max-w-none md:aspect-[100/50]">
             <div class="col-left w-[10%] border-r-2 border-black md:w-[30%]"
                 style="background-color: {{ $data->backgroundColor ?? '#ffffff' }}"></div>
 
@@ -50,18 +59,33 @@
                         @foreach ($artists_terms as $term)
                             <span>{{ $term->name }}</span>
                         @endforeach
-                    </div> <!-- Cerrar el div correspondiente al bloque de términos -->
+                    </div>
                 @endif
-            </a> <!-- Cerrar la etiqueta <a> correctamente -->
+            </a>
 
             <div class="col-right w-[10%] border-l-2 border-black md:w-[30%]"
                 style="background-color: {{ $data->backgroundColor ?? '#ffffff' }}"></div>
         </div>
-    @else
-        <p>Post not found.</p>
+    @elseif($layout === 'layout2')
+        @if (isset($post))
+            <div class="not-prose {{ $align }} mx-6 flex border-y-2 border-black py-4 md:flex-row">
+                <div style="background-color: {{ $data->backgroundColor ?? '#ffffff' }}"
+                    class="flex w-full flex-col justify-between p-6 md:w-1/2">
+                    <div class="font-bugrino font-light">{{ $post_type_label }}</div>
+                    <div class="my-6 text-center font-arialblack text-sm">
+                        {{ $name }}</div>
+                    <div class="text-center font-fk text-sm">
+                        {!! $excerpt !!}
+                    </div>
+                </div>
+                <div class="flex h-full w-full items-center justify-center md:w-1/2">
+                    <img src="{{ $image_url }}" srcset="{{ $image_srcset }}" sizes="(max-width: 768px) 100%, 50%"
+                        alt="{{ $name }}"
+                        class="{{ $image_orientation === 'horizontal' ? 'w-full' : 'w-2/3' }}">
+                </div>
+            </div>
+        @endif
     @endif
-@elseif($layout === 'layout2')
-    <div class="product-blockflex w-full max-w-none">
-        Renderiza el layout 2
-    </div>
-@endif --}}
+@else
+    <p>Post not found.</p>
+@endif
