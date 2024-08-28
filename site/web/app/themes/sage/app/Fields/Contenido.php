@@ -14,12 +14,11 @@ class Contenido extends Field
 
         $builder
             ->setLocation('post_type', '==', 'story')
-                ->or('post_type', '==', 'project');
+            ->or('post_type', '==', 'project');
 
         $builder
             ->addTab('Portada', ['placement' => 'left'])
-                ->addFields($this->get(Portada::class))
-            ;
+            ->addFields($this->get(Portada::class));
 
         return $builder->build();
     }

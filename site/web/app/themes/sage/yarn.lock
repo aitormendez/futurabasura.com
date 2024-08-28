@@ -979,6 +979,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@prettier/plugin-php@npm:^0.22.2":
+  version: 0.22.2
+  resolution: "@prettier/plugin-php@npm:0.22.2"
+  dependencies:
+    linguist-languages: "npm:^7.27.0"
+    php-parser: "npm:^3.1.5"
+  peerDependencies:
+    prettier: ^3.0.0
+  checksum: 10c0/8fc6b429e5efcaa3f5f469fb8129452306adc5cd49d319701924dca94dbd05e0b2934cb9ba191d36e9aabd20058c71a938ecb757cfc1de24d548d5293326e975
+  languageName: node
+  linkType: hard
+
 "@radix-ui/number@npm:1.1.0":
   version: 1.1.0
   resolution: "@radix-ui/number@npm:1.1.0"
@@ -6894,6 +6906,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"linguist-languages@npm:^7.27.0":
+  version: 7.27.0
+  resolution: "linguist-languages@npm:7.27.0"
+  checksum: 10c0/a4d4d63785155332736a59d58fe72310a4e449199e1ae7d7ba2334a81b9a10a249693d67e54af812ab36091d6396090e69b0370a3655a49f434e7e968516b714
+  languageName: node
+  linkType: hard
+
 "load-json-file@npm:^4.0.0":
   version: 4.0.0
   resolution: "load-json-file@npm:4.0.0"
@@ -8178,6 +8197,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"php-parser@npm:^3.1.5":
+  version: 3.1.5
+  resolution: "php-parser@npm:3.1.5"
+  checksum: 10c0/356b7c8d84c055f0f3838d4906edf8100fc022bd5651d81d86d705027253c3ab8a4d8f1569365e88c286e39c9d10011a1f4f86eb8afec95dad99b35f574bd7bd
+  languageName: node
+  linkType: hard
+
 "picocolors@npm:^1.0.0, picocolors@npm:^1.0.1":
   version: 1.0.1
   resolution: "picocolors@npm:1.0.1"
@@ -9079,6 +9105,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"prettier@npm:^3.3.3":
+  version: 3.3.3
+  resolution: "prettier@npm:3.3.3"
+  bin:
+    prettier: bin/prettier.cjs
+  checksum: 10c0/b85828b08e7505716324e4245549b9205c0cacb25342a030ba8885aba2039a115dbcf75a0b7ca3b37bc9d101ee61fab8113fc69ca3359f2a226f1ecc07ad2e26
+  languageName: node
+  linkType: hard
+
 "pretty-format@npm:29.7.0":
   version: 29.7.0
   resolution: "pretty-format@npm:29.7.0"
@@ -9622,6 +9657,7 @@ __metadata:
   dependencies:
     "@devnomic/marquee": "npm:^1.0.2"
     "@glidejs/glide": "npm:^3.6.1"
+    "@prettier/plugin-php": "npm:^0.22.2"
     "@roots/bud": "npm:^6.23.2"
     "@roots/bud-tailwindcss": "npm:^6.23.2"
     "@roots/sage": "npm:^6.23.2"
@@ -9638,6 +9674,7 @@ __metadata:
     lightgallery: "npm:^2.7.2"
     lucide-react: "npm:^0.407.0"
     media-icons: "npm:^1.1.4"
+    prettier: "npm:^3.3.3"
     prop-types: "npm:^15.8.1"
     radix-ui: "npm:^1.0.1"
     react-feather: "npm:^2.0.10"

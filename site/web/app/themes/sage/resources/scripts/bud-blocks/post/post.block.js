@@ -11,12 +11,16 @@ const CustomIcon = (
 );
 
 export default {
-  name: `sage/product`,
-  title: `Product`,
+  name: `sage/post`,
+  title: `post`,
   icon: CustomIcon,
   category: `fb`,
   attributes: {
-    productId: {
+    contentType: {
+      type: 'string',
+      default: 'product', // Puede ser 'product', 'project', o 'story'
+    },
+    postId: {
       type: 'number',
       default: 0,
     },

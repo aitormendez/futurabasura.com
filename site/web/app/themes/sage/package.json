@@ -20,10 +20,12 @@
     "translate:mo": "wp i18n make-mo ./resources/lang ./resources/lang"
   },
   "devDependencies": {
+    "@prettier/plugin-php": "^0.22.2",
     "@roots/bud": "^6.23.2",
     "@roots/bud-tailwindcss": "^6.23.2",
     "@roots/sage": "^6.23.2",
-    "@tailwindcss/typography": "^0.5.13"
+    "@tailwindcss/typography": "^0.5.13",
+    "prettier": "^3.3.3"
   },
   "dependencies": {
     "@devnomic/marquee": "^1.0.2",

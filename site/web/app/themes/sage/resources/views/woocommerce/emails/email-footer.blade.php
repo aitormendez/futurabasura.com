@@ -15,8 +15,10 @@
  * @version 3.7.0
  */
 
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit();
 ?>
+{{-- blade-formatter-disable --}}
+
 															</div>
 														</td>
 													</tr>
@@ -82,3 +84,4 @@ defined( 'ABSPATH' ) || exit;
 		</div>
 	</body>
 </html>
+{{-- blade-formatter-enable --}}

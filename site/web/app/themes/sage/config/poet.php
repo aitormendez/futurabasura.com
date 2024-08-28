@@ -121,11 +121,29 @@ return [
     */
 
     'block' => [
-        'sage/product' => [
-            'title' => __('Product', 'sage'),
-            'description' => __('Show a product', 'sage'),
-            'keywords' => ['product'],
-            'post_types' => ['post', 'page'],
+        'sage/post' => [
+            'title' => __('Content Block', 'sage'),
+            'description' => __('Show a product, project, or story', 'sage'),
+            'keywords' => ['product', 'project', 'story'],
+            'post_types' => ['post', 'page', 'project', 'story'],
+            'attributes' => [
+                'postId' => [
+                    'type' => 'number',
+                    'default' => 0,
+                ],
+                'layout' => [
+                    'type' => 'string',
+                    'default' => 'layout1',
+                ],
+                'contentType' => [
+                    'type' => 'string',
+                    'default' => 'product',
+                ],
+                'backgroundColor' => [
+                    'type' => 'string',
+                    'default' => '#ffff00',
+                ],
+            ],
         ],
         'sage/video' => [
             'title' => __('Video', 'sage'),
