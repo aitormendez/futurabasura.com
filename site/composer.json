@@ -63,6 +63,7 @@
     "wpackagist-plugin/mailchimp-for-wp": "*",
     "wpackagist-plugin/variation-swatches-woo": "*",
     "wpackagist-plugin/complianz-gdpr": "*",
+    "wpackagist-plugin/woocommerce-square": "*",
     "log1x/poet": "^2.0",
     "log1x/acf-composer": "^3.0.24",
     "log1x/navi": "^3.0.3",
