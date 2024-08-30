@@ -1,13 +1,10 @@
 import domReady from '@roots/sage/client/dom-ready';
 import { navigation } from './navigation.js';
-import Alpine from 'alpinejs';
-import { dropdownFilter, dropdownSort } from './shop.js';
 import scramble from './scramble.js';
 import './components/video/video-player.js';
-window.Alpine = Alpine;
-window.dropdownFilter = dropdownFilter;
-window.dropdownSort = dropdownSort;
-Alpine.start();
+import Alpine from 'alpinejs';
+import collapse from '@alpinejs/collapse';
+Alpine.plugin(collapse);
 
 /**
  * Application entrypoint
@@ -81,6 +78,9 @@ domReady(async () => {
   if (document.body.classList.contains('woocommerce-shop')) {
     const { infiniteScrollShop } = await import('./infiniteScroll.js');
     infiniteScrollShop();
+    const { dropdownFilter, dropdownSort } = await import('./shop.js');
+    window.dropdownFilter = dropdownFilter;
+    window.dropdownSort = dropdownSort;
   }
 
   if (
@@ -90,6 +90,9 @@ domReady(async () => {
     const { galeriaStory } = await import('./singleStory.js');
     galeriaStory();
   }
+
+  window.Alpine = Alpine;
+  Alpine.start();
 });
 
 /**

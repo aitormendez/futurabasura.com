@@ -22,6 +22,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@alpinejs/collapse@npm:^3.14.1":
+  version: 3.14.1
+  resolution: "@alpinejs/collapse@npm:3.14.1"
+  checksum: 10c0/688ad4fe8f49c48b1ebf3d1e1bccf37c3eaee93b488538969726917b5ad4e14bc6673ddd373989561b00669433909d50ee21ad5aed6b8a7ea6bc2aa996f260fa
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.24.7":
   version: 7.24.7
   resolution: "@babel/code-frame@npm:7.24.7"
@@ -9655,6 +9662,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "sage@workspace:."
   dependencies:
+    "@alpinejs/collapse": "npm:^3.14.1"
     "@devnomic/marquee": "npm:^1.0.2"
     "@glidejs/glide": "npm:^3.6.1"
     "@prettier/plugin-php": "npm:^0.22.2"

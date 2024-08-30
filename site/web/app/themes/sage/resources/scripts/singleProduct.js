@@ -11,7 +11,7 @@ export function singleProductGallery() {
   let g = document.getElementById('glide'),
     s = g.getElementsByClassName('slide'),
     slidesReales = Array.from(s).filter(
-      (slide) => !slide.classList.contains('glide__slide--clone')
+      (slide) => !slide.classList.contains('glide__slide--clone'),
     ),
     i = document.getElementById('indice');
 
@@ -38,7 +38,6 @@ export function singleProductGallery() {
   });
 
   function indice() {
-    console.log(s.length);
     i.innerHTML = glide.index + 1 + ' / ' + slidesReales.length;
   }
 

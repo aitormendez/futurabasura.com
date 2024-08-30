@@ -28,6 +28,7 @@
     "prettier": "^3.3.3"
   },
   "dependencies": {
+    "@alpinejs/collapse": "^3.14.1",
     "@devnomic/marquee": "^1.0.2",
     "@glidejs/glide": "^3.6.1",
     "@vidstack/react": "^1.11.25",

@@ -19,6 +19,10 @@ class WooCommerceServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        add_filter('woocommerce_show_variation_price', function () {
+            return true;
+        });
+
         //desplegable artistas
         add_action('woocommerce_before_shop_loop', function () {
             echo <<<HTML
@@ -58,8 +62,8 @@ class WooCommerceServiceProvider extends ServiceProvider
         }, 25);
 
         // desplegable ordenar
-        add_action('woocommerce_before_shop_loop', function() {
-            ?>
+        add_action('woocommerce_before_shop_loop', function () {
+?>
             <div x-data="dropdownSort()" x-init="init()" class="relative md:min-w-80 text-center">
                 <!-- Aplicar @click.away en este nivel asegura que cualquier clic fuera del desplegable cerrará las opciones -->
                 <div @click.away="open = false" @click="open = !open" class="cursor-pointer bg-white uppercase tracking-[0.2em] w-full">
@@ -73,7 +77,7 @@ class WooCommerceServiceProvider extends ServiceProvider
                     </div>
                 </div>
             </div>
-            <?php
+        <?php
 
             // EL SCRIPT ESTÁ EN SHOP.JS (dropdownSort).
         }, 26);
@@ -97,21 +101,21 @@ class WooCommerceServiceProvider extends ServiceProvider
                     </div>
                 </div>
             HTML;
-    
+
             // Obtener las categorías excluyendo "uncategorized"
             $categories = get_terms([
                 'taxonomy' => 'product_cat',
                 'hide_empty' => true,
                 'exclude' => [get_term_by('slug', 'uncategorized', 'product_cat')->term_id], // Excluir el término "uncategorized"
             ]);
-    
-            $categories_js = array_map(function($category) {
+
+            $categories_js = array_map(function ($category) {
                 return [
                     'slug' => $category->slug,
                     'name' => $category->name,
                 ];
             }, $categories);
-    
+
             echo "<script>
                 function dropdownCategory() {
                     return {
@@ -140,67 +144,67 @@ class WooCommerceServiceProvider extends ServiceProvider
                 }
             </script>";
         }, 24);
-    
 
-        
+
+
 
         /**
          * Rodear filtros de la tienda con un div.filtros -- inicio.
          */
-        add_action( 'woocommerce_before_shop_loop', function() {
+        add_action('woocommerce_before_shop_loop', function () {
             echo '<div class="relative flex flex-wrap justify-center p-6 filtros md:pt-12 md:pb-20">';
-        }, 20 );
+        }, 20);
 
         /**
          * Rodear filtros de la tienda con un div.filtros -- fin
          */
-        add_action( 'woocommerce_before_shop_loop', function() {
+        add_action('woocommerce_before_shop_loop', function () {
             echo '</div><div id="desplegable" class="relative"></div>';
-        }, 30 );
+        }, 30);
 
         /**
          * Eliminar estilos WC.
          */
-        add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
+        add_filter('woocommerce_enqueue_styles', '__return_empty_array');
 
 
         /**
          * Eliminar "Showing número de products" de la portada de la tienda.
          */
-        remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
+        remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20);
 
 
 
         /**
          * Eliminar funcionalidad (zoom, gallery, lightbox) de single product.
          */
-        add_action( 'after_setup_theme', function () {
-            remove_theme_support( 'wc-product-gallery-slider' );
-            remove_theme_support( 'wc-product-gallery-zoom' );
-            remove_theme_support( 'wc-product-gallery-lightbox' );
-        }, 20 );
+        add_action('after_setup_theme', function () {
+            remove_theme_support('wc-product-gallery-slider');
+            remove_theme_support('wc-product-gallery-zoom');
+            remove_theme_support('wc-product-gallery-lightbox');
+        }, 20);
 
         /**
          * Eliminar reviews de single product y additional information tab.
          */
-        add_filter( 'woocommerce_product_tabs', function ($tabs) {
+        add_filter('woocommerce_product_tabs', function ($tabs) {
             unset($tabs['reviews']);
-            unset( $tabs['additional_information'] );
+            unset($tabs['additional_information']);
             return $tabs;
-        }, 98 );
+        }, 98);
 
 
         /**
          * Añadir clase simple/variable/etc en body de single-product.
          */
 
-         add_action('template_redirect', function() {
+        add_action('template_redirect', function () {
             if (!is_admin() && is_product()) {
-                add_filter('body_class', function($classes) {
+                add_filter('body_class', function ($classes) {
                     global $post;
                     $product = wc_get_product($post->ID);
                     $tipo = $product->get_type();
-    
+
                     return array_merge($classes, [$tipo]);
                 });
             }
@@ -209,7 +213,7 @@ class WooCommerceServiceProvider extends ServiceProvider
         /**
          * Mostrar nota legal.
          */
-        add_filter( 'woocommerce_after_shipping_calculator', function()  {
+        add_filter('woocommerce_after_shipping_calculator', function () {
             echo '<div class="text-xs">' . get_field('exp_car_totals', 'option') . '</div>';
         });
 
@@ -217,9 +221,9 @@ class WooCommerceServiceProvider extends ServiceProvider
          * Mostrar etiqueta nuevo producto.
          */
 
-        add_action( 'woocommerce_before_shop_loop_item_title', [$this, 'mostrar_etiqueta_nuevo_producto'], 15 );
-        
-        
+        add_action('woocommerce_before_shop_loop_item_title', [$this, 'mostrar_etiqueta_nuevo_producto'], 15);
+
+
 
         /**
          * acciones condicionales para móvil y para escritorio
@@ -235,13 +239,13 @@ class WooCommerceServiceProvider extends ServiceProvider
 
         add_action('pre_get_posts', [$this, 'apply_artist_filter_to_products_query']);
 
-         // Remove the default WooCommerce product link open function
+        // Remove the default WooCommerce product link open function
         remove_action('woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10);
 
         // Add your customized product link open function
         add_action('woocommerce_before_shop_loop_item', [$this, 'custom_woocommerce_template_loop_product_link_open'], 10);
 
-        if ( wp_is_mobile() ) {
+        if (wp_is_mobile()) {
             add_action('woocommerce_before_shop_loop_item_title', [$this, 'woocommerce_template_loop_product_thumbnail_mobile'], 10);
             add_action('woocommerce_before_shop_loop_item_title', [$this, 'renderizar_metadatos_mobile_shop_loop'], 15);
         } else {
@@ -250,14 +254,15 @@ class WooCommerceServiceProvider extends ServiceProvider
         }
     }
 
-        /**
+    /**
      * Mostrar etiqueta "new in shop" en los productos de la portada de la tienda.
      */
 
-     public function mostrar_etiqueta_nuevo_producto() {
+    public function mostrar_etiqueta_nuevo_producto()
+    {
         global $product;
         // Verifica si el producto tiene la etiqueta "new in shop"
-        if ( has_term( 'new-in-shop', 'product_tag', $product->get_id() ) ) {
+        if (has_term('new-in-shop', 'product_tag', $product->get_id())) {
             if (wp_is_mobile()) {
                 echo '<span class="absolute top-0 left-4 uppercase tracking-wider bg-yellow-300 px-2 pt-[0.2em]">New</span>';
             } else {
@@ -270,14 +275,14 @@ class WooCommerceServiceProvider extends ServiceProvider
      * Mostrar artista en los productos de la portada de la tienda.
      */
 
-    private function mostrar_artista_producto() {
+    private function mostrar_artista_producto()
+    {
         global $product;
-        $artist_ids = wp_get_post_terms( $product->get_id(), 'artist', ['fields' => 'names'] );
+        $artist_ids = wp_get_post_terms($product->get_id(), 'artist', ['fields' => 'names']);
         // Comprueba si hay artistas asignados y los imprime
-        if ( !empty($artist_ids) ) {
+        if (!empty($artist_ids)) {
             if (wp_is_mobile()) {
                 echo '<div class="font-bugrino text-lg my-3">' . join(', ', $artist_ids) . '</div>';
-
             } else {
                 echo '<div class="font-bugrino text-[1.5vw] mt-3">' . join(', ', $artist_ids) . '</div>';
             }
@@ -287,7 +292,8 @@ class WooCommerceServiceProvider extends ServiceProvider
     /**
      * Mostrar las categorías de producto, excluyendo "Uncategorized".
      */
-    private function mostrar_tipo_producto() {
+    private function mostrar_tipo_producto()
+    {
         global $product;
 
         // Obtener las categorías del producto
@@ -318,16 +324,17 @@ class WooCommerceServiceProvider extends ServiceProvider
     }
 
     /**
-    * mostrar información de producto en el loop de portada.
-    */
-   
-    private function mostrar_informacion_producto() {
+     * mostrar información de producto en el loop de portada.
+     */
+
+    private function mostrar_informacion_producto()
+    {
         global $product;
 
         // Comprueba si el producto es variable
-        if ( $product->is_type( 'variable' ) ) {
+        if ($product->is_type('variable')) {
             $variations = $product->get_available_variations();
-            foreach ( $variations as $variation ) {
+            foreach ($variations as $variation) {
                 $variation_obj = new \WC_Product_Variation($variation['variation_id']);
 
                 // Inicializa una cadena para los atributos
@@ -337,7 +344,7 @@ class WooCommerceServiceProvider extends ServiceProvider
                 $attributes = $variation_obj->get_variation_attributes();
 
                 // Itera sobre cada atributo
-                foreach ( $attributes as $attribute_name => $attribute_value ) {
+                foreach ($attributes as $attribute_name => $attribute_value) {
                     // Salta el atributo 'product type'
                     if ($attribute_name == 'attribute_pa_product-type') {
                         continue;
@@ -368,20 +375,19 @@ class WooCommerceServiceProvider extends ServiceProvider
                 }
 
                 echo '<span class="grow">' . $attributes_str . '</span>';
-                
+
                 // Precios
                 $price = $variation_obj->get_regular_price();
                 $sale_price = $variation_obj->get_sale_price();
-                if ( !empty($sale_price) && $sale_price < $price ) {
-                    echo '<span class="mr-2"><del>' . wc_price( $price ) . '</del></span>';
-                    echo '<span class="text-red-600">' . wc_price( $sale_price ) . '</span>';
+                if (!empty($sale_price) && $sale_price < $price) {
+                    echo '<span class="mr-2"><del>' . wc_price($price) . '</del></span>';
+                    echo '<span class="text-red-600">' . wc_price($sale_price) . '</span>';
                 } else {
                     echo '<span></span>'; // Espacio para mantener la estructura cuando no hay precio de oferta
-                    echo '<span>' . wc_price( $price ) . '</span>';
+                    echo '<span>' . wc_price($price) . '</span>';
                 }
                 echo '</li>';
             }
-
         } else {
             // Para productos simples y otros tipos
             // Inicializa una cadena para los atributos
@@ -391,9 +397,9 @@ class WooCommerceServiceProvider extends ServiceProvider
             $attributes = $product->get_attributes();
 
             // Itera sobre cada atributo
-            foreach ( $attributes as $attribute_name => $attribute ) {
+            foreach ($attributes as $attribute_name => $attribute) {
                 // Salta los atributos que no son visibles o son personalizados
-                if ( !$attribute->get_visible() || $attribute->get_variation() ) {
+                if (!$attribute->get_visible() || $attribute->get_variation()) {
                     continue;
                 }
 
@@ -409,7 +415,7 @@ class WooCommerceServiceProvider extends ServiceProvider
                 }
 
                 // Concatena este atributo con los anteriores, solo si $attributes_str no está vacío
-                if ( !empty($attributes_str) ) {
+                if (!empty($attributes_str)) {
                     $attributes_str .= ', '; // Añade coma entre atributos solo si ya hay contenido en la cadena
                 }
                 $attributes_str .= $attribute_values_formatted;
@@ -427,33 +433,34 @@ class WooCommerceServiceProvider extends ServiceProvider
             // Precios
             $price = $product->get_regular_price();
             $sale_price = $product->get_sale_price();
-            if ( !empty($sale_price) && $sale_price < $price ) {
-                echo '<span class="mr-4"><del>' . wc_price( $price ) . '</del></span>';
-                echo '<span>' . wc_price( $sale_price ) . '</span>';
+            if (!empty($sale_price) && $sale_price < $price) {
+                echo '<span class="mr-4"><del>' . wc_price($price) . '</del></span>';
+                echo '<span>' . wc_price($sale_price) . '</span>';
             } else {
                 echo '<span></span>'; // Espacio para mantener la estructura cuando no hay precio de oferta
-                echo '<span>' . wc_price( $price ) . '</span>';
+                echo '<span>' . wc_price($price) . '</span>';
             }
             echo '</li>';
         }
-
     }
 
     /**
      * mostrar nombre de producto.
      */
-    private function woocommerce_template_loop_product_title() {
+    private function woocommerce_template_loop_product_title()
+    {
         if (wp_is_mobile()) {
-            echo '<h2 class="text-sm leading-tight uppercase text-center px-2 mb-20 items-center tracking-wider ' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '">' . get_the_title() . '</h2>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo '<h2 class="text-sm leading-tight uppercase text-center px-2 mb-20 items-center tracking-wider ' . esc_attr(apply_filters('woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title')) . '">' . get_the_title() . '</h2>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         } else {
-            echo '<h2 class="text-[1.2vw] leading-tight uppercase text-center px-2 grow flex items-center tracking-wider ' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '">' . get_the_title() . '</h2>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo '<h2 class="text-[1.2vw] leading-tight uppercase text-center px-2 grow flex items-center tracking-wider ' . esc_attr(apply_filters('woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title')) . '">' . get_the_title() . '</h2>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         }
     }
 
     /**
      * Renderizar thumbnail dentro de un div card-front.
      */
-    public function renderizar_card_front() {
+    public function renderizar_card_front()
+    {
         echo '<div class="card-front">';
         echo woocommerce_get_product_thumbnail('large');
         echo '</div>';
@@ -463,14 +470,15 @@ class WooCommerceServiceProvider extends ServiceProvider
      * Renderizar la imagen de producto con diferente marcado si es horizontal o vertical.
      */
 
-     public function woocommerce_template_loop_product_thumbnail_mobile() {
+    public function woocommerce_template_loop_product_thumbnail_mobile()
+    {
         $thumbnail_id = get_post_thumbnail_id();
         $thumbnail_url = wp_get_attachment_image_src($thumbnail_id, 'full');
-        
+
         if ($thumbnail_url) {
             $width = $thumbnail_url[1];
             $height = $thumbnail_url[2];
-    
+
             if ($width > $height) {
                 echo '<div class="horizontal">' . woocommerce_get_product_thumbnail('large') . '</div>';
             } else {
@@ -482,7 +490,8 @@ class WooCommerceServiceProvider extends ServiceProvider
         }
     }
 
-    public function renderizar_metadatos_mobile_shop_loop() {
+    public function renderizar_metadatos_mobile_shop_loop()
+    {
         echo '<div class="bg-white flex flex-col items-center mx-4">';
         echo $this->mostrar_artista_producto();
         $this->woocommerce_template_loop_product_title();
@@ -492,8 +501,9 @@ class WooCommerceServiceProvider extends ServiceProvider
         echo '</ul>';
         echo '</div>';
     }
-    
-    public function renderizar_card_back() {
+
+    public function renderizar_card_back()
+    {
         echo '<div class="card-back bg-white pt-1 flex flex-col justify-between items-center">';
         echo $this->mostrar_tipo_producto();
         echo $this->mostrar_artista_producto();
@@ -508,7 +518,8 @@ class WooCommerceServiceProvider extends ServiceProvider
     /**
      * Insert the opening anchor tag for products in the loop.
      */
-    public function custom_woocommerce_template_loop_product_link_open() {
+    public function custom_woocommerce_template_loop_product_link_open()
+    {
         global $product;
 
         $link = apply_filters('woocommerce_loop_product_link', get_the_permalink(), $product);
@@ -525,9 +536,10 @@ class WooCommerceServiceProvider extends ServiceProvider
 
     /**
      * Aplicar el filtro de artista al query de producto.
-     */   
+     */
 
-    public function apply_artist_filter_to_products_query($query) {
+    public function apply_artist_filter_to_products_query($query)
+    {
         // Solo modifica la consulta en la tienda o páginas de archivo de productos y si hay un filtro aplicado
         if (!is_admin() && $query->is_main_query() && ($query->is_post_type_archive('product') || $query->is_product_category()) && isset($_GET['artist_filter']) && !empty($_GET['artist_filter'])) {
             $query->set('tax_query', array(
@@ -541,13 +553,14 @@ class WooCommerceServiceProvider extends ServiceProvider
     }
     /**
      * Generar el enlace de próxima página en portada de producto para infinite-scroll.
-     */  
-    public function custom_woocommerce_next_page_link() {
+     */
+    public function custom_woocommerce_next_page_link()
+    {
         if (!is_shop() && !is_product_category() && !is_product_taxonomy()) return; // Asegúrate de que esto solo se ejecute en las páginas de la tienda
-        
+
         global $wp_query;
         if ($wp_query->max_num_pages <= 1) return; // No hay necesidad de paginación si solo hay una página
-    
+
         $next_page_link = get_next_posts_page_link($wp_query->max_num_pages);
         if ($next_page_link) {
             echo '<nav class="woocommerce-pagination">';
@@ -558,8 +571,9 @@ class WooCommerceServiceProvider extends ServiceProvider
 
     /**
      * para añadir el editor TinyMCE al campo de descripción de la taxonomía.
-     */  
-    public function custom_taxonomy_description_field() {
+     */
+    public function custom_taxonomy_description_field()
+    {
         ?>
         <tr class="form-field term-description-wrap">
             <th scope="row"><label for="description"><?php _e('Description'); ?></label></th>
@@ -575,20 +589,21 @@ class WooCommerceServiceProvider extends ServiceProvider
                 <span class="description"><?php _e('The description is not prominent by default; however, some themes may show it.'); ?></span>
             </td>
         </tr>
-        <?php
+    <?php
     }
 
     /**
      * esconder campo por defecto para añadir el editor TinyMCE al campo de 
      * descripción de la taxonomía. (complementa la función anterior)
-     */ 
-    function hide_standard_description_field() {
-        ?>
+     */
+    function hide_standard_description_field()
+    {
+    ?>
         <script type="text/javascript">
             jQuery(document).ready(function($) {
                 $('textarea#description').closest('.form-field').remove(); // Oculta el campo de descripción estándar
             });
         </script>
-        <?php
+<?php
     }
 }

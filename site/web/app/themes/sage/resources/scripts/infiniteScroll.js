@@ -12,7 +12,6 @@ export function infiniteScrollShop() {
 }
 
 export function infiniteScrollArchives() {
-  console.log('infiniteScrollArchives');
   new InfiniteScroll('.infinite-scroll-container', {
     path: '.nav-previous a',
     append: 'article',

@@ -1,3 +1,5 @@
+import Alpine from 'alpinejs';
+
 import {
   ftbs_product_quantity_increase,
   ftbs_product_quantity_decrease,

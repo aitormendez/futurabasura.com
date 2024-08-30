@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Your base production configuration goes in this file. Environment-specific
  * overrides go in their respective config/environments/{{WP_ENV}}.php file.
@@ -147,7 +148,7 @@ if (file_exists($env_config)) {
  * Memory Limit
  */
 Config::define('WP_MEMORY_LIMIT', '512M');
-Config::define('WP_MAX_MEMORY_LIMIT', '1024');
+Config::define('WP_MAX_MEMORY_LIMIT', '768');
 
 Config::apply();
 

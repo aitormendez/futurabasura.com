@@ -45,7 +45,6 @@
     @endphp
 
 
-    @dump($artista);
     @if ($artista['rand_products'])
         <div
             class="order-1 flex w-full flex-col items-center bg-white px-6 pb-20 pt-20 text-xl md:-order-none md:border-b-2">

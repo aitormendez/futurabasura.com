@@ -21,7 +21,7 @@ html {
 }
 
 body {
-  @apply font-fk;
+  @apply font-sans;
 }
 
 #fondo {
@@ -41,7 +41,9 @@ body {
 main {
   a:link {
     color: theme('colors.azul');
-    transition: color 0.5s, background-color 0.5s;
+    transition:
+      color 0.5s,
+      background-color 0.5s;
 
     &:hover {
       color: theme('colors.negro-fb');

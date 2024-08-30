@@ -24,7 +24,6 @@ export function dropdownFilter() {
     bioLabel: '',
     init() {
       this.artists = fb.artists; // Asume que fb.artists incluye objetos con name y slug
-      console.log(this.artists);
       const urlParams = new URLSearchParams(window.location.search);
       const artistSlug = urlParams.get('artist_filter');
       if (artistSlug) {
@@ -36,7 +35,7 @@ export function dropdownFilter() {
           const isTaxonomyPage = window.location.pathname.includes('/artists/');
           if (!isTaxonomyPage) {
             this.bioLink = `${fb.homeUrl}/artists/${encodeURIComponent(
-              artist.slug
+              artist.slug,
             )}/`;
             this.bioLabel = `bio: ${artist.name}`;
           }
@@ -85,7 +84,7 @@ export const dropdownSort = () => {
 
       // Buscar la opción correspondiente
       const selectedOption = this.options.find(
-        (option) => option.value === orderByValue
+        (option) => option.value === orderByValue,
       );
       if (selectedOption) {
         this.selected = selectedOption.text;

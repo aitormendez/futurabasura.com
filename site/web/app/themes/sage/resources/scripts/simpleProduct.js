@@ -26,9 +26,7 @@ export function anadirAlCarroSimple() {
 }
 
 export function resetearHiddenInput() {
-  console.log('resetearHiddenInput');
   var quantityInput = document.querySelector('.quantity input');
-  console.log(quantityInput);
 
   // Restablecer el valor a 1 al cargar la página
   if (quantityInput) {
