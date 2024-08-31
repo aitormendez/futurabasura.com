@@ -30,10 +30,10 @@ add_action('wp_enqueue_scripts', function () {
         'hide_empty' => false,
     ]);
 
-    $artists = array_map(function($term) {
+    $artists = array_map(function ($term) {
         return ['name' => $term->name, 'slug' => $term->slug];
     }, $terms);
-    
+
 
     bundle('app')->enqueue()->localize('fb', [
         'fondos' => [
@@ -229,7 +229,7 @@ add_action('after_setup_theme', function () {
  * 
  */
 add_filter('redirect_canonical', function ($redirect_url) {
-    if (is_cart()) {
+    if (is_cart() || is_checkout()) {
         return false; // Desactiva la redirección canónica en la página del carrito
     }
     return $redirect_url;

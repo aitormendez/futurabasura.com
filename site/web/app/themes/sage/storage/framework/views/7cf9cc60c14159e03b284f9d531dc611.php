@@ -1,4 +1,4 @@
-@php
+<?php
     /**
      * Checkout Payment Section
      *
@@ -16,24 +16,24 @@
      */
 
     defined('ABSPATH') || exit();
-@endphp
+?>
 
-@php
+<?php
     if (!wp_doing_ajax()) {
         do_action('woocommerce_review_order_before_payment');
     }
-@endphp
+?>
 
 <div id="payment" class="woocommerce-checkout-payment px-4 py-6">
-    @if (WC()->cart->needs_payment())
+    <?php if(WC()->cart->needs_payment()): ?>
         <ul class="wc_payment_methods payment_methods methods">
-            @if (!empty($available_gateways))
-                @foreach ($available_gateways as $gateway)
-                    @php wc_get_template('checkout/payment-method.php', ['gateway' => $gateway]) @endphp
-                @endforeach
-            @else
+            <?php if(!empty($available_gateways)): ?>
+                <?php $__currentLoopData = $available_gateways; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $gateway): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php wc_get_template('checkout/payment-method.php', ['gateway' => $gateway]) ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php else: ?>
                 <li>
-                    {!! wc_print_notice(
+                    <?php echo wc_print_notice(
                         apply_filters(
                             'woocommerce_no_available_payment_methods_message',
                             WC()->customer->get_billing_country()
@@ -44,34 +44,37 @@
                                 : __('Please fill in your details above to see available payment methods.', 'woocommerce'),
                         ),
                         'notice',
-                    ) !!}
+                    ); ?>
+
                 </li>
-            @endif
+            <?php endif; ?>
         </ul>
-    @endif
+    <?php endif; ?>
     <div class="form-row place-order">
         <noscript>
-            {!! sprintf(
+            <?php echo sprintf(
                 __(
                     'Since your browser does not support JavaScript, or it is disabled, please ensure you click the %1$sUpdate Totals%2$s button before placing your order. You may be charged more than the amount stated above if you fail to do so.',
                     'woocommerce',
                 ),
                 '<em>',
                 '</em>',
-            ) !!}
+            ); ?>
+
             <br />
             <button type="submit"
-                class="button alt{{ esc_attr(wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : '') }}"
-                name="woocommerce_checkout_update_totals" value="{{ esc_attr(__('Update totals', 'woocommerce')) }}">
-                {{ __('Update totals', 'woocommerce') }}
+                class="button alt<?php echo e(esc_attr(wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : '')); ?>"
+                name="woocommerce_checkout_update_totals" value="<?php echo e(esc_attr(__('Update totals', 'woocommerce'))); ?>">
+                <?php echo e(__('Update totals', 'woocommerce')); ?>
+
             </button>
         </noscript>
 
-        @php wc_get_template('checkout/terms.php') @endphp
+        <?php wc_get_template('checkout/terms.php') ?>
 
-        @php do_action('woocommerce_review_order_before_submit') @endphp
+        <?php do_action('woocommerce_review_order_before_submit') ?>
 
-        {!! apply_filters(
+        <?php echo apply_filters(
             'woocommerce_order_button_html',
             '<button type="submit" class="button alt' .
                 esc_attr(
@@ -84,16 +87,18 @@
                 '">' .
                 esc_html($order_button_text) .
                 '</button>',
-        ) !!}
+        ); ?>
 
-        @php do_action('woocommerce_review_order_after_submit') @endphp
 
-        @php wp_nonce_field('woocommerce-process_checkout', 'woocommerce-process-checkout-nonce') @endphp
+        <?php do_action('woocommerce_review_order_after_submit') ?>
+
+        <?php wp_nonce_field('woocommerce-process_checkout', 'woocommerce-process-checkout-nonce') ?>
     </div>
 </div>
 
-@php
+<?php
     if (!wp_doing_ajax()) {
         do_action('woocommerce_review_order_after_payment');
     }
-@endphp
+?>
+<?php /**PATH /srv/www/futurabasura.com/current/web/app/themes/sage/resources/views/woocommerce/checkout/payment.blade.php ENDPATH**/ ?>
