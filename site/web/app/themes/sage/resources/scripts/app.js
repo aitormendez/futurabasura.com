@@ -75,7 +75,10 @@ domReady(async () => {
     carrito();
   }
 
-  if (document.body.classList.contains('woocommerce-shop')) {
+  if (
+    document.body.classList.contains('woocommerce-shop') ||
+    document.body.classList.contains('tax-artist')
+  ) {
     const { infiniteScrollShop } = await import('./infiniteScroll.js');
     infiniteScrollShop();
     const { dropdownFilter, dropdownSort } = await import('./shop.js');

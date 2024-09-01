@@ -1,4 +1,5 @@
-.post-type-archive-product {
+.post-type-archive-product,
+.tax-artist {
   .card {
     perspective: 1000px;
   }

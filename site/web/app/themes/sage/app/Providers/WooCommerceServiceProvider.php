@@ -54,9 +54,7 @@ class WooCommerceServiceProvider extends ServiceProvider
             //Si tu función JavaScript está inline, inclúyela aquí. De lo contrario, asegúrate de que está en un archivo JS que se encola correctamente.
             // echo <<<SCRIPT
             // <script>
-            // function dropdownFilter() {
-            //     // Tu función dropdownFilter aquí...
-            // }
+            //     console.log('woocommerce_before_shop_loop');
             // </script>
             // SCRIPT;
         }, 25);
