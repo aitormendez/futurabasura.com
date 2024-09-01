@@ -135,7 +135,8 @@ class WooCommerceServiceProvider extends ServiceProvider
                         init() {
                             const params = new URLSearchParams(window.location.search);
                             const selectedSlug = params.get('product_cat');
-                            const selectedCategory = this.categories.find(category => category.slug === selectedSlug);
+                            const categoryArray = Object.values(this.categories); // Convertir objeto en array
+                            const selectedCategory = categoryArray.find(category => category.slug === selectedSlug);
                             if (selectedCategory) {
                                 this.selectedCategory = selectedCategory.name;
                             }
