@@ -30,6 +30,8 @@
     26 => 'Log1x\\SageSvg\\SageSvgServiceProvider',
     27 => 'OwenVoke\\BladeFontAwesome\\BladeFontAwesomeServiceProvider',
     28 => 'App\\Providers\\ThemeServiceProvider',
+    29 => 'App\\Providers\\WooCommerceServiceProvider',
+    30 => 'App\\Providers\\VideoServiceProvider',
   ),
   'eager' => 
   array (
@@ -54,6 +56,8 @@
     18 => 'Log1x\\SageSvg\\SageSvgServiceProvider',
     19 => 'OwenVoke\\BladeFontAwesome\\BladeFontAwesomeServiceProvider',
     20 => 'App\\Providers\\ThemeServiceProvider',
+    21 => 'App\\Providers\\WooCommerceServiceProvider',
+    22 => 'App\\Providers\\VideoServiceProvider',
   ),
   'deferred' => 
   array (

@@ -165,7 +165,8 @@ return [
         /*
          * Application Service Providers...
          */
-        // App\Providers\ThemeServiceProvider::class,
+        App\Providers\WooCommerceServiceProvider::class,
+        App\Providers\VideoServiceProvider::class,
     ])->toArray(),
 
     /*

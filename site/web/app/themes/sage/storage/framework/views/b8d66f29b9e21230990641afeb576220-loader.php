@@ -1,0 +1,2 @@
+<?= \Roots\view('woocommerce.single-product.add-to-cart.variable', $data ?? get_defined_vars())->render(); ?>
+<?php /**PATH /srv/www/futurabasura.com/current/web/app/themes/sage/resources/views/woocommerce/single-product/add-to-cart/variable.blade.php ENDPATH**/ ?>

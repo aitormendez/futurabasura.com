@@ -1,0 +1,2 @@
+<?= \Roots\view('woocommerce.emails.email-footer', $data ?? get_defined_vars())->render(); ?>
+<?php /**PATH /srv/www/futurabasura.com/current/web/app/themes/sage/resources/views/woocommerce/emails/email-footer.blade.php ENDPATH**/ ?>

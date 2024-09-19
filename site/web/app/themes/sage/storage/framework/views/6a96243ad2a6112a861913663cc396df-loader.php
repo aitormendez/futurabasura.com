@@ -1,0 +1,2 @@
+<?= \Roots\view('woocommerce.cart.cart-totals', $data ?? get_defined_vars())->render(); ?>
+<?php /**PATH /srv/www/futurabasura.com/current/web/app/themes/sage/resources/views/woocommerce/cart/cart-totals.blade.php ENDPATH**/ ?>
