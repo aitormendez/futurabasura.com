@@ -1,6 +1,6 @@
 <?php
 if (! function_exists('array_column')) {
-    function array_column(array $input, $columnKey, $indexKey = null) {
+    function array_column_bc(array $input, $columnKey, $indexKey = null) {
         $array = array();
         foreach ($input as $value) {
             if ( !array_key_exists($columnKey, $value)) {

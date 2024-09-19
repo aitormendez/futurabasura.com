@@ -16,7 +16,6 @@ if ($helper->isEnabled() && $helper->isClosureAutomatically()) {
         $to = date('Y-m-d H:i:s', $time);
         $lastTime = $time - 60 * 60 * 24 * 30; // 60*60*24*2
         $from = date('Y-m-d H:i:s', $lastTime);
-	    $shippingMethods = MBE_ESHIP_ID.'|wf_mbe_shipping'; // search also for orders created with the old plugin
 
         $post_status = implode("','", array('wc-processing', 'wc-completed'));
 
@@ -25,13 +24,34 @@ if ($helper->isEnabled() && $helper->isClosureAutomatically()) {
 	    $orders_pickup_batch_ids = $helper->select_pickup_orders_ids();
 	    $order_filter = 'AND ((ID IN ('.$order_ids.') OR ID IN ('.$orders_custom_mapping_ids.')) AND ID NOT IN ('.$orders_pickup_batch_ids.'))';
 
-	    $results = $wpdb->get_results( "SELECT * FROM $wpdb->posts WHERE post_type = 'shop_order' $order_filter AND post_status IN ('{$post_status}')" );
+	    if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+		    $table_name        = $wpdb->prefix . 'wc_orders';
+		    $postmetaTableName = $wpdb->prefix . 'wc_orders_meta';
+		    $postmetaTableJoin = ' AS pm ON pm.order_id = p.ID ';
+		    $postTypeWhere     = "type = 'shop_order'";
+			$postStatus        = 'status';
+		    $orderIdField      = 'id';
+	    } else {
+		    $table_name        = $wpdb->prefix . 'posts';
+		    $postmetaTableName = $wpdb->prefix . 'postmeta';
+		    $postmetaTableJoin = ' AS pm ON pm.post_id = p.ID ';
+		    $postTypeWhere     = "post_type = 'shop_order'";
+		    $postStatus        = 'post_status';
+		    $orderIdField      = 'ID';
+	    }
+	    $logger->logVar('Selecting the orders with shipments to close');
+	    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
+	    $results = $wpdb->get_results($wpdb->prepare(
+			"SELECT * FROM %i 
+         			WHERE $postTypeWhere $order_filter 
+         			AND %i IN ('{$post_status}')"
+		    , $table_name, $postStatus));
 
         $post_ids = array();
         foreach ($results as $order) {
-            $post_ids[] = ($order->ID);
+            $post_ids[] = ($order->$orderIdField);
         }
-        $logger->logVar($post_ids,'Order with shipments to close id');
+        $logger->logVar($post_ids,'Orders not closed (all)');
         $toClosedIds = array();
         $alreadyClosedIds = array();
         $withoutTracking = array();
@@ -49,26 +69,32 @@ if ($helper->isEnabled() && $helper->isClosureAutomatically()) {
 		    }
 	    }
 
-        $logger->logVar($toClosedIds,'Order with shipments to close id');
+        $logger->logVar($toClosedIds,'Orders with shipments to close');
 
         $ws->closeShipping($toClosedIds);
 
-        if (count($withoutTracking) > 0) {
-            echo sprintf(__('%s - Total of %d order(s) without tracking number yet.', 'mail-boxes-etc'), date('Y-m-d H:i:s'), count($withoutTracking));
-        }
+	    if (count($withoutTracking) > 0) {
+		    $message = sprintf(__('%s - Total of %d order(s) without tracking number yet.', 'mail-boxes-etc'), date('Y-m-d H:i:s'), count($withoutTracking));
+		    $logger->log($message);
+	    }
 
 	    if(count($pickupIds) > 0) {
-		    echo sprintf(__('%s - Total of %d order(s) are pickup shipment.', 'mail-boxes-etc'), date('Y-m-d H:i:s'), count($pickupIds));
+		    $message = sprintf(__('%s - Total of %d order(s) are pickup shipment.', 'mail-boxes-etc'), date('Y-m-d H:i:s'), count($pickupIds));
+		    $logger->log($message);
 	    }
 
 	    if (count($toClosedIds) > 0) {
-            echo sprintf(__('%s - Total of %d order(s) have been closed.', 'mail-boxes-etc'), date('Y-m-d H:i:s'), count($toClosedIds));
-        }
+		    $message = sprintf(__('%s - Total of %d order(s) have been closed.', 'mail-boxes-etc'), date('Y-m-d H:i:s'), count($toClosedIds));
+		    $logger->log($message);
+	    }
 
-        if (count($alreadyClosedIds) > 0) {
-            echo sprintf(__('%s - Total of %d order(s) was already closed', 'mail-boxes-etc'), date('Y-m-d H:i:s'), count($alreadyClosedIds));
-        }
+	    if (count($alreadyClosedIds) > 0) {
+		    $message = sprintf(__('%s - Total of %d order(s) were already closed', 'mail-boxes-etc'), date('Y-m-d H:i:s'), count($alreadyClosedIds));
+		    $logger->log($message);
+	    }
 
+    } else {
+	    $logger->log('User must not close shipments');
     }
 }
 die();

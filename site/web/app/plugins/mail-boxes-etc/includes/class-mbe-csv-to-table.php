@@ -160,7 +160,7 @@ class Mbe_Shipping_CsvFileToTable // extends \Magento\Config\Model\Config\Backen
 			 * @see _wp_handle_upload() in wp-admin/includes/file.php
 			 */
 			WC_Admin_Settings::add_error(__($uploadedFile['error']));
-			throw new FileUploadException($uploadedFile['error']);
+			throw new FileUploadException(esc_html($uploadedFile['error']));
 		}
 
 		// TODO : Multiple file upload - the $_FILE array structure is different

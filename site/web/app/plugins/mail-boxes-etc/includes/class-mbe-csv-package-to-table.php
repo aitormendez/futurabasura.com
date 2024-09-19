@@ -89,7 +89,7 @@ class Mbe_Shipping_CsvPackageToTable extends Mbe_Shipping_CsvFileToTable
 
 		if (array_search($reservedCode, $haystack) !== false) {
 			throw new ValidationException(
-				__(__('Reserved package code cannot be used:') .' '. $reservedCode)
+				esc_html__(esc_html__('Reserved package code cannot be used:') .' '. $reservedCode)
 			);
 		}
 	}

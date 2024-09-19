@@ -17,13 +17,26 @@ class Mbe_Shipping_Helper_Logger
 	{
 		if ($this->helper->debug() || $force) {
 
-			if(substr(sprintf('%o', fileperms(MBE_ESHIP_PLUGIN_LOG_DIR)), -4)<>0755 ) {
-				chmod( MBE_ESHIP_PLUGIN_LOG_DIR, 0755 );
+
+			$logDirPath = $this->helper->getMbeLogDir(); // returns the path checking if it exists and if it's missing it creates it
+
+			// if the directory already exists but the permissions are wrongs, changes it
+			if(file_exists($logDirPath) && substr(sprintf('%o', fileperms($logDirPath)), -4)<>0755 ) {
+				chmod( $logDirPath, 0755 );
 			}
 
-			if (!file_exists(MBE_ESHIP_PLUGIN_LOG_DIR ) ) {
-				mkdir(MBE_ESHIP_PLUGIN_LOG_DIR , 0755, true);
+//			if(substr(sprintf('%o', fileperms(MBE_ESHIP_PLUGIN_LOG_DIR)), -4)<>0755 ) {
+//				chmod( MBE_ESHIP_PLUGIN_LOG_DIR, 0755 );
+//			}
+//
+//			if (!file_exists(MBE_ESHIP_PLUGIN_LOG_DIR ) ) {
+//				mkdir(MBE_ESHIP_PLUGIN_LOG_DIR , 0755, true);
+//			}
+
+			if(!file_exists(trailingslashit($logDirPath) . '.htaccess')) {
+				$this->helper->createHtaccessDenyAll($logDirPath);
 			}
+
 			$row = date_format(new DateTime(), 'Y-m-d\TH:i:s\Z');
 			$row .= " - ";
 			$row .= $this->pluginVersionMessage . $message . "\n\r";
@@ -32,11 +45,11 @@ class Mbe_Shipping_Helper_Logger
 	}
 
 
-	public function logVar($var, $message = null)
+	public function logVar($var, $message = null, $force = false)
 	{
 		if ($message) {
-			$this->log($message);
+			$this->log($message, $force);
 		}
-		$this->log(print_r($var, true));
+		$this->log(print_r($var, true),$force);
 	}
 }

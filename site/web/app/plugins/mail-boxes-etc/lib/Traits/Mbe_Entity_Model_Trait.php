@@ -7,7 +7,8 @@ trait Mbe_Entity_Model_Trait {
 	public function tableExists( $tableName ) {
 		global $wpdb;
 
-		if ( ! $wpdb->get_var( "SHOW TABLES LIKE '$tableName'" ) == $tableName ) {
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
+		if ( ! $wpdb->get_var( $wpdb->prepare("SHOW TABLES LIKE %s", $tableName )) == $tableName ) {
 			return false;
 		}
 
@@ -34,6 +35,7 @@ trait Mbe_Entity_Model_Trait {
 	public function insertRow( $tableName, $row ) {
 		global $wpdb;
 		try {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
 			if ( false === $wpdb->insert( $tableName, $row ) ) {
 				$message = __( 'Error while adding data to the table ' ) . $tableName . ' :' . $wpdb->last_error;
 				$helper = new \Mbe_Shipping_Helper_Data();
@@ -61,6 +63,7 @@ trait Mbe_Entity_Model_Trait {
 	public function updateRow( $tableName, $id, $row ) {
 		global $wpdb;
 		try {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
 			if ( false === $wpdb->update( $tableName, $row, [ 'id' => $id ] ) ) {
 				$message = __( 'Error while updating data in the table ' ) . $tableName . ' :' . $wpdb->last_error;
 				$helper = new \Mbe_Shipping_Helper_Data();
@@ -88,6 +91,7 @@ trait Mbe_Entity_Model_Trait {
 	public function deleteRow( $tableName, $id ) {
 		global $wpdb;
 		try {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
 			if ( false === $wpdb->delete( $tableName,[ 'id' => $id ] ) ) {
 				$message = __( 'Error while updating data in the table ' ) . $tableName . ' :' . $wpdb->last_error;
 				$helper = new \Mbe_Shipping_Helper_Data();

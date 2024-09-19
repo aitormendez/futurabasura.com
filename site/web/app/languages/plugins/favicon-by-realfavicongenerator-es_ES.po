@@ -1,56 +1,15 @@
-# Translation of Plugins - Favicon by RealFaviconGenerator - Development (trunk) in Spanish (Spain)
-# This file is distributed under the same license as the Plugins - Favicon by RealFaviconGenerator - Development (trunk) package.
+# Translation of Plugins - Favicon by RealFaviconGenerator - Stable (latest release) in Spanish (Spain)
+# This file is distributed under the same license as the Plugins - Favicon by RealFaviconGenerator - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-04-20 15:01:10+0000\n"
+"PO-Revision-Date: 2024-08-24 18:45:25+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: GlotPress/4.0.0-rc.1\n"
+"X-Generator: GlotPress/4.0.1\n"
 "Language: es\n"
-"Project-Id-Version: Plugins - Favicon by RealFaviconGenerator - Development (trunk)\n"
-
-#: admin/class-favicon-by-realfavicongenerator-api-response.php:209
-msgid "Apparently WordPress has no direct access to the file system (it uses another mean such as FTP). This may be the root cause of this issue."
-msgstr "Aparentemente, WordPress no tiene acceso directo al sistema de archivos (usa otro medio, como FTP). Esto puede ser la causa principal de este problema."
-
-#: admin/views/keep_active_notice.php:18
-msgid "In any case, <a %s>the plugin is super lightweight</a> and will not affect the performance of your site."
-msgstr "En cualquier caso, <a %s>el plugin es superligero</a> y no afectará el rendimiento de tu sitio."
-
-#: admin/views/keep_active_notice.php:9
-msgid "You may wonder <a %s>why it works that way</a>."
-msgstr "Puede que te preguntes <a %s>por qué funciona de esa manera</a>."
-
-#: admin/views/keep_active_notice.php:3
-msgid "You should keep this plugin active. As soon as you deactive it, your favicon is disabled, too."
-msgstr "Deberías mantener activo este plugin. Tan pronto como lo desactives, tu favicon también se desactivará."
-
-#. Author URI of the plugin
-#: favicon-by-realfavicongenerator.php
-msgid "http://realfavicongenerator.net/"
-msgstr "https://realfavicongenerator.net/"
-
-#. Author of the plugin
-#: favicon-by-realfavicongenerator.php
-msgid "Philippe Bernard"
-msgstr "Philippe Bernard"
-
-#. Description of the plugin
-#: favicon-by-realfavicongenerator.php
-msgid "Create and install your favicon for all platforms: PC/Mac of course, but also iPhone/iPad, Android devices, Windows 8 tablets, etc."
-msgstr "Crea e instala tu favicon para todas las plataformas: PC / Mac, por supuesto, pero también iPhone/iPad, dispositivos Android, tabletas Windows 8, etc."
-
-#. Plugin URI of the plugin
-#: favicon-by-realfavicongenerator.php
-msgid "http://realfavicongenerator.net/extensions/wordpress"
-msgstr "https://realfavicongenerator.net/extensions/wordpress"
-
-#. Plugin Name of the plugin
-#: favicon-by-realfavicongenerator.php
-msgid "Favicon by RealFaviconGenerator"
-msgstr "Favicon by RealFaviconGenerator"
+"Project-Id-Version: Plugins - Favicon by RealFaviconGenerator - Stable (latest release)\n"
 
 #: public/class-favicon-by-realfavicongenerator-common.php:192
 msgid "Visit the <a href=\"%s\">RFG's change log</a> to view the content of the update"
@@ -71,6 +30,18 @@ msgstr "Mostrar avisos de actualización"
 #: admin/views/settings.php:11
 msgid "Do you want to setup your favicon? Go to <a href=\"%s\">Appearance &gt; Favicon</a>"
 msgstr "¿Quieres configurar tu favicon? Ve a «<a href=\"%s\">Apariencia &gt; Favicon</a>»"
+
+#: admin/views/keep_active_notice.php:18
+msgid "In any case, <a %s>the plugin is super lightweight</a> and will not affect the performance of your site."
+msgstr "En cualquier caso, <a %s>el plugin es superligero</a> y no afectará el rendimiento de tu sitio."
+
+#: admin/views/keep_active_notice.php:9
+msgid "You may wonder <a %s>why it works that way</a>."
+msgstr "Puede que te preguntes <a %s>por qué funciona de esa manera</a>."
+
+#: admin/views/keep_active_notice.php:3
+msgid "You should keep this plugin active. As soon as you deactive it, your favicon is disabled, too."
+msgstr "Deberías mantener activo este plugin. Tan pronto como lo desactives, tu favicon también se desactivará."
 
 #: admin/views/appearance.php:299
 msgid "An internal error occurred"
@@ -172,6 +143,10 @@ msgstr "No se puede descargar el archivo en %s"
 msgid "Error while unziping the favicon package %1$s to directory %2$s"
 msgstr "Error al descomprimir el paquete de favicon %1$s en el directorio %2$s"
 
+#: admin/class-favicon-by-realfavicongenerator-api-response.php:209
+msgid "Apparently WordPress has no direct access to the file system (it uses another mean such as FTP). This may be the root cause of this issue."
+msgstr "Aparentemente, WordPress no tiene acceso directo al sistema de archivos (usa otro medio, como FTP). Esto puede ser la causa principal de este problema."
+
 #: admin/class-favicon-by-realfavicongenerator-api-response.php:207
 msgid "Unknown reason"
 msgstr "Razón desconocida"
@@ -220,3 +195,28 @@ msgstr "Ajustes del favicon"
 #: admin/class-favicon-by-realfavicongenerator-admin.php:97
 msgid "Favicon"
 msgstr "Favicon"
+
+#. Author URI of the plugin
+#: favicon-by-realfavicongenerator.php
+msgid "http://realfavicongenerator.net/"
+msgstr "https://realfavicongenerator.net/"
+
+#. Author of the plugin
+#: favicon-by-realfavicongenerator.php
+msgid "Philippe Bernard"
+msgstr "Philippe Bernard"
+
+#. Description of the plugin
+#: favicon-by-realfavicongenerator.php
+msgid "Create and install your favicon for all platforms: PC/Mac of course, but also iPhone/iPad, Android devices, Windows 8 tablets, etc."
+msgstr "Crea e instala tu favicon para todas las plataformas: PC / Mac, por supuesto, pero también iPhone/iPad, dispositivos Android, tabletas Windows 8, etc."
+
+#. Plugin URI of the plugin
+#: favicon-by-realfavicongenerator.php
+msgid "http://realfavicongenerator.net/extensions/wordpress"
+msgstr "https://realfavicongenerator.net/extensions/wordpress"
+
+#. Plugin Name of the plugin
+#: favicon-by-realfavicongenerator.php
+msgid "Favicon by RealFaviconGenerator"
+msgstr "Favicon by RealFaviconGenerator"

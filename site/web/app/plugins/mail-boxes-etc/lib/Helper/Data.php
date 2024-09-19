@@ -6,6 +6,7 @@ class Mbe_Shipping_Helper_Data
     private $_csvDir = 'csv';
 	const MBE_LOG_WS = 'mbe_ws.log';
 	const MBE_LOG_PLUGIN = 'mbe_shipping.log';
+	const XML_PATH_MBE_LOG_FOLDER_NAME =  MBE_ESHIP_ID . '_' . 'log_folder';
 //    const MBE_SHIPPING_PREFIX = "mbe_shipping_";
 	const MBE_CSV_PACKAGES_RESERVED_CODE = 'settings';
 	const MBE_WC_ELINK_SETTINGS_PREFIX = 'woocommerce_wf_mbe_shipping_';
@@ -134,6 +135,20 @@ class Mbe_Shipping_Helper_Data
 	const META_FIELD_PICKUP_BATCH_ID = "woocommerce_mbe_pickup_batch_id";
 	const META_FIELD_PICKUP_CUSTOM_DATA_ID = "woocommerce_mbe_pickup_custom_data_id";
 
+	// Delivery Point
+	const GEL_PROXIMITY_URL = "https://platform.gelproximity.com";
+	const GEL_PROXIMITY_URL_END_USER = self::GEL_PROXIMITY_URL . "/gel-enduser-client/";
+	const META_FIELD_DELIVERY_POINT_CUSTOM_DATA = "woocommerce_mbe_delivery_point_custom_data";
+	const META_FIELD_DELIVERY_POINT_SHIPMENT = 'woocommerce_mbe_delivery_point_shipment';
+	const META_FIELD_DELIVERY_POINT_SERVICES = 'delivery_point_services';
+//	const META_FIELD_DELIVERY_POINT_MOL_SERVICES = 'delivery_point_mol_services';
+
+	// Tax and Duties
+	const XML_PATH_TAX_DUTIES_ENABLED = 'mbe_taxduties_enabled';
+	const XML_PATH_TAX_DUTIES_MODE = 'mbe_taxduties_mode';
+	const MBE_TAX_AND_DUTIES_DDP = 1;
+	const MBE_TAX_AND_DUTIES_DAP = 0;
+
 	protected $csv_package_model;
 	protected $csv_package_product_model;
 	protected $_options;
@@ -164,7 +179,7 @@ class Mbe_Shipping_Helper_Data
     //TODO: check if is necessary to specify storeid or get current storeid
     public function isEnabled()
     {
-        return $this->getOption(self::XML_PATH_ENABLED);
+        return (bool) $this->getOption(self::XML_PATH_ENABLED);
     }
 
     public function debug()
@@ -214,13 +229,10 @@ class Mbe_Shipping_Helper_Data
 		return false;
 	}
 
-
-
     public function getCountry()
     {
         return $this->getOption(self::XML_PATH_COUNTRY);
     }
-
 
     public function getWsUrl()
     {
@@ -293,7 +305,7 @@ class Mbe_Shipping_Helper_Data
 
     public function getAllowedShipmentServices()
     {
-        return $this->getOption(self::XML_PATH_ALLOWED_SHIPMENT_SERVICES);
+        return $this->getOption(self::XML_PATH_ALLOWED_SHIPMENT_SERVICES, []);
     }
 
     public function convertShippingCodeWithInsurance($code)
@@ -352,22 +364,22 @@ class Mbe_Shipping_Helper_Data
 
     public function getShipmentConfigurationMode()
     {
-        return $this->getOption(self::XML_PATH_SHIPMENT_CONFIGURATION_MODE);
+        return $this->getOption(self::XML_PATH_SHIPMENT_CONFIGURATION_MODE, Mbe_Shipping_Model_Carrier::SHIPMENT_CONFIGURATION_MODE_ONE_SHIPMENT_PER_SHOPPING_CART_WEIGHT_MULTI_PARCEL);
     }
 
     public function getDefaultLength()
     {
-        return $this->getOption(self::XML_PATH_DEFAULT_LENGTH);
+        return $this->getOption(self::XML_PATH_DEFAULT_LENGTH, 0);
     }
 
     public function getDefaultWidth()
     {
-        return $this->getOption(self::XML_PATH_DEFAULT_WIDTH);
+        return $this->getOption(self::XML_PATH_DEFAULT_WIDTH, 0);
     }
 
     public function getDefaultHeight()
     {
-        return $this->getOption(self::XML_PATH_DEFAULT_HEIGHT);
+        return $this->getOption(self::XML_PATH_DEFAULT_HEIGHT, 0);
     }
 
     public function getCanCreateCourierWaybill()
@@ -381,32 +393,70 @@ class Mbe_Shipping_Helper_Data
 		return $ws->getCustomerPermission('enabledThirdPartyPickups');
 	}
 
-//    public function getMaxPackageWeight()
-//    {
-//        $result = $this->getOption(self::XML_PATH_MAX_PACKAGE_WEIGHT);
-//        $ws = new Mbe_Shipping_Model_Ws();
-//
-//        if ($this->getDefaultShipmentType() == "ENVELOPE") {
-//            $maxParcelWeight = 0.5;
-//        }
-//        else {
-//            $maxParcelWeight = 0;//$ws->getCustomerPermission("maxParcelWeight");
-//        }
-//
-//        if ($maxParcelWeight > 0 && $maxParcelWeight < $result) {
-//            $result = $maxParcelWeight;
-//        }
-//        return $result;
-//    }
+	public function getGelProximityMerchantCode() {
+		$ws = new Mbe_Shipping_Model_Ws();
+		$customer = $ws->getCustomer();
+		return $customer->MerchantCode??null;
+	}
+
+	public function getGelProxymityApiKey() {
+		$ws = new Mbe_Shipping_Model_Ws();
+		$customer = $ws->getCustomer();
+		return $customer->DeliveryPointApiKey??null;
+	}
+
+	public function getGelProxymityUrlEndUser() {
+		return self::GEL_PROXIMITY_URL_END_USER ;
+	}
+
+	public function getPermissionEnabledTaxAndDuties() {
+		$ws = new Mbe_Shipping_Model_Ws();
+		return (bool)$ws->getCustomerPermission('enabledTaxAndDuties');
+	}
+
+	public function isEnabledTaxAndDuties() {
+		return (bool)$this->getOption(self::XML_PATH_TAX_DUTIES_ENABLED);
+	}
+
+	public function setEnabledTaxAndDuties($value) {
+		return $this->setOption(self::XML_PATH_TAX_DUTIES_ENABLED, $value);
+	}
+
+	public function getTaxAndDutiesMode() {
+		return $this->getOption(self::XML_PATH_TAX_DUTIES_MODE, 1);
+	}
+
+	public function getTaxAndDutiesModeName() {
+		switch ($this->getOption(self::XML_PATH_TAX_DUTIES_MODE, 1)) {
+			case self::MBE_TAX_AND_DUTIES_DAP:
+				return 'DAP';
+			case self::MBE_TAX_AND_DUTIES_DDP:
+				return 'DDP';
+		}
+	}
+
+	public function addTaxAndDutiesToTotal() {
+		return $this->isEnabledTaxAndDuties() && self::MBE_TAX_AND_DUTIES_DDP == $this->getTaxAndDutiesMode();
+	}
+
+	public function mustDisableTaxAndDuties() {
+		// If the Customer cannot use tax and duties, it must be disabled
+		// If the merchant can use the tax and duties functionality but the manual pickup is enabled, tax & duties must be disabled
+		// If it's "service mapping" is used, tax & duties must be disabled
+		return ( !$this->getPermissionEnabledTaxAndDuties() ||
+				(
+					$this->getPermissionEnabledTaxAndDuties()
+		         && $this->getPickupRequestEnabled()
+		         && $this->getPickupRequestMode() === self::MBE_PICKUP_REQUEST_MANUAL
+				) ||
+		          $this->isEnabledCustomMapping()
+		);
+	}
 
 	/**
 	 * Check the package weight and replace it if necessary,
 	 * return the value using the woocommerce unit of measure
 	 *
-	 * @param $baseWeight
-	 * @param $type
-	 *
-	 * @return float|mixed|null
 	 */
 	protected function checkMaxWeight($baseWeight, $type)
 	{
@@ -518,7 +568,104 @@ class Mbe_Shipping_Helper_Data
     {
         return $this->getOption(self::XML_PATH_SHIPMENTS_CLOSURE_TIME);
     }
-	
+
+	protected function updateOrderItemShippingMeta($orderId, $metaValue, $metaKey) {
+		if (empty($orderId) || empty($metaValue) || empty($metaKey)) {
+			return false;
+		}
+
+		$order = wc_get_order($orderId);
+		$shippingItems = $order->get_items('shipping');
+
+		if (empty($shippingItems)) {
+			return false;
+		}
+
+		$isUpdated = false;
+		// Using foreach to split item id and data, but there should be only one row
+		foreach ($shippingItems as $orderItemId => $orderItemData) {
+			$isUpdated = wc_update_order_item_meta(
+				$orderItemId,
+				$metaKey,
+				$metaValue
+			);
+		}
+
+		return $isUpdated;
+	}
+
+	protected function getOrderItemShippingMeta($orderId, $metaKey) {
+		if (empty($orderId) || empty($metaKey)) {
+			return false;
+		}
+
+		$order = wc_get_order($orderId);
+		$shippingItems = $order->get_items('shipping');
+
+		if (empty($shippingItems)) {
+			return false;
+		}
+
+		$metaValue = false;
+		// Using foreach to split item id and data, but there should be only one row
+		foreach ($shippingItems as $orderItemId => $orderItemData) {
+			$metaValue = wc_get_order_item_meta(
+				$orderItemId,
+				$metaKey,
+			);
+		}
+
+		return $metaValue;
+	}
+
+	protected function deleteOrderItemShippingMeta($orderId, $metaKey) {
+		if (empty($orderId) || empty($metaKey)) {
+			return false;
+		}
+
+		$order = wc_get_order($orderId);
+		$shippingItems = $order->get_items('shipping');
+
+		if (empty($shippingItems)) {
+			return false;
+		}
+
+		$isDeleted = false;
+		// Using foreach to split item id and data, but there should be only one row
+		foreach ($shippingItems as $orderItemId => $orderItemData) {
+			$isDeleted = wc_delete_order_item_meta(
+				$orderItemId,
+				$metaKey,
+			);
+		}
+
+		return $isDeleted;
+	}
+
+	public function setOrderDeliveryPointCustomData( $orderId, $value ) {
+		return $this->updateOrderItemShippingMeta($orderId, $value, self::META_FIELD_DELIVERY_POINT_CUSTOM_DATA);
+	}
+
+	public function setOrderDeliveryPointShipment( $orderId, $value ) {
+		return $this->updateOrderItemShippingMeta($orderId, $value, self::META_FIELD_DELIVERY_POINT_SHIPMENT);
+	}
+
+	public function getOrderDeliveryPointCustomData( $orderId ) {
+		return $this->getOrderItemShippingMeta($orderId, self::META_FIELD_DELIVERY_POINT_CUSTOM_DATA);
+	}
+
+	public function getOrderDeliveryPointShipment( $orderId ) {
+		return $this->getOrderItemShippingMeta($orderId, self::META_FIELD_DELIVERY_POINT_SHIPMENT);
+	}
+
+	public function getOrderDeliveryPointServices( $orderId ) {
+		return $this->getOrderItemShippingMeta($orderId, self::META_FIELD_DELIVERY_POINT_SERVICES);
+	}
+
+//	public function getOrderDeliveryPointMolServices( $orderId ) {
+//		return $this->getOrderItemShippingMeta($orderId, self::META_FIELD_DELIVERY_POINT_MOL_SERVICES);
+//	}
+
 	public function getPickupRequestMode() {
 		return $this->getOption(self::XML_PATH_PICKUP_REQUEST_MODE);
 	}
@@ -528,57 +675,51 @@ class Mbe_Shipping_Helper_Data
 	}
 
 	public function getOrderPickupCustomDataId( $orderId ) {
-		$order = New WC_Order($orderId);
-		// Using foreach to split item id and data, but there should be only one row
-		foreach ( $order->get_items( 'shipping' ) as $orderItemId => $orderItemData ) {
-			$customDataId = wc_get_order_item_meta( $orderItemId, Mbe_Shipping_Helper_Data::META_FIELD_PICKUP_CUSTOM_DATA_ID );
-		}
-		 return $customDataId;
+		return $this->getOrderItemShippingMeta($orderId, self::META_FIELD_PICKUP_CUSTOM_DATA_ID);
+//		$order = New WC_Order($orderId);
+//		// Using foreach to split item id and data, but there should be only one row
+//		foreach ( $order->get_items( 'shipping' ) as $orderItemId => $orderItemData ) {
+//			$customDataId = wc_get_order_item_meta( $orderItemId, Mbe_Shipping_Helper_Data::META_FIELD_PICKUP_CUSTOM_DATA_ID );
+//		}
+//		 return $customDataId;
 	}
 
 	public function getOrderPickupBatchId( $orderId ) {
-		$order = New WC_Order($orderId);
-		// Using foreach to split item id and data, but there should be only one row
-		foreach ( $order->get_items( 'shipping' ) as $orderItemId => $orderItemData ) {
-			$customDataId = wc_get_order_item_meta( $orderItemId, Mbe_Shipping_Helper_Data::META_FIELD_PICKUP_BATCH_ID);
-		}
-		return $customDataId;
+		return $this->getOrderItemShippingMeta($orderId, self::META_FIELD_PICKUP_BATCH_ID);
+//		$order = New WC_Order($orderId);
+//		// Using foreach to split item id and data, but there should be only one row
+//		foreach ( $order->get_items( 'shipping' ) as $orderItemId => $orderItemData ) {
+//			$customDataId = wc_get_order_item_meta( $orderItemId, Mbe_Shipping_Helper_Data::META_FIELD_PICKUP_BATCH_ID);
+//		}
+//		return $customDataId;
 	}
 
 	public function setOrderPickupCustomDataId( $orderId, $value ) {
-		$order = New WC_Order($orderId);
-		// Using foreach to split item id and data, but there should be only one row
-		foreach ( $order->get_items( 'shipping' ) as $orderItemId => $orderItemData ) {
-			$updated = wc_update_order_item_meta( $orderItemId, Mbe_Shipping_Helper_Data::META_FIELD_PICKUP_CUSTOM_DATA_ID, $value );
-		}
-		return $updated;
+		return $this->updateOrderItemShippingMeta($orderId, $value, self::META_FIELD_PICKUP_CUSTOM_DATA_ID);
 	}
 
 	public function setOrderPickupBatchId( $orderId, $value ) {
-		$order = New WC_Order($orderId);
-		// Using foreach to split item id and data, but there should be only one row
-		foreach ( $order->get_items( 'shipping' ) as $orderItemId => $orderItemData ) {
-			$updated = wc_update_order_item_meta( $orderItemId, Mbe_Shipping_Helper_Data::META_FIELD_PICKUP_BATCH_ID, $value );
-		}
-		return $updated;
+		return $this->updateOrderItemShippingMeta($orderId, $value, self::META_FIELD_PICKUP_BATCH_ID);
 	}
 
 	public function deleteOrderPickupCustomDataId( $orderId ) {
-		$order = New WC_Order($orderId);
-		// Using foreach to split item id and data, but there should be only one row
-		foreach ( $order->get_items( 'shipping' ) as $orderItemId => $orderItemData ) {
-			$deleted = wc_delete_order_item_meta( $orderItemId, Mbe_Shipping_Helper_Data::META_FIELD_PICKUP_CUSTOM_DATA_ID );
-		}
-		return $deleted;
+		return $this->deleteOrderItemShippingMeta($orderId, self::META_FIELD_PICKUP_CUSTOM_DATA_ID);
+//		$order = New WC_Order($orderId);
+//		// Using foreach to split item id and data, but there should be only one row
+//		foreach ( $order->get_items( 'shipping' ) as $orderItemId => $orderItemData ) {
+//			$deleted = wc_delete_order_item_meta( $orderItemId, Mbe_Shipping_Helper_Data::META_FIELD_PICKUP_CUSTOM_DATA_ID );
+//		}
+//		return $deleted;
 	}
 
 	public function deleteOrderPickupBatchId( $orderId ) {
-		$order = New WC_Order($orderId);
-		// Using foreach to split item id and data, but there should be only one row
-		foreach ( $order->get_items( 'shipping' ) as $orderItemId => $orderItemData ) {
-			$deleted = wc_delete_order_item_meta( $orderItemId, Mbe_Shipping_Helper_Data::META_FIELD_PICKUP_BATCH_ID );
-		}
-		return $deleted;
+		return $this->deleteOrderItemShippingMeta($orderId, self::META_FIELD_PICKUP_BATCH_ID);
+//		$order = New WC_Order($orderId);
+//		// Using foreach to split item id and data, but there should be only one row
+//		foreach ( $order->get_items( 'shipping' ) as $orderItemId => $orderItemData ) {
+//			$deleted = wc_delete_order_item_meta( $orderItemId, Mbe_Shipping_Helper_Data::META_FIELD_PICKUP_BATCH_ID );
+//		}
+//		return $deleted;
 	}
 
 	public function detachOrderFromPickupBatch( $orderId ) {
@@ -590,10 +731,11 @@ class Mbe_Shipping_Helper_Data
 		return true;
 	}
 
-	public function isPickupShipped( $post_id = null ) {
-		$post_id = is_null($post_id) ? (int)$_GET['post'] : (int)$post_id;
+	public function isPickupShipped( $post_id ) {
+		if(empty($post_id)) {return false;}
+		// $post_id = is_null($post_id) ? (int)$_GET['post'] : (int)$post_id;
 
-		$order = New WC_Order($post_id);
+		$order = wc_get_order($post_id);
 		foreach ( $order->get_items( 'shipping' ) as $orderItemId => $orderItemData ) {
 			$value = wc_get_order_item_meta( $orderItemId, Mbe_Shipping_Helper_Data::META_FIELD_IS_PICKUP_SHIPPING, true );
 		}
@@ -601,13 +743,13 @@ class Mbe_Shipping_Helper_Data
 	}
 
 	public function setIsPickupShipped( $orderId, $value = false ) {
-		$order = New WC_Order($orderId);
+		$order = wc_get_order($orderId);
 		// Using foreach to split item id and data, but there should be only one row
 		foreach ( $order->get_items( 'shipping' ) as $orderItemId => $orderItemData ) {
 			if (!empty($orderItemId)) {
 				wc_update_order_item_meta( $orderItemId, Mbe_Shipping_Helper_Data::META_FIELD_IS_PICKUP_SHIPPING, $value );
 			} else {
-				throw new Exception(__('Pickup info cannot be set in order items', 'mail-boxes-etc'));
+				throw new Exception(esc_html__('Pickup info cannot be set in order items', 'mail-boxes-etc'));
 			}
 		}
 		return !empty($value);
@@ -654,10 +796,17 @@ class Mbe_Shipping_Helper_Data
         return $this->getShipmentsClosureMode() == self::MBE_CLOSURE_MODE_AUTOMATICALLY;
     }
 
-    public function hasTracking($post_id = null)
+    public function hasTracking($post_id)
     {
-        $post_id = is_null($post_id) ? (int)$_GET['post'] : (int)$post_id;
-        $value = get_post_meta($post_id, self::SHIPMENT_SOURCE_TRACKING_NUMBER, true);
+        //$post_id = is_null($post_id) ? (int)$_GET['post'] : (int)$post_id;
+	    if(empty($post_id)) {return false;}
+
+	    if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+		    $order = wc_get_order($post_id);
+		    $value = $order->get_meta(self::SHIPMENT_SOURCE_TRACKING_NUMBER);
+	    } else {
+		    $value = get_post_meta($post_id, self::SHIPMENT_SOURCE_TRACKING_NUMBER, true);
+	    }
         return !empty($value);
     }
 
@@ -739,7 +888,12 @@ class Mbe_Shipping_Helper_Data
     public function getFileNames($orderId)
     {
         $result = array();
-        $files = get_post_meta($orderId, self::SHIPMENT_SOURCE_TRACKING_FILENAME, true);
+	    if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+		    $order = wc_get_order($orderId);
+		    $files = $order->get_meta(self::SHIPMENT_SOURCE_TRACKING_FILENAME);
+	    } else {
+		    $files = get_post_meta($orderId, self::SHIPMENT_SOURCE_TRACKING_FILENAME, true);
+	    }
         if ($files != '') {
             if (strpos($files, self::MBE_SHIPPING_TRACKING_SEPARATOR) !== false) {
                 $result = explode(self::MBE_SHIPPING_TRACKING_SEPARATOR, $files);
@@ -753,8 +907,14 @@ class Mbe_Shipping_Helper_Data
 
     public function getTrackings($shipmentId)
     {
-        $tracking = get_post_meta($shipmentId, self::SHIPMENT_SOURCE_TRACKING_NUMBER, true);
-        if (strpos($tracking, self::MBE_SHIPPING_TRACKING_SEPARATOR) !== false) {
+	    if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+		    $order = wc_get_order($shipmentId);
+		    $tracking = $order->get_meta(self::SHIPMENT_SOURCE_TRACKING_NUMBER);
+	    } else {
+		    $tracking = get_post_meta($shipmentId, self::SHIPMENT_SOURCE_TRACKING_NUMBER, true);
+	    }
+
+        if ( str_contains( $tracking, self::MBE_SHIPPING_TRACKING_SEPARATOR ) ) {
             $value = explode(self::MBE_SHIPPING_TRACKING_SEPARATOR, $tracking);
 
         }
@@ -769,9 +929,14 @@ class Mbe_Shipping_Helper_Data
 
     public function getTrackingsString($shipmentId)
     {
-        $result = get_post_meta($shipmentId, self::SHIPMENT_SOURCE_TRACKING_NUMBER, true);
+	    if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+		    $order = wc_get_order($shipmentId);
+		    $result = $order->get_meta(self::SHIPMENT_SOURCE_TRACKING_NUMBER);
+	    } else {
+		    $result = get_post_meta($shipmentId, self::SHIPMENT_SOURCE_TRACKING_NUMBER, true);
+	    }
         //compatibility replace
-        if (strpos($result, self::MBE_SHIPPING_TRACKING_SEPARATOR__OLD) !== false) {
+        if ( str_contains( $result, self::MBE_SHIPPING_TRACKING_SEPARATOR__OLD ) ) {
             $result = str_replace(self::MBE_SHIPPING_TRACKING_SEPARATOR__OLD, self::MBE_SHIPPING_TRACKING_SEPARATOR, $result);
         }
         return $result;
@@ -806,6 +971,23 @@ class Mbe_Shipping_Helper_Data
         $this->checkMbeDir($result);
         return $result;
     }
+
+	public function generateSha256RandomString() {
+		return hash('sha256', microtime() . mt_rand());
+	}
+
+	public function getMbeLogDir() {
+		$mbeLogDir = $this->getOption(self::XML_PATH_MBE_LOG_FOLDER_NAME);
+
+		if(empty($mbeLogDir)) {
+			$mbeLogDir = substr($this->generateSha256RandomString(), 0, 15);
+			$this->setOption(self::XML_PATH_MBE_LOG_FOLDER_NAME, $mbeLogDir);
+		}
+
+		$mbeLogDirPath = MBE_ESHIP_PLUGIN_DIR . $mbeLogDir;
+		$this->checkMbeDir( $mbeLogDirPath );
+		return $mbeLogDirPath;
+	}
 
     public function getMbeCsvUploadUrl()
     {
@@ -845,14 +1027,19 @@ class Mbe_Shipping_Helper_Data
 
     public function isMbeShipping($order)
     {
-        $shippingMethod = $this->getShippingMethod($order);
+        $shippingMethod = $this->getShippingMethod($order)??'';
 	    // Handle already shipped orders added with custom mapping, if custom mapping is currently disabled.
-	    $customMappingOrder = !empty($this->getTrackings($order->get_id())) && (get_post_meta( $order->get_id(), woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_CUSTOM_MAPPING,true) === 'yes');
+	    if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+		    $customMappingOrder = !empty($this->getTrackings($order->get_id())) && ($order->get_meta(woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_CUSTOM_MAPPING) === 'yes');
+	    } else {
+		    $customMappingOrder = !empty($this->getTrackings($order->get_id())) && (get_post_meta( $order->get_id(), woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_CUSTOM_MAPPING,true) === 'yes');
+	    }
 	    // Check if the method is an MBE one (old or new) or if is a custom mapped default one
-	    if (
-        	preg_match('/'.MBE_ESHIP_ID.'|wf_mbe_shipping/', $shippingMethod)
-	        || $this->isMbeShippingCustomMapping($shippingMethod)
-		    || $customMappingOrder
+	    if ( !empty($shippingMethod) && (
+			    $this->isMBEShippingMethod( $shippingMethod )
+			    || $this->isMbeShippingCustomMapping($shippingMethod)
+			    || $customMappingOrder
+		    )
         ) {
             return true;
         }
@@ -863,7 +1050,6 @@ class Mbe_Shipping_Helper_Data
 	 * @param $order
 	 *
 	 * @return false|string
-	 * @throws Exception
 	 */
     public function getShippingMethod($order)
     {
@@ -872,19 +1058,22 @@ class Mbe_Shipping_Helper_Data
             foreach ($order->get_items('shipping') as $key => $item) {
                 $order_item_id = $key;
             }
-
-            if ($order_item_id) {
-                $shippingMethod = wc_get_order_item_meta($order_item_id, 'method_id', true);
-                if ($this->isEnabledCustomMapping()) {
-	                $customMapping = $this->getOption( 'mbe_custom_mapping_' . $shippingMethod );
-	                if ( ! empty( $customMapping ) ) {
-		                $shippingMethod = $shippingMethod . ':' . $customMapping;
-	                }
-                }
-                return $shippingMethod;
-            } else {
-                return false;
-            }
+	        try {
+		        if ( $order_item_id ) {
+			        $shippingMethod = wc_get_order_item_meta( $order_item_id, 'method_id', true );
+			        if ( $this->isEnabledCustomMapping() ) {
+				        $customMapping = $this->getOption( 'mbe_custom_mapping_' . $shippingMethod );
+				        if ( ! empty( $customMapping ) ) {
+					        $shippingMethod = $shippingMethod . ':' . $customMapping;
+				        }
+			        }
+			        return $shippingMethod;
+		        } else {
+			        return false;
+		        }
+	        } catch (Exception $e) {
+				return false;
+	        }
         }
     }
 
@@ -897,7 +1086,12 @@ class Mbe_Shipping_Helper_Data
         }
         else {
 	        $orderId = $this->getOrderId($order);
-            return get_post_meta($orderId, '_shipping_method_title', true);
+	        if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+		        $order = wc_get_order($orderId);
+		        return $order->get_meta('_shipping_method_title');
+	        } else {
+		        return get_post_meta($orderId, '_shipping_method_title', true);
+	        }
         }
     }
 
@@ -1050,12 +1244,12 @@ class Mbe_Shipping_Helper_Data
 
 	public function getLogWsPath()
 	{
-		return MBE_ESHIP_PLUGIN_LOG_DIR . DIRECTORY_SEPARATOR . self::MBE_LOG_WS;
+		return trailingslashit($this->getMbeLogDir()) . self::MBE_LOG_WS;
 	}
 
 	public function getLogPluginPath()
 	{
-		return MBE_ESHIP_PLUGIN_LOG_DIR . DIRECTORY_SEPARATOR . self::MBE_LOG_PLUGIN;
+		return trailingslashit($this->getMbeLogDir()) . self::MBE_LOG_PLUGIN;
 	}
 
     public function isEnabledCustomMapping()
@@ -1275,10 +1469,6 @@ class Mbe_Shipping_Helper_Data
 
 	/**
 	 * This method returns an array for all the boxes grouped by box type
-	 * @param $boxes
-	 * @param $boxesSingleParcel
-	 *
-	 * @return mixed
 	 */
 	public function mergeBoxesArray($boxes, $boxesSingleParcel)
 	{
@@ -1317,9 +1507,6 @@ class Mbe_Shipping_Helper_Data
 
 	/**
 	 * Compare all the dimensions for all the boxes and returns the biggest one
-	 * @param $boxesArray
-	 *
-	 * @return mixed
 	 */
 	public function longestSizeBoxesArray($boxesArray)
 	{
@@ -1397,9 +1584,13 @@ class Mbe_Shipping_Helper_Data
 	}
 
 	public function isReturned($post_id) {
-		$post_id = is_null($post_id) ? (int)$_GET['post'] : (int)$post_id;
-//		$value = explode(self::MBE_SHIPPING_TRACKING_SEPARATOR, get_post_meta($post_id, self::SHIPMENT_SOURCE_RETURN_TRACKING_NUMBER, true));
-		return !empty(get_post_meta($post_id, self::SHIPMENT_SOURCE_RETURN_TRACKING_NUMBER, true));
+		if(empty($post_id)) {return false;}
+		if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+			$order = wc_get_order($post_id);
+			return $order->get_meta(self::SHIPMENT_SOURCE_RETURN_TRACKING_NUMBER);
+		} else {
+			return !empty(get_post_meta($post_id, self::SHIPMENT_SOURCE_RETURN_TRACKING_NUMBER, true));
+		}
 	}
 
 	public function arrayKeyFirst($array) {
@@ -1422,7 +1613,7 @@ class Mbe_Shipping_Helper_Data
 		$shippingMethods = MBE_ESHIP_ID.'|wf_mbe_shipping'; // search also for orders created with the old plugin
 
 		if (version_compare(WC()->version, '2.1', '>=')) {
-			return "SELECT order_id FROM {$wpdb->prefix}woocommerce_order_items AS oi INNER JOIN $wpdb->order_itemmeta AS oim ON oi.order_item_id = oim.order_item_id WHERE oim.meta_key = 'method_id' AND oim.meta_value REGEXP '{$shippingMethods}'";
+			return "SELECT order_id FROM {$wpdb->prefix}woocommerce_order_items AS oi INNER JOIN $wpdb->order_itemmeta AS oim ON oi.order_item_id = oim.order_item_id WHERE oi.order_item_type = 'shipping' AND oim.meta_key = 'method_id' AND oim.meta_value REGEXP '{$shippingMethods}'";
 		}
 		else {
 			return "SELECT post_id FROM {$postmetaTableName} AS pm WHERE pm.meta_key = '_shipping_method' AND pm.meta_value REGEXP '{$shippingMethods}'";
@@ -1431,18 +1622,23 @@ class Mbe_Shipping_Helper_Data
 
 	public function select_custom_mapping_ids()
 	{
-		// get orders with custom mapped shipping method
-		$customMappingFilter = array(
-			'post_type' => 'shop_order',
-			'post_status' => 'wc-%',
-			'nopaging' => 'true',
-			'fields' => 'ids',
-			'meta_key' => woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_CUSTOM_MAPPING,
-			'meta_value' => 'yes',
-		);
+		if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+			global $wpdb;
+			return "SELECT DISTINCT order_id FROM {$wpdb->prefix}wc_orders_meta WHERE meta_key = '".woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_CUSTOM_MAPPING."' AND meta_value = 'yes'";
+		} else {
+			// get orders with custom mapped shipping method
+			$customMappingFilter = array(
+				'post_type' => 'shop_order',
+				'post_status' => 'wc-%',
+				'nopaging' => 'true',
+				'fields' => 'ids',
+				'meta_key' => woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_CUSTOM_MAPPING,
+				'meta_value' => 'yes',
+			);
 
-		$sqlFilter = new WP_Query($customMappingFilter);
-		return $sqlFilter->request;
+			$sqlFilter = new WP_Query($customMappingFilter);
+			return $sqlFilter->request;
+		}
 
 	}
 
@@ -1457,9 +1653,9 @@ class Mbe_Shipping_Helper_Data
 	public function select_pickup_batch_orders_ids($batchId = null) {
 		global $wpdb;
 		$filterId = " AND oim.meta_value " . ($batchId?" = '" . $batchId ."'":"IS NOT NULL");
-		return "SELECT order_id FROM {$wpdb->prefix}woocommerce_order_items AS oi INNER JOIN $wpdb->order_itemmeta AS oim ON oi.order_item_id = oim.order_item_id 
-                WHERE oim.meta_key = '".self::META_FIELD_PICKUP_BATCH_ID."' {$filterId} ";
 
+		return "SELECT order_id FROM {$wpdb->prefix}woocommerce_order_items AS oi INNER JOIN $wpdb->order_itemmeta AS oim ON oi.order_item_id = oim.order_item_id
+                WHERE oim.meta_key = '".self::META_FIELD_PICKUP_BATCH_ID."' {$filterId} ";
 	}
 
 	/**
@@ -1473,17 +1669,10 @@ class Mbe_Shipping_Helper_Data
 	public function select_pickup_orders_ids($pickpCustomDataId = null) {
 		global $wpdb;
 		$filterId = " AND oim.meta_value " . ($pickpCustomDataId? " = '" . $pickpCustomDataId . "'":"IS NOT NULL");
+
 		return "SELECT order_id FROM {$wpdb->prefix}woocommerce_order_items AS oi INNER JOIN $wpdb->order_itemmeta AS oim ON oi.order_item_id = oim.order_item_id 
                 WHERE oim.meta_key = '".self::META_FIELD_PICKUP_CUSTOM_DATA_ID."' {$filterId} ";
-
 	}
-
-//	public function select_pickup_orders_ids2($batchId = null) {
-//		global $wpdb;
-//		$filterId = ($batchId?" oim.meta_key = '".self::META_FIELD_PICKUP_BATCH_ID."' AND oim.meta_value = '" . $batchId ."'":"oim.meta_key = '" . self::META_FIELD_PICKUP_CUSTOM_DATA_ID ."' AND oim.meta_value IS NOT NULL");
-//		return "SELECT order_id FROM {$wpdb->prefix}woocommerce_order_items AS oi INNER JOIN $wpdb->order_itemmeta AS oim ON oi.order_item_id = oim.order_item_id
-//                WHERE {$filterId} ";
-//	}
 
 	public function checkStartEndTime($start, $end){
 		$timeStart = new DateTime($start);
@@ -1503,9 +1692,128 @@ class Mbe_Shipping_Helper_Data
 	 * @return void
 	 */
 	public function setWpAdminMessages(array $message = [ 'message' => '', 'status'   => 'info' ]) {
-		$wpAdminMessage = maybe_unserialize( get_option( 'mbe_shipping_wp_admin_messages' ) );
+		$wpAdminMessage = maybe_unserialize( get_option( 'mbe_shipping_wp_admin_messages' , []) )??[];
 		$wpAdminMessage[] = $message;
 		update_option( 'mbe_shipping_wp_admin_messages', serialize($wpAdminMessage) );
+	}
+
+	public function getDeliveryPointServices( $estimateShipping ) {
+		$lowestPriceDeliveryService = null;
+		$courierServices            = [];
+		$molServices                = [];
+		$priceForMap                = [];
+
+		foreach ( $estimateShipping as $shippingOption ) {
+			if ( $this->isEnabledDeliveryPointService( $shippingOption ) ) {
+				$molServices[] = $shippingOption->Service;
+				$courierServices[] = $shippingOption->CourierService;
+				$priceForMap[] = $shippingOption->NetShipmentTotalPrice;
+				$lowestPriceDeliveryService = $this->getLowestPriceService( $shippingOption, $lowestPriceDeliveryService );
+			}
+		}
+
+		if ( $lowestPriceDeliveryService ) {
+			$lowestPriceDeliveryService->MolService = $molServices;
+			$lowestPriceDeliveryService->CourierService = $courierServices;
+			$lowestPriceDeliveryService->PriceForMap = $priceForMap;
+			$lowestPriceDeliveryService->Service = MBE_DELIVERY_POINT_SERVICE;
+			$lowestPriceDeliveryService->ServiceDesc = MBE_DELIVERY_POINT_DESCRIPTION;
+		}
+
+		return $lowestPriceDeliveryService;
+	}
+
+	public function isEnabledDeliveryPointService( $shippingOption ) {
+		return in_array( $shippingOption->Service, MBE_ESTIMATE_DELIVERY_POINT_SERVICES ) && in_array( $shippingOption->Service, $this->getAllowedShipmentServices() );
+	}
+
+	public function getLowestPriceService( $currentOption, $existingOption ) {
+		if ( empty( $existingOption ) || $currentOption->NetShipmentTotalPrice < $existingOption->NetShipmentTotalPrice ) {
+			return $currentOption;
+		}
+
+		return $existingOption;
+	}
+
+	public function isDeliveryPointOrder( $post_id ) {
+		if(empty($post_id)) {return false;}
+		return $this->getOrderDeliveryPointShipment($post_id) == 'Yes';
+	}
+
+	public function logErrorAndSetWpAdminMessage($errMsg, $logger = null)
+	{
+		if (!empty($logger)) $logger->log( $errMsg );
+		$this->setWpAdminMessages([
+			'message' => urlencode( $errMsg ),
+			'status'  => urlencode( 'error' )
+		]);
+	}
+
+	public function logErrorAndSetWCAdminMessage($errMsg, $logger = null)
+	{
+		if (!empty($logger)) $logger->log( $errMsg );
+		WC_Admin_Settings::add_error(MBE_ESHIP_PLUGIN_NAME . ' - ' . $errMsg);
+	}
+
+	public function mbe_download_file( $filePath, $fileName = '', $fileType = 'text/csv', $deleteAfter = false ) {
+		$fileNamefromPath = [];
+		if ( $fileName === '' && preg_match( '/(?P<filename>[\w\-. ]+)$/', $filePath, $fileNamefromPath ) ) {
+			$fileName = $fileNamefromPath['filename'] ?? 'mbe_download_file.csv';
+		}
+		try {
+			if ( is_file( $filePath ) ) {
+				header( 'Content-Description: File Transfer' );
+				header( 'Content-Type: ' . $fileType );
+				header( "Content-Disposition: attachment; filename=" . $fileName );
+				header( 'Content-Transfer-Encoding: binary' );
+				header( 'Expires: 0' );
+				header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
+				header( 'Pragma: public' );
+				header( 'Content-Length: ' . filesize( $filePath ) );
+				ob_clean();
+				flush();
+				readfile( $filePath );
+				if ( $deleteAfter ) {
+					wp_delete_file( $filePath );
+				}
+				exit;
+			}
+			error_log( __( 'MBE Download file - files not found' ) );
+		} catch ( \Exception $e ) {
+			error_log( __( 'MBE Download file - Unexpected error' ) . ' - ' . $e->getMessage() );
+		}
+		exit;
+	}
+
+	/**
+	 * @param string $shippingMethod
+	 *
+	 * @return false|int
+	 */
+	public function isMBEShippingMethod( $shippingMethod ) {
+		if (is_array($shippingMethod)) {
+			$shippingMethod = $shippingMethod[0];
+		}
+		return preg_match( '/' . MBE_ESHIP_ID . '|wf_mbe_shipping/', $shippingMethod );
+	}
+
+	/**
+	 * @param $grossPrice
+	 *
+	 * @return float|int
+	 */
+	public function calculateNetPriceFromGross( $grossPrice, $taxPercentage ) {
+		return $grossPrice / ( 1 + ( $taxPercentage / 100 ) );
+	}
+
+	public function createHtaccessDenyAll( $filePath ) {
+		$content = 'deny from all';
+		if(file_put_contents(trailingslashit($filePath) . '.htaccess', $content) === false) {
+			return false;
+		}
+
+		return true;
+
 	}
 
 }

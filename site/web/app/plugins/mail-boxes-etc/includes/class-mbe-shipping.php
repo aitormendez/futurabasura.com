@@ -51,6 +51,24 @@ class mbe_shipping_method extends WC_Shipping_Method {
 						'cost'  => $r['price'],
 						//                'calc_tax' => 'per_item'
 					);
+					$rate['meta_data'] = [];
+					// Add delivery point services data, if any
+					if(!empty( $r['delivery_point_services'] ) ) {
+						$rate['meta_data']  = array_merge($rate['meta_data'], [
+							'delivery_point_services'     => $r['delivery_point_services'],
+						]);
+						// Update the method price if we are recalculating fares due to a delivery point selection
+						if(isset($package['delivery_point'])) {
+							$rate['cost'] = $package['delivery_point']->cost??$rate['cost'];
+						}
+					}
+
+					// Add Tax and Duties data, if any
+					if($this->shippingHelper->isEnabledTaxAndDuties() && !empty( $r['tax_and_duties_data'] ) ) {
+						$rate['meta_data']  = array_merge($rate['meta_data'], [
+							'tax_and_duties_data'      => $r['tax_and_duties_data'],
+						]);
+					}
 					// Register the rate
 					$this->add_rate( $rate );
 				}

@@ -30,7 +30,7 @@ class Mbe_Shipping_Helper_Csv
 						$current  = $this->readCsvRowToArray( $headerDefinition, $header, $currentRow );
 						$result[] = $current;
 					} catch (ValidationException $e) {
-						throw new ValidationException($e->getMessage() . ' file:'. basename($importFilePath)  );
+						throw new ValidationException(esc_html($e->getMessage() . ' file:'. basename($importFilePath)  ));
 					}
 				}
 			}
@@ -64,7 +64,7 @@ class Mbe_Shipping_Helper_Csv
 				$result[$currentKey] = $currentRowValue;
 			}
 		} else {
-			throw new ValidationException(__(__('Expected ('. count($headerDefinition) .') columns, found ('. count($row) .').')));
+			throw new ValidationException(esc_html__('Expected ('. count($headerDefinition) .') columns, found ('. count($row) .').'));
 		}
 		return $result;
 	}

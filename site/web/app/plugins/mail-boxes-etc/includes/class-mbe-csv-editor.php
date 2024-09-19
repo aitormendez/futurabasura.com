@@ -27,7 +27,7 @@ class Mbe_Shipping_Csv_Editor extends WP_List_Table
 	/** Function to be overridden by the child class
 	 *
 	 */
-	public function get_remoteRows($orderby = null, $order = 'asc') {}
+	public function get_remoteRows($orderBy = null, $order = 'asc'): array {}
 
 	/**
 	 * Prepares the list of items for displaying.
@@ -46,10 +46,7 @@ class Mbe_Shipping_Csv_Editor extends WP_List_Table
 		if($this->isRemote) {
 			$this->items = $this->get_remoteRows($_REQUEST['orderby']??null, $_REQUEST['order']??null);
 		} else {
-			$this->items = $wpdb->get_results( $wpdb->prepare(
-				"SELECT * FROM {$this->tableName} {$order}"
-			)
-				, ARRAY_A );
+			$this->items = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM %i {$order}", $this->tableName), ARRAY_A ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
 		}
 
 		$this->set_pagination_args([]);
@@ -114,7 +111,7 @@ class Mbe_Shipping_Csv_Editor extends WP_List_Table
 			if (!empty($ids)) {
 				do_action(MBE_ESHIP_ID . '_csv_editor_deleting', $ids);
 				if (!$this->isRemote) {
-					$wpdb->query( "DELETE FROM $table_name WHERE $this->get_ID() IN ( " . implode( ',', $ids ) . " )" );
+					$wpdb->query( $wpdb->prepare("DELETE FROM %i WHERE %i IN ( " . implode( ',', $ids ) . " )" , $table_name, $this->get_ID()) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
 				}
 				do_action(MBE_ESHIP_ID . '_csv_editor_deleted', $ids, $this->csvType);
 			}
@@ -122,7 +119,7 @@ class Mbe_Shipping_Csv_Editor extends WP_List_Table
 	}
 
 	function column_default( $item, $column_name ) {
-		echo $item[$column_name];
+		esc_html_e($item[$column_name]);
 	}
 
 	function column_id($item)
@@ -171,7 +168,7 @@ class Mbe_Shipping_Csv_Editor extends WP_List_Table
 		echo '<div class="alignright actions">';
 
 		if ( 'top' === $which ) {
-			echo sprintf( '<a class="add-new-h2" href="?page=' . MBE_ESHIP_ID . '_csv_edit_form&action=new&csv=' . $this->csvType . '&id=%s">%s</a>', null, __('Add', 'mail-boxes-etc') . ' ' . $this->get_title());
+			echo sprintf( '<a class="add-new-h2" href="?page=' . esc_attr(MBE_ESHIP_ID) . '_csv_edit_form&action=new&csv=' . esc_attr($this->csvType) . '&id=%s">%s</a>', null, esc_html__('Add') . ' ' . esc_html($this->get_title()));
 		}
 
 		echo '</div>';
@@ -184,7 +181,7 @@ class Mbe_Shipping_Csv_Editor extends WP_List_Table
 		if(!$this->get_isRemote()) {
 			global $wpdb;
 			$idParam = ! empty( $id ) ? " AND id <> $id" : '';
-			$wpdb->get_results( $wpdb->prepare( "SELECT id FROM $this->tableName WHERE $field = $type $idParam", $value ) );
+			$wpdb->get_results( $wpdb->prepare( "SELECT id FROM %i WHERE $field = $type $idParam", $this->tableName, $value ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
 
 			return $wpdb->num_rows > 0;
 		}

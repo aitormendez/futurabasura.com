@@ -15,15 +15,15 @@ class Mbe_Shipping_Helper_Rates
     public function uninstallRatesTable()
     {
         global $wpdb;
-        $sql = "DROP TABLE IF EXISTS `" . $this->_rate_table_name . "`";
-	    return $wpdb->query($sql);
+//        $sql = "DROP TABLE IF EXISTS `" . $this->_rate_table_name . "`";
+	    return $wpdb->query($wpdb->prepare("DROP TABLE IF EXISTS %i", $this->_rate_table_name));  // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
     }
 
     public function truncate()
     {
         global $wpdb;
-        $truncateSql = " TRUNCATE `" . $this->_rate_table_name . "` ";
-	    return $wpdb->query($truncateSql);
+//	    $truncateSql = " TRUNCATE `" . $this->_rate_table_name . "` ";
+	    return $wpdb->query($wpdb->prepare("TRUNCATE %i", $this->_rate_table_name)); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
     }
 
     public function insertRate($country, $region, $city, $zip, $zipTo, $weightFrom, $weightTo, $price, $deliveryType)
@@ -40,24 +40,38 @@ class Mbe_Shipping_Helper_Rates
 	    $price = esc_sql($price);
 	    $deliveryType = esc_sql($deliveryType);
 
-        $sql = "
-                INSERT INTO `" . $this->_rate_table_name . "` (
-                    `country`,`region`,`city`,`zip`,`zip_to`,`weight_from`,`weight_to`,`price`,`delivery_type`
-                ) 
-                VALUES (
-                    '" . $country . "',
-                    '" . $region . "',
-                    '" . $city . "',
-                    '" . $zip . "',
-                    '" . $zipTo . "',
-                    " . $weightFrom . ",
-                    " . $weightTo . ",
-                    " . $price . ",
-                    '" . $deliveryType . "'
-                );
-            ";
+//        $sql = "
+//                INSERT INTO `" . $this->_rate_table_name . "` (
+//                    `country`,`region`,`city`,`zip`,`zip_to`,`weight_from`,`weight_to`,`price`,`delivery_type`
+//                )
+//                VALUES (
+//                    '" . $country . "',
+//                    '" . $region . "',
+//                    '" . $city . "',
+//                    '" . $zip . "',
+//                    '" . $zipTo . "',
+//                    " . $weightFrom . ",
+//                    " . $weightTo . ",
+//                    " . $price . ",
+//                    '" . $deliveryType . "'
+//                );
+//            ";
 
-	    return $wpdb->query($sql);
+	    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
+	    return $wpdb->query($wpdb->prepare(
+		    "INSERT INTO %i ( `country`,`region`,`city`,`zip`,`zip_to`,`weight_from`,`weight_to`,`price`,`delivery_type` ) 
+				  VALUES (%s, %s, %s, %s, %s, %d, %d, %d, %s) ",
+		    $this->_rate_table_name,
+		    $country,
+		    $region,
+		    $city,
+		    $zip,
+		    $zipTo,
+		    $weightFrom,
+		    $weightTo,
+		    $price,
+		    $deliveryType
+	    ));
     }
 
 
@@ -77,8 +91,8 @@ class Mbe_Shipping_Helper_Rates
         }
 
 		if ($helper->getShipmentsCsvMode() == Mbe_Shipping_Helper_Data::MBE_CSV_MODE_PARTIAL) {
-            $sql = "SELECT * FROM `" . $this->_rate_table_name . "` WHERE `country` = '" . $country . "'";
-            $rates = $wpdb->get_results($sql,"ARRAY_A");
+//            $sql = "SELECT * FROM `" . $this->_rate_table_name . "` WHERE `country` = '" . $country . "'";
+            $rates = $wpdb->get_results($wpdb->prepare("SELECT * FROM %i WHERE country = %s", $this->_rate_table_name, $country),"ARRAY_A");  // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
             if (is_array($rates) && count($rates) > 0) {
                 return true;
             }
@@ -92,8 +106,6 @@ class Mbe_Shipping_Helper_Rates
         $result = $rate;
 
         $helper = new Mbe_Shipping_Helper_Data();
-
-        $helper->getShipmentsCsvInsurancePercentage();
 
         $percentageValue = $helper->getShipmentsCsvInsurancePercentage() / 100 * (float)$insuranceValue;
         $fixedValue = $helper->getShipmentsCsvInsuranceMin();
@@ -228,7 +240,7 @@ class Mbe_Shipping_Helper_Rates
                 $sql .= " ORDER BY country DESC, region DESC, zip DESC";
 
 
-                $rows = $wpdb->get_results($sql, 'ARRAY_A');
+                $rows = $wpdb->get_results($sql, 'ARRAY_A');  // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
 
 
                 if (!empty($rows)) {
@@ -241,9 +253,11 @@ class Mbe_Shipping_Helper_Rates
 
             }
         }
+	    $resultWithoutInsurance = [];
+	    $resultWithInsurance = [];
+		$resultDeliveryPoint = [];
 
         $ws = new Mbe_Shipping_Model_Ws();
-        $helper = new Mbe_Shipping_Helper_Data();
         foreach ($newdata as $data) {
             $rate = new \stdClass;
             $rate->Service = $data["delivery_type"];
@@ -252,18 +266,44 @@ class Mbe_Shipping_Helper_Rates
             $rate->IdSubzone = '';
 
             $rate->NetShipmentTotalPrice = $data["price"];
-            $result[] = $rate;
 
-            //rate with insurance
-            $rateWithInsurance = new \stdClass;
-            $rateWithInsurance->Service = $helper->convertShippingCodeWithInsurance($data["delivery_type"]);
-            $rateWithInsurance->ServiceDesc = $helper->convertShippingLabelWithInsurance($ws->getLabelFromShipmentType($data["delivery_type"]));;
-            $rateWithInsurance->SubzoneDesc = '';
-            $rateWithInsurance->IdSubzone = '';
+			// Extract all the delivery point CourierService codes
+	        if(in_array($data["delivery_type"], MBE_ESTIMATE_DELIVERY_POINT_SERVICES)) {
+                $customerData = $ws->getCustomer();
+		        $enabledServices = explode(',', $customerData->Permissions->enabledServices);
+		        $enabledCourierServices = explode(',',$customerData->Permissions->enabledCourierServices);
+		        foreach ($enabledServices  as $key=>$value ) {
+					if($data["delivery_type"] === $value) {
+						$netRate = clone $rate;
+						$netRate->CourierService = $enabledCourierServices[$key];
+						$resultDeliveryPoint[] = $netRate;
+					}
+				}
+	        } else {
+		        $resultWithoutInsurance[] = $rate;
 
-            $rateWithInsurance->NetShipmentTotalPrice = $this->applyInsuranceToRate($data["price"], $insuranceValue);
-            $result[] = $rateWithInsurance;
+				//rate with insurance
+		        $rateWithInsurance = new \stdClass;
+		        $rateWithInsurance->Service = $this->helper->convertShippingCodeWithInsurance($data["delivery_type"]);
+		        $rateWithInsurance->ServiceDesc = $this->helper->convertShippingLabelWithInsurance($ws->getLabelFromShipmentType($data["delivery_type"]));;
+		        $rateWithInsurance->SubzoneDesc = '';
+		        $rateWithInsurance->IdSubzone = '';
+
+		        $rateWithInsurance->NetShipmentTotalPrice = $this->applyInsuranceToRate($data["price"], $insuranceValue);
+		        $resultWithInsurance[] = $rateWithInsurance;
+	        }
+
+
         }
+	    $result = array_merge($resultWithInsurance, $resultWithoutInsurance);
+
+	    // Add common delivery point service
+	    if(is_array($resultDeliveryPoint)) {
+		    $result[] = $this->helper->getDeliveryPointServices($resultDeliveryPoint);
+		    $result = array_values(array_filter($result)); //Clean empty array items and reindex (remove null deliverypointservices if any)
+	    }
+
         return $result;
     }
+
 }

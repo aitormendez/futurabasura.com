@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Mail boxes\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-13 13:46+0000\n"
-"PO-Revision-Date: 2023-12-11 10:52+0100\n"
+"PO-Revision-Date: 2024-07-17 16:07+0200\n"
 "Last-Translator: Rafał Borycki <rborycki@mbe.pl>\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.4\n"
 "X-Poedit-KeywordsList: __\n"
 "X-Poedit-Basepath: /home/web/php59/woombe/wordpress46/wp-content/plugins/mbe-woocommerce-shipping-method\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -1385,3 +1385,119 @@ msgstr "Wystąpił błąd podczas pobierania manifestów dla partii odbioru"
 
 msgid "Order does not have a tracking number"
 msgstr "Zamówienie nie ma numeru śledzenia"
+
+msgid "Click to select a delivery point"
+msgstr "Kliknij, aby wybrać punkt dostawy"
+
+msgid "Delivery Point"
+msgstr "Punkt dostawy"
+
+msgid "Select a delivery point to proceed"
+msgstr "Wybierz punkt dostawy, aby kontynuować"
+
+msgid "Download waybill"
+msgstr "Pobierz list przewozowy"
+
+msgid "no document to download. Please, retry later"
+msgstr "Brak dokumentu do pobrania. Spróbuj ponownie później"
+
+msgid "waybill for order %s is still generating. Please try again in 1 minute"
+msgstr "List przewozowy dla zamówienia %s jest nadal generowany. Spróbuj ponownie za 1 minutę"
+
+msgid "%s Downloaded waybills"
+msgstr "Pobrano %s listów przewozowych"
+
+msgid "Shipment not found. Contact your Center for more information"
+msgstr "Nie znaleziono przesyłki. Skontaktuj się z centrum, aby uzyskać więcej informacji"
+
+msgid "Courier waybill not yet available"
+msgstr "Kurierski list przewozowy nie jest jeszcze dostępny"
+
+msgid "Courier waybill not found"
+msgstr "Nie znaleziono kurierskiego listu przewozowego"
+
+msgid "Courier waybill not enabled for this shipment. Contact your Center for more information"
+msgstr "Kurierski list przewozowy nie jest włączony dla tej przesyłki. Skontaktuj się z centrum, aby uzyskać więcej informacji"
+
+msgid "Pickup for PUDO shipments will be booked automatically after shipments closure for the next working day."
+msgstr "Odbiór dla przesyłek PUDO zostanie zarezerwowany automatycznie po zamknięciu przesyłek na następny dzień roboczy."
+
+msgid "Custom description for the service \"MBE Delivery Point (11)\""
+msgstr "Niestandardowy opis usługi \"Punkt doręczeń MBE (11)\""
+
+msgid "Enter the custom name for the shipping method. Leave blank to not change the default value"
+msgstr "Wprowadź niestandardową nazwę metody wysyłki. Pozostaw puste, aby nie zmieniać wartości domyślnej"
+
+msgid "VAT for \"MBE Delivery Point\""
+msgstr "Podatek VAT za \"Punkt dostawy MBE\""
+
+msgid "Custom description for the service \"MBE MBEDP\""
+msgstr "Niestandardowy opis usługi \"MBE MBEDP\""
+
+msgid "VAT for \"MBE MBEDP\""
+msgstr "Podatek VAT za \"MBE MBEDP\""
+
+msgid "Custom description for the service \"MBE GPDP\""
+msgstr "Niestandardowy opis usługi \"MBE GPDP\""
+
+msgid "VAT for \"MBE GPDP\""
+msgstr "Podatek VAT za \"MBE GPDP\""
+
+msgid "Select the pick-up point"
+msgstr "Wybierz punkt odbioru"
+
+msgid "The proximity gel shipment file is not ready"
+msgstr "Plik wysyłki Gel Proximity nie jest gotowy"
+
+msgid "N.B: If you choose this mode, PUDO-related MBE services cannot be used "
+msgstr "Uwaga: W przypadku wybrania tego trybu nie można korzystać z usług MBE związanych z PUDO."
+
+msgid "An error occurred while retrieving LDV"
+msgstr "Wystąpił błąd podczas pobierania LDV"
+
+msgid "One of the LDV of the selected delivery point is not yet ready"
+msgstr "Jeden z LDV wybranego punktu dostawy nie jest jeszcze gotowy."
+
+msgid "An error occurred while selecting the pickup location, please try again. "
+msgstr "Wystąpił błąd podczas wybierania miejsca odbioru, spróbuj ponownie. "
+
+msgid "Pick-up point selected "
+msgstr "Wybrano punkt odbioru "
+
+msgid "Sandbox mode is active "
+msgstr "Aktywny jest tryb Sandbox "
+
+msgid "Tax & Duties service"
+msgstr "Obsługa podatków i ceł T&D"
+
+msgid "If you want to enable Tax and Duties service you need to set the \"automatic\" pickup management mode"
+msgstr "Jeśli chcesz włączyć obsługę podatków i ceł, musisz ustawić \"automatyczny\" tryb zarządzania odbiorem"
+
+msgid "By enabling this option you can compute T&D price in case of Worldwide shipments and display the total amount on checkout phase"
+msgstr "Włączenie tej opcji pozwala obliczyć cenę T&D w przypadku przesyłek na całym świecie i wyświetlić łączną kwotę na etapie realizacji zakupu."
+
+msgid "By choosing the Manual mode, it will be possible to route a pickup request manually, associating a specific pickup address and pickup data with one or more shipments. The Manual mode is not configurable when T&D service is active. By choosing the Automatic mode, pickup requests will be routed to a default address and with default pickup data"
+msgstr "Wybierając tryb ręczny, możliwe będzie ręczne skierowanie żądania odbioru, kojarząc określony adres odbioru i dane odbioru z jedną lub kilkoma przesyłkami. Trybu ręcznego nie można skonfigurować, gdy usługa T&D jest aktywna. Po wybraniu trybu automatycznego żądania odbioru będą kierowane na domyślny adres i z domyślnymi danymi odbioru"
+
+msgid "\"Tax & Duties service\" cannot be enabled with \"Mapping of Couriers and Shipping Services\" configuration mode"
+msgstr "\" Obsługa podatków i ceł\" nie może być włączona w trybie konfiguracji \"Mapowanie kurierów i usług wysyłkowych\"."
+
+msgid "As with for all international shipments, customs requires a payment to clear goods through customs. It is a cost independent of our policies and tariffs, but the figure of <strong><span>%s</span></strong> charged ensures customs clearance, taken care of by us."
+msgstr "Podobnie jak w przypadku wszystkich przesyłek międzynarodowych, urząd celny wymaga opłaty za odprawę celną towarów. Jest to koszt niezależny od naszych zasad i taryf, ale naliczona kwota <strong><span>%s</span></strong> zapewnia odprawę celną, którą zajmujemy się my."
+
+msgid "As for all international shipments, customs requires a payment to clear goods through customs. It is a cost independent of our policies and tariffs. The <strong><span>%s</span></strong> figure shown may vary depending on the legislation of the country of destination."
+msgstr "Podobnie jak w przypadku wszystkich przesyłek międzynarodowych, urząd celny wymaga uiszczenia opłaty za odprawę celną towarów. Jest to koszt niezależny od naszych zasad i taryf. Podana wartość <strong><span>%s</span></strong> może się różnić w zależności od przepisów kraju docelowego."
+
+msgid ""
+"Default Incoterm: [DAP] [DDP] \n"
+" If you choose to work of [DAP] by default, a forecast of how much customs will charge the consignee to clear the goods will be shown at checkout. \n"
+" If you choose to work in [DDP] by default, the calculation of the customs clearance cost will be added at checkout and guaranteed via MBE, to have a fast and smooth shipping flow. \n"
+" In any case, these features will only be used if the shipment is international and involves customs in its path to the destination."
+msgstr ""
+"Domyślny wybór: [DAP] [DDP] \n"
+" Jeśli domyślnie wybierzesz [DAP], cło obciąży odbiorcę za odprawę towarów, kwota zostanie wyświetlona przy kasie. \n"
+" Jeśli domyślnie wybierzesz [DDP], obliczenie kosztów odprawy celnej zostanie dodane przy kasie i zagwarantowane za pośrednictwem MBE, aby zapewnić szybki i płynny przepływ wysyłki. \n"
+" W każdym razie funkcje te będą używane tylko wtedy, gdy przesyłka jest międzynarodowa i obejmuje odprawę celną w drodze do miejsca przeznaczenia."
+
+msgid "At the moment this feature is not active, you will receive detailed information as soon as it is released."
+msgstr "W tej chwili ta funkcja nie jest aktywna, otrzymasz szczegółowe informacje, jak tylko zostanie udostępniona."

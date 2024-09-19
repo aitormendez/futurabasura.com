@@ -118,15 +118,15 @@ class Mbe_Settings extends WC_Settings_Page {
 				'mbe_shipments' => __( 'Shipping', 'mail-boxes-etc' ),
             ];
 
-            if($this->helper->isEnabledThirdPartyPickups()) {
-                $sections['mbe_pickup'] = __( 'Pickup management', 'mail-boxes-etc');
-            }
+        if($this->helper->isEnabledThirdPartyPickups()) {
+            $sections['mbe_pickup'] = __( 'Pickup management', 'mail-boxes-etc');
+        }
 
-            return array_merge($sections,[
-				'mbe_markup'    => __( 'Markup', 'mail-boxes-etc' ),
-				'mbe_debug'     => __( 'Debug', 'mail-boxes-etc' ),
-
-			]);
+        return array_merge($sections,[
+	        'mbe_taxduties'   => __( 'Tax and Duty', 'mail-boxes-etc'),
+            'mbe_markup'    => __( 'Markup', 'mail-boxes-etc' ),
+            'mbe_debug'     => __( 'Debug', 'mail-boxes-etc' ),
+        ]);
 
 	}
 
@@ -165,6 +165,15 @@ class Mbe_Settings extends WC_Settings_Page {
 
 	    $pickupRequestOptionsDisabled = $this->helper->isCreationAutomatically() ? [ 'disabled' => 'disabled' ] : [];
 
+	    if ($this->helper->isEnabledTaxAndDuties()) {
+		    $pickupRequestOptionsDisabled  = [ 'disabled' => 'disabled' ];
+		    $pickupRequestOptionsDescription = __('By choosing the Manual mode, it will be possible to route a pickup request manually, associating a specific pickup address and pickup data with one or more shipments. The Manual mode is not configurable when T&D service is active. By choosing the Automatic mode, pickup requests will be routed to a default address and with default pickup data', 'mail-boxes-etc');
+	    } else {
+		    $pickupRequestOptionsDisabled = [];
+		    $pickupRequestOptionsDescription = __('By choosing the Manual mode, it will be possible to route a pickup request manually, associating a specific pickup address and pickup data with one or more shipments. By choosing the Automatic mode, pickup requests will be routed to a default address and with default pickup data', 'mail-boxes-etc' )
+		                                       . ' ' . __('Pickup for PUDO shipments will be booked automatically after shipments closure for the next working day', 'mail-boxes-etc');
+	    }
+
         $pickupCutoff = Mbe_Shipping_Helper_Data::MBE_PICKUP_REQUEST_AUTOMATIC === $this->helper->getPickupRequestMode()?[[
 	        'id'    => $this->id . '_' . Mbe_Shipping_Helper_Data::XML_PATH_PICKUP_OPTIONS_CUTOFF,
 	        'title' => __( 'Pickup Cutoff - Period', 'mail-boxes-etc' ),
@@ -195,7 +204,7 @@ class Mbe_Settings extends WC_Settings_Page {
 		    [
 			    'id'    => $this->id . '_' . Mbe_Shipping_Helper_Data::XML_PATH_PICKUP_REQUEST_MODE,
 			    'title' => __( 'Pickup Mode', 'mail-boxes-etc' ),
-			    'desc' => __('By choosing the Manual mode, it will be possible to route a pickup request manually, associating a specific pickup address and pickup data with one or more shipments. By choosing the Automatic mode, pickup requests will be routed to a default address and with default pickup data', 'mail-boxes-etc' ),
+			    'desc' => $pickupRequestOptionsDescription,
                 'options' => $pickupRequestOptions,
 			    'custom_attributes' => $pickupRequestOptionsDisabled,
                 'default' => Mbe_Shipping_Helper_Data::MBE_PICKUP_REQUEST_AUTOMATIC,
@@ -311,14 +320,14 @@ class Mbe_Settings extends WC_Settings_Page {
 						'class'      => 'button-secondary',
 						'confirm'    => false,
 //	                    'confirm_txt' => __( 'Do you really want to generate new credentials and invalidate the old ones?', 'mail-boxes-etc' ),
-						'onclick'    => get_admin_url() . 'admin-post.php?action=mbe_sign_in',
+						'onclick'    => get_admin_url() . "admin-post.php?action=mbe_sign_in&nonce=" . wp_create_nonce( 'mbe_sign_in' ) ,
 						'parameters' => '{"' . $this->id . '_' . Mbe_Shipping_Helper_Data::XML_PATH_MBE_USERNAME . '":"","' . $this->id . '_' . Mbe_Shipping_Helper_Data::XML_PATH_MBE_PASSWORD . '":"","' . $this->id . '_' . 'country":""}',
 						'blank'      => false,
 						'lock'       => true,
 					],
 					[
 						'type' => 'info',
-						'text' => __('Or proceed with the', 'mail-boxes-etc') . ' ' . ' <a href="admin-post.php?action=mbe_goto_advanced_login">' . __( 'Advanced configuration', 'mail-boxes-etc' ) . '</a>'
+						'text' => __('Or proceed with the', 'mail-boxes-etc') . ' ' . ' <a href="admin-post.php?action=mbe_goto_advanced_login&nonce=' . wp_create_nonce( 'mbe_goto_advanced_login' ) . '">' . __( 'Advanced configuration', 'mail-boxes-etc' ) . '</a>'
 					]
 				];
 				break;
@@ -364,7 +373,7 @@ class Mbe_Settings extends WC_Settings_Page {
 						'class'   => 'button-secondary',
 						'confirm' => false,
 //	                    'confirm_txt' => __( 'Do you really want to generate new credentials and invalidate the old ones?', 'mail-boxes-etc' ),
-						'onclick' => get_admin_url() . 'admin-post.php?action=mbe_reset_login',
+						'onclick' => get_admin_url() . "admin-post.php?action=mbe_reset_login&nonce=" . wp_create_nonce( 'mbe_reset_login' ) ,
 						'blank'   => false,
 						'lock'    => false,
 						'description' =>__('Click here if you want to reset the information entered in the form above', 'mail-boxes-etc'),
@@ -415,6 +424,7 @@ class Mbe_Settings extends WC_Settings_Page {
 
 	protected function get_settings_for_mbe_courier_section() {
 		$serviceOptions = null;
+
 		if ( $this->customer && $this->customer->Enabled ) {
 			if ( $this->availableShipping ) {
 				foreach ( $this->availableShipping as $key => $array ) {
@@ -432,7 +442,8 @@ class Mbe_Settings extends WC_Settings_Page {
 			[
 				'title' => '',
 				'type'  => 'title',
-				'desc'  => __( 'For the plugin to work correctly, at least one option must be selected, and the services available are those set by the MBE Center on the MOL user page on HUB. Subsequently, it is possible to define a custom name for each MBE service selected in the field seen above. This set of fields is automatically generated dynamically, based on the values selected in the "Enabled MBE Services" list', 'mail-boxes-etc' ),
+				'desc'  => __( 'For the plugin to work correctly, at least one option must be selected, and the services available are those set by the MBE Center on the MOL user page on HUB. Subsequently, it is possible to define a custom name for each MBE service selected in the field seen above. This set of fields is automatically generated dynamically, based on the values selected in the "Enabled MBE Services" list', 'mail-boxes-etc' )
+                . (true?"\n\n".__('"Tax & Duties service" cannot be enabled with "Mapping of Couriers and Shipping Services" configuration mode', 'mail-boxes-etc'):'') ,
 				'id'    => $sectionId
 			],
 
@@ -454,7 +465,7 @@ class Mbe_Settings extends WC_Settings_Page {
 		$sectionId        = 'mbe_courier_config';
 		$configDescr      = '';
 		$configFields     = [];
-		$selectedServices = $this->helper->getAllowedShipmentServices();
+//		$selectedServices = $this->helper->getAllowedShipmentServices();
 
 		switch ( $this->helper->getOption( Mbe_Shipping_Helper_Data::XML_PATH_COURIER_CONFIG_MODE ) ) {
 			case Mbe_Shipping_Helper_Data::MBE_COURIER_MODE_CSV:
@@ -486,7 +497,7 @@ class Mbe_Settings extends WC_Settings_Page {
 						'caption'           => __( 'Download current file', 'mail-boxes-etc' ),
 						'class'             => ( !is_file( $this->helper->getShipmentsCsvFileDir() ) ? 'disabled ' : '' ) . 'button-secondary',
 						'confirm'           => false,
-						'onclick'           => get_admin_url() . 'admin-post.php?action=mbe_download_shipping_file&mbe_filetype=shipping',
+						'onclick'           => get_admin_url() . "admin-post.php?action=mbe_download_shipping_file&mbe_filetype=shipping&nonce="  . wp_create_nonce( 'mbe_download_shipping_file' ) ,
 						'blank'             => true,
 						'custom_attributes' => [ ( !is_file( $this->helper->getShipmentsCsvFileDir() ) ? 'disabled' : '' ) => '' ]
 					],
@@ -497,7 +508,7 @@ class Mbe_Settings extends WC_Settings_Page {
 						'caption' => __( 'Download template file', 'mail-boxes-etc' ),
 						'class'   => 'button-secondary',
 						'confirm' => false,
-						'onclick' => get_admin_url() . 'admin-post.php?action=mbe_download_shipping_file&mbe_filetype=shipping-template',
+						'onclick' => get_admin_url() . "admin-post.php?action=mbe_download_shipping_file&mbe_filetype=shipping-template&nonce="  . wp_create_nonce( 'mbe_download_shipping_file' ) ,
 						'blank'   => true,
 					],
 					[
@@ -526,7 +537,7 @@ class Mbe_Settings extends WC_Settings_Page {
 					]
 				];
                 // Custom label for selected services
-				$configFields = array_merge($configFields, $this->getCustomLabelSetting( $selectedServices ));
+				$configFields = array_merge($configFields, $this->getCustomLabelSetting( $this->selectedServices ));
 				break;
 			case Mbe_Shipping_Helper_Data::MBE_COURIER_MODE_MAPPING:
 				$defaultMethods = WC()->shipping()->get_shipping_methods();
@@ -541,13 +552,18 @@ class Mbe_Settings extends WC_Settings_Page {
 //					'text' => 'Associate MBE services with your couriers: below you can define the couriers to be associated with the MBE services you selected in the previous point.',
 //					'css'  => '',
 //				];
-				// Remove UPS Delivery point method as it doesn't make sense as a mapping
-				foreach ( array_diff( $selectedServices, [ MBE_UAP_SERVICE ] ) as $key => $value ) {
+
+				$serviceOptions = preg_grep( MBE_ESTIMATE_DELIVERY_POINT_SERVICES_REGEXP, $serviceOptions, PREG_GREP_INVERT );
+//				$this->selectedServices = array_diff( $this->selectedServices, MBE_ESTIMATE_DELIVERY_POINT_SERVICES );
+
+				// Remove Delivery point methods as it doesn't make any sense as a mapping
+				foreach ( array_diff( $this->selectedServices, MBE_ESTIMATE_DELIVERY_POINT_SERVICES ) as $key => $value ) {
 					$index = array_search( $value, array_column( $this->availableShipping, 'value' ) );
 					if ( isset( $this->availableShipping[ $index ]['label'] ) ) {
 						$selectedOptions[ $value ] = __( $this->availableShipping[ $index ]['label'], 'mail-boxes-etc' );
 					}
 				}
+
 				foreach ( $defaultMethods as $default_method ) {
 					if ( isset( $default_method->id ) ) {
 						$configFields [] = [
@@ -564,7 +580,7 @@ class Mbe_Settings extends WC_Settings_Page {
 			case Mbe_Shipping_Helper_Data::MBE_COURIER_MODE_SERVICES:
 				$configDescr = __( "Introductory description of MBE shipments: \n - MBE Standard: is a service that offers you the possibility to ship in Italy and throughout Europe and is the ideal solution for individuals and companies who want to guarantee their customers reliability and punctuality.\n - MBE Express: is a service that guarantees the delivery of your shipments, in Italy, on average in two working days (within 48 hours of collection)\n - MBE Delivery Point: it is a service that allows you to send objects, packages, documents and much more, in a convenient and fast way from an MBE Center of your choice, to one of the many authorized and authorized collection points, both in Italy than abroad.", 'mail-boxes-etc' );
 				// Custom label for selected services
-				$configFields = $this->getCustomLabelSetting( $selectedServices );
+				$configFields = $this->getCustomLabelSetting( $this->selectedServices );
 				break;
 		}
 		$configSection = [
@@ -686,7 +702,7 @@ class Mbe_Settings extends WC_Settings_Page {
 						'caption'           => __( 'Download current file' , 'mail-boxes-etc' ),
 						'class'             => ( !is_file( $this->helper->getCurrentCsvPackagesDir()  ) ? 'disabled ' : '' ) . 'button-secondary',
 						'confirm'           => false,
-						'onclick'           => get_admin_url() . 'admin-post.php?action=mbe_download_standard_package_file&mbe_filetype=package',
+						'onclick'           => get_admin_url() . "admin-post.php?action=mbe_download_standard_package_file&mbe_filetype=package&nonce="  . wp_create_nonce( 'mbe_download_standard_package_file' ),
 						'blank'             => true,
 						'custom_attributes' => [ ( !is_file( $this->helper->getCurrentCsvPackagesDir()  ) ? 'disabled' : '' ) => '' ]
 					],
@@ -697,7 +713,7 @@ class Mbe_Settings extends WC_Settings_Page {
 						'caption' => __( 'Download template file', 'mail-boxes-etc' ),
 						'class'   => 'button-secondary',
 						'confirm' => false,
-						'onclick' => get_admin_url() . 'admin-post.php?action=mbe_download_standard_package_file&mbe_filetype=package-template',
+						'onclick' => get_admin_url() . "admin-post.php?action=mbe_download_standard_package_file&mbe_filetype=package-template&nonce="  . wp_create_nonce( 'mbe_download_standard_package_file' ),
 						'blank'   => true,
 					],
 					[
@@ -717,7 +733,7 @@ class Mbe_Settings extends WC_Settings_Page {
 						'caption'           => __( 'Download current file', 'mail-boxes-etc' ),
 						'class'             => ( !is_file($this->helper->getCurrentCsvPackagesProductDir() ) ? 'disabled ' : '' ) . 'button-secondary',
 						'confirm'           => false,
-						'onclick'           => get_admin_url() . 'admin-post.php?action=mbe_download_standard_package_file&mbe_filetype=package-product',
+						'onclick'           => get_admin_url() . "admin-post.php?action=mbe_download_standard_package_file&mbe_filetype=package-product&nonce="  . wp_create_nonce( 'mbe_download_standard_package_file' ),
 						'blank'             => true,
 						'custom_attributes' => [ ( !is_file( $this->helper->getCurrentCsvPackagesProductDir() ) ? 'disabled' : '' ) => '' ]
 					],
@@ -728,7 +744,7 @@ class Mbe_Settings extends WC_Settings_Page {
 						'caption' => __( 'Download template file', 'mail-boxes-etc' ),
 						'class'   => 'button-secondary',
 						'confirm' => false,
-						'onclick' => get_admin_url() . 'admin-post.php?action=mbe_download_standard_package_file&mbe_filetype=package-product-template',
+						'onclick' => get_admin_url() . "admin-post.php?action=mbe_download_standard_package_file&mbe_filetype=package-product-template&nonce="  . wp_create_nonce( 'mbe_download_standard_package_file' ),
 						'blank'   => true,
 					],
 				];
@@ -891,6 +907,74 @@ class Mbe_Settings extends WC_Settings_Page {
 		];
 	}
 
+	protected function get_settings_for_mbe_taxduties_section() {
+
+
+        if ($this->helper->mustDisableTaxAndDuties()) {
+	        $TaxAndDutiesOptionsDisabled  = [ 'disabled' => 'disabled' ];
+            $TaxAndDutiesDescription = __('If you want to enable Tax and Duties service you need to set the "automatic" pickup management mode', 'mail-boxes-etc');
+        } else {
+            $TaxAndDutiesOptionsDisabled = [];
+            $TaxAndDutiesDescription = __( 'By enabling this option you can compute T&D price in case of Worldwide shipments and display the total amount on checkout phase', 'mail-boxes-etc' );
+        }
+
+        $sectionId = 'mbe_taxduties_1';
+		$settings  = [
+			[
+				'title' => __( 'Tax and Duty', 'mail-boxes-etc' ),
+				'type'  => 'title',
+				'desc'  => __( '', 'mail-boxes-etc' ),
+				'id'    => $sectionId,
+			],
+		];
+
+        if(!$this->helper->getPermissionEnabledTaxAndDuties()) {
+	        $settings  = [
+		        [
+			        'title' => __( 'Tax and Duty', 'mail-boxes-etc' ),
+			        'type'  => 'title',
+			        'desc'  => __( 'At the moment this feature is not active, you will receive detailed information as soon as it is released.', 'mail-boxes-etc' ),
+			        'id'    => $sectionId,
+		        ],
+	        ];
+        } else {
+	        $settings  = [
+		        [
+			        'title' => __( 'Tax and Duty', 'mail-boxes-etc' ),
+			        'type'  => 'title',
+			        'desc'  => __( '', 'mail-boxes-etc' ),
+			        'id'    => $sectionId,
+		        ],
+		        [
+			        'id'                => $this->id . '_' . Mbe_Shipping_Helper_Data::XML_PATH_TAX_DUTIES_ENABLED,
+			        'title'             => __( 'Enable', 'mail-boxes-etc' ),
+			        'type'              => 'select',
+			        'default'           => 0,
+			        'options'           => [ 1 => __( 'Yes', 'mail-boxes-etc' ), 0 => __( 'No', 'mail-boxes-etc' ) ],
+			        'label'             => __( 'Enable', 'mail-boxes-etc' ),
+			        'desc'              => $TaxAndDutiesDescription,
+			        'custom_attributes' => $TaxAndDutiesOptionsDisabled,
+		        ],
+	        ];
+	        if($this->helper->isEnabledTaxAndDuties()) {
+		        $settings[] = [
+			        'id'      => $this->id . '_' . Mbe_Shipping_Helper_Data::XML_PATH_TAX_DUTIES_MODE,
+			        'title'   => __( 'DDP/DAP', 'mail-boxes-etc' ),
+			        'type'    => 'select',
+			        'default' => 1,
+			        'options' => [ Mbe_Shipping_Helper_Data::MBE_TAX_AND_DUTIES_DDP => __( 'DDP', 'mail-boxes-etc' ), Mbe_Shipping_Helper_Data::MBE_TAX_AND_DUTIES_DAP => __( 'DAP', 'mail-boxes-etc' ) ],
+			        'label'   => __( 'DDP/DAP', 'mail-boxes-etc' ),
+			        'desc'    => __( "Default Incoterm: [DAP] [DDP] \n If you choose to work of [DAP] by default, a forecast of how much customs will charge the consignee to clear the goods will be shown at checkout. \n If you choose to work in [DDP] by default, the calculation of the customs clearance cost will be added at checkout and guaranteed via MBE, to have a fast and smooth shipping flow. \n In any case, these features will only be used if the shipment is international and involves customs in its path to the destination.", 'mail-boxes-etc' ),
+
+		        ];
+            }
+        }
+
+		$settings[] = [ 'type' => 'sectionend', 'id' => $sectionId ];
+
+        return $settings;
+	}
+
 	protected function get_settings_for_mbe_markup_section() {
 		$sectionId = 'mbe_markup_1';
 		$settings  = [
@@ -965,27 +1049,29 @@ class Mbe_Settings extends WC_Settings_Page {
 				'id'    => $sectionId,
 			];
 
-			foreach ( $this->selectedServices as $t ) {
+            $servicesForThreshold = $this->selectedServices ;
+
+            // Remove multiple MOL delivery point services
+            $deliveryIsEnabled = false;
+            foreach ( $servicesForThreshold as $key => $value ) {
+                if ( in_array( $value, MBE_ESTIMATE_DELIVERY_POINT_SERVICES ) ) {
+                    unset( $servicesForThreshold[ $key ] );
+                    $deliveryIsEnabled = true ;
+                }
+            }
+
+            // Add the common delivery service treshold if the Custom Mapping is not enabled
+            if($deliveryIsEnabled && !$this->helper->isEnabledCustomMapping()) {
+	            $settings = $this->addShippingThresholdSettings( MBE_DELIVERY_POINT_DESCRIPTION, MBE_DELIVERY_POINT_SERVICE, $settings );
+            }
+
+			foreach ( $servicesForThreshold as $t ) {
 				$index         = array_search( $t, array_column( $this->availableShipping, 'value' ) );
 				$shippingLabel = "";
 				if ( isset( $this->availableShipping[ $index ]['label'] ) ) {
 					$shippingLabel = $this->availableShipping[ $index ]['label'];
 				}
-				$labelDom = sprintf( __( 'Free shipping Thresholds %s', 'mail-boxes-etc' ), $shippingLabel ) . ' - ' . __( 'Domestic', 'mail-boxes-etc' );
-//					$freeTresholds[] = [ 'label' => $labelDom, 'name' => 'mbelimit_' . strtolower( $t ) . '_dom' ];
-				$labelWw = sprintf( __( 'Free shipping Thresholds %s', 'mail-boxes-etc' ), $shippingLabel ) . ' - ' . __( 'Rest of the world', 'mail-boxes-etc' );
-//					$freeTresholds[] = [ 'label' => $labelWw, 'name' => 'mbelimit_' . strtolower( $t ) . '_ww' ];
-
-				$settings[] = [
-					'id'    => $this->id . '_' . 'mbelimit_' . strtolower( $t ) . '_dom',
-					'title' => __( $labelDom, 'mail-boxes-etc' ),
-					'type'  => 'text',
-				];
-				$settings[] = [
-					'id'    => $this->id . '_' . 'mbelimit_' . strtolower( $t ) . '_ww',
-					'title' => __( $labelWw, 'mail-boxes-etc' ),
-					'type'  => 'text',
-				];
+				$settings = $this->addShippingThresholdSettings( $shippingLabel, $t, $settings );
 			}
 
 			$settings[] = [ 'type' => 'sectionend', 'id' => $sectionId ];
@@ -1024,7 +1110,7 @@ class Mbe_Settings extends WC_Settings_Page {
 					'caption' => __( 'Download now', 'mail-boxes-etc' ),
 					'class'   => 'button-secondary',
 					'confirm' => false,
-					'onclick' => get_admin_url() . 'admin-post.php?action=mbe_download_log_files',
+					'onclick' => get_admin_url() . "admin-post.php?action=mbe_download_log_files&nonce="  . wp_create_nonce( 'mbe_download_log_files' ) ,
 					'blank'   => true,
 				];
 			$debugButton[] =
@@ -1035,7 +1121,7 @@ class Mbe_Settings extends WC_Settings_Page {
 					'caption'     => __( 'Delete now', 'mail-boxes-etc' ),
 					'class'       => 'button-secondary',
 					'confirm'     => true,
-					'onclick'     => get_admin_url() . 'admin-post.php?action=mbe_delete_log_files',
+					'onclick'     => get_admin_url() . "admin-post.php?action=mbe_delete_log_files&nonce="  . wp_create_nonce( 'mbe_delete_log_files' ) ,
 					'blank'       => false,
 					'confirm_txt' => __( 'Do you want to permanentely delete the log files ?' ),
 				];
@@ -1100,10 +1186,10 @@ class Mbe_Settings extends WC_Settings_Page {
         <tr>
             <th scope="row" class="titledesc">
                 <label for="<?php echo esc_attr( $field_key ); ?>"><?php echo esc_html( $data['title'] ); ?></label>
-				<?php echo $this->get_tooltip_html( $data ); ?>
+				<?php echo wp_kses_post($this->get_tooltip_html( $data )); ?>
             </th>
 
-            <td class="forminp forminp-<?php echo sanitize_title( $data['type'] ) ?>">
+            <td class="forminp forminp-<?php esc_html_e(sanitize_title( $data['type'] )) ?>">
 
                 <input
                         id="<?php echo esc_attr( $field_key ); ?>"
@@ -1117,48 +1203,51 @@ class Mbe_Settings extends WC_Settings_Page {
                                 '<?php echo esc_attr( $data['blank'] ) ? '_blank' : '_self'; ?>',
                                 '<?php echo esc_attr( $data['confirm'] ) ? 'true' : 'false'; ?>',
                                 '<?php echo esc_attr( $data['confirm_txt'] ); ?>',
+                                '<?php echo esc_attr( $data['parameters'] ) ?>',
                                 '<?php echo esc_attr( $data['lock'] ) ? 'true' : 'false'; ?>'
                                 )"
-					<?php echo $this->get_custom_attribute_html( $data ) ?>
+                        <?php echo wp_kses_post($this->get_custom_attribute_html( $data )) ?>
                 />
-				<?php echo $this->get_description_html( $data ); ?>
+				<?php echo wp_kses_post($this->get_description_html( $data )) ?>
 
             </td>
         </tr>
-        <script>
-            if (typeof mbeButtonAction !== "function") {
-                function mbeButtonAction(button, url, target, confirmation, confirmationText, lock) {
-                    let ok = false;
-                    if (confirmation === 'true') {
-                        if (confirm(confirmationText) === true) {
-                            ok = true;
-                        }
-                    } else {
-                        ok = true;
-                    }
-                    if (ok === true) {
-                        if (lock === 'true') {
-                            button.disabled = true;
-                        }
-                        let a = document.createElement('a');
-                        a.target = target;
-                        let parameters = '<?php echo $data['parameters'] ?>'
-                        let queryString = '';
-                        if (parameters.length) {
-                            parameters = JSON.parse(parameters)
-                            Object.entries(parameters).forEach((entry) => {
-                                const [key, value] = entry;
-                                parameters[key] = document.getElementById(key).value;
-                            });
-                            queryString = '&' + (new URLSearchParams(parameters).toString())
-                        }
-                        a.href = url + queryString;
-                        a.click();
-                    }
-                }
-            }
 
-        </script>
+<!--        Moved to mbe-helper-scripts.js-->
+<!--        <script>-->
+<!--            if (typeof mbeButtonAction !== "function") {-->
+<!--                function mbeButtonAction(button, url, target, confirmation, confirmationText, parameters, lock) {-->
+<!--                    let ok = false;-->
+<!--                    if (confirmation === 'true') {-->
+<!--                        if (confirm(confirmationText) === true) {-->
+<!--                            ok = true;-->
+<!--                        }-->
+<!--                    } else {-->
+<!--                        ok = true;-->
+<!--                    }-->
+<!--                    if (ok === true) {-->
+<!--                        if (lock === 'true') {-->
+<!--                            button.disabled = true;-->
+<!--                        }-->
+<!--                        let a = document.createElement('a');-->
+<!--                        a.target = target;-->
+<!--                        let parameters = '--><?php //echo $data['parameters'] ?><!--'-->
+<!--                        let queryString = '';-->
+<!--                        if (parameters.length) {-->
+<!--                            parameters = JSON.parse(parameters)-->
+<!--                            Object.entries(parameters).forEach((entry) => {-->
+<!--                                const [key, value] = entry;-->
+<!--                                parameters[key] = document.getElementById(key).value;-->
+<!--                            });-->
+<!--                            queryString = '&' + (new URLSearchParams(parameters).toString())-->
+<!--                        }-->
+<!--                        a.href = url + queryString;-->
+<!--                        a.click();-->
+<!--                    }-->
+<!--                }-->
+<!--            }-->
+<!---->
+<!--        </script>-->
 
 		<?php
 	}
@@ -1183,7 +1272,7 @@ class Mbe_Settings extends WC_Settings_Page {
 		?>
         <tr valign="top">
             <th scope="row" class="titledesc">
-                <label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?><?php echo $this->get_tooltip_html( $data ); // WPCS: XSS ok.
+                <label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?><?php echo wp_kses_post($this->get_tooltip_html( $data )); // WPCS: XSS ok.
 					?></label>
             </th>
             <td class="forminp">
@@ -1194,9 +1283,9 @@ class Mbe_Settings extends WC_Settings_Page {
                            type="<?php echo esc_attr( $data['type'] ); ?>" name="<?php echo esc_attr( $field_key ); ?>"
                            id="<?php echo esc_attr( $field_key ); ?>" style="<?php echo esc_attr( $data['css'] ); ?>"
                            value=""
-                           placeholder="<?php echo esc_attr( $data['placeholder'] ); ?>" <?php disabled( $data['disabled'], true ); ?> <?php echo $this->get_custom_attribute_html( $data ); // WPCS: XSS ok.
+                           placeholder="<?php echo esc_attr( $data['placeholder'] ); ?>" <?php disabled( $data['disabled'], true ); ?> <?php echo wp_kses_post($this->get_custom_attribute_html( $data )); // WPCS: XSS ok.
 					?> />
-					<?php echo $this->get_description_html( $data ); // WPCS: XSS ok.
+					<?php echo wp_kses_post($this->get_description_html( $data )); // WPCS: XSS ok.
 					?>
                 </fieldset>
             </td>
@@ -1228,7 +1317,7 @@ class Mbe_Settings extends WC_Settings_Page {
 		?>
         <tr valign="top" style="<?php echo esc_attr( $displayRow ) ?>">
             <th scope="row" class="titledesc">
-                <label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?><?php echo $this->get_tooltip_html( $data ); // WPCS: XSS ok.
+                <label for="<?php echo esc_attr( $field_key ); ?>"><?php echo wp_kses_post( $data['title'] ); ?><?php echo wp_kses_post($this->get_tooltip_html( $data )); // WPCS: XSS ok.
 					?></label>
             </th>
             <td class="forminp forminp-text">
@@ -1239,9 +1328,9 @@ class Mbe_Settings extends WC_Settings_Page {
                            type="<?php echo esc_attr( $type ); ?>" name="<?php echo esc_attr( $field_key ); ?>"
                            id="<?php echo esc_attr( $field_key ); ?>" style="<?php echo esc_attr( $data['css'] ); ?>"
                            value="<?php echo esc_attr( $this->helper->getOption( $optionKey ) ); ?>"
-                           placeholder="<?php echo esc_attr( $data['placeholder'] ); ?>"  <?php echo $this->get_custom_attribute_html( $data ); // WPCS: XSS ok.
+                           placeholder="<?php echo esc_attr( $data['placeholder'] ); ?>"  <?php echo wp_kses_post($this->get_custom_attribute_html( $data )); // WPCS: XSS ok.
 					?> />
-					<?php echo $this->get_description_html( $data ); // WPCS: XSS ok.
+					<?php echo wp_kses_post($this->get_description_html( $data )); // WPCS: XSS ok.
 					?>
                 </fieldset>
             </td>
@@ -1273,7 +1362,7 @@ class Mbe_Settings extends WC_Settings_Page {
 	    ?>
         <tr valign="top" style="<?php echo esc_attr( $displayRow ) ?>">
             <th scope="row" class="titledesc">
-                <label for="<?php echo esc_attr( $field_key_start ); ?>"><?php echo wp_kses_post( $data['title'] ); ?><?php echo $this->get_tooltip_html( $data ); // WPCS: XSS ok.
+                <label for="<?php echo esc_attr( $field_key_start ); ?>"><?php echo wp_kses_post( $data['title'] ); ?><?php echo wp_kses_post($this->get_tooltip_html( $data )); // WPCS: XSS ok.
 				    ?></label>
             </th>
             <td class="forminp forminp-time">
@@ -1283,7 +1372,7 @@ class Mbe_Settings extends WC_Settings_Page {
                            type="time" name="<?php echo esc_attr( $field_key_start ); ?>"
                            id="<?php echo esc_attr( $field_key_start ); ?>" style="<?php echo esc_attr( $data['css'] ); ?>"
                            value="<?php echo esc_attr( $this->helper->getOption( $optionKeyStart )?:$data['default-start'] ); ?>"
-                           placeholder="<?php echo esc_attr( $data['placeholder'] ); ?>" <?php disabled( $data['disabled'], true ); ?> <?php echo $this->get_custom_attribute_html( $data ); // WPCS: XSS ok.?>
+                           placeholder="<?php echo esc_attr( $data['placeholder'] ); ?>" <?php disabled( $data['disabled'], true ); ?> <?php echo wp_kses_post($this->get_custom_attribute_html( $data )); // WPCS: XSS ok.?>
 <?php /**
                            onfocusout="checkStartEndTime(event,window.document.getElementById('<?php echo esc_attr( $field_key_start ); ?>').value,window.document.getElementById('<?php echo esc_attr( $field_key_end ); ?>').value)"
  */?>
@@ -1293,9 +1382,9 @@ class Mbe_Settings extends WC_Settings_Page {
                            type="time" name="<?php echo esc_attr( $field_key_end ); ?>"
                            id="<?php echo esc_attr( $field_key_end ); ?>" style="<?php echo esc_attr( $data['css'] ); ?>"
                            value="<?php echo esc_attr( $this->helper->getOption( $optionKeyEnd )?:$data['default-end'] ); ?>"
-                           placeholder="<?php echo esc_attr( $data['placeholder'] ); ?>" <?php disabled( $data['disabled'], true ); ?> <?php echo $this->get_custom_attribute_html( $data ); // WPCS: XSS ok.
+                           placeholder="<?php echo esc_attr( $data['placeholder'] ); ?>" <?php disabled( $data['disabled'], true ); ?> <?php echo wp_kses_post($this->get_custom_attribute_html( $data )); // WPCS: XSS ok.
 	                ?> />
-	                <?php echo $this->get_description_html( $data ); // WPCS: XSS ok.
+	                <?php echo wp_kses_post($this->get_description_html( $data )); // WPCS: XSS ok.
 	                ?>
                 </fieldset>
             </td>
@@ -1313,8 +1402,8 @@ class Mbe_Settings extends WC_Settings_Page {
 		$data = wp_parse_args( $value, $defaults );
 		?>
         <tr>
-            <td colspan="2" scope="row" class="<?php esc_attr( $data['class'] ) ?>"
-                style="<?php esc_attr( $data['css'] ) ?>">
+            <td colspan="2" scope="row" class="<?php esc_attr_e( $data['class'] ) ?>"
+                style="<?php esc_attr_e( $data['css'] ) ?>">
 				<?php echo wp_kses_post( wpautop( wptexturize( $data['text'] ) ) ); ?>
             </td>
         </tr>
@@ -1368,24 +1457,62 @@ class Mbe_Settings extends WC_Settings_Page {
         return $end;
     }
 
-	protected function getCustomLabelSetting( $selectedServices ): array {
-        $result = [];
-		if ( ! empty( $selectedServices ) ) {
-			// Custom label for selected methods
-			foreach ( $selectedServices as $t ) {
+	protected function addCustomLabel( string $labelKey, string $labelName ) {
+		return [
+			'id'       => $this->id . '_' . 'mbe_custom_label_' . strtolower( $labelKey ),
+			'title'    => __( 'Custom name for', 'mail-boxes-etc' ) . ' ' . $labelName,
+			'type'     => 'text',
+			'desc'     => __( "Insert the custom name for the shipment method. Leave it blank if you don't want to change the default value", 'mail-boxes-etc' ),
+			'desc_tip' => true,
+		];
+	}
+
+	protected function getCustomLabelSetting( $selectedServices = [] ): array {
+		$result                          = [];
+		$selectedServicesNoDeliveryPoints = array_diff( $selectedServices, MBE_ESTIMATE_DELIVERY_POINT_SERVICES );
+		$selectedServicesDeliveryPoints = array_intersect($selectedServices, MBE_ESTIMATE_DELIVERY_POINT_SERVICES, array_column( $this->availableShipping, 'value' ));
+
+		if ( ! empty( $selectedServicesNoDeliveryPoints ) ) {
+			foreach ( $selectedServicesNoDeliveryPoints as $t ) {
 				$index = array_search( $t, array_column( $this->availableShipping, 'value' ) );
 				if ( isset( $this->availableShipping[ $index ]['label'] ) ) {
-					$result [] = [
-						'id'       => $this->id . '_' . 'mbe_custom_label_' . strtolower( $t ),
-						'title'    => __( 'Custom name for', 'mail-boxes-etc' ) . ' ' . $this->availableShipping[ $index ]['label'],
-						'type'     => 'text',
-						'desc'     => __( "Insert the custom name for the shipment method. Leave it blank if you don't want to change the default value", 'mail-boxes-etc' ),
-						'desc_tip' => true,
-					];
+					$result[] = $this->addCustomLabel( $t, $this->availableShipping[ $index ]['label'] );
 				}
 			}
 		}
+		// Common custom label for all the delivery point services
+		if ( ! empty( $selectedServicesDeliveryPoints ) ) {
+			$result[] = $this->addCustomLabel( MBE_DELIVERY_POINT_SERVICE, __( MBE_DELIVERY_POINT_DESCRIPTION, 'mail-boxes-etc' ) );
+		}
+
 		return $result;
+	}
+
+	/**
+	 * @param $shippingLabel
+	 * @param $t
+	 * @param array $settings
+	 *
+	 * @return array
+	 */
+	protected function addShippingThresholdSettings( $shippingLabel, $t, array $settings ): array {
+		$labelDom = sprintf( __( 'Free shipping Thresholds %s', 'mail-boxes-etc' ), $shippingLabel ) . ' - ' . __( 'Domestic', 'mail-boxes-etc' );
+//					$freeTresholds[] = [ 'label' => $labelDom, 'name' => 'mbelimit_' . strtolower( $t ) . '_dom' ];
+		$labelWw = sprintf( __( 'Free shipping Thresholds %s', 'mail-boxes-etc' ), $shippingLabel ) . ' - ' . __( 'Rest of the world', 'mail-boxes-etc' );
+//					$freeTresholds[] = [ 'label' => $labelWw, 'name' => 'mbelimit_' . strtolower( $t ) . '_ww' ];
+
+		$settings[] = [
+			'id'    => $this->id . '_' . 'mbelimit_' . strtolower( $t ) . '_dom',
+			'title' => __( $labelDom, 'mail-boxes-etc' ),
+			'type'  => 'text',
+		];
+		$settings[] = [
+			'id'    => $this->id . '_' . 'mbelimit_' . strtolower( $t ) . '_ww',
+			'title' => __( $labelWw, 'mail-boxes-etc' ),
+			'type'  => 'text',
+		];
+
+		return $settings;
 	}
 
 }

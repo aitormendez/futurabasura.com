@@ -59,6 +59,7 @@ class Mbe_Shipping_Model_Csv_Package implements Mbe_Shipping_Entity_Model_Interf
 		$main_table      = $this->getTableName();
 		$packagesProduct = $this->packagesProductModel->getTableName();
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
 		return $wpdb->get_results( $wpdb->prepare(
 			"SELECT $main_table.*," .
 			" $packagesProduct.id as id_product, $packagesProduct.single_parcel, $packagesProduct.custom_package " .
@@ -75,6 +76,7 @@ class Mbe_Shipping_Model_Csv_Package implements Mbe_Shipping_Entity_Model_Interf
 		$main_table = $this->getTableName();
 		$join_table = $this->packagesProductModel->getTableName();
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
 		return $wpdb->get_results(
 			"SELECT $main_table.package_label, $main_table.id  FROM $main_table" .
 			" LEFT JOIN $join_table ON " .
@@ -87,13 +89,15 @@ class Mbe_Shipping_Model_Csv_Package implements Mbe_Shipping_Entity_Model_Interf
 		global $wpdb;
 		$main_table = $this->getTableName();
 
-		return $wpdb->get_results( "SELECT *  FROM $main_table", ARRAY_A );
+		return $wpdb->get_results($wpdb->prepare("SELECT *  FROM %i ", $main_table), ARRAY_A ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
+
 	}
 
 	public function getPackageInfobyId( $packageId ) {
 		global $wpdb;
 		$main_table = $this->getTableName();
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
 		$a = $wpdb->get_results( $wpdb->prepare(
 			"SELECT *, 0 as single_parcel, 0 as custom_package FROM $main_table " .
 			" WHERE id = %d"

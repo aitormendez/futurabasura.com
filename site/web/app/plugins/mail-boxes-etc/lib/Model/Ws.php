@@ -24,9 +24,9 @@ class Mbe_Shipping_Model_Ws
 	    $this->system = $this->helper->getCountry();
 	    $this->customer = $this->getCustomer();
 
-	    if ($debug) {
-		    $this->helper->checkDir(MBE_ESHIP_PLUGIN_LOG_DIR);
-	    }
+//	    if ($debug) {
+//		    $this->helper->checkDir($this->helper->getMbeLogDir());
+//	    }
     }
 
     public function getCustomer()
@@ -141,7 +141,7 @@ class Mbe_Shipping_Model_Ws
         return $result;
     }
 
-	public function estimateShipping($country, $region, $postCode, $weight, $boxes, $insuranceValue)
+	public function estimateShipping($country, $region, $city, $postCode, $weight, $boxes, $insuranceValue, $products)
 	{
 		$this->logger->log('ESTIMATESHIPPING');
 //        $weight = $this->helper->convertWeight($weight);
@@ -160,17 +160,14 @@ class Mbe_Shipping_Model_Ws
 
 			$this->logger->logVar($items, 'ESTIMATESHIPPING ITEMS');
 
-			// ASSEGNO A SERVICE TUTTI I CORRIERI
-			// DA ULTIMARE LA FIX: $service = $this->$helper->getAllowedShipmentServices();
-
 			//Shipping without insurance
 			$resultWithoutInsurance = $this->ws->estimateShipping(
-				$wsUrl, $wsUsername, $wsPassword, $shipmentType, $system, $country, $region, $postCode, $items, false, $insuranceValue
+				$wsUrl, $wsUsername, $wsPassword, $shipmentType, $system, $country, $region, $city, $postCode, $items, $products, false, $insuranceValue
 			);
 
 			//Shipping with insurance
 			$resultWithInsurance = $this->ws->estimateShipping(
-				$wsUrl, $wsUsername, $wsPassword, $shipmentType, $system, $country, $region, $postCode, $items, true, $insuranceValue
+				$wsUrl, $wsUsername, $wsPassword, $shipmentType, $system, $country, $region, $city, $postCode, $items, $products, true, $insuranceValue
 			);
 			$resultWithInsurance = $this->convertInsuranceShipping($resultWithInsurance);
 
@@ -184,6 +181,18 @@ class Mbe_Shipping_Model_Ws
 				if ($resultWithoutInsurance) {
 					$result = $resultWithoutInsurance;
 				}
+			}
+
+            // Remove multiple MOL delivery point services
+			foreach ( $result as $key=>$value ) {
+				if(in_array($value->Service, MBE_ESTIMATE_DELIVERY_POINT_SERVICES) ){
+					unset($result[$key]);
+				}
+			}
+			// Add common delivery point service
+			if(is_array($resultWithoutInsurance)) {
+				$result[] = $this->helper->getDeliveryPointServices($resultWithoutInsurance);
+				$result = array_values(array_filter($result)); //Clean empty array items and reindex (remove null deliverypointservices)
 			}
 		}
 
@@ -243,7 +252,7 @@ class Mbe_Shipping_Model_Ws
 
     public function mustCloseShipments()
     {
-	    $canCreateCourierWaybill= $this->helper->getCanCreateCourierWaybill()??0;
+	    $canCreateCourierWaybill= $this->helper->getCanCreateCourierWaybill()??false;
 
 	    return !$canCreateCourierWaybill;
     }
@@ -403,8 +412,8 @@ class Mbe_Shipping_Model_Ws
 		return $this->ws->deletePickupAddress($this->wsUrl, $this->wsUsername, $this->wsPassword, $this->system, $addressId);
 	}
 
-	public function getPickupManifest( array $masterTrackingIds ) {
-		return $this->ws->getPickupManifest($this->wsUrl, $this->wsUsername, $this->wsPassword, $this->system, $masterTrackingIds);
+	public function getPickupManifest( $masterTrackingId ) {
+		return $this->ws->getPickupManifest($this->wsUrl, $this->wsUsername, $this->wsPassword, $this->system, $masterTrackingId);
 	}
 
 	public function getDefaultPickupAddress() {
@@ -420,6 +429,13 @@ class Mbe_Shipping_Model_Ws
 	 */
 	public function closePickupShippping($pickupBatchid, $pickupBatchData) {
 		return $this->ws->closePickupShippping($this->wsUrl, $this->wsUsername, $this->wsPassword, $this->system, $pickupBatchid, $pickupBatchData);
+	}
+
+	/**
+	 * @throws \MbeExceptions\ShippingDocumentException
+	 */
+	public function getDeliveryPointShippingDocument( $masterTrackingId ) {
+		return $this->ws->getShippingDocument($this->wsUrl, $this->wsUsername, $this->wsPassword, $this->system, $masterTrackingId);
 	}
 
 }

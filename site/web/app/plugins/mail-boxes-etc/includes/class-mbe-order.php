@@ -32,24 +32,24 @@ class Mbe_E_Link_Order_List_Table extends WP_List_Table
 	    $this->logger = new Mbe_Shipping_Helper_Logger();
     }
 
-    function column_ID($item)
+	function column_ID($item)
     {
 
         $actions = array(
-            'edit' => sprintf('<a href="' . get_home_url() . '/wp-admin/post.php?post=%s&action=edit">%s</a>', $item['ID'], __('Edit', 'mail-boxes-etc')),
+            'edit' => sprintf('<a href="' . get_home_url() . '/wp-admin/post.php?post=%s&action=edit">%s</a>', $this->itemId($item), __('Edit', 'mail-boxes-etc')),
         );
 	    https://mbe-wordpress/wp-admin/post.php?post=20452&action=edit
         return sprintf('%s %s',
-            $item['ID'],
+            $this->itemId($item),
             $this->row_actions($actions)
         );
 
-        return sprintf('%1$s <span style="color:silver"></span>%2$s', $item['id'], $this->row_actions($actions));
+        return sprintf('%1$s <span style="color:silver"></span>%2$s', $this->itemId($item), $this->row_actions($actions));
     }
 
     function column_post_author($item)
     {
-        $order = new WC_Order($item['ID']);
+        $order = wc_get_order($this->itemId($item));
 
         if (version_compare(WC()->version, '3', '>=')) {
             $billingFirstName = $order->get_billing_first_name();
@@ -65,24 +65,29 @@ class Mbe_E_Link_Order_List_Table extends WP_List_Table
     function column_carrier($item)
     {
         //TODO: verify
-        $order = new WC_Order($item["ID"]);
+        $order = wc_get_order($this->itemId($item));
         $serviceName = $this->helper->getServiceName($order);
         return $serviceName;
-        //return sprintf('%s', get_post_meta($item['ID'], 'woocommerce_mbe_tracking_name', true));
+        //return sprintf('%s', get_post_meta($this->itemId($item), 'woocommerce_mbe_tracking_name', true));
     }
 
 
     function column_tracking($item)
     {
-        $trackings = $this->helper->getTrackings($item['ID']);
+        $trackings = $this->helper->getTrackings($this->itemId($item));
         if (empty($trackings)) {
             return '';
         }
         else {
             $html = '';
-            $url = get_post_meta($item['ID'], 'woocommerce_mbe_tracking_url', true);
+	        if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+				$order = wc_get_order($this->itemId($item));
+				$url = $order->get_meta('woocommerce_mbe_tracking_url');
+	        } else {
+		        $url = get_post_meta($this->itemId($item), 'woocommerce_mbe_tracking_url', true);
+	        }
 
-            $trackingString = $this->helper->getTrackingsString($item['ID']);
+            $trackingString = $this->helper->getTrackingsString($this->itemId($item));
             if (count($trackings) > 1) {
                 $html .= "<a target='_blank' href=" . $url . $trackingString . ">" . __('Track all', 'mail-boxes-etc') . "</a><br/>";
             }
@@ -101,18 +106,20 @@ class Mbe_E_Link_Order_List_Table extends WP_List_Table
 
     function column_post_date($item)
     {
-        return $item['post_date'];
+	    $order = wc_get_order($this->itemId($item));
+	    $date = new DateTimeImmutable($order->get_date_created());
+	    return wp_date( get_option( 'date_format' ), $date->getTimestamp() );
     }
 
     function column_total($item)
     {
-        $order = new WC_Order($item['ID']);
+        $order = wc_get_order($this->itemId($item));
         return $order->get_total() . ' &euro;';
     }
 
     function column_payment($item)
     {
-        $order = new WC_Order($item['ID']);
+        $order = wc_get_order($this->itemId($item));
         if (version_compare(WC()->version, '3', '>=')) {
             $paymentMethodTitle = $order->get_payment_method_title();
         }
@@ -124,34 +131,53 @@ class Mbe_E_Link_Order_List_Table extends WP_List_Table
 
     function column_status($item)
     {
-        return $this->helper->isShippingOpen($item['ID']) ? __('Opened', 'mail-boxes-etc') : __('Closed', 'mail-boxes-etc');
+        return $this->helper->isShippingOpen($this->itemId($item)) ? __('Opened', 'mail-boxes-etc') : __('Closed', 'mail-boxes-etc');
     }
 
     function column_files($item)
     {
-        $files = $this->helper->getFileNames($item['ID']);
+		if($this->helper->isDeliveryPointOrder($this->itemId($item)) && $this->helper->hasTracking($this->itemId($item))) {
+			$actionUrl = sprintf( "%sadmin-post.php?action=mbe_download_delivery_point_waybill&mbe_delivery_point_postid=%s&nonce=%s", get_admin_url(), $this->itemId($item), wp_create_nonce( 'mbe_download_delivery_point_waybill' ) );
+//			return '<a href="'. get_admin_url() . 'admin-post.php?action=mbe_download_delivery_point_waybill&mbe_delivery_point_postid=' . $this->itemId($item) . '&nonce=' . wp_create_nonce( 'mbe_download_delivery_point_waybill' ) . '">
+//						<button style="margin: 0px 5px 0px 5px; color:#778899FF; cursor:pointer" type="button" title="' . __( 'Download waybill', 'mail-boxes-etc' ) . '">
+//								<svg style="height: 20px;width: 20px; padding-top: 4px"  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+//    								<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 9h6m-6 3h6m-6 3h6M7 9h0m0 3h0m0 3h0M4 5h16c.6 0 1 .4 1 1v12c0 .6-.4 1-1 1H4a1 1 0 0 1-1-1V6c0-.6.4-1 1-1Z"/>
+//  								</svg>
+//	                    </button>
+//                    </a>';
 
-        $trackings = $this->helper->getTrackings($item['ID']);
-        if (empty($files)) {
-            return '';
-        }
-        else {
-            $html = '';
-            for ($i = 0; $i < count($files); $i++) {
-                $filename = __('Label', 'mail-boxes-etc') . " " . ($i + 1);
-                $path = $this->helper->mbeUploadUrl(). DIRECTORY_SEPARATOR . $files[$i];
-                $html .= "<a target='_blank' href=" . $path . " style='margin-bottom:5px;display: inline-block;'>" . $filename . "</a></br>";
-            }
-            if (isset($trackings[0]) && !$this->helper->isTrackingOpen($trackings[0])) {
-                $path = $this->helper->mbeUploadUrl(). DIRECTORY_SEPARATOR . 'MBE_' . $trackings[0] . "_closed.pdf";
-                $html .= "<a target='_blank' href=" . $path . " style='margin-bottom:5px;display: inline-block;'>" . __('Closure file', 'mail-boxes-etc') . "</a></br>";
-            }
-            return $html;
-        }
+			return ' <button style="margin: 0px 5px 0px 5px; color:#778899FF; cursor:pointer" type="button" title="' . __( 'Download waybill', 'mail-boxes-etc' ) . '"
+ 					  onclick="mbeButtonAction(this, \'' . $actionUrl . '\',\'_self\', \'false\')">
+								<svg style="height: 20px;width: 20px; padding-top: 4px"  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+    								<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 9h6m-6 3h6m-6 3h6M7 9h0m0 3h0m0 3h0M4 5h16c.6 0 1 .4 1 1v12c0 .6-.4 1-1 1H4a1 1 0 0 1-1-1V6c0-.6.4-1 1-1Z"/>
+  								</svg>
+					 </input>';
+		} else {
+			$files = $this->helper->getFileNames( $this->itemId($item) );
+
+			$trackings = $this->helper->getTrackings( $this->itemId($item) );
+			if ( empty( $files ) ) {
+				return '';
+			} else {
+				$html = '';
+				for ( $i = 0; $i < count( $files ); $i ++ ) {
+					$filename = __( 'Label', 'mail-boxes-etc' ) . " " . ( $i + 1 );
+					$path     = $this->helper->mbeUploadUrl() . DIRECTORY_SEPARATOR . $files[ $i ];
+					$html     .= "<a target='_blank' href=" . $path . " style='margin-bottom:5px;display: inline-block;'>" . $filename . "</a></br>";
+				}
+				if ( isset( $trackings[0] ) && ! $this->helper->isTrackingOpen( $trackings[0] ) ) {
+					$path = $this->helper->mbeUploadUrl() . DIRECTORY_SEPARATOR . 'MBE_' . $trackings[0] . "_closed.pdf";
+					$html .= "<a target='_blank' href=" . $path . " style='margin-bottom:5px;display: inline-block;'>" . __( 'Closure file', 'mail-boxes-etc' ) . "</a></br>";
+				}
+
+				return $html;
+			}
+		}
     }
+
 	function column_pickup_manifest($item) {
-		if ( $this->helper->isPickupShipped( $item['ID'] ) && $this->helper->hasTracking( $item['ID'] ) ) {
-			return '<a href="'. get_admin_url() . 'admin-post.php?action=mbe_download_pickup_manifest&mbe_pickup_postid='. $item['ID'] .'&nonce='.wp_create_nonce('mbe_download_pickup_manifest') .'">
+		if ( $this->helper->isPickupShipped( $this->itemId($item) ) && $this->helper->hasTracking( $this->itemId($item) ) ) {
+			return '<a href="'. get_admin_url() . 'admin-post.php?action=mbe_download_pickup_manifest&mbe_pickup_postid='. $this->itemId($item) .'&nonce='.wp_create_nonce('mbe_download_pickup_manifest') .'">
 						<button  style="margin: 0px 5px 0px 5px; color:#778899FF; cursor:pointer" type="button" title="'.__('Download manifest', 'mail-boxes-etc').'">
 								<svg style="height: 20px;width: 20px; padding-top: 4px" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
 						            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.5 10.25a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Zm0 0a2.225 2.225 0 0 0-1.666.75H12m3.5-.75a2.225 2.225 0 0 1 1.666.75H19V7m-7 4V3h5l2 4m-7 4H6.166a2.225 2.225 0 0 0-1.666-.75M12 11V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v9h1.834a2.225 2.225 0 0 1 1.666-.75M19 7h-6m-8.5 3.25a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z"/>
@@ -161,7 +187,7 @@ class Mbe_E_Link_Order_List_Table extends WP_List_Table
 //			return '<form action="' . esc_url( admin_url( 'admin-post.php' ) ) .'" method="post" id="mbe_download_pickup_manifest" style="display: inline-flex">
 //						<input type="hidden" name="action" value="mbe_download_pickup_manifest"/>
 //						<input type="hidden" name="nonce" value="'.wp_create_nonce('mbe_download_pickup_manifest') .'"/>
-//						<input type="hidden" name="mbe_pickup_postid" value="'. urlencode( $item['ID'] ).'"/>
+//						<input type="hidden" name="mbe_pickup_postid" value="'. urlencode( $this->itemId($item) ).'"/>
 //
 //						<button type="button" style="margin: 0px 5px 0px 5px; color:#778899FF" title="'.__('Download manifest', 'mail-boxes-etc').'">
 //							<svg style="height: 16px;width: 16px; padding-top: 4px" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
@@ -176,7 +202,8 @@ class Mbe_E_Link_Order_List_Table extends WP_List_Table
     {
         return sprintf(
             '<input type="checkbox" name="id[]" value="%s" />',
-            $item['ID']
+//            $this->itemId($item)
+            $this->itemId($item)
         );
     }
 
@@ -301,42 +328,58 @@ class Mbe_E_Link_Order_List_Table extends WP_List_Table
 	            	try {
 			            $labelsPdf = [];
 			            foreach ( $post_ids as $post_id ) {
-				            $labels = $this->helper->getFileNames( $post_id );
-				            if ( is_array( $labels ) ) {
-					            foreach ( $labels as $l ) {
-						            $labelType   = preg_replace( '/.*\./', '', $l );
-						            $labelsPdf[] = $this->convertShippingLabelToPdf( $labelType, file_get_contents( $this->helper->mbeUploadDir() . DIRECTORY_SEPARATOR . $l ) );
+				            if ( $this->helper->isDeliveryPointOrder( $post_id ) ) {
+
+					            if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+						            $order = wc_get_order($post_id);
+						            $masterTrackingNumber = $order->get_meta(woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_NUMBER);
+					            } else {
+						            $masterTrackingNumber = get_post_meta( $post_id, woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_NUMBER, true );
+					            }
+
+					            $response = $this->ws->getDeliveryPointShippingDocument( $masterTrackingNumber );
+
+					            if ( $response !== false && empty( $response->Errors ) ) {
+						            $outputPdf   = file_get_contents( $response->CourierWaybill ); // load the remote pdf
+						            $labelsPdf[] = $this->convertShippingLabelToPdf( 'pdf', $outputPdf );
+					            } else {
+//						            $errMsg = sprintf( __( "Download waybill", 'mail-boxes-etc' ) . " - " . __("waybill for order %s is still generating. Please try again in 1 minute", 'mail-boxes-etc' ), $post_id );
+						            $errMsg = __( "Download waybill", 'mail-boxes-etc' ) . " $post_id - " . __($response->Errors->Error->Description??'', 'mail-boxes-etc' );
+						            $this->helper->logErrorAndSetWpAdminMessage( $errMsg, $this->logger );
+					            }
+				            } else {
+					            $labels = $this->helper->getFileNames( $post_id );
+					            if ( is_array( $labels ) ) {
+						            foreach ( $labels as $l ) {
+							            $labelType   = preg_replace( '/.*\./', '', $l );
+							            $labelsPdf[] = $this->convertShippingLabelToPdf( $labelType, file_get_contents( $this->helper->mbeUploadDir() . DIRECTORY_SEPARATOR . $l ) );
+						            }
 					            }
 				            }
 			            }
-			            if (!empty($labelsPdf)) {
-				            $outputPdf     = $this->combineLabelsPdf($labelsPdf);
+			            if ( ! empty( $labelsPdf ) ) {
+				            $outputPdf     = $this->combineLabelsPdf( $labelsPdf );
 				            $outputPdfPath = $this->helper->mbeUploadDir() . DIRECTORY_SEPARATOR . current_datetime()->getTimestamp() . rand( 0, 999 ) . '.pdf';
+				            $this->helper->setWpAdminMessages( [
+					            'message' => urlencode( sprintf( __( "Download waybill", 'mail-boxes-etc' ) . " - " . __("%s Downloaded waybills", 'mail-boxes-etc' ), count( $labelsPdf ) ) ),
+					            'status'  => urlencode( 'info' )
+				            ] );
 
 				            if ( file_put_contents( $outputPdfPath, $outputPdf ) !== false ) {
-					            // dowload the files
-					            header( 'Content-Description: File Transfer' );
-					            header( 'Content-Type: application/pdf' );
-					            header( "Content-Disposition: attachment; filename=mbe-labels.pdf" );
-					            header( 'Content-Transfer-Encoding: binary' );
-					            header( 'Expires: 0' );
-					            header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
-					            header( 'Pragma: public' );
-					            header( 'Content-Length: ' . filesize( $outputPdfPath ) );
-					            ob_clean();
-					            flush();
-					            readfile( $outputPdfPath );
-					            wp_delete_file( $outputPdfPath );
+					            wp_redirect( admin_url( 'admin.php?page=' . WOOCOMMERCE_MBE_TABS_PAGE . '&reload-download=' . urlencode( $outputPdfPath ) ) );
 					            exit;
 				            } else {
-					            $errMess = __( 'MBE Download shipping labels - error writing to file ' . $outputPdfPath, 'mail-boxes-etc');
+					            $errMess = __( 'MBE Download shipping labels - error writing to file ' . $outputPdfPath, 'mail-boxes-etc' );
 					            $this->logger->log( $errMess );
 				            }
 			            } else {
-				            $this->logger->log( __('MBE Download shipping labels - no label to download ', 'mail-boxes-etc') );
+				            $this->logger->log( __( 'MBE Download shipping labels - no label to download ', 'mail-boxes-etc' ) );
 			            }
+//		            } catch (\MbeExceptions\ShippingDocumentException $e) {
+//			            $errMsg = sprintf( __( "Download waybill", 'mail-boxes-etc' ) . " - " . __("%s", 'mail-boxes-etc' ), $e->getMessage() );
+//			            $this->helper->logErrorAndSetWpAdminMessage( $errMsg, $this->logger );
 		            } catch (\Exception $e) {
-	            		$errMess = __( 'MBE Download shipping labels - Unexpected error', 'mail-boxes-etc') . ' - ' . $e->getMessage() ;
+	            		$errMess = __( "Download waybill", 'mail-boxes-etc' ) . " - " . __('Unexpected error', 'mail-boxes-etc') . ' - ' . $e->getMessage() ;
 			            $this->logger->log($errMess);
 		            }
 		            break;
@@ -358,7 +401,12 @@ class Mbe_E_Link_Order_List_Table extends WP_List_Table
 								throw new \MbeExceptions\ValidationException(sprintf(__('Order %s does not have a tracking number', 'mail-boxes-etc'), $post_id));
 							}
 
-							$masterTrackingNumber = get_post_meta($post_id, woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_NUMBER);
+				            if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+					            $order = wc_get_order($post_id);
+					            $masterTrackingNumber = $order->get_meta(woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_NUMBER, false);
+				            } else {
+					            $masterTrackingNumber = get_post_meta($post_id, woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_NUMBER);
+				            }
 
 							// This shouldn't be necessary, but we check it just to avoid unexpected issues
 				            if ($masterTrackingNumber) {
@@ -371,7 +419,7 @@ class Mbe_E_Link_Order_List_Table extends WP_List_Table
 			            if (!empty($masterTrackingIds)) {
 				            $manifestPdf = [];
 				            foreach ( $masterTrackingIds as $masterTrackingId ) {
-					            $response = $this->ws->getPickupManifest([$masterTrackingId]);
+					            $response = $this->ws->getPickupManifest($masterTrackingId);
 					            $manifestPdf[] = $response->Label->Stream;
 				            }
 
@@ -451,79 +499,230 @@ class Mbe_E_Link_Order_List_Table extends WP_List_Table
         }
         else {
             if ($this->current_action()) {
-                echo '<div class="error"><p>' . sprintf(__('Please select items.', 'mail-boxes-etc')) . '</p></div>';
+                echo '<div class="error"><p>' . esc_html__('Please select items.', 'mail-boxes-etc') . '</p></div>';
             }
         }
     }
 
-    function prepare_items()
-    {
-        global $wpdb;
-        $table_name = $wpdb->prefix . 'posts';
+    function prepare_items() {
+	    global $wpdb;
+
 	    $this->mustCloseShipments = $this->ws->mustCloseShipments(); // Use a local parameter to avoid calling the function multiple times for each row
 
 	    $per_page = 10;
-        $columns = $this->get_columns();
-        $hidden = array();
-        $sortable = $this->get_sortable_columns();
+		$max_num_pages = 0;
+	    $columns  = $this->get_columns();
+	    $hidden   = array();
+	    $sortable = $this->get_sortable_columns();
 
-        $this->_column_headers = array($columns, $hidden, $sortable);
+	    $this->_column_headers = array( $columns, $hidden, $sortable );
 
-        $this->process_bulk_action();
+	    $orders_pickup_batch_ids   = $this->helper->select_pickup_orders_ids();
 
-        $paged = isset($_REQUEST['paged']) ? max(0, intval($_REQUEST['paged']) - 1) : 0;
-        $paged = $paged * $per_page;
-        $orderby = (isset($_REQUEST['orderby']) && in_array($_REQUEST['orderby'], array_keys($this->get_sortable_columns()))) ? sanitize_sql_orderby($_REQUEST['orderby']) : 'id';
-        $order = (isset($_REQUEST['order']) && in_array($_REQUEST['order'], array('asc', 'desc'))) ? sanitize_text_field($_REQUEST['order']) : 'desc';
+	    $this->process_bulk_action();
 
-        $postmetaTableName = $wpdb->prefix . 'postmeta';
-        $order_ids = $this->helper->select_mbe_ids();
-	    $orders_custom_mapping_ids = $this->helper->select_custom_mapping_ids();
-		$orders_pickup_batch_ids = $this->helper->select_pickup_orders_ids();
-        $order_filter = 'AND ((ID IN ('.$order_ids.') OR ID IN ('.$orders_custom_mapping_ids.')) AND ID NOT IN ('.$orders_pickup_batch_ids.'))';
+//	    if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+//		    $table_name        = $wpdb->prefix . 'wc_orders';
+//		    $postmetaTableName = $wpdb->prefix . 'wc_orders_meta';
+//		    $postmetaTableJoin = ' AS pm ON pm.order_id = p.ID ';
+//		    $postTypeWhere     = "type = 'shop_order'";
 
-        if (isset($_REQUEST["order_search"]) && $_REQUEST["order_search"] != "") {
-            $search = esc_sql($_REQUEST["order_search"]);
+		    $order_ids = array(
+			    'limit'      => - 1,
+//		    'type'     => 'shop_order',
+			    'return'     => 'ids',
+//			'meta_key'     => '_shipping_method',
+//			'meta_value'   => 'mbe_eship|wf_mbe_shipping',
+//			'comparison' => 'REGEXP'
+			    'meta_query' =>
+//				array(
+				    array(
+					    'key'     => '_shipping_method',
+					    'value'   => 'mbe_eship|wf_mbe_shipping',
+					    'compare' => 'REGEXP'
+				    )
+//		    )
+		    );
 
-            $total_items = $wpdb->get_var("SELECT COUNT(DISTINCT(p.ID)) FROM $table_name AS p
-                                           LEFT JOIN $postmetaTableName AS pm ON pm.post_id = p.ID
-                                           WHERE post_type='shop_order'
+		    $orders_custom_mapping_ids = array(
+			    'limit'      => - 1,
+//			'type'     => 'shop_order',
+			    'return'     => 'ids',
+			    'meta_key'   => 'woocommerce_mbe_tracking_custom_mapping',
+			    'meta_value' => 'yes',
+//			'meta_query' => array(
+//				'key'     => 'woocommerce_mbe_tracking_custom_mapping',
+//				'value'   => 'yes',
+//				'compare' => '='
+//			)
+		    );
+
+
+//		$order_query_args = array(
+//			'limit'    => $per_page,
+//		    'page'     => $this->get_pagenum(),
+//		    'type'     => 'shop_order',
+//			'paginate' => true,
+//			'field_query' => array(
+//				'relation' => 'AND',
+//				array(
+//					'relation' => 'OR',
+//					array(
+//						'field' => 'id',
+//						'value' => wc_get_orders($order_ids),
+//						'compare' => 'IN'
+//					),
+//					array(
+//						'field' => 'id',
+//						'value' => wc_get_orders($orders_custom_mapping_ids),
+//						'compare' => 'IN'
+//					)
+//				),
+//				array(
+//					'field' => 'id',
+//					'value' => array_column($wpdb->get_results($orders_pickup_batch_ids), 'order_id'),
+//					'compare' => 'NOT IN'
+//				)
+//			)
+//		);
+
+		    $order_query_args = array(
+			    'limit'       => $per_page,
+			    'page'        => $this->get_pagenum(),
+			    'post_type'   => 'shop_order',
+			    'paginate'    => true,
+//			'relations' => 'AND',
+			    'meta_query'  => array(
+				    array(
+					    'relation' => 'OR',
+					    array(
+						    'key'     => '_shipping_method',
+						    'value'   => 'mbe_eship|wf_mbe_shipping',
+						    'compare' => 'REGEXP'
+					    ),
+					    array(
+						    'key'   => 'woocommerce_mbe_tracking_custom_mapping',
+						    'value' => 'yes',
+					    )
+					    // OR method_id in order_itemmeta regexp 'mbe_eship|wf_mbe_shipping'
+				    )
+			    ),
+			    'field_query' => array(
+				    array(
+					    'field'   => 'id',
+					    'value'   => array_column( $wpdb->get_results( $orders_pickup_batch_ids ), 'order_id' ), // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
+					    'compare' => 'NOT IN'
+				    )
+			    )
+		    );
+		    $mbeOrders = wc_get_orders( $order_query_args );
+
+//		    $newOrders = wc_get_orders( $order_query_args );
+			// TODO : Check - Filter all the orders not only the already filtered ones
+//			$mbeOrders = [];
+//		    foreach ($newOrders->orders as $order) {
+//			    foreach ($order->get_items('shipping') as $item_id => $item) {
+//				    if (preg_match("/MBE_ESHIP_ID.'|wf_mbe_shipping'/", $item->get_method_id()) ) {
+//					    $mbeOrders[] = $order;
+//					    break;
+//				    }
+//			    }
+//		    }
+
+		    $max_num_pages = $mbeOrders->max_num_pages;
+//	        $total_items = $mbeOrders->total??0;
+		    // $total_items = count($mbeOrders);
+		    $this->items = $mbeOrders;
+
+		    // Check in case the user has attempted to page beyond the available range of orders.
+		    if ( 0 === $max_num_pages && $order_query_args['page'] > 1 ) {
+			    $count_query_args          = $order_query_args;
+			    $count_query_args['page']  = 1;
+			    $count_query_args['limit'] = 1;
+			    $order_count               = wc_get_orders( $count_query_args );
+			    $max_num_pages             = (int) ceil( $order_count->total / $order_query_args['limit'] );
+		    }
+
+//		    $this->set_pagination_args(
+//			    array(
+//				    'total_items' => $newOrders->total ?? 0,
+//				    'per_page'    => $per_page,
+//				    'total_pages' => $max_num_pages,
+//			    )
+//		    );
+
+
+		    if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+			    $table_name        = $wpdb->prefix . 'wc_orders';
+			    $postmetaTableName = $wpdb->prefix . 'wc_orders_meta';
+			    $postmetaTableJoin = ' AS pm ON pm.order_id = p.ID ';
+			    $postTypeWhere     = "type = 'shop_order'";
+		    } else {
+			    $table_name        = $wpdb->prefix . 'posts';
+			    $postmetaTableName = $wpdb->prefix . 'postmeta';
+			    $postmetaTableJoin = ' AS pm ON pm.post_id = p.ID ';
+			    $postTypeWhere     = "post_type = 'shop_order'";
+		    }
+
+		    $paged   = isset( $_REQUEST['paged'] ) ? max( 0, intval( $_REQUEST['paged'] ) - 1 ) : 0;
+		    $paged   = $paged * $per_page;
+		    $orderby = ( isset( $_REQUEST['orderby'] ) && in_array( $_REQUEST['orderby'], array_keys( $this->get_sortable_columns() ) ) ) ? sanitize_sql_orderby( $_REQUEST['orderby'] ) : 'id';
+		    $order   = ( isset( $_REQUEST['order'] ) && in_array( $_REQUEST['order'], array(
+				    'asc',
+				    'desc'
+			    ) ) ) ? sanitize_text_field( $_REQUEST['order'] ) : 'desc';
+
+		    $order_ids                 = $this->helper->select_mbe_ids();
+		    $orders_custom_mapping_ids = $this->helper->select_custom_mapping_ids();
+
+		    $order_filter              = 'AND ((ID IN (' . $order_ids . ') OR ID IN (' . $orders_custom_mapping_ids . ')) AND ID NOT IN (' . $orders_pickup_batch_ids . '))';
+
+		    if ( isset( $_REQUEST["s"] ) && $_REQUEST["s"] != "" ) {
+			    $search = esc_sql( $_REQUEST["s"] );
+
+			    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
+			    $total_items = $wpdb->get_var( "SELECT COUNT(DISTINCT(p.ID)) FROM $table_name AS p 
+                                           LEFT JOIN $postmetaTableName . $postmetaTableJoin
+                                           WHERE $postTypeWhere
                                            {$order_filter}
                                            AND pm.meta_value LIKE '%$search%'
-                                           ");
+                                           " );
 
-            $query = $wpdb->prepare("SELECT p.*, p.ID FROM $table_name AS p
-                                       LEFT JOIN $postmetaTableName AS pm ON pm.post_id = p.ID
-                                       WHERE post_type='shop_order'
+			    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
+			    $query       = $wpdb->prepare( "SELECT p.*, p.ID as ID FROM $table_name AS p
+                                       LEFT JOIN $postmetaTableName . $postmetaTableJoin
+                                       WHERE $postTypeWhere
                                        {$order_filter}
                                        AND pm.meta_key IN ('_billing_last_name', '_billing_first_name', 'woocommerce_mbe_tracking_name','woocommerce_mbe_tracking_number', '_order_total', '_payment_method_title')
                                        AND (pm.meta_value LIKE '%%$search%%')
                                        GROUP BY p.ID
-                                       ORDER BY $orderby $order LIMIT %d OFFSET %d", array($per_page, $paged));
-            $this->items = $wpdb->get_results($query, ARRAY_A);
-        }
-        else {
-            $total_items = $wpdb->get_var("SELECT COUNT(id) FROM $table_name
-                                            WHERE post_type='shop_order'
-                                            {$order_filter}");
-            $this->items = $wpdb->get_results($wpdb->prepare("SELECT * FROM $table_name
-                                                        WHERE post_type='shop_order'
-                                                        {$order_filter}
-                                                        ORDER BY $orderby $order LIMIT %d OFFSET %d", $per_page, $paged), ARRAY_A);
-        }
+                                       ORDER BY $orderby $order LIMIT %d OFFSET %d", array( $per_page, $paged ) );
 
-        $this->set_pagination_args(array(
-            'total_items' => $total_items, // total items defined above
-            'per_page'    => $per_page, // per page constant defined at top of method
-            'total_pages' => ceil($total_items / $per_page) // calculate pages count
-        ));
+			    $this->items = $wpdb->get_results( $query, ARRAY_A );  // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
+		    } else {
+
+			    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
+			    $total_items = $wpdb->get_var( "SELECT COUNT(id) FROM $table_name
+                                            WHERE $postTypeWhere
+                                            {$order_filter}" );
+			    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
+			    $this->items = $wpdb->get_results( $wpdb->prepare( "SELECT id as ID, $table_name.* FROM $table_name
+                                                        WHERE $postTypeWhere
+                                                        {$order_filter}
+                                                        ORDER BY $orderby $order LIMIT %d OFFSET %d", $per_page, $paged ), ARRAY_A );
+		    }
+
+			$max_num_pages = ceil( $total_items / $per_page ) ;
+
+//	    }
+
+	    $this->set_pagination_args( array(
+		    'total_items' => $total_items, // total items defined above
+		    'per_page'    => $per_page, // per page constant defined at top of method
+		    'total_pages' => $max_num_pages// calculate pages count
+	    ) );
     }
 
-	/**
-	 * @param string $labelType
-	 * @param $label
-	 * @return mixed
-	 */
 	public function convertShippingLabelToPdf(string $labelType, $label)
 	{
 		$dompdf = new Dompdf();
@@ -531,7 +730,7 @@ class Mbe_E_Link_Order_List_Table extends WP_List_Table
 		switch ($labelType) {
 			case 'html':
 				$domOptions = $dompdf->getOptions();
-				$domOptions->setIsHtml5ParserEnabled(true);
+//				$domOptions->setIsHtml5ParserEnabled(true);
 				$domOptions->setIsRemoteEnabled(true);
 				$domOptions->setDefaultMediaType('print');
 				$dompdf->setPaper('A4', 'landscape');
@@ -562,6 +761,15 @@ class Mbe_E_Link_Order_List_Table extends WP_List_Table
 			$outputPdf->addRaw($item);
 		}
 		return $outputPdf->merge();
+	}
+
+	function itemId($item) {
+		if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+			//return $item->get_id();
+			return $item['id'];
+		} else {
+			return $item['ID'];
+		}
 	}
 
 }

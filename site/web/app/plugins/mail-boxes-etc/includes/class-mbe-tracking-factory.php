@@ -26,7 +26,7 @@ class mbe_tracking_factory
 	    $logger         = new Mbe_Shipping_Helper_Logger();
 	    $shippingHelper = new Mbe_Shipping_Helper_Data();
 	    $logger->log( "CREATESHIPMENT" );
-	    $order = new WC_Order( $order_id );
+	    $order = wc_get_order( $order_id );
 
 
 	    $shippingMethod = $shippingHelper->getShippingMethod( $order );
@@ -45,9 +45,10 @@ class mbe_tracking_factory
 	    }
 
 	    $shippingMethodArray = explode( '_', $shippingMethod );
+		$shippingMethodArray = empty($shippingMethodArray)?[]:$shippingMethodArray;
 
-	    $service = isset( $shippingMethodArray[0] ) ? $shippingMethodArray[0] : null;
-	    $subzone = isset( $shippingMethodArray[1] ) ? $shippingMethodArray[1] : null;
+		$service = $shippingMethodArray[0] ?? null;
+		$subzone = $shippingMethodArray[1] ?? null;
 
 	    $orderTotal = $order->get_total();
 
@@ -114,10 +115,10 @@ class mbe_tracking_factory
 				    $subTotalTax = $item["line_subtotal_tax"];
 			    }
 
-			    $goodsValue = ( $subTotal ) / $itemQty;
-
-				$p->Price = $goodsValue;
+			    $p->Price = ( $subTotal ) / $itemQty;
 			    $products[] = $p;
+
+			    $goodsValue = $p->Price;
 
 			    if ( $shippingHelper->getShipmentsInsuranceMode() == Mbe_Shipping_Helper_Data::MBE_INSURANCE_WITH_TAXES ) {
 				    $insuranceValue = ( $subTotal + $subTotalTax ) / $itemQty;
@@ -253,10 +254,6 @@ class mbe_tracking_factory
     }
 
 	/**
-	 * @param $order WC_Order
-	 * @param $weight mixed
-	 * @param $boxes integer
-	 * @param array $qty
 	 *
 	 * @throws \MbeExceptions\ApiRequestException
 	 */
@@ -265,8 +262,8 @@ class mbe_tracking_factory
 
         $logger = new Mbe_Shipping_Helper_Logger();
         $helper = new Mbe_Shipping_Helper_Data();
-        $logger->log('CREATE SINGLE SHIPMENT');
-        $logger->logVar(func_get_args(), 'CREATE SINGLE SHIPMENT ARGS');
+//        $logger->log('CREATE SINGLE SHIPMENT');
+//        $logger->logVar(func_get_args(), 'CREATE SINGLE SHIPMENT ARGS');
         try {
 
             $shippingMethod = $helper->getShippingMethod($order);
@@ -369,13 +366,23 @@ class mbe_tracking_factory
 		            }
 
 		            self::saveMultipleShipmentInfo($orderId, woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_NUMBER, $trackingNumber);
-		            update_post_meta($orderId, woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_NUMBER, $trackingNumber, true);
-		            update_post_meta($orderId, woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_NAME, $serviceName, true);
-		            update_post_meta($orderId, woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_SERVICE, $service, true);
-		            update_post_meta($orderId, woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_ZONE, $subzone, true);
-		            update_post_meta($orderId, woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_URL, self::getTrackingUrlBySystem());
 
-		            if($pickupInfo['is-pickup']) {
+		            if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+			            $order->update_meta_data( woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_NUMBER, $trackingNumber);
+			            $order->update_meta_data( woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_NAME, $serviceName);
+			            $order->update_meta_data( woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_SERVICE, $service);
+			            $order->update_meta_data( woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_ZONE, $subzone);
+			            $order->update_meta_data( woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_URL, self::getTrackingUrlBySystem() );
+						$order->save();
+		            } else {
+			            update_post_meta( $orderId, woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_NUMBER, $trackingNumber, true );
+			            update_post_meta( $orderId, woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_NAME, $serviceName, true );
+			            update_post_meta( $orderId, woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_SERVICE, $service, true );
+			            update_post_meta( $orderId, woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_ZONE, $subzone, true );
+			            update_post_meta( $orderId, woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_URL, self::getTrackingUrlBySystem() );
+		            }
+
+		            if(array_key_exists('is-pickup', $pickupInfo) && $pickupInfo['is-pickup']) {
 						$helper->setIsPickupShipped($orderId, true);
 		            }
 		            return true;
@@ -392,15 +399,29 @@ class mbe_tracking_factory
 
     public static function saveMultipleShipmentInfo($post_id, $key, $value)
     {
-        $old_meta = get_post_meta($post_id, $key, true);
-        // Update post meta
-        if (!empty($old_meta)) {
-            $old_meta = $old_meta . Mbe_Shipping_Helper_Data::MBE_SHIPPING_TRACKING_SEPARATOR . $value;
-            update_post_meta($post_id, $key, $old_meta);
-        }
-        else {
-            add_post_meta($post_id, $key, $value, true);
-        }
+	    if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+		    $order = wc_get_order($post_id);
+		    $old_meta = $order->get_meta($key);
+		    if (!empty($old_meta)) {
+			    $old_meta = $old_meta . Mbe_Shipping_Helper_Data::MBE_SHIPPING_TRACKING_SEPARATOR . $value;
+				$order->update_meta_data($key,$old_meta);
+		    } else {
+				$order->add_meta_data($key, $value, true);
+		    }
+		    $order->save();
+	    } else {
+		    $old_meta = get_post_meta($post_id, $key, true);
+		    // Update post meta
+		    if (!empty($old_meta)) {
+			    $old_meta = $old_meta . Mbe_Shipping_Helper_Data::MBE_SHIPPING_TRACKING_SEPARATOR . $value;
+			    update_post_meta($post_id, $key, $old_meta);
+		    }
+		    else {
+			    add_post_meta($post_id, $key, $value, true);
+		    }
+	    }
+
+
     }
 
 
@@ -484,11 +505,11 @@ class mbe_tracking_factory
 	protected static function getProductWeightPrice( $product )
 	{
 		if ( version_compare( WC()->version, '3', '>=' ) ) {
-			$productResult['weight'] = $product->get_weight();
-			$productResult['price']  = $product->get_price();
+			$productResult['weight'] = (float)$product->get_weight();
+			$productResult['price']  = (float)$product->get_price();
 		} else {
-			$productResult['weight'] = $product->weight;
-			$productResult['price']  = $product->price;
+			$productResult['weight'] = (float)$product->weight;
+			$productResult['price']  = (float)$product->price;
 		}
 
 		return $productResult;

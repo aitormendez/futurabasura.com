@@ -62,6 +62,7 @@ trait ShipmentActions {
 
 		foreach ( $post_ids as $post_id ) {
 			$post_id = (int) $post_id;
+// TODO Check bulk status order update
 			if ( $helper->hasTracking( $post_id ) ) {
 				array_push( $alreadyCreatedIds, $post_id );
 			} else {
@@ -257,7 +258,7 @@ trait ShipmentActions {
 			$returnedShipping = $ws->returnShipping($toReturnIds);
 			$returnedIds = 0;
 			foreach ( $toReturnIds as $return_id ) {
-				$order = new \WC_Order($return_id);
+				$order = wc_get_order($return_id);
 				$returnTrackingMeta = '';
 				$returnedTrackings = 0;
 				$trackingList = $helper->getTrackings($helper->getOrderId($order));
@@ -268,7 +269,12 @@ trait ShipmentActions {
 				}
 				if ($returnedTrackings>0) {
 					// add or update metadata
-					update_post_meta($helper->getOrderId($order), \Mbe_Shipping_Helper_Data::SHIPMENT_SOURCE_RETURN_TRACKING_NUMBER, substr($returnTrackingMeta, 0,-1), true);
+					if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+						$order->update_meta_data(\Mbe_Shipping_Helper_Data::SHIPMENT_SOURCE_RETURN_TRACKING_NUMBER,substr($returnTrackingMeta, 0,-1));
+						$order->save();
+					} else {
+						update_post_meta($helper->getOrderId($order), \Mbe_Shipping_Helper_Data::SHIPMENT_SOURCE_RETURN_TRACKING_NUMBER, substr($returnTrackingMeta, 0,-1), true);
+					}
 				}
 			}
 

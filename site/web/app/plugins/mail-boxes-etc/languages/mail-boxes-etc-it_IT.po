@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Mail boxes\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-13 13:46+0000\n"
-"PO-Revision-Date: 2023-12-12 12:14+0100\n"
+"PO-Revision-Date: 2024-07-17 16:07+0200\n"
 "Last-Translator: Samuele Carpene <samuele.carpene@intesys.it>\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.4\n"
 "X-Poedit-KeywordsList: __\n"
 "X-Poedit-Basepath: /home/web/php59/woombe/wordpress46/wp-content/plugins/mbe-woocommerce-shipping-method\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -411,7 +411,8 @@ msgstr "Nr. Tracking MBE "
 msgid "Label"
 msgstr "Etichetta spedizione MBE"
 
-#: includes/class-mbe-tracking-admin.php:86 includes/class-mbe-tracking-admin.php:91
+#: includes/class-mbe-tracking-admin.php:86
+#: includes/class-mbe-tracking-admin.php:91
 msgid "link"
 msgstr "link"
 
@@ -453,7 +454,8 @@ msgid "MBE Economy"
 msgstr "MBE Economy"
 
 #. Austria
-#: includes/translations.php:11 includes/translations.php:46 includes/translations.php:67 includes/translations.php:90
+#: includes/translations.php:11 includes/translations.php:46
+#: includes/translations.php:67 includes/translations.php:90
 msgid "MBE Express"
 msgstr "MBE Express"
 
@@ -469,7 +471,8 @@ msgstr "MBE Raccomandata 1"
 msgid "MBE Raccomandata"
 msgstr "MBE Raccomandata"
 
-#: includes/translations.php:15 includes/translations.php:50 includes/translations.php:70 includes/translations.php:92
+#: includes/translations.php:15 includes/translations.php:50
+#: includes/translations.php:70 includes/translations.php:92
 msgid "MBE Standard"
 msgstr "MBE Standard"
 
@@ -505,7 +508,8 @@ msgstr "MBE Capi Appesi Small (SCS)"
 msgid "MBE Economy (SEC)"
 msgstr "MBE Economy (SEC)"
 
-#: includes/translations.php:24 includes/translations.php:53 includes/translations.php:73 includes/translations.php:97
+#: includes/translations.php:24 includes/translations.php:53
+#: includes/translations.php:73 includes/translations.php:97
 msgid "MBE Express (SEE)"
 msgstr "MBE Express (SEE)"
 
@@ -521,7 +525,8 @@ msgstr "MBE Raccomandata 1 (SR1)"
 msgid "MBE Raccomandata (SRA)"
 msgstr "MBE Raccomandata (SRA)"
 
-#: includes/translations.php:28 includes/translations.php:57 includes/translations.php:76 includes/translations.php:99
+#: includes/translations.php:28 includes/translations.php:57
+#: includes/translations.php:76 includes/translations.php:99
 msgid "MBE Standard (SSE)"
 msgstr "MBE Standard (SSE)"
 
@@ -557,7 +562,8 @@ msgstr "MBE Capi Appesi Small (SCS) + Assicurazione"
 msgid "MBE Economy (SEC) + Insurance"
 msgstr "MBE Economy (SEC) + Assicurazione"
 
-#: includes/translations.php:37 includes/translations.php:60 includes/translations.php:79 includes/translations.php:104
+#: includes/translations.php:37 includes/translations.php:60
+#: includes/translations.php:79 includes/translations.php:104
 msgid "MBE Express (SEE) + Insurance"
 msgstr "MBE Express (SEE) + Assicurazione"
 
@@ -573,7 +579,8 @@ msgstr "MBE Raccomandata 1 (SR1) + Assicurazione"
 msgid "MBE Raccomandata (SRA) + Insurance"
 msgstr "MBE Raccomandata (SRA) + Assicurazione"
 
-#: includes/translations.php:41 includes/translations.php:64 includes/translations.php:82 includes/translations.php:106
+#: includes/translations.php:41 includes/translations.php:64
+#: includes/translations.php:82 includes/translations.php:106
 msgid "MBE Standard (SSE) + Insurance"
 msgstr "MBE Standard (SSE) + Assicurazione"
 
@@ -1102,14 +1109,10 @@ msgid "Markup"
 msgstr "Ricarico"
 
 msgid "Turnkey digital services that help your brand take off. Reach your customers online with digital solutions and web marketing tools that give you more chances to reach your audience by building an effective online presence for your business and being where your customers are. MBE offers you effective solutions to grow your digital channels. Showcase your brand, e-commerce store, or improve your current website to make it more visible on search engines."
-msgstr ""
-"I servizi digitali chiavi in mano che aiutano il tuo brand a decollare. Raggiungi i tuoi clienti online con soluzioni digitali e strumenti di web marketing che ti danno maggiori possibilità di raggiungere il tuo pubblico costruendo una presenza online efficace per la tua azienda ed essere dove sono i tuoi clienti. MBE ti offre soluzioni efficaci per far crescere i tuoi canali digitali. Metti in mostra il tuo marchio, negozio e-commerce o migliora il tuo sito web "
-"attuale per renderlo più visibile sui motori di ricerca."
+msgstr "I servizi digitali chiavi in mano che aiutano il tuo brand a decollare. Raggiungi i tuoi clienti online con soluzioni digitali e strumenti di web marketing che ti danno maggiori possibilità di raggiungere il tuo pubblico costruendo una presenza online efficace per la tua azienda ed essere dove sono i tuoi clienti. MBE ti offre soluzioni efficaci per far crescere i tuoi canali digitali. Metti in mostra il tuo marchio, negozio e-commerce o migliora il tuo sito web attuale per renderlo più visibile sui motori di ricerca."
 
 msgid "The packaging service that gives your business an edge. Your customers deserve a unique experience: surprise them during unboxing with customized packaging solutions for your products. A highly customized solution that enhances your brand and adds a touch of style based on your specific needs. In addition to optimizing time and resources, you can reduce your environmental impact as MBE uses innovative packaging techniques and materials."
-msgstr ""
-"Il servizio di imballaggio che dà una marcia in più alla tua attività. I tuoi clienti meritano un'esperienza unica: sorprendili durante l'unboxing con le soluzioni di imballaggio su misura per i tuoi prodotti. Una soluzione altamente personalizzata che valorizza il tuo brand e aggiunge un tocco di stile in base alle tue specifiche esigenze. Oltre ad ottimizzare tempo e risorse puoi ridurre l'impatto ambientale poiché MBE utilizza tecniche e materiali di imballaggio "
-"innovative."
+msgstr "Il servizio di imballaggio che dà una marcia in più alla tua attività. I tuoi clienti meritano un'esperienza unica: sorprendili durante l'unboxing con le soluzioni di imballaggio su misura per i tuoi prodotti. Una soluzione altamente personalizzata che valorizza il tuo brand e aggiunge un tocco di stile in base alle tue specifiche esigenze. Oltre ad ottimizzare tempo e risorse puoi ridurre l'impatto ambientale poiché MBE utilizza tecniche e materiali di imballaggio innovative."
 
 msgid "Now you know you have a reliable partner by your side!"
 msgstr "Ora sai di avere un partner affidabile al tuo fianco!"
@@ -1476,3 +1479,119 @@ msgstr "Si è verificato un errore durante il recupero dei manifest per il lotto
 
 msgid "Order does not have a tracking number"
 msgstr "L'ordine non ha un numero di tracciamento"
+
+msgid "Click to select a delivery point"
+msgstr "Clicca per selezionare un punto di ritiro"
+
+msgid "Delivery Point"
+msgstr "Punto di consegna"
+
+msgid "Select a delivery point to proceed"
+msgstr "Seleziona un punto di consegna per procedere"
+
+msgid "Download waybill"
+msgstr "Scarica la lettera di vettura"
+
+msgid "no document to download. Please, retry later"
+msgstr "Nessun documento da scaricare. Riprovare più tardi"
+
+msgid "waybill for order %s is still generating. Please try again in 1 minute"
+msgstr "Lettera di vettura per l'ordine %s è ancora in fase di generazione. Riprovare fra 1 minuto"
+
+msgid "%s Downloaded waybills"
+msgstr "Lettera di vettura %s scaricata"
+
+msgid "Shipment not found. Contact your Center for more information"
+msgstr "Spedizione non trovata. Contatta il tuo Centro per maggiori informazioni"
+
+msgid "Courier waybill not yet available"
+msgstr "Lettera di vettura non ancora disponibile"
+
+msgid "Courier waybill not found"
+msgstr "Lettera di vettura corriere non trovata"
+
+msgid "Courier waybill not enabled for this shipment. Contact your Center for more information"
+msgstr "Lettera di vettura corriere non abilitata per questa spedizione. Contatta il tuo Centro per maggiori informazioni"
+
+msgid "Pickup for PUDO shipments will be booked automatically after shipments closure for the next working day. "
+msgstr "Il ritiro delle spedizioni PUDO verrà prenotato automaticamente dopo la chiusura delle spedizioni per il giorno lavorativo successivo."
+
+msgid "Custom description for the service \"MBE Delivery Point (11)\""
+msgstr "Descrizione personalizzata per il servizio \"MBE Delivery Point (11)\""
+
+msgid "Enter the custom name for the shipping method. Leave blank to not change the default value"
+msgstr "Inserisci il nome personalizzato per il metodo di spedizione. Lascia vuoto per non modificare il valore predefinito"
+
+msgid "VAT for \"MBE Delivery Point\""
+msgstr "IVA per \"MBE Delivery Point\""
+
+msgid "Custom description for the service \"MBE MBEDP\""
+msgstr "Descrizione personalizzata per il servizio \"MBE MBEDP\""
+
+msgid "VAT for \"MBE MBEDP\""
+msgstr "IVA per \"MBE MBEDP\""
+
+msgid "Custom description for the service \"MBE GPDP\""
+msgstr "Descrizione personalizzata per il servizio \"MBE GPDP\""
+
+msgid "VAT for \"MBE GPDP\""
+msgstr "IVA per \"MBE GPDP\""
+
+msgid "Select the pick-up point"
+msgstr "Seleziona il punto di ritiro"
+
+msgid "The proximity gel shipment file is not ready"
+msgstr "Il file di spedizione di Gel Proximity non è pronto"
+
+msgid "N.B: If you choose this mode, PUDO-related MBE services cannot be used "
+msgstr "N.B se si seleziona questa modalità, i servizi MBE legati ai PUDO non potranno essere utilizzati"
+
+msgid "An error occurred while retrieving LDV"
+msgstr "Si è verificato un errore nel recupero della lettera di vettura"
+
+msgid "One of the LDV of the selected delivery point is not yet ready"
+msgstr "Una delle lettere di vettura del punto di consegna selezionato non è ancora disponibile"
+
+msgid "An error occurred while selecting the pickup location, please try again. "
+msgstr "Si è verificato un errore nella selezione del punto di ritiro, provare di nuovo"
+
+msgid "Pick-up point selected "
+msgstr "Punto di ritiro selezionato"
+
+msgid "Sandbox mode is active "
+msgstr "Modalità Sandbox attiva"
+
+msgid "Tax & Duties service"
+msgstr "Servizio Tax & Duites"
+
+msgid "If you want to enable Tax and Duties service you need to set the \"automatic\" pickup management mode"
+msgstr "Se si desidera attivare il servizio di imposte e tasse, è necessario impostare la modalità di gestione di pickup \"automatico\"."
+
+msgid "By enabling this option you can compute T&D price in case of Worldwide shipments and display the total amount on checkout phase"
+msgstr "Abilitando questa opzione è possibile calcolare il prezzo T&D in caso di spedizioni in tutto il mondo e visualizzare l'importo totale nella fase di checkout."
+
+msgid "By choosing the Manual mode, it will be possible to route a pickup request manually, associating a specific pickup address and pickup data with one or more shipments. The Manual mode is not configurable when T&D service is active. By choosing the Automatic mode, pickup requests will be routed to a default address and with default pickup data"
+msgstr "Scegliendo la modalità Manuale, sarà possibile inoltrare una richiesta di prelievo manualmente, associando un indirizzo di prelievo e dati di prelievo specifici a una o più spedizioni. La modalità Manuale non è configurabile quando il servizio T&D è attivo. Scegliendo la modalità Automatica, le richieste di prelievo verranno inoltrate a un indirizzo predefinito e con dati di prelievo predefiniti."
+
+msgid "\"Tax & Duties service\" cannot be enabled with \"Mapping of Couriers and Shipping Services\" configuration mode"
+msgstr "Il \"Servizio imposte e tasse\" non può essere abilitato con la modalità di configurazione \"Mappatura dei corrieri e dei servizi di spedizione\"."
+
+msgid "As with for all international shipments, customs requires a payment to clear goods through customs. It is a cost independent of our policies and tariffs, but the figure of <strong><span>%s</span></strong> charged ensures customs clearance, taken care of by us."
+msgstr "Come per tutte le spedizioni internazionali, la dogana richiede un pagamento per sdoganare la merce. Si tratta di un costo indipendente dalle nostre politiche e tariffe, ma la cifra di <strong><span>%s</span></strong> addebitata garantisce lo sdoganamento, curato da noi."
+
+msgid "As for all international shipments, customs requires a payment to clear goods through customs. It is a cost independent of our policies and tariffs. The <strong><span>%s</span></strong> figure shown may vary depending on the legislation of the country of destination."
+msgstr "Come per tutte le spedizioni internazionali, la dogana richiede un pagamento per sdoganare la merce. Si tratta di un costo indipendente dalle nostre politiche e tariffe. La cifra <strong><span>%s</span></strong> indicata può variare a seconda della legislazione del paese di destinazione."
+
+msgid ""
+"Default Incoterm: [DAP] [DDP] \n"
+" If you choose to work of [DAP] by default, a forecast of how much customs will charge the consignee to clear the goods will be shown at checkout. \n"
+" If you choose to work in [DDP] by default, the calculation of the customs clearance cost will be added at checkout and guaranteed via MBE, to have a fast and smooth shipping flow. \n"
+" In any case, these features will only be used if the shipment is international and involves customs in its path to the destination."
+msgstr ""
+"Default Incoterm: [DAP] [DDP] \n"
+" Se scegli di lavorare in [DAP] di default, al checkout verrà mostrata una previsione di quanto la dogana chiederà al destinatario per sdoganare la merce. \n"
+" Se scegli di lavorare in [DDP] di default, il calcolo del costo di sdoganamento verrà aggiunto al checkout e garantito tramite MBE, per avere un flusso di spedizione veloce e senza intoppi. \n"
+" In ogni caso, tali funzionalità verranno utilizzate solo se la spedizione è internazionale e prevede un passaggio dalla dogana per arrivare a destinazione."
+
+msgid "At the moment this feature is not active, you will receive detailed information as soon as it is released."
+msgstr "Al momento questa funzione non è attiva, riceverai informazioni dettagliate non appena sarà rilasciata."

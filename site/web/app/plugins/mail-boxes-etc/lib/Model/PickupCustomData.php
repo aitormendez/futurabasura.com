@@ -60,6 +60,7 @@ class Mbe_Shipping_Model_Pickup_Custom_Data implements Mbe_Shipping_Entity_Model
     public function insertRow( $row ) {
 	    global $wpdb;
 	    try {
+		    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
 		    if (!$wpdb->insert($this->getTableName(), $row)) {
 			    $this->helper->setWpAdminMessages( [
 				    'message' => urlencode( $wpdb->last_error ),
@@ -106,7 +107,7 @@ class Mbe_Shipping_Model_Pickup_Custom_Data implements Mbe_Shipping_Entity_Model
 
 	public function getRow( $rowId ) {
 		global $wpdb;
-		return $wpdb->get_row( $wpdb->prepare( "SELECT * FROM " . $this->getTableName() . " where id = %d", $rowId), ARRAY_A );
+		return $wpdb->get_row( $wpdb->prepare( "SELECT * FROM " . $this->getTableName() . " where id = %d", $rowId), ARRAY_A ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
 	}
 
 	/**
@@ -115,14 +116,20 @@ class Mbe_Shipping_Model_Pickup_Custom_Data implements Mbe_Shipping_Entity_Model
 	 */
 	public function getBatchIdRow( $pickupBatchId ) {
 		global $wpdb;
-		return $wpdb->get_row( $wpdb->prepare( "SELECT * FROM " . $this->getTableName() . " where pickup_batch_id = %s", $pickupBatchId ));
+		return $wpdb->get_row( $wpdb->prepare( "SELECT * FROM %i where pickup_batch_id = %s", $this->getTableName(), $pickupBatchId )); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
 	}
 
 	public function getBatchIdOrders( $pickupBatchId, $orderClause = '' ) {
 		global $wpdb;
 		$orderItemTable = $wpdb->prefix . 'woocommerce_order_items';
 		$orderItemMetaTable = $wpdb->prefix . 'woocommerce_order_itemmeta';
-        $postTable = $wpdb->prefix . 'posts';
+
+		if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+			$postTable = $wpdb->prefix . 'wc_orders';
+		} else {
+			$postTable = $wpdb->prefix . 'posts';
+		}
+
         $metakey = Mbe_Shipping_Helper_Data::META_FIELD_PICKUP_BATCH_ID;
         $orderSql = $orderClause?"ORDER BY $orderClause":"";
 
@@ -131,10 +138,11 @@ class Mbe_Shipping_Model_Pickup_Custom_Data implements Mbe_Shipping_Entity_Model
                     LEFT JOIN $orderItemMetaTable AS oim ON oi.order_item_id = oim.order_item_id
 					WHERE oi.order_item_type='shipping'
 					AND oim.meta_key = %s
-					AND %s = oim.meta_value 
+					AND oim.meta_value = %s 
 					$orderSql",
                 array($metakey, $pickupBatchId)
 		);
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
 		return $wpdb->get_results($query, ARRAY_A);
     }
 
@@ -142,7 +150,12 @@ class Mbe_Shipping_Model_Pickup_Custom_Data implements Mbe_Shipping_Entity_Model
 		global $wpdb;
 		$orderItemTable = $wpdb->prefix . 'woocommerce_order_items';
 		$orderItemMetaTable = $wpdb->prefix . 'woocommerce_order_itemmeta';
-		$postTable = $wpdb->prefix . 'posts';
+
+		if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+			$postTable = $wpdb->prefix . 'wc_orders';
+		} else {
+			$postTable = $wpdb->prefix . 'posts';
+		}
 		$metakey = Mbe_Shipping_Helper_Data::META_FIELD_PICKUP_CUSTOM_DATA_ID;
 		$orderSql = $orderClause?"ORDER BY $orderClause":"";
 
@@ -155,6 +168,7 @@ class Mbe_Shipping_Model_Pickup_Custom_Data implements Mbe_Shipping_Entity_Model
 					$orderSql",
 			array($metakey, $pickupCustomDataId)
 		);
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
 		return $wpdb->get_results($query, ARRAY_A);
 	}
 
@@ -169,7 +183,7 @@ class Mbe_Shipping_Model_Pickup_Custom_Data implements Mbe_Shipping_Entity_Model
 
 	public function setStatus( $rowId, $value = 'ready' ) {
 		global $wpdb;
-		// sanitize
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
 		$wpdb->update(
 			$this->getTableName(),
 			['status' => $value],
@@ -183,15 +197,15 @@ class Mbe_Shipping_Model_Pickup_Custom_Data implements Mbe_Shipping_Entity_Model
 		$csvPickupAddresses = new Mbe_Shipping_Csv_Editor_Pickup_Addresses();
 		$tomorrow = new DateTime('tomorrow');
         $today = new DateTime('today');
-        $pickupBatchIdInput = isset($item['pickup_batch_id'])?'<input type="hidden" name="pickup_batch_id" id="pickup_batch_id" value="' . esc_attr($item['pickup_batch_id']) . '"/>':''
+//        $pickupBatchIdInput = isset($item['pickup_batch_id'])?'<input type="hidden" name="pickup_batch_id" id="pickup_batch_id" value="' . esc_attr($item['pickup_batch_id']) . '"/>':''
 		?>
 
 		<table style="width: 100%;" class="form-table">
 			<tbody>
-            <?php echo  $pickupBatchIdInput ?>
+            <?php echo (isset($item['pickup_batch_id'])?'<input type="hidden" name="pickup_batch_id" id="pickup_batch_id" value="' . esc_attr($item['pickup_batch_id']) . '"/>':'') ?>
             <tr class="form-field">
                 <th scope="row">
-                    <label for="address"><?php _e( 'Order list', 'mail-boxes-etc' ) ?></label>
+                    <label for="address"><?php esc_html_e( 'Order list', 'mail-boxes-etc' ) ?></label>
                 </th>
                 <td>
                     <div style="width: 95%; height: auto">
@@ -209,7 +223,7 @@ class Mbe_Shipping_Model_Pickup_Custom_Data implements Mbe_Shipping_Entity_Model
             </tr>
             <tr class="form-field">
                 <th scope="row">
-                    <label for="address"><?php _e( 'Pickup address', 'mail-boxes-etc' ) ?></label>
+                    <label for="address"><?php esc_html_e( 'Pickup address', 'mail-boxes-etc' ) ?></label>
                     <span style="color: #c03939">*</span>
                 </th>
                 <td>
@@ -217,8 +231,8 @@ class Mbe_Shipping_Model_Pickup_Custom_Data implements Mbe_Shipping_Entity_Model
                         <?php
                         foreach ( $csvPickupAddresses->get_remoteRows() as $address ) {
                             ?>
-                            <option value="<?php echo $address['pickup_address_id'] ?>" <?php echo $address['pickup_address_id']==($item['pickup_address_id']??'')?"selected":"" ?>>
-                                <?php echo $address['trade_name'] .', ' . $address['address_1'] .', ' . $address['zip_code'] .', ' . $address['city'] ?>
+                            <option value="<?php esc_attr_e($address['pickup_address_id']) ?>" <?php echo $address['pickup_address_id']==($item['pickup_address_id']??'')?"selected":"" ?>>
+                                <?php esc_html_e($address['trade_name'] .', ' . $address['address_1'] .', ' . $address['zip_code'] .', ' . $address['city']) ?>
                             </option>
                             <?php
                         }
@@ -226,8 +240,12 @@ class Mbe_Shipping_Model_Pickup_Custom_Data implements Mbe_Shipping_Entity_Model
                     </select>
                     <p style="margin-top:5px; margin-bottom: 5px;">
                         <?php
+//                        $returnLink = urlencode_deep(esc_url(MBE_ESHIP_ID . "_pickup_data_tabs&orderids=".json_encode($item['order_ids'])));
+//                        $buttonLink = esc_url(sprintf("admin.php?backpage=%s&page=' . MBE_ESHIP_ID . '_csv_edit_form&action=new&csv=pickup-addresses&id=%s", $returnLink, null));
+//                        echo '<a class="button" href="'.$buttonLink.'">'.__('Add New Pickup Address', 'mail-boxes-etc').'</a>';
                         $returnLink = urlencode(MBE_ESHIP_ID . "_pickup_data_tabs&orderids=".json_encode($item['order_ids']));
-                        echo sprintf( '<a class="button" href="admin.php?backpage=%s&page=' . MBE_ESHIP_ID . '_csv_edit_form&action=new&csv=pickup-addresses&id=%s">%s</a>',$returnLink, null, __('Add New Pickup Address', 'mail-boxes-etc'));
+                        $hrefUrl = get_admin_url(null, "admin.php?backpage=".$returnLink."&page=" . MBE_ESHIP_ID . "_csv_edit_form&action=new&csv=pickup-addresses&id=");
+                        echo wp_kses_post(sprintf( '<a class="button" href="%s">%s</a>',$hrefUrl, __('Add New Pickup Address', 'mail-boxes-etc')));
                         ?>
                     </p>
                 </td>
@@ -235,21 +253,24 @@ class Mbe_Shipping_Model_Pickup_Custom_Data implements Mbe_Shipping_Entity_Model
 <!--            Pickup Date-->
 			<tr class="form-field">
 				<th scope="row">
-					<label for="date"><?php _e( 'Pickup Date', 'mail-boxes-etc' ) ?></label>
+					<label for="date"><?php esc_html_e( 'Pickup Date', 'mail-boxes-etc' ) ?></label>
 					<span style="color: #c03939">*</span>
 				</th>
 				<td>
 					<input id="date" name="date" type="date" style="width: 95%"
-					       value="<?php echo $item['date']??$tomorrow->format('Y-m-d') ?>"
-                           min="<?php echo $today->format('Y-m-d') ?>"
+					       value="<?php esc_html_e($item['date']??$tomorrow->format('Y-m-d')) ?>"
+                           min="<?php  esc_html_e($today->format('Y-m-d')) ?>"
 					       required>
+                    <p class="description">
+                        <?php esc_html_e('Pickup for PUDO shipments will be booked automatically after shipments closure for the next working day', 'mail-boxes-etc') ?>
+                    </p>
 				</td>
 			</tr>
 <!--            Preferred time-->
             <tr class="form-field">
                 <th scope="row">
                     <label for="preferred">
-                        <span><?php _e('Pickup Time - Preferred', 'mail-boxes-etc') ?></span>
+                        <span><?php esc_html_e('Pickup Time - Preferred', 'mail-boxes-etc') ?></span>
                     </label>
                     <span style="color: #c03939">*</span>
                 </th>
@@ -268,7 +289,7 @@ class Mbe_Shipping_Model_Pickup_Custom_Data implements Mbe_Shipping_Entity_Model
                                value="<?php echo esc_attr($item['preferred_to']) ?>"
 			            />
                         <p class="description">
-                            <?php wp_kses_post(_e('Minimum and maximum pickup time that will be communicated to the courier(N.B. pickup time is approximate and may not be observed by the final courier)', 'mail-boxes-etc')) ?>
+                            <?php esc_html_e('Minimum and maximum pickup time that will be communicated to the courier(N.B. pickup time is approximate and may not be observed by the final courier)', 'mail-boxes-etc') ?>
                         </p>
                     </fieldset>
                 </td>
@@ -277,7 +298,7 @@ class Mbe_Shipping_Model_Pickup_Custom_Data implements Mbe_Shipping_Entity_Model
             <tr class="form-field">
                 <th scope="row">
                     <label for="alternative">
-                        <span><?php _e('Pickup Time - Alternative', 'mail-boxes-etc') ?></span>
+                        <span><?php esc_html_e('Pickup Time - Alternative', 'mail-boxes-etc') ?></span>
                     </label>
                 </th>
 
@@ -296,7 +317,7 @@ class Mbe_Shipping_Model_Pickup_Custom_Data implements Mbe_Shipping_Entity_Model
                                value="<?php echo esc_attr($item['alternative_to']) ?>"
                         />
                         <p class="description">
-							<?php wp_kses_post(_e('Alternative minimum and maximum pickup time that will be communicated to the courier (N.B. pickup time is approximate and may not be observed by the final courier)', 'mail-boxes-etc')) ?>
+							<?php esc_html_e('Alternative minimum and maximum pickup time that will be communicated to the courier (N.B. pickup time is approximate and may not be observed by the final courier)', 'mail-boxes-etc') ?>
                         </p>
                     </fieldset>
                 </td>
@@ -304,7 +325,7 @@ class Mbe_Shipping_Model_Pickup_Custom_Data implements Mbe_Shipping_Entity_Model
 <!--            Note -->
             <tr class="form-field">
                 <th scope="row">
-                    <label for="notes"><?php _e( 'Pickup notes', 'mail-boxes-etc' ) ?></label>
+                    <label for="notes"><?php esc_html_e( 'Pickup notes', 'mail-boxes-etc' ) ?></label>
                 </th>
                 <td>
                     <input id="notes" name="notes" type="text" style="width: 95%"
@@ -323,11 +344,11 @@ class Mbe_Shipping_Model_Pickup_Custom_Data implements Mbe_Shipping_Entity_Model
                             (count($item['order_ids']) > 1 || !empty($item['pickup_batch_id']))
                         ) {
                         */ ?>
-                            <input type="submit" value="<?php _e( 'Save', 'mail-boxes-etc' ) ?>" id="submit_save"
+                            <input type="submit" value="<?php esc_html_e( 'Save', 'mail-boxes-etc' ) ?>" id="submit_save"
                                    class="button-primary" name="submit_save">
                         <?php /* } */?>
                         <?php if($helper->getPickupRequestEnabled()) { ?>
-                        <input type="submit" value="<?php _e( 'Save and send', 'mail-boxes-etc' ) ?>" id="submit_savesend"
+                        <input type="submit" value="<?php esc_html_e( 'Save and send', 'mail-boxes-etc' ) ?>" id="submit_savesend"
                                class="button-primary" name="submit_savesend">
 			            <?php } ?>
                     </div>

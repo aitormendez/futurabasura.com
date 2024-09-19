@@ -85,7 +85,7 @@ class Mbe_Shipping_Csv_Editor_Pickup_Addresses extends Mbe_Shipping_Csv_Editor {
 	/**
 	 * @throws \MbeExceptions\ApiRequestException
 	 */
-	public function get_remoteRows($orderBy = null, $order = 'asc') {
+	public function get_remoteRows($orderBy = null, $order = 'asc'): array {
         $orderBy = $orderBy ?? $this->get_ID();
 	    $ws = new Mbe_Shipping_Model_Ws();
         $addresses = $ws->getPickupAddressesData();
@@ -231,113 +231,113 @@ class Mbe_Shipping_Csv_Editor_Pickup_Addresses extends Mbe_Shipping_Csv_Editor {
 <!--                </tr>-->
                 <tr class="form-field">
                     <th scope="row">
-                        <label for="pickup_address_id_label"><?php _e( 'Pickup Address ID', 'mail-boxes-etc' ) ?></label>
+                        <label for="pickup_address_id_label"><?php esc_html_e( 'Pickup Address ID', 'mail-boxes-etc' ) ?></label>
                     </th>
                     <td>
                         <label id="pickup_address_id_label" style="width: 95%"><?php echo esc_attr( $item['pickup_address_id'] ) ?></label>
                         <input id="pickup_address_id" name="pickup_address_id" type="hidden"
-                               value="<?php echo esc_attr( $item['pickup_address_id'] ) ?>">
+                               value="<?php esc_attr_e( $item['pickup_address_id'] ) ?>">
                     </td>
                 </tr>
 			<?php } ?>
             <tr class="form-field">
                 <th scope="row">
-                    <label for="trade_name"><?php _e( 'Trade Name', 'mail-boxes-etc' ) ?></label>
+                    <label for="trade_name"><?php esc_html_e( 'Trade Name', 'mail-boxes-etc' ) ?></label>
                     <span style="color: #c03939">*</span>
                 </th>
                 <td>
                     <input id="trade_name" name="trade_name" type="text" style="width: 95%"
                            value="<?php echo esc_attr( $item['trade_name'] ) ?>"
-                           placeholder="<?php _e( 'Trade Name', 'mail-boxes-etc' ) ?>"
+                           placeholder="<?php esc_attr_e( 'Trade Name', 'mail-boxes-etc' ) ?>"
                            required>
                 </td>
             </tr>
 
             <tr class="form-field">
                 <th scope="row">
-                    <label for="address_1"><?php _e( 'Address', 'mail-boxes-etc' ) ?> 1</label>
+                    <label for="address_1"><?php esc_html_e( 'Address', 'mail-boxes-etc' ) ?> 1</label>
                     <span style="color: #c03939">*</span>
                 </th>
                 <td>
                     <input id="address_1" name="address_1" type="text" style="width: 95%"
                            value="<?php echo esc_attr( $item['address_1'] ) ?>"
-                           placeholder="<?php _e( 'Address', 'mail-boxes-etc' ) ?>"
+                           placeholder="<?php esc_attr_e( 'Address', 'mail-boxes-etc' ) ?>"
                            required>
                 </td>
             </tr>
 
             <tr class="form-field">
                 <th scope="row">
-                    <label for="address_2"><?php _e( 'Address', 'mail-boxes-etc' ) ?> 2</label>
+                    <label for="address_2"><?php esc_html_e( 'Address', 'mail-boxes-etc' ) ?> 2</label>
                 </th>
                 <td>
                     <input id="address_2" name="address_2" type="text" style="width: 95%"
                            value="<?php echo esc_attr( $item['address_2'] ) ?>"
-                           placeholder="<?php _e( 'Address', 'mail-boxes-etc' ) ?>"
+                           placeholder="<?php esc_attr_e( 'Address', 'mail-boxes-etc' ) ?>"
                            >
                 </td>
             </tr>
 
             <tr class="form-field">
                 <th scope="row">
-                    <label for="address_3"><?php _e( 'Address', 'mail-boxes-etc' ) ?> 3</label>
+                    <label for="address_3"><?php esc_html_e( 'Address', 'mail-boxes-etc' ) ?> 3</label>
                 </th>
                 <td>
                     <input id="address_3" name="address_3" type="text" style="width: 95%"
                            value="<?php echo esc_attr( $item['address_3'] ) ?>"
-                           placeholder="<?php _e( 'Address', 'mail-boxes-etc' ) ?>"
+                           placeholder="<?php esc_attr_e( 'Address', 'mail-boxes-etc' ) ?>"
                            >
                 </td>
             </tr>
 
             <tr class="form-field">
                 <th scope="row">
-                    <label for="zip_code"><?php _e( 'Postcode', 'mail-boxes-etc' ) ?></label>
+                    <label for="zip_code"><?php esc_html_e( 'Postcode', 'mail-boxes-etc' ) ?></label>
                     <span style="color: #c03939">*</span>
                 </th>
                 <td>
                     <input id="zip_code" name="zip_code" type="text" style="width: 95%"
                            value="<?php echo esc_attr( $item['zip_code'] ) ?>"
-                           placeholder="<?php _e( 'Postcode', 'mail-boxes-etc' ) ?>"
+                           placeholder="<?php esc_attr_e( 'Postcode', 'mail-boxes-etc' ) ?>"
                            required>
                 </td>
             </tr>
 
             <tr class="form-field">
                 <th scope="row">
-                    <label for="city"><?php _e( 'City', 'mail-boxes-etc' ) ?></label>
+                    <label for="city"><?php esc_html_e( 'City', 'mail-boxes-etc' ) ?></label>
                     <span style="color: #c03939">*</span>
                 </th>
                 <td>
                     <input id="city" name="city" type="text" style="width: 95%"
                            value="<?php echo esc_attr( $item['city'] ) ?>"
-                           placeholder="<?php _e( 'City', 'mail-boxes-etc' ) ?>"
+                           placeholder="<?php esc_attr_e( 'City', 'mail-boxes-etc' ) ?>"
                            required>
                 </td>
             </tr>
 
             <tr class="form-field">
                 <th scope="row">
-                    <label for="province"><?php _e( 'Province', 'mail-boxes-etc' ) ?></label>
+                    <label for="province"><?php esc_html_e( 'Province', 'mail-boxes-etc' ) ?></label>
                     <span style="color: #c03939">*</span>
                 </th>
                 <td>
                     <input id="province" name="province" type="text" style="width: 95%"
                            value="<?php echo esc_attr( $item['province'] ) ?>"
-                           placeholder="<?php _e( 'Province', 'mail-boxes-etc' ) ?>"
+                           placeholder="<?php esc_attr_e( 'Province', 'mail-boxes-etc' ) ?>"
                            required>
                 </td>
             </tr>
 
             <tr class="form-field">
                 <th scope="row">
-                    <label for="country"><?php _e( 'Country', 'mail-boxes-etc' ) ?></label>
+                    <label for="country"><?php esc_html_e( 'Country', 'mail-boxes-etc' ) ?></label>
                     <span style="color: #c03939">*</span>
                 </th>
                 <td>
                     <select id="country" name="country" style="width: 95%" required>
                         <?php foreach ( $countries->get_countries() as $code=>$label ) {
-                            echo '<option value="'.$code.'" '. (strtolower($item['country']) === strtolower($code)?'selected':'') .'>'.$label.'</option>';
+                            echo '<option value="'.esc_attr($code).'" '. (strtolower($item['country']) === strtolower($code)?'selected':'') .'>'.esc_html($label).'</option>';
                         } ?>
                     </select>
                 </td>
@@ -345,85 +345,85 @@ class Mbe_Shipping_Csv_Editor_Pickup_Addresses extends Mbe_Shipping_Csv_Editor {
 
             <tr class="form-field">
                 <th scope="row">
-                    <label for="reference"><?php _e( 'Reference', 'mail-boxes-etc' ) ?></label>
+                    <label for="reference"><?php esc_html_e( 'Reference', 'mail-boxes-etc' ) ?></label>
                     <span style="color: #c03939">*</span>
                 </th>
                 <td>
                     <input id="reference" name="reference" type="text" style="width: 95%"
                            value="<?php echo esc_attr( $item['reference'] ) ?>"
-                           placeholder="<?php _e( 'Reference', 'mail-boxes-etc' ) ?>"
+                           placeholder="<?php esc_attr_e( 'Reference', 'mail-boxes-etc' ) ?>"
                            required>
                 </td>
             </tr>
 
             <tr class="form-field">
                 <th scope="row">
-                    <label for="phone_1"><?php _e( 'Telephone', 'mail-boxes-etc' ) ?> 1</label>
+                    <label for="phone_1"><?php esc_html_e( 'Telephone', 'mail-boxes-etc' ) ?> 1</label>
                     <span style="color: #c03939">*</span>
                 </th>
                 <td>
                     <input id="phone_1" name="phone_1" type="tel" style="width: 95%"
                            pattern="^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$"
                            value="<?php echo esc_attr( $item['phone_1'] ) ?>"
-                           placeholder="<?php _e( 'Telephone', 'mail-boxes-etc' ) ?>"
+                           placeholder="<?php esc_attr_e( 'Telephone', 'mail-boxes-etc' ) ?>"
                            required>
                 </td>
             </tr>
 
             <tr class="form-field">
                 <th scope="row">
-                    <label for="phone_2"><?php _e( 'Telephone', 'mail-boxes-etc' ) ?> 2</label>
+                    <label for="phone_2"><?php esc_html_e( 'Telephone', 'mail-boxes-etc' ) ?> 2</label>
                 </th>
                 <td>
                     <input id="phone_2" name="phone_2" type="tel" style="width: 95%"
                            pattern="^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$"
                            value="<?php echo esc_attr( $item['phone_2'] ) ?>"
-                           placeholder="<?php _e( 'Telephone', 'mail-boxes-etc' ) ?>"
+                           placeholder="<?php esc_attr_e( 'Telephone', 'mail-boxes-etc' ) ?>"
                            >
                 </td>
             </tr>
 
             <tr class="form-field">
                 <th scope="row">
-                    <label for="email_1"><?php _e( 'Email', 'mail-boxes-etc' ) ?> 1</label>
+                    <label for="email_1"><?php esc_html_e( 'Email', 'mail-boxes-etc' ) ?> 1</label>
                     <span style="color: #c03939">*</span>
                 </th>
                 <td>
                     <input id="email_1" name="email_1" type="email" style="width: 95%"
                            value="<?php echo esc_attr( $item['email_1'] ) ?>"
-                           placeholder="<?php _e( 'email', 'mail-boxes-etc' ) ?>"
+                           placeholder="<?php esc_attr_e( 'email', 'mail-boxes-etc' ) ?>"
                            required>
                 </td>
             </tr>
 
             <tr class="form-field">
                 <th scope="row">
-                    <label for="email_2"><?php _e( 'Email', 'mail-boxes-etc' ) ?> 2</label>
+                    <label for="email_2"><?php esc_html_e( 'Email', 'mail-boxes-etc' ) ?> 2</label>
                 </th>
                 <td>
                     <input id="email_2" name="email_2" type="email" style="width: 95%"
                            value="<?php echo esc_attr( $item['email_2'] ) ?>"
-                           placeholder="<?php _e( 'Email', 'mail-boxes-etc' ) ?>"
+                           placeholder="<?php esc_attr_e( 'Email', 'mail-boxes-etc' ) ?>"
                            >
                 </td>
             </tr>
 
             <tr class="form-field">
                 <th scope="row">
-                    <label for="fax"><?php _e( 'Fax', 'mail-boxes-etc' ) ?></label>
+                    <label for="fax"><?php esc_html_e( 'Fax', 'mail-boxes-etc' ) ?></label>
                 </th>
                 <td>
                     <input id="fax" name="fax" type="tel" style="width: 95%"
                            pattern="^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$"
                            value="<?php echo esc_attr( $item['fax'] ) ?>"
-                           placeholder="<?php _e( 'Fax', 'mail-boxes-etc' ) ?>"
+                           placeholder="<?php esc_attr_e( 'Fax', 'mail-boxes-etc' ) ?>"
                            >
                 </td>
             </tr>
             <?php if( !($helper->getCountry() === "FR" || $helper->getCountry() === "DE") ) {?>
                 <tr class="form-field">
                     <th scope="row">
-                        <label for="res"><?php _e( 'RES', 'mail-boxes-etc' ) ?></label>
+                        <label for="res"><?php esc_html_e( 'RES', 'mail-boxes-etc' ) ?></label>
                     </th>
                     <td>
                         <input id="res" name="res" class="form-check-input" type="checkbox"
@@ -433,7 +433,7 @@ class Mbe_Shipping_Csv_Editor_Pickup_Addresses extends Mbe_Shipping_Csv_Editor {
 
                 <tr class="form-field">
                     <th scope="row">
-                        <label for="mmr"><?php _e( 'MMR', 'mail-boxes-etc' ) ?></label>
+                        <label for="mmr"><?php esc_html_e( 'MMR', 'mail-boxes-etc' ) ?></label>
                     </th>
                     <td>
                         <input id="mmr" name="mmr" class="form-check-input" type="checkbox"
@@ -443,7 +443,7 @@ class Mbe_Shipping_Csv_Editor_Pickup_Addresses extends Mbe_Shipping_Csv_Editor {
 
                 <tr class="form-field">
                     <th scope="row">
-                        <label for="ltz"><?php _e( 'LTZ', 'mail-boxes-etc' ) ?></label>
+                        <label for="ltz"><?php esc_html_e( 'LTZ', 'mail-boxes-etc' ) ?></label>
                     </th>
                     <td>
                         <input id="ltz" name="ltz" class="form-check-input" type="checkbox"
@@ -453,7 +453,7 @@ class Mbe_Shipping_Csv_Editor_Pickup_Addresses extends Mbe_Shipping_Csv_Editor {
             <?php } ?>
             <tr class="form-field">
                 <th scope="row">
-                    <label for="is_default"><?php _e( 'Default', 'mail-boxes-etc' ) ?></label>
+                    <label for="is_default"><?php esc_html_e( 'Default', 'mail-boxes-etc' ) ?></label>
                 </th>
                 <td>
                     <input id="is_default" name="is_default" class="form-check-input" type="checkbox"

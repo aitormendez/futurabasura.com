@@ -38,7 +38,7 @@ class Mbe_E_Link_Pickup_Batches_List_Table extends WP_List_Table
 
 		$this->screen->render_screen_reader_content( 'heading_list' );
 		?>
-		<table class="wp-list-table <?php echo implode( ' ', $this->get_table_classes() ); ?>">
+		<table class="wp-list-table <?php esc_attr_e(implode( ' ', $this->get_table_classes() )); ?>">
 			<?php $this->print_table_description(); ?>
 			<thead>
 			<tr>
@@ -49,7 +49,7 @@ class Mbe_E_Link_Pickup_Batches_List_Table extends WP_List_Table
 			<tbody id="the-list"
 				<?php
 				if ( $singular ) {
-					echo " data-wp-lists='list:$singular'";
+					esc_attr_e( " data-wp-lists='list:$singular'");
 				}
 				?>
 			>
@@ -159,6 +159,11 @@ class Mbe_E_Link_Pickup_Batches_List_Table extends WP_List_Table
 	            }
             }
 
+			// Add display to the safe display propetries. To be used when escaping actionbuttons
+            add_filter( 'safe_style_css', function( $styles ) {
+				$styles[] = 'display';
+				return $styles;
+			} );
 
 			echo '<style>
                     .actions.column-actions {
@@ -168,13 +173,37 @@ class Mbe_E_Link_Pickup_Batches_List_Table extends WP_List_Table
                   <tr style="background-color: #e2f3db">
 					<th style="text-transform: capitalize;" colspan="' . count($this->get_columns()) . '">
 					<div style="float: left; margin: 0px 15px 0px 5px;">'.
-			     (empty($item['pickup_batch_id'])?'<strong>' . __('Single order pickup', 'mail-boxes-etc') . '</strong>':'	<strong>' . __('batch id', 'mail-boxes-etc') . ': </strong>' . $item['pickup_batch_id']) .
+			     wp_kses_post(empty($item['pickup_batch_id'])?'<strong>' . __('Single order pickup', 'mail-boxes-etc') . '</strong>':'	<strong>' . __('batch id', 'mail-boxes-etc') . ': </strong>' . $item['pickup_batch_id']) .
 					'</div>
 					<div style="float: left; margin: 0px 15px 0px 5px;">
-						<strong>' . __('Status', 'mail-boxes-etc') . ': </strong>' . strtoupper($item['status']) . '
+						<strong>' . esc_html__('Status', 'mail-boxes-etc') . ': </strong>' . wp_kses_post(strtoupper($item['status'])) . '
 					</div>
 					<div style="float: right; margin: 0px 5px 0px 5px;text-align: right">
-						' . $actionButtons . '
+						' . wp_kses( $actionButtons, [
+                                'a'      => [ 'href'=>true, 'class'=> true, 'style' => true],
+                                'form'   => [ 'action' => true, 'method' => true, 'id'=>true, 'style' => true],
+                                'input'  => [ 'type' => true, 'name' => true, 'value' => true ],
+                                'button' => [ 'type' => true, 'style' => true, 'title' => true ],
+                                'svg'    => [
+                                    'style'       => true,
+                                    'fill'        => true,
+                                    'viewbox'     => true,
+                                    'role'        => true,
+                                    'aria-hidden' => true,
+                                    'focusable'   => true,
+                                    'height'      => true,
+                                    'width'       => true,
+                                    'xmlns'       => true,
+                                ],
+                                'path'   => [
+                                    'd'    => true,
+                                    'fill' => true,
+	                                'stroke'=> true,
+                                    'stroke-linecap'=> true,
+                                    'stroke-linejoin'=> true,
+                                    'stroke-width'=> true,
+                                 ],
+                            ] ) . '
 					</div>
 					</th>
 				  </tr>';
@@ -195,10 +224,10 @@ class Mbe_E_Link_Pickup_Batches_List_Table extends WP_List_Table
     {
 
         $actions = array(
-            'edit' => sprintf('<a href="' . get_home_url() . '/wp-admin/post.php?post=%s&action=edit">%s</a>', $item['ID'], __('Edit', 'mail-boxes-etc')),
+            'edit' => sprintf('<a href="' . get_home_url() . '/wp-admin/post.php?post=%s&action=edit">%s</a>', $item['orderid'], __('Edit', 'mail-boxes-etc')),
         );
         return sprintf('%s %s',
-            $item['ID'],
+            $item['orderid'],
             $this->row_actions($actions)
         );
 
@@ -206,7 +235,7 @@ class Mbe_E_Link_Pickup_Batches_List_Table extends WP_List_Table
 
     function column_post_author($item)
     {
-        $order = new WC_Order($item['ID']);
+        $order = wc_get_order($item['orderid']);
 
         if (version_compare(WC()->version, '3', '>=')) {
             $billingFirstName = $order->get_billing_first_name();
@@ -222,24 +251,28 @@ class Mbe_E_Link_Pickup_Batches_List_Table extends WP_List_Table
     function column_carrier($item)
     {
         //TODO: verify
-        $order = new WC_Order($item["ID"]);
+        $order = wc_get_order($item["orderid"]);
         $serviceName = $this->helper->getServiceName($order);
         return $serviceName;
-        //return sprintf('%s', get_post_meta($item['ID'], 'woocommerce_mbe_tracking_name', true));
     }
 
 
     function column_tracking($item)
     {
-        $trackings = $this->helper->getTrackings($item['ID']);
+        $trackings = $this->helper->getTrackings($item['orderid']);
         if (empty($trackings)) {
             return '';
         }
         else {
             $html = '';
-            $url = get_post_meta($item['ID'], 'woocommerce_mbe_tracking_url', true);
+	        if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+		        $order = wc_get_order($item['orderid']);
+		        $url = $order->get_meta('woocommerce_mbe_tracking_url');
+	        } else {
+		        $url = get_post_meta($item['orderid'], 'woocommerce_mbe_tracking_url', true);
+	        }
 
-            $trackingString = $this->helper->getTrackingsString($item['ID']);
+            $trackingString = $this->helper->getTrackingsString($item['orderid']);
             if (count($trackings) > 1) {
                 $html .= "<a target='_blank' href=" . $url . $trackingString . ">" . __('Track all', 'mail-boxes-etc') . "</a><br/>";
             }
@@ -258,19 +291,20 @@ class Mbe_E_Link_Pickup_Batches_List_Table extends WP_List_Table
 
     function column_post_date($item)
     {
-		$date = new DateTimeImmutable($item['post_date']);
+        $order = wc_get_order($item['orderid']);
+		$date = new DateTimeImmutable($order->get_date_created());
 	    return wp_date( get_option( 'date_format' ), $date->getTimestamp() );
     }
 
     function column_total($item)
     {
-        $order = new WC_Order($item['ID']);
+        $order = wc_get_order($item['orderid']);
         return $order->get_total() . ' &euro;';
     }
 
     function column_payment($item)
     {
-        $order = new WC_Order($item['ID']);
+        $order = wc_get_order($item['orderid']);
         if (version_compare(WC()->version, '3', '>=')) {
             $paymentMethodTitle = $order->get_payment_method_title();
         }
@@ -282,14 +316,14 @@ class Mbe_E_Link_Pickup_Batches_List_Table extends WP_List_Table
 
     function column_status($item)
     {
-        return $this->helper->isShippingOpen($item['ID']) ? __('Opened', 'mail-boxes-etc') : __('Closed', 'mail-boxes-etc');
+        return $this->helper->isShippingOpen($item['orderid']) ? __('Opened', 'mail-boxes-etc') : __('Closed', 'mail-boxes-etc');
     }
 
     function column_files($item)
     {
-        $files = $this->helper->getFileNames($item['ID']);
+        $files = $this->helper->getFileNames($item['orderid']);
 
-        $trackings = $this->helper->getTrackings($item['ID']);
+        $trackings = $this->helper->getTrackings($item['orderid']);
         if (empty($files)) {
             return '';
         }
@@ -312,7 +346,7 @@ class Mbe_E_Link_Pickup_Batches_List_Table extends WP_List_Table
     {
 //        return sprintf(
 //            '<input type="checkbox" name="id[]" value="%s" />',
-//            $item['ID']
+//            $item['orderid']
 //        );
 	    return '';
     }
@@ -322,7 +356,7 @@ class Mbe_E_Link_Pickup_Batches_List_Table extends WP_List_Table
         $returnButton = '<form action="' . esc_url( admin_url( 'admin-post.php' ) ) .'" method="post" id="mbe_create_return_shipment" style="display: inline-flex">
 								<input type="hidden" name="action" value="mbe_create_return_shipment"/>
 								<input type="hidden" name="nonce" value="'.wp_create_nonce('mbe_create_return_shipment') .'"/>
-								<input type="hidden" name="mbe_post_id" value="'. urlencode( $item['ID'] ).'"/>
+								<input type="hidden" name="mbe_post_id" value="'. urlencode( $item['orderid'] ).'"/>
 	                            <button type="submit" class="mbe_pickup_order_button" title="'.__('Create return shipment', 'mail-boxes-etc').'">
 									<svg style="transform:rotate(180deg); height: 16px;width: 16px; padding-top: 4px" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 4 16 14">
 									    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 7 3-3-3-3m0 12H5.5a4.5 4.5 0 1 1 0-9H14"/>
@@ -333,7 +367,7 @@ class Mbe_E_Link_Pickup_Batches_List_Table extends WP_List_Table
 		$detachButton = '<form action="' . esc_url( admin_url( 'admin-post.php' ) ) .'" method="post" id="mbe_detach_order_from_batch" style="display: inline-flex">
 								<input type="hidden" name="action" value="mbe_detach_order_from_batch"/>
 								<input type="hidden" name="nonce" value="'.wp_create_nonce('mbe_detach_order_from_batch') .'"/>
-								<input type="hidden" name="mbe_pickup_postid" value="'. urlencode( $item['ID'] ).'"/>
+								<input type="hidden" name="mbe_pickup_postid" value="'. urlencode( $item['orderid'] ).'"/>
 								<button type="submit" class="mbe_pickup_order_button" title="'.__('Detach from Pickup Batch', 'mail-boxes-etc').'">
 									<svg style="height: 16px;width: 16px; padding-top: 4px" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
 										<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m13 7-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
@@ -356,7 +390,7 @@ class Mbe_E_Link_Pickup_Batches_List_Table extends WP_List_Table
                     background-color:#e3e3e3;
                   }' .
 		       '</style>' .
-		       ($this->helper->hasTracking($item['ID'])?$returnButton:$detachButton) .
+		       ($this->helper->hasTracking($item['orderid'])?$returnButton:$detachButton) .
 		       '</div>';
 
 	}
@@ -437,7 +471,7 @@ class Mbe_E_Link_Pickup_Batches_List_Table extends WP_List_Table
         $paged = isset($_REQUEST['paged']) ? max(0, intval($_REQUEST['paged']) - 1) : 0;
         $paged = $paged * $per_page;
 
-	    $total_items = $wpdb->get_var("SELECT COUNT(DISTINCT(ID)) FROM $table_name");
+	    $total_items = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(DISTINCT(ID)) FROM %i", $table_name));  // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
 
 	    if (isset($_REQUEST["order_search"]) && $_REQUEST["order_search"] != "") {
             $search = esc_sql($_REQUEST["order_search"]);
@@ -445,10 +479,12 @@ class Mbe_E_Link_Pickup_Batches_List_Table extends WP_List_Table
             $query = $wpdb->prepare("SELECT pcd.*, pcd.ID FROM $table_name AS pcd
                                        GROUP BY pcd.ID
                                        ORDER BY id DESC LIMIT %d OFFSET %d", array($per_page, $paged));
-            $this->items = $wpdb->get_results($query, ARRAY_A);
+            $this->items = $wpdb->get_results($query, ARRAY_A);  // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
         }
         else {
 	        // {$order_filter}
+            
+	        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
             $this->items = $wpdb->get_results($wpdb->prepare("SELECT * FROM $table_name
                                                         ORDER by id desc
                                                         LIMIT %d OFFSET %d", array($per_page, $paged)), ARRAY_A);
@@ -460,4 +496,13 @@ class Mbe_E_Link_Pickup_Batches_List_Table extends WP_List_Table
             'total_pages' => ceil($total_items / $per_page) // calculate pages count
         ));
     }
+
+	function itemId($item) {
+		if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+			//return $item->get_id();
+			return $item['id'];
+		} else {
+			return $item['ID'];
+		}
+	}
 }

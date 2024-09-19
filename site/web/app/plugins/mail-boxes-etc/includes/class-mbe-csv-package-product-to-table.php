@@ -87,7 +87,7 @@ class Mbe_Shipping_CsvPackageProductToTable extends Mbe_Shipping_CsvFileToTable
 		$invalidPackages = array_intersect($multiplePackages, $customPackages);
 		if ($invalidPackages) {
 			throw new ValidationException(
-				__(__('Custom package used more than once:').json_encode($invalidPackages))
+				esc_html__(esc_html__('Custom package used more than once:').json_encode($invalidPackages))
 			);
 		}
 	}

@@ -83,7 +83,7 @@ class Mbe_Shipping_Csv_Editor_Package_Product extends Mbe_Shipping_Csv_Editor
 	    $idParam = !empty($id)?" AND id <> $id ":'';
         $flagParam = empty($custom)? " AND custom_package = 1 ":"";
 
-	    $wpdb->get_results("SELECT id FROM $this->tableName WHERE package_code = '$value' $flagParam $idParam");
+	    $wpdb->get_results("SELECT id FROM $this->tableName WHERE package_code = '$value' $flagParam $idParam");  // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.DirectDatabaseQuery.SchemaChange
         return $wpdb->num_rows>0;
     }
 
@@ -94,7 +94,7 @@ class Mbe_Shipping_Csv_Editor_Package_Product extends Mbe_Shipping_Csv_Editor
 			<?php if($item['id']!=0) { ?>
                 <tr class="form-field">
                     <th scope="row">
-                        <label for="package_id"><?php _e( 'ID', 'mail-boxes-etc' ) ?></label>
+                        <label for="package_id"><?php esc_html_e( 'ID', 'mail-boxes-etc' ) ?></label>
                     </th>
                     <td>
                         <label id="package_id" style="width: 95%"><?php echo esc_attr( $item['id'] ) ?></label>
@@ -103,29 +103,29 @@ class Mbe_Shipping_Csv_Editor_Package_Product extends Mbe_Shipping_Csv_Editor
 			<?php } ?>
 			<tr class="form-field">
 				<th scope="row">
-					<label for="product_sku"><?php _e( 'Product SKU', 'mail-boxes-etc' ) ?></label>
+					<label for="product_sku"><?php esc_html_e( 'Product SKU', 'mail-boxes-etc' ) ?></label>
 				</th>
 				<td>
 					<input id="product_sku" name="product_sku" type="text" style="width: 95%"
 					       value="<?php echo esc_attr( $item['product_sku'] ) ?>"
-					       size="50" class="code" placeholder="<?php _e( 'Product SKU', 'mail-boxes-etc' ) ?>"
+					       size="50" class="code" placeholder="<?php esc_attr_e( 'Product SKU', 'mail-boxes-etc' ) ?>"
 					       required>
 				</td>
 			</tr>
 			<tr class="form-field">
 				<th scope="row">
-					<label for="package_code"><?php _e( 'Package code', 'mail-boxes-etc' ) ?></label>
+					<label for="package_code"><?php esc_html_e( 'Package code', 'mail-boxes-etc' ) ?></label>
 				</th>
 				<td>
 					<input id="package_code" name="package_code" type="text" style="width: 95%"
 					       value="<?php echo esc_attr( $item['package_code'] ) ?>"
-					       size="50" class="code" placeholder="<?php _e( 'Package code', 'mail-boxes-etc' ) ?>"
+					       size="50" class="code" placeholder="<?php esc_attr_e( 'Package code', 'mail-boxes-etc' ) ?>"
 					       required>
 				</td>
 			</tr>
 			<tr class="form-field">
 				<th scope="row">
-					<label for="custom_package"><?php _e( 'Custom package', 'mail-boxes-etc' ) ?></label>
+					<label for="custom_package"><?php esc_html_e( 'Custom package', 'mail-boxes-etc' ) ?></label>
 				</th>
 				<td>
 					<input class="form-check-input" type="checkbox" name="custom_package" id="custom_package" value="1" <?php echo esc_attr( $item['custom_package']?'checked':'' ) ?>>
@@ -133,7 +133,7 @@ class Mbe_Shipping_Csv_Editor_Package_Product extends Mbe_Shipping_Csv_Editor
 			</tr>
 			<tr class="form-field">
 				<th scope="row">
-					<label for="single_parcel"><?php _e( 'Single parcel', 'mail-boxes-etc' ) ?></label>
+					<label for="single_parcel"><?php esc_html_e( 'Single parcel', 'mail-boxes-etc' ) ?></label>
 				</th>
 				<td>
 					<input class="form-check-input" type="checkbox" name="single_parcel" id="single_parcel" value="1" <?php echo esc_attr( $item['single_parcel']?'checked':'' ) ?>>

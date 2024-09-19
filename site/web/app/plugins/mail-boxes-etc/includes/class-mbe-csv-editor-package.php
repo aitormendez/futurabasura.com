@@ -71,7 +71,7 @@ class Mbe_Shipping_Csv_Editor_Package extends Mbe_Shipping_Csv_Editor
             <?php if($item['id']!=0) { ?>
 			<tr class="form-field">
 				<th scope="row">
-					<label for="package_id"><?php _e( 'ID', 'mail-boxes-etc' ) ?></label>
+					<label for="package_id"><?php esc_html_e( 'ID', 'mail-boxes-etc' ) ?></label>
 				</th>
 				<td>
 					<label id="package_id" style="width: 95%"><?php echo esc_attr( $item['id'] ) ?></label>
@@ -80,67 +80,67 @@ class Mbe_Shipping_Csv_Editor_Package extends Mbe_Shipping_Csv_Editor
 			<?php } ?>
 			<tr class="form-field">
 				<th scope="row">
-					<label for="package_label"><?php _e( 'Package label', 'mail-boxes-etc' ) ?></label>
+					<label for="package_label"><?php esc_html_e( 'Package label', 'mail-boxes-etc' ) ?></label>
 				</th>
 				<td>
 					<input id="package_label" name="package_label" type="text" style="width: 95%"
 					       value="<?php echo esc_attr( $item['package_label'] ) ?>"
-					       size="50" class="code" placeholder="<?php _e( 'Package label', 'mail-boxes-etc' ) ?>"
+					       size="50" class="code" placeholder="<?php esc_attr_e( 'Package label', 'mail-boxes-etc' ) ?>"
 					       required>
 				</td>
 			</tr>
 			<tr class="form-field">
 				<th scope="row">
-					<label for="package_code"><?php _e( 'Package code', 'mail-boxes-etc' ) ?></label>
+					<label for="package_code"><?php esc_html_e( 'Package code', 'mail-boxes-etc' ) ?></label>
 				</th>
 				<td>
 					<input id="package_code" name="package_code" type="text" style="width: 95%"
 					       value="<?php echo esc_attr( $item['package_code'] ) ?>"
-					       size="50" class="code" placeholder="<?php _e( 'Package code', 'mail-boxes-etc' ) ?>"
+					       size="50" class="code" placeholder="<?php esc_attr_e( 'Package code', 'mail-boxes-etc' ) ?>"
 					       required>
 				</td>
 			</tr>
             <tr class="form-field">
                 <th scope="row">
-                    <label for="length"><?php _e( 'Length', 'mail-boxes-etc' ) ?></label>
+                    <label for="length"><?php esc_html_e( 'Length', 'mail-boxes-etc' ) ?></label>
                 </th>
                 <td>
                     <input id="length" name="length" type="number" style="width: 95%"
                            value="<?php echo esc_attr( $item['length'] ) ?>"
-                           size="50" class="code" placeholder="<?php _e( 'Length', 'mail-boxes-etc'  ) ?>"
+                           size="50" class="code" placeholder="<?php esc_attr_e( 'Length', 'mail-boxes-etc'  ) ?>"
                            required>
                 </td>
             </tr>
 			<tr class="form-field">
 				<th scope="row">
-					<label for="width"><?php _e( 'Width') ?></label>
+					<label for="width"><?php esc_html_e( 'Width') ?></label>
 				</th>
 				<td>
 					<input id="width" name="width" type="number" style="width: 95%"
 					       value="<?php echo esc_attr( $item['width'] ) ?>"
-					       size="50" class="code" placeholder="<?php _e( 'Width' ) ?>"
+					       size="50" class="code" placeholder="<?php esc_attr_e( 'Width' ) ?>"
 					       required>
 				</td>
 			</tr>
 			<tr class="form-field">
 				<th scope="row">
-					<label for="height"><?php _e( 'Height') ?></label>
+					<label for="height"><?php esc_html_e( 'Height') ?></label>
 				</th>
 				<td>
 					<input id="height" name="height" type="number" style="height: 95%"
 					       value="<?php echo esc_attr( $item['height'] ) ?>"
-					       size="50" class="code" placeholder="<?php _e( 'Height' ) ?>"
+					       size="50" class="code" placeholder="<?php esc_attr_e( 'Height' ) ?>"
 					       required>
 				</td>
 			</tr>
 			<tr class="form-field">
 				<th scope="row">
-					<label for="max_weight"><?php echo __( 'Maximum Package Weight', 'mail-boxes-etc' ) .' (' . esc_html( get_option( 'woocommerce_weight_unit' ) ) . ')' ?></label>
+					<label for="max_weight"><?php echo esc_html__( 'Maximum Package Weight', 'mail-boxes-etc' ) .' (' . esc_html( get_option( 'woocommerce_weight_unit' ) ) . ')' ?></label>
 				</th>
 				<td>
 					<input id="max_weight" name="max_weight" type="number" style="height: 95%"
 					       value="<?php echo esc_attr( $item['max_weight'] ) ?>"
-					       size="50" class="code" placeholder="<?php _e( 'Maximum Package Weight', 'mail-boxes-etc' ) ?>"
+					       size="50" class="code" placeholder="<?php esc_attr_e( 'Maximum Package Weight', 'mail-boxes-etc' ) ?>"
 					       required>
 				</td>
 			</tr>

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - MC4WP: Mailchimp for WordPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2024-04-22 15:00:53+0000\n"
+"PO-Revision-Date: 2024-09-11 17:39:21+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,19 +11,23 @@ msgstr ""
 "Language: es\n"
 "Project-Id-Version: Plugins - MC4WP: Mailchimp for WordPress - Stable (latest release)\n"
 
-#: includes/forms/views/tabs/form-settings.php:57
+#: integrations/woocommerce/admin-after.php:48
+msgid "Select the location where you would like to show the sign-up checkbox. Note that only works if not using WooCommerce Checkout Block."
+msgstr "Selecciona el lugar donde quieres mostrar la casilla de verificación de registro. Ten en cuenta que sólo funciona si no utilizas el bloque de pago de WooCommerce."
+
+#: includes/forms/views/tabs/form-settings.php:59
 msgid "We strongly suggest keeping double opt-in enabled. Disabling double opt-in may affect your GDPR compliance."
 msgstr "Sugerimos encarecidamente mantener la doble opción activada. Desactivar la doble opción puede afectar a tu cumplimiento del RGPD."
 
-#: includes/forms/class-form-amp.php:33
+#: includes/forms/class-form-amp.php:35
 msgid "Submitting..."
 msgstr "Enviando..."
 
-#: includes/forms/class-form-manager.php:144
+#: includes/forms/class-form-manager.php:151
 msgid "Resource does not exist."
 msgstr "No existe el recurso."
 
-#: includes/forms/class-admin.php:161 includes/forms/class-admin.php:288
+#: includes/forms/class-admin.php:166 includes/forms/class-admin.php:296
 msgid "Form saved."
 msgstr "Formulario guardado."
 
@@ -39,7 +43,7 @@ msgstr "Checkout for WooCommerce: Después de la información de la cuenta"
 msgid "Checkout for WooCommerce: Before complete order button"
 msgstr "Checkout for WooCommerce: Antes del botón de completar pedido"
 
-#: includes/views/parts/admin-sidebar.php:34
+#: includes/views/parts/admin-sidebar.php:36
 msgid "Privacy-friendly analytics plugin that does not use any external services."
 msgstr "Plugin de análisis de privacidad que no utiliza ningún servicio externo."
 
@@ -56,39 +60,39 @@ msgstr "Cargando... Por favor, espera."
 msgid "MC4WP: Mailchimp for WordPress"
 msgstr "MC4WP: Mailchimp for WordPress"
 
-#: includes/admin/class-admin.php:290
+#: includes/admin/class-admin.php:299
 msgid "This is a premium feature. Please upgrade to Mailchimp for WordPress Premium to be able to use it."
 msgstr "Esta es una característica premium. Por favor, actualiza a Mailchimp for WordPress Premium para poder usarla."
 
-#: includes/admin/class-admin.php:289
+#: includes/admin/class-admin.php:298
 msgid "The given value does not look like a valid Mailchimp API key."
 msgstr "El valor dado no parece ser una clave API válida de Mailchimp."
 
-#: includes/forms/views/tabs/form-settings.php:106
+#: includes/forms/views/tabs/form-settings.php:108
 msgid "Separate multiple values with a comma."
 msgstr "Separa valores múltiples con comas."
 
-#: includes/forms/views/tabs/form-settings.php:105
+#: includes/forms/views/tabs/form-settings.php:107
 msgid "The listed tags will be applied to all subscribers added or updated by this form."
 msgstr "Las etiquetas listadas se aplicarán a todos los suscriptores añadidos o actualizados desde este formulario."
 
-#: includes/forms/views/tabs/form-settings.php:103
+#: includes/forms/views/tabs/form-settings.php:105
 msgid "Example: My tag, another tag"
 msgstr "Ejemplo: Mi etiqueta, otra etiqueta"
 
-#: includes/forms/views/tabs/form-settings.php:101
+#: includes/forms/views/tabs/form-settings.php:103
 msgid "Subscriber tags"
 msgstr "Etiquetas del suscriptor"
 
-#: includes/integrations/views/integrations.php:40
+#: includes/integrations/views/integrations.php:34
 msgid "Not installed"
 msgstr "No instalado"
 
-#: includes/integrations/views/integrations.php:38
+#: includes/integrations/views/integrations.php:32
 msgid "Inactive"
 msgstr "Inactivo"
 
-#: includes/integrations/views/integrations.php:36
+#: includes/integrations/views/integrations.php:30
 msgid "Active"
 msgstr "Activo"
 
@@ -100,30 +104,30 @@ msgstr "Después de las notas del pedido"
 msgid "You defined your Mailchimp API key using the <code>MC4WP_API_KEY</code> constant."
 msgstr "Tu clave API de MailChimp definida usando la constante <code>MC4WP_API_KEY</code>."
 
-#: includes/forms/class-admin.php:73
+#: includes/forms/class-admin.php:76
 msgid "Link to your terms & conditions page"
 msgstr "Enlace a tu página de términos y condiciones"
 
-#: includes/forms/class-admin.php:72
+#: includes/forms/class-admin.php:75
 msgid "Agree to terms"
 msgstr "Aceptación de los términos"
 
-#: includes/forms/class-admin.php:71
+#: includes/forms/class-admin.php:74
 msgid "I have read and agree to the terms & conditions"
 msgstr "He leído y acepto los términos y condiciones"
 
-#: includes/integrations/views/integration-settings.php:100
-#: includes/integrations/views/integration-settings.php:185
-#: integrations/gravity-forms/class-gravity-forms.php:131
+#: includes/integrations/views/integration-settings.php:96
+#: includes/integrations/views/integration-settings.php:183
+#: integrations/gravity-forms/class-gravity-forms.php:134
 msgid "<strong>Warning: </strong> enabling this may affect your <a href=\"%s\">GDPR compliance</a>."
 msgstr "<strong>Advertencia: </strong> activar esto tal vez afecte tu <a href=\"%s\">cumplimiento de la GDPR</a>."
 
-#: includes/integrations/views/integration-settings.php:95
+#: includes/integrations/views/integration-settings.php:91
 msgid "Select \"yes\" if you want to subscribe people without asking them explicitly."
 msgstr "Selecciona \"sí\" en caso de que quieras suscribir gente sin preguntarles explícitamente."
 
-#: includes/integrations/views/integration-settings.php:91
-#: includes/integrations/views/integration-settings.php:178
+#: includes/integrations/views/integration-settings.php:87
+#: includes/integrations/views/integration-settings.php:176
 msgid "(recommended)"
 msgstr "(recomendado)"
 
@@ -135,27 +139,23 @@ msgstr "El formulario puede que se muestre ligeramente diferente de este al most
 msgid "Form code"
 msgstr "Código del formulario"
 
-#: includes/admin/class-ads.php:37 includes/admin/class-ads.php:38
+#: includes/admin/class-ads.php:38 includes/admin/class-ads.php:39
 msgid "Add-ons"
 msgstr "Extensiones"
 
-#: includes/forms/views/tabs/form-settings.php:154
+#: includes/forms/views/tabs/form-settings.php:156
 msgid "Your \"subscribed\" message will not show when redirecting to another page, so make sure to let your visitors know they were successfully subscribed."
 msgstr "El mensaje de \"te has suscrito\" no se mostrará al redirigir a otra página, así que asegúrate de que haces saber a tus visitantes que se han suscrito con éxito."
 
-#: includes/views/parts/admin-sidebar.php:46
-msgid "Super flexible forms using native HTML. Just like Mailchimp for WordPress forms but for other purposes, like a contact form."
-msgstr "Formularios superflexibles que usan HTML nativo. Igual que los formularios de MailChimp for WordPress, pero para otros propósitos, como un formulario de contacto."
-
-#: includes/views/parts/admin-sidebar.php:40
+#: includes/views/parts/admin-sidebar.php:42
 msgid "Pop-ups or boxes that slide-in with a newsletter sign-up form. A sure-fire way to grow your email lists."
 msgstr "Ventajas emergentes o cajas que se deslizan con un formulario de registro en boletines. Un modo a prueba de fuego de hacer crecer tus listas de correo."
 
-#: includes/views/parts/admin-sidebar.php:28
+#: includes/views/parts/admin-sidebar.php:30
 msgid "Other plugins by ibericode"
 msgstr "Otros plugins de ibericode"
 
-#: integrations/gravity-forms/class-gravity-forms.php:96
+#: integrations/gravity-forms/class-gravity-forms.php:99
 msgid "Select a Mailchimp list"
 msgstr "Elige una lista de MailChimp"
 
@@ -164,32 +164,32 @@ msgstr "Elige una lista de MailChimp"
 msgid "To integrate with Gravity Forms, add the \"Mailchimp for WordPress\" field to <a href=\"%s\">one of your Gravity Forms forms</a>."
 msgstr "Para integrarlo con Gravity Forms, añade el campo \"MailChimp para WordPress\" a <a href=\"%s\">uno de los formulario de Gravity Forms</a>."
 
-#: includes/forms/class-form-element.php:82
+#: includes/forms/class-form-element.php:84
 msgid "Leave this field empty if you're human:"
 msgstr "Deja vacío este campo si eres humano:"
 
-#: integrations/wpforms/class-field.php:174
+#: integrations/wpforms/class-field.php:178
 msgid "Showing the first 20 choices.<br> All %d choices will be displayed when viewing the form."
 msgstr "Mostrando las primeras 20 opciones.<br> Las %d opciones se mostrarán al ver el formulario."
 
-#: integrations/wpforms/class-field.php:158
+#: integrations/wpforms/class-field.php:162
 msgid "(empty)"
 msgstr "(vacío)"
 
-#: integrations/wpforms/class-field.php:115
+#: integrations/wpforms/class-field.php:118
 msgid "Sign-up checkbox"
 msgstr "Casilla de registro"
 
-#: integrations/wpforms/class-field.php:104
+#: integrations/wpforms/class-field.php:107
 msgid "Set your sign-up label text and whether it should be pre-checked."
 msgstr "Configura el texto de tu etiqueta de registro y si debe estar marcada por defecto."
 
-#: integrations/gravity-forms/class-gravity-forms.php:93
-#: integrations/wpforms/class-field.php:79
+#: integrations/gravity-forms/class-gravity-forms.php:96
+#: integrations/wpforms/class-field.php:81
 msgid "Mailchimp list"
 msgstr "Lista de MailChimp"
 
-#: integrations/wpforms/class-field.php:73
+#: integrations/wpforms/class-field.php:75
 msgid "Select the Mailchimp list to subscribe to."
 msgstr "Elige la lista de MailChimp a la que se suscribirán."
 
@@ -201,15 +201,15 @@ msgstr "¿Quieres suscribirte a nuestro boletín?"
 msgid "Use this integration by adding the \"Mailchimp\" field to <a href=\"%s\">your WPForms forms</a>."
 msgstr "Utiliza esta integración añadiendo el campo \"MailChimp\" a <a href=\"%s\">tus formularios de WPForms</a>."
 
-#: includes/admin/class-admin.php:409
+#: includes/admin/class-admin.php:421
 msgid "Looks like your server is blocked by Mailchimp's firewall. Please contact Mailchimp support and include the following reference number: %s"
 msgstr "Parece que tu servidor está bloqueado por el cortafuegos de MailChimp. Por favor, contacta con el soporte de MailChimp e incluye el siguiente número de referencia: %s"
 
-#: includes/admin/class-admin.php:294
+#: includes/admin/class-admin.php:303
 msgid "Failed to renew your lists. An error occured."
 msgstr "Fallo al renovar tus listas. Ocurrió un error."
 
-#: integrations/ninja-forms/class-field.php:35
+#: integrations/ninja-forms/class-field.php:38
 msgid "Mailchimp opt-in"
 msgstr "Suscripción de MailChimp"
 
@@ -217,105 +217,105 @@ msgstr "Suscripción de MailChimp"
 msgid "To integrate with Ninja Forms, add the \"Mailchimp\" action to <a href=\"%s\">one of your Ninja Forms forms</a>."
 msgstr "Para integrar con Ninja Forms añade la acción \"MailChimp\" a <a href=\"%s\">uno de tus formularios de Ninja Forms</a>."
 
-#: includes/integrations/views/integrations.php:126
+#: includes/integrations/views/integrations.php:111
 msgid "Greyed out integrations will become available after installing & activating the corresponding plugin."
 msgstr "Las integraciones difuminadas estarán disponibles después de instalar y activar el plugin correspondiente."
 
-#: includes/views/other-settings.php:52
+#: includes/views/other-settings.php:54
 msgid "Determines what events should be written to <a href=\"%s\">the debug log</a> (see below)."
 msgstr "Determina que eventos deben ser escritos en <a href=\"%s\">el registro de depuración</a> (ver debajo)."
 
-#: includes/views/other-settings.php:49
+#: includes/views/other-settings.php:51
 msgid "Everything"
 msgstr "Todo"
 
-#: includes/views/other-settings.php:48
+#: includes/views/other-settings.php:50
 msgid "Errors & warnings only"
 msgstr "Sólo errores y advertencias"
 
-#: includes/views/other-settings.php:45
+#: includes/views/other-settings.php:47
 msgid "Logging"
 msgstr "Entrando"
 
-#: includes/views/other-settings.php:42
+#: includes/views/other-settings.php:44
 msgid "Miscellaneous settings"
 msgstr "Otros ajustes"
 
-#: includes/forms/class-admin.php:109
+#: includes/forms/class-admin.php:112
 msgid "Value"
 msgstr "Valor"
 
-#: includes/forms/class-admin.php:83
+#: includes/forms/class-admin.php:86
 msgid "Field type"
 msgstr "Tipo de campo"
 
-#: includes/forms/views/tabs/form-settings.php:54
+#: includes/forms/views/tabs/form-settings.php:56
 msgid "Are you sure you want to disable double opt-in?"
 msgstr "¿Estas seguro que quieres desactivar el doble opt-in?"
 
-#: includes/admin/class-review-notice.php:72
+#: includes/admin/class-review-notice.php:75
 msgid "Dismiss this notice."
 msgstr "No mostrar más este aviso."
 
-#: includes/admin/class-review-notice.php:70
+#: includes/admin/class-review-notice.php:73
 msgid "If you do, please <a href=\"%s\">leave us a 5★ rating on WordPress.org</a>. It would be of great help to us."
 msgstr "Si quieres puedes <a href=\"%s\">darnos una puntuación de 5★ en WordPress.org</a>. Será de gran ayuda para nosotros."
 
-#: includes/admin/class-review-notice.php:69
+#: includes/admin/class-review-notice.php:72
 msgid "You've been using Mailchimp for WordPress for some time now; we hope you love it!"
 msgstr "Has estado usando Mailchimp para WordPress durante bastante tiempo. ¡Esperamos que te encante!"
 
-#: includes/admin/class-ads.php:148
+#: includes/admin/class-ads.php:154
 msgid "<a href=\"%1$s\">Upgrade to Mailchimp for WordPress Premium</a> or <a href=\"%2$s\">read more about Mailchimp's E-Commerce features</a>."
 msgstr "<a href=\"%1$s\">Actualiza a MailChimp para WordPress Premium</a> o <a href=\"%2$s\">lee más sobre las características de MailChimp para e-Commerce</a>."
 
-#: includes/admin/class-ads.php:145
+#: includes/admin/class-ads.php:151
 msgid "Do you want to track all WooCommerce orders in Mailchimp so you can send emails based on the purchase activity of your subscribers?"
 msgstr "¿Quieres hacer un seguimiento de todos los pedidos de WooCommerce en MailChimp, para que puedas enviar emails basados en la actividad de compra de tus suscriptores?"
 
-#: includes/admin/class-admin.php:293
+#: includes/admin/class-admin.php:302
 msgid "Done! Mailchimp lists renewed."
 msgstr "¡Listo! La lista de MailChimp ha sido actualizada."
 
-#: includes/admin/class-admin.php:292
+#: includes/admin/class-admin.php:301
 msgid "Fetching Mailchimp lists"
 msgstr "Obteniendo las listas de MailChimp"
 
-#: includes/admin/class-admin.php:417
+#: includes/admin/class-admin.php:429
 msgid "Mailchimp returned the following error:"
 msgstr "MailChimp devolvió el siguiente error:"
 
-#: includes/admin/class-admin.php:412
+#: includes/admin/class-admin.php:424
 msgid "Here's some info on solving common connectivity issues."
 msgstr "Aquí tienes algo de información sobre cómo resolver problemas de conectividad."
 
-#: includes/admin/class-admin.php:406
+#: includes/admin/class-admin.php:418
 msgid "Error connecting to Mailchimp:"
 msgstr "Error al conectar con MailChimp:"
 
-#: integrations/ninja-forms-2/class-ninja-forms.php:75
-#: integrations/ninja-forms/class-field.php:79
+#: integrations/ninja-forms-2/class-ninja-forms.php:76
+#: integrations/ninja-forms/class-field.php:84
 msgid "Checked"
 msgstr "Marcado"
 
-#: integrations/ninja-forms-2/class-ninja-forms.php:71
-#: integrations/ninja-forms/class-field.php:81
+#: integrations/ninja-forms-2/class-ninja-forms.php:72
+#: integrations/ninja-forms/class-field.php:86
 msgid "Unchecked"
 msgstr "Sin marcar"
 
-#: integrations/ninja-forms-2/class-ninja-forms.php:54
+#: integrations/ninja-forms-2/class-ninja-forms.php:55
 msgid "Right of Element"
 msgstr "A la derecha del elemento"
 
-#: integrations/ninja-forms-2/class-ninja-forms.php:50
+#: integrations/ninja-forms-2/class-ninja-forms.php:51
 msgid "Below Element"
 msgstr "Debajo del elemento"
 
-#: integrations/ninja-forms-2/class-ninja-forms.php:46
+#: integrations/ninja-forms-2/class-ninja-forms.php:47
 msgid "Above Element"
 msgstr "Encima del elemento"
 
-#: integrations/ninja-forms-2/class-ninja-forms.php:42
+#: integrations/ninja-forms-2/class-ninja-forms.php:43
 msgid "Left of Element"
 msgstr "A la izquierda del elemento"
 
@@ -323,59 +323,59 @@ msgstr "A la izquierda del elemento"
 msgid "To integrate with Ninja Forms, add the \"Mailchimp\" field to your Ninja Forms forms."
 msgstr "Para integrarlo con Ninja Forms añade el campo \"MailChimp\" a tus formularios de Ninja Forms."
 
-#: includes/forms/views/tabs/form-messages.php:82
+#: includes/forms/views/tabs/form-messages.php:84
 msgid "The text that shows when an existing subscriber is updated."
 msgstr "El texto que se muestra cuando se actualiza un suscriptor existente."
 
-#: includes/forms/views/tabs/form-messages.php:79
+#: includes/forms/views/tabs/form-messages.php:81
 msgid "Updated"
 msgstr "Actualizado"
 
-#: includes/class-dynamic-content-tags.php:27
+#: includes/class-dynamic-content-tags.php:28
 msgid "Data from a cookie."
 msgstr "Datos de una cookie."
 
-#: includes/forms/class-admin.php:94
+#: includes/forms/class-admin.php:97
 msgid "List fields"
 msgstr "Lista de campos"
 
-#: includes/forms/class-admin.php:90
+#: includes/forms/class-admin.php:93
 msgid "Interest categories"
 msgstr "Categorías de intereses"
 
-#: includes/forms/class-admin.php:87
+#: includes/forms/class-admin.php:90
 msgid "Form fields"
 msgstr "Campos del formulario"
 
-#: includes/forms/class-admin.php:78
+#: includes/forms/class-admin.php:81
 msgid "Choose a field to add to the form"
 msgstr "Elige un campo para añadirlo al fomulario"
 
-#: config/default-form-messages.php:9
+#: config/default-form-messages.php:10
 msgid "Thank you, your records have been updated!"
 msgstr "¡Gracias, tus registros se han actualizado!"
 
-#: includes/views/other-settings.php:77
+#: includes/views/other-settings.php:79
 msgid "Please ensure %1$s has the proper <a href=\"%2$s\">file permissions</a>."
 msgstr "Por favor, asegúrate de que %1$s tiene los <a href=\"%2$s\">permisos de archivo</a> adecuados."
 
-#: includes/views/other-settings.php:76
+#: includes/views/other-settings.php:78
 msgid "Log file is not writable."
 msgstr "No se puede escribir en el archivo de registro."
 
-#: includes/forms/class-admin.php:102
+#: includes/forms/class-admin.php:105
 msgid "Remove"
 msgstr "Quitar"
 
-#: includes/forms/class-admin.php:101
+#: includes/forms/class-admin.php:104
 msgid "Preselect"
 msgstr "Preselección"
 
-#: includes/forms/class-admin.php:98
+#: includes/forms/class-admin.php:101
 msgid "Optional"
 msgstr "Opcional"
 
-#: includes/admin/class-admin.php:486
+#: includes/admin/class-admin.php:502
 msgid "To get started with Mailchimp for WordPress, please <a href=\"%s\">enter your Mailchimp API key on the settings page of the plugin</a>."
 msgstr "Para empezar con MailChimp para WordPress, por favor, <a href=\"%s\">introduce tu clave API de MailChimp en la página de ajustes del plugin</a>."
 
@@ -395,63 +395,63 @@ msgstr "Detalles posteriores del cliente"
 msgid "After shipping details"
 msgstr "Detalles de después del envío"
 
-#: includes/class-dynamic-content-tags.php:74
+#: includes/class-dynamic-content-tags.php:75
 msgid "Property of the current page or post."
 msgstr "Propiedad de la página o entrada actual."
 
-#: includes/forms/views/tabs/form-messages.php:68
+#: includes/forms/views/tabs/form-messages.php:70
 msgid "When offering a list choice, this is the text that shows when no lists were selected."
 msgstr "Cuando ofreces elegir una lista este es el texto que se muestra cuando no se selecciona ninguna lista."
 
-#: includes/forms/views/tabs/form-messages.php:65
+#: includes/forms/views/tabs/form-messages.php:67
 msgid "No list selected"
 msgstr "Ninguna lista seleccionada"
 
-#: includes/forms/class-admin.php:466
+#: includes/forms/class-admin.php:482
 msgid "Select the form to show"
 msgstr "Elige el formulario a mostrar"
 
-#: includes/views/other-settings.php:116
+#: includes/views/other-settings.php:118
 msgid "Right now, the plugin is configured to only log errors and warnings."
 msgstr "Ahora mismo el plugin está configurado para guardar registro solo de errores y avisos."
 
-#: includes/forms/class-admin.php:110
+#: includes/forms/class-admin.php:113
 msgid "Text to prefill this field with."
 msgstr "Texto de relleno previo de este campo."
 
-#: includes/forms/class-admin.php:100
+#: includes/forms/class-admin.php:103
 msgid "Text to show when field has no value."
 msgstr "Texto que se muestra cuando un campo no tiene ningún valor."
 
-#: includes/views/other-settings.php:108
+#: includes/views/other-settings.php:110
 msgid "Empty Log"
 msgstr "Registro Vacío"
 
-#: includes/views/other-settings.php:98
+#: includes/views/other-settings.php:100
 msgid "Nothing here. Which means there are no errors!"
 msgstr "No hay nada aquí. ¡Lo que significa que no hay errores!"
 
-#: includes/views/other-settings.php:71
+#: includes/views/other-settings.php:73
 msgid "Filter.."
 msgstr "Filtro.."
 
-#: includes/views/other-settings.php:71
+#: includes/views/other-settings.php:73
 msgid "Debug Log"
 msgstr "Log de depuración"
 
-#: includes/forms/class-admin.php:88
+#: includes/forms/class-admin.php:91
 msgid "This field is marked as required in Mailchimp."
 msgstr "Este campo está marcado como obligatorio en MailChimp."
 
-#: includes/admin/class-admin.php:456
+#: includes/admin/class-admin.php:471
 msgid "Log successfully emptied."
 msgstr "Registro vaciado con éxito."
 
-#: includes/admin/class-admin.php:328
+#: includes/admin/class-admin.php:338
 msgid "Other"
 msgstr "Otro"
 
-#: includes/admin/class-admin.php:327 includes/views/other-settings.php:14
+#: includes/admin/class-admin.php:337 includes/views/other-settings.php:14
 #: includes/views/other-settings.php:24
 msgid "Other Settings"
 msgstr "Otras Configuraciones"
@@ -460,139 +460,139 @@ msgstr "Otras Configuraciones"
 msgid "Subscribe to our newsletter."
 msgstr "Suscríbete a nuestra lista de correo."
 
-#: includes/views/parts/admin-sidebar.php:18
+#: includes/views/parts/admin-sidebar.php:19
 msgid "Found a bug? Please <a href=\"%s\">open an issue on GitHub</a>."
 msgstr "¿Has encontrado un fallo? Por favor, <a href=\"%s\">abre un aviso en GitHub</a>."
 
-#: includes/admin/class-ads.php:107
+#: includes/admin/class-ads.php:111
 msgid "Are you enjoying this plugin? The Premium add-on unlocks several powerful features. <a href=\"%s\">Find out about all benefits now</a>."
 msgstr "¿Estás disfrutando este plugin? La extensión Premium desbloquea varias potentes características. <a href=\"%s\">Descubre ahora todos sus beneficios</a>."
 
-#: includes/admin/class-ads.php:102
+#: includes/admin/class-ads.php:106
 msgid "Do you want to create more than one form? Our Premium add-on does just that! <a href=\"%s\">Have a look at all Premium benefits</a>."
 msgstr "¿Quieres crear más de un formulario? ¡Nuestra extensión Premium hace justo eso! <a href=\"%s\">Echa un vistazo a las ventajas de ser Premium</a>."
 
-#: includes/admin/class-ads.php:97
+#: includes/admin/class-ads.php:101
 msgid "Do you want translated forms for all of your languages? <a href=\"%s\">Try Mailchimp for WordPress Premium</a>, which does just that plus more."
 msgstr "¿Quieres los formularios traducidos en todos tus idiomas? <a href=\"%s\">Prueba MailChimp para WordPress Premium</a> que hace eso y mucho más."
 
-#: includes/admin/class-ads.php:85
+#: includes/admin/class-ads.php:89
 msgid "Upgrade to Premium"
 msgstr "Actualizar a premium"
 
-#: includes/admin/class-ads.php:71
+#: includes/admin/class-ads.php:74
 msgid "Increased conversions? <a href=\"%s\">Mailchimp for WordPress Premium</a> submits forms without reloading the entire page, resulting in a much better experience for your visitors."
 msgstr "¿Quieres mejorar las conversiones? <a href=\"%s\">MailChimp para WordPress Premium</a> envía formularios sin recargar toda la página, lo que supone una mucho mejor experiencia para tus visitantes."
 
-#: includes/admin/class-ads.php:69
+#: includes/admin/class-ads.php:72
 msgid "Be notified whenever someone subscribes? <a href=\"%s\">Mailchimp for WordPress Premium</a> allows you to set up email notifications for your forms."
 msgstr "¿Quieres recibir avisos cuando alguien se suscriba? <a href=\"%s\">MailChimp para WordPress Premium</a> te permite configurar avisos por correo electrónico de tus formularios."
 
-#: includes/admin/class-ads.php:54
+#: includes/admin/class-ads.php:56
 msgid "Want to customize the style of your form? <a href=\"%s\">Try our Styles Builder</a> & edit the look of your forms with just a few clicks."
 msgstr "¿Quieres personalizar el estilo de tu formulario? <a href=\"%s\">Prueba nuestro constructor de estilos</a> y modifica el aspecto de tus formularios en unos pocos clics."
 
-#: includes/views/parts/admin-sidebar.php:17
+#: includes/views/parts/admin-sidebar.php:18
 msgid "If your answer can not be found in the resources listed above, please use the <a href=\"%s\">support forums on WordPress.org</a>."
 msgstr "Si tu respuesta no está en los recursos anteriores, por favor, usa los <a href=\"%s\">foros de soporte de WordPress.org</a>."
 
-#: includes/views/parts/admin-sidebar.php:15
+#: includes/views/parts/admin-sidebar.php:16
 msgid "Frequently Asked Questions"
 msgstr "Preguntas Frecuentes"
 
-#: includes/views/parts/admin-sidebar.php:14
+#: includes/views/parts/admin-sidebar.php:15
 msgid "Knowledge Base"
 msgstr "Base de conocimiento"
 
-#: includes/views/parts/admin-sidebar.php:12
+#: includes/views/parts/admin-sidebar.php:13
 msgid "We have some resources available to help you in the right direction."
 msgstr "Tenemos disponibles algunos recursos que te ayudarán en la dirección correcta."
 
-#: includes/integrations/views/integrations.php:116
+#: includes/integrations/views/integrations.php:104
 msgid "Click on the name of an integration to edit all settings specific to that integration."
 msgstr "Haz clic en el nombre de una integración para modificar todos los ajustes específicos de esa integración."
 
-#: includes/integrations/views/integrations.php:115
+#: includes/integrations/views/integrations.php:103
 msgid "The table below shows all available integrations."
 msgstr "La siguiente tabla muestra todas las integraciones disponibles."
 
-#: includes/forms/class-admin.php:124 includes/forms/views/edit-form.php:26
+#: includes/forms/class-admin.php:128 includes/forms/views/edit-form.php:26
 msgid "Form"
 msgstr "Formulario"
 
-#: includes/forms/class-admin.php:111
+#: includes/forms/class-admin.php:114
 msgid "ZIP"
 msgstr "Código Postal"
 
-#: includes/forms/class-admin.php:105
+#: includes/forms/class-admin.php:108
 msgid "State"
 msgstr "Estado/Provincia"
 
-#: includes/forms/class-admin.php:104
+#: includes/forms/class-admin.php:107
 msgid "Street Address"
 msgstr "Dirección"
 
-#: includes/forms/class-admin.php:103
+#: includes/forms/class-admin.php:106
 msgid "Radio buttons"
 msgstr "Botones radio"
 
-#: includes/forms/class-admin.php:97
+#: includes/forms/class-admin.php:100
 msgid "No available fields. Did you select a Mailchimp list in the form settings?"
 msgstr "Ningún campo disponible ¿Has elegido una lista de MailChimp en los ajustes del formulario?"
 
-#: includes/forms/class-admin.php:96
+#: includes/forms/class-admin.php:99
 msgid "Max"
 msgstr "Máx"
 
-#: includes/forms/class-admin.php:95
+#: includes/forms/class-admin.php:98
 msgid "Min"
 msgstr "Mín"
 
-#: includes/forms/class-admin.php:93
+#: includes/forms/class-admin.php:96
 msgid "This field will allow your visitors to choose a list to subscribe to."
 msgstr "Este campo permitirá a tus visitantes que elijan una lista a la que suscribirse."
 
-#: includes/forms/class-admin.php:91
+#: includes/forms/class-admin.php:94
 msgid "Is this field required?"
 msgstr "¿Es obligatorio este campo?"
 
-#: includes/forms/class-admin.php:86
+#: includes/forms/class-admin.php:89
 msgid "This field will allow your visitors to choose whether they would like to subscribe or unsubscribe"
 msgstr "Este campo permitirá a tus visitantes elegir si quieren suscribirse o anular la suscripción"
 
-#: includes/forms/class-admin.php:85
+#: includes/forms/class-admin.php:88
 msgid "Form action"
 msgstr "Acción del formulario"
 
-#: includes/forms/class-admin.php:84
+#: includes/forms/class-admin.php:87
 msgid "Field label"
 msgstr "Nombre del campo"
 
-#: includes/forms/class-admin.php:81
+#: includes/forms/class-admin.php:84
 msgid "Dropdown"
 msgstr "Desplegable"
 
-#: integrations/ninja-forms-2/class-ninja-forms.php:80
+#: integrations/ninja-forms-2/class-ninja-forms.php:81
 msgid "Default Value"
 msgstr "Valor por defecto"
 
-#: includes/forms/class-admin.php:80
+#: includes/forms/class-admin.php:83
 msgid "Country"
 msgstr "País"
 
-#: includes/forms/class-admin.php:79
+#: includes/forms/class-admin.php:82
 msgid "Close"
 msgstr "Cerrado"
 
-#: includes/forms/class-admin.php:77
+#: includes/forms/class-admin.php:80
 msgid "Choice type"
 msgstr "Tipo de elección"
 
-#: includes/forms/class-admin.php:76
+#: includes/forms/class-admin.php:79
 msgid "Choices"
 msgstr "Opciones"
 
-#: includes/forms/class-admin.php:74
+#: includes/forms/class-admin.php:77
 msgid "City"
 msgstr "Ciudad"
 
@@ -601,7 +601,7 @@ msgstr "Ciudad"
 msgid "Mailchimp for WordPress by ibericode. Adds various highly effective sign-up methods to your site."
 msgstr "MailChimp para WordPress por ibericode. Añade a tu sitio varios métodos de registro altamente efectivos."
 
-#: integrations/woocommerce/class-woocommerce.php:179
+#: integrations/woocommerce/class-woocommerce.php:245
 msgid "Order #%d"
 msgstr "Pedido #%d"
 
@@ -617,15 +617,15 @@ msgstr "Para integrarlo con Contact Form 7 configura los siguientes ajustes y lu
 msgid "Edit this list in Mailchimp"
 msgstr "Modifica esta lista en MailChimp"
 
-#: includes/views/parts/lists-overview.php:29
+#: includes/views/parts/lists-overview.php:26
 msgid "Subscribers"
 msgstr "Subscriptores"
 
-#: includes/views/parts/lists-overview.php:28
+#: includes/views/parts/lists-overview.php:25
 msgid "ID"
 msgstr "Identidad"
 
-#: includes/views/parts/lists-overview.php:27
+#: includes/views/parts/lists-overview.php:24
 msgid "List Name"
 msgstr "Nombre de Lista"
 
@@ -637,77 +637,77 @@ msgstr "La siguiente tabla muestra tus listas de MailChimp y sus detalles. Si ha
 msgid "Your Mailchimp Account"
 msgstr "Tu cuenta de MailChimp"
 
-#: includes/integrations/views/integrations.php:20
+#: includes/integrations/views/integrations.php:15
 msgid "Configure this integration"
 msgstr "Configurar esta integración"
 
-#: includes/integrations/views/integrations.php:61
+#: includes/integrations/views/integrations.php:55
 msgid "Description"
 msgstr "Decripción"
 
-#: includes/integrations/views/integrations.php:60
+#: includes/integrations/views/integrations.php:54
 msgid "Name"
 msgstr "Nombre"
 
-#: includes/integrations/views/integration-settings.php:28
+#: includes/integrations/views/integration-settings.php:23
 msgid "Please ensure you <a href=\"%1$s\">configure the plugin to send all required fields</a> or <a href=\"%2$s\">log into your Mailchimp account</a> and make sure only the email & name fields are marked as required fields for the selected list(s)."
 msgstr "Por favor, asegúrate de <a href=\"%1$s\">configurar el plugin para enviar todos los campos obligatorios</a> o <a href=\"%2$s\">accede a tu cuenta de MailChimp</a> y asegúrate de que solo estén marcados como obligatorios los campos de nombre y correo electrónico para la(s) lista(s) seleccionada(s)."
 
-#: includes/integrations/views/integration-settings.php:27
+#: includes/integrations/views/integration-settings.php:22
 msgid "The selected Mailchimp lists require non-default fields, which may prevent this integration from working."
 msgstr "Las listas elegidas de MailChimp requieren campos inexistentes por defecto, que podrían evitar que funcione esta integración."
 
-#: includes/integrations/views/integration-settings.php:181
-#: integrations/gravity-forms/class-gravity-forms.php:129
+#: includes/integrations/views/integration-settings.php:179
+#: integrations/gravity-forms/class-gravity-forms.php:132
 msgid "Select \"yes\" if the checkbox should be pre-checked."
 msgstr "Elige \"sí\" si la casilla debería estar seleccionada por defecto."
 
-#: includes/integrations/views/integration-settings.php:88
+#: includes/integrations/views/integration-settings.php:84
 msgid "Implicit?"
 msgstr "¿Implícito?"
 
-#: includes/integrations/views/integration-settings.php:68
+#: includes/integrations/views/integration-settings.php:63
 msgid "Enable the %s integration? This will add a sign-up checkbox to the form."
 msgstr "¿Activar la integración con %s? Esto añadirá una casilla de registro al formulario."
 
-#: includes/integrations/views/integration-settings.php:64
+#: includes/integrations/views/integration-settings.php:59
 msgid "Enabled?"
 msgstr "¿Activo?"
 
-#: includes/integrations/views/integration-settings.php:20
+#: includes/integrations/views/integration-settings.php:15
 msgid "%s integration"
 msgstr "integración con %s"
 
-#: includes/integrations/class-admin.php:72
-#: includes/integrations/class-admin.php:73
-#: includes/integrations/views/integration-settings.php:10
-#: includes/integrations/views/integrations.php:101
+#: includes/integrations/class-admin.php:76
+#: includes/integrations/class-admin.php:77
+#: includes/integrations/views/integration-settings.php:9
+#: includes/integrations/views/integrations.php:92
+#: includes/integrations/views/integrations.php:97
 #: includes/integrations/views/integrations.php:109
-#: includes/integrations/views/integrations.php:123
 msgid "Integrations"
 msgstr "Integraciones"
 
-#: includes/forms/views/tabs/form-settings.php:121
+#: includes/forms/views/tabs/form-settings.php:123
 msgid "Form behaviour"
 msgstr "Comportamiento del formulario"
 
-#: includes/forms/views/tabs/form-settings.php:95
-#: includes/integrations/views/integration-settings.php:283
+#: includes/forms/views/tabs/form-settings.php:97
+#: includes/integrations/views/integration-settings.php:281
 msgid "What does this do?"
 msgstr "¿Qué hace esto?"
 
-#: includes/forms/views/tabs/form-settings.php:94
-#: includes/integrations/views/integration-settings.php:282
+#: includes/forms/views/tabs/form-settings.php:96
+#: includes/integrations/views/integration-settings.php:280
 msgid "Select \"no\" if you want to add the selected interests to any previously selected interests when updating a subscriber."
 msgstr "Elige \"no\" si quieres añadir los intereses seleccionados a cualquier interés seleccionado al actualizar un suscriptor."
 
-#: includes/forms/views/tabs/form-settings.php:72
-#: includes/integrations/views/integration-settings.php:256
+#: includes/forms/views/tabs/form-settings.php:74
+#: includes/integrations/views/integration-settings.php:254
 msgid "Select \"yes\" if you want to update existing subscribers with the data that is sent."
 msgstr "Elige \"sí\" si quieres actualizar los suscriptores existentes con los datos enviados."
 
-#: includes/forms/views/tabs/form-settings.php:47
-#: integrations/ninja-forms/class-action.php:29
+#: includes/forms/views/tabs/form-settings.php:49
+#: integrations/ninja-forms/class-action.php:32
 msgid "Use double opt-in?"
 msgstr "¿Usar la doble confirmación?"
 
@@ -788,21 +788,21 @@ msgstr "Para añadir más campos a tu formulario tendrás que crear primero esto
 msgid "Add more fields"
 msgstr "Añadir más campos"
 
-#: includes/forms/views/edit-form.php:63
+#: includes/forms/views/edit-form.php:62
 msgid "Enter the title of your sign-up form"
 msgstr "Introduce el título de tu formulario de registro"
 
-#: includes/forms/views/edit-form.php:59
+#: includes/forms/views/edit-form.php:58
 msgid "Enter form title here"
 msgstr "Introduce aquí el título del formulario"
 
-#: includes/forms/views/edit-form.php:34
+#: includes/forms/views/edit-form.php:32
 msgid "Edit Form"
 msgstr "Editar Formulario"
 
 #: includes/forms/views/edit-form.php:22
-#: includes/integrations/views/integration-settings.php:8
-#: includes/integrations/views/integrations.php:99
+#: includes/integrations/views/integration-settings.php:7
+#: includes/integrations/views/integrations.php:90
 #: includes/views/general-settings.php:7 includes/views/other-settings.php:12
 msgid "You are here: "
 msgstr "Estás en:"
@@ -819,23 +819,23 @@ msgstr "Mensajes"
 msgid "Fields"
 msgstr "Campos"
 
-#: includes/forms/views/add-form.php:61
+#: includes/forms/views/add-form.php:49
 msgid "No lists found. Did you <a href=\"%s\">connect with Mailchimp</a>?"
 msgstr "Ninguna lista encontrada. ¿Has <a href=\"%s\">conectado con MailChimp</a>?"
 
-#: includes/forms/views/add-form.php:36
+#: includes/forms/views/add-form.php:24
 msgid "To which Mailchimp lists should this form subscribe?"
 msgstr "¿A qué listas de MailChimp debería suscribir este formulario?"
 
-#: includes/forms/views/add-form.php:29
+#: includes/forms/views/add-form.php:19
 msgid "Enter your form title.."
 msgstr "Introduce el título de tu formulario.."
 
-#: includes/forms/views/add-form.php:26
+#: includes/forms/views/add-form.php:16
 msgid "What is the name of this form?"
 msgstr "¿Cuál es el nombre de este formulario?"
 
-#: includes/forms/views/add-form.php:10 includes/forms/views/add-form.php:69
+#: includes/forms/views/add-form.php:6 includes/forms/views/add-form.php:55
 msgid "Add new form"
 msgstr "Añadir nuevo formulario"
 
@@ -843,39 +843,39 @@ msgstr "Añadir nuevo formulario"
 msgid "There is no form with ID %d, perhaps it was deleted?"
 msgstr "No hay ningún formulario con el ID %d ¿es posible que lo hayas borrado?"
 
-#: includes/class-dynamic-content-tags.php:68
+#: includes/class-dynamic-content-tags.php:69
 msgid "The property of the currently logged-in user."
 msgstr "La propiedad del usuario conectado actualmente."
 
-#: includes/class-dynamic-content-tags.php:63
+#: includes/class-dynamic-content-tags.php:64
 msgid "The visitor's IP address. Example: %s."
 msgstr "La dirección IP del visitante. Ejemplo: %s."
 
-#: includes/class-dynamic-content-tags.php:58
+#: includes/class-dynamic-content-tags.php:59
 msgid "The site's language. Example: %s."
 msgstr "El idioma del sitio. Ejemplo: %s."
 
-#: includes/class-dynamic-content-tags.php:53
+#: includes/class-dynamic-content-tags.php:54
 msgid "The current time. Example: %s."
 msgstr "La hora actual. Ejemplo: %s."
 
-#: includes/class-dynamic-content-tags.php:48
+#: includes/class-dynamic-content-tags.php:49
 msgid "The current date. Example: %s."
 msgstr "La fecha actual. Ejemplo: %s."
 
-#: includes/class-dynamic-content-tags.php:43
+#: includes/class-dynamic-content-tags.php:44
 msgid "The path of the page."
 msgstr "La ruta de la página."
 
-#: includes/class-dynamic-content-tags.php:38
+#: includes/class-dynamic-content-tags.php:39
 msgid "The URL of the page."
 msgstr "La URL de la página."
 
-#: includes/class-dynamic-content-tags.php:33
+#: includes/class-dynamic-content-tags.php:34
 msgid "The email address of the current visitor (if known)."
 msgstr "La dirección de correo electrónico del visitante actual (si se conoce)."
 
-#: includes/forms/class-form-tags.php:39
+#: includes/forms/class-form-tags.php:41
 msgid "Data from the URL or a submitted form."
 msgstr "Datos de la URL o del formulario enviado."
 
@@ -883,27 +883,27 @@ msgstr "Datos de la URL o del formulario enviado."
 msgid "Form preview"
 msgstr "Vista previa del formulario"
 
-#: includes/forms/class-admin.php:399
+#: includes/forms/class-admin.php:412
 msgid "Go back"
 msgstr "Ir atrás"
 
-#: includes/forms/class-admin.php:397
+#: includes/forms/class-admin.php:410
 msgid "Form not found."
 msgstr "Formulario no encontrado"
 
-#: includes/admin/migrations/3.0.0-form-1-post-type.php:35
+#: includes/admin/migrations/3.0.0-form-1-post-type.php:34
 msgid "Default sign-up form"
 msgstr "Formulario de registro por defecto"
 
-#: includes/admin/class-admin.php:209
+#: includes/admin/class-admin.php:215
 msgid "Success! The cached configuration for your Mailchimp lists has been renewed."
 msgstr "¡Lo lograste! La configuración de cache de tus listas MailChimp se ha renovado."
 
-#: includes/admin/class-admin-texts.php:84
+#: includes/admin/class-admin-texts.php:89
 msgid "Documentation"
 msgstr "Documentación"
 
-#: config/default-form-messages.php:37
+#: config/default-form-messages.php:38
 msgid "Please select at least one list."
 msgstr "Por favor, elige el menos una lista."
 
@@ -911,7 +911,7 @@ msgstr "Por favor, elige el menos una lista."
 msgid "The API key for connecting with your Mailchimp account."
 msgstr "La clave API para conectar con tu cuenta de MailChimp."
 
-#: includes/integrations/views/integrations.php:62
+#: includes/integrations/views/integrations.php:56
 #: includes/views/general-settings.php:34
 msgid "Status"
 msgstr "Estado"
@@ -931,45 +931,45 @@ msgstr "ibericode"
 msgid "https://www.mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-for-wp&utm_campaign=plugins-page"
 msgstr "https://www.mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-for-wp&utm_campaign=plugins-page"
 
-#: includes/views/parts/admin-sidebar.php:11
+#: includes/views/parts/admin-sidebar.php:12
 msgid "Looking for help?"
 msgstr "¿Buscas ayuda?"
 
-#: includes/views/parts/admin-footer.php:31
+#: includes/views/parts/admin-footer.php:34
 msgid "This plugin is not developed by or affiliated with Mailchimp in any way."
 msgstr "Este plugin no es desarrollado ni esta afiliado a MailChimp de ninguna manera."
 
 #. translators: %s links to the WordPress.org translation project
-#: includes/views/parts/admin-footer.php:13
+#: includes/views/parts/admin-footer.php:14
 msgid "Mailchimp for WordPress is in need of translations. Is the plugin not translated in your language or do you spot errors with the current translations? Helping out is easy! Please <a href=\"%s\">help translate the plugin using your WordPress.org account</a>."
 msgstr "Mailchimp for WordPress necesita traducciones. ¿No está el plugin traducido a tu idioma o ves errores en las traducciones actuales? ¡Ayudar es fácil! Por favor, <a href=\"%s\">ayuda a traducir el plugin usando tu cuenta de WordPress.org</a>."
 
-#: includes/forms/class-admin.php:70
+#: includes/forms/class-admin.php:73
 msgid "Add to form"
 msgstr "Añadir al formulario"
 
-#: includes/forms/class-admin.php:108
+#: includes/forms/class-admin.php:111
 msgid "Wrap in paragraph tags?"
 msgstr "¿Envolver las etiquetas en el párrafo?"
 
-#: includes/forms/class-admin.php:99
+#: includes/forms/class-admin.php:102
 msgid "Placeholder"
 msgstr "Marcador de posición"
 
-#: includes/forms/class-admin.php:92
+#: includes/forms/class-admin.php:95
 msgid "List choice"
 msgstr "Lista de opciones"
 
-#: includes/forms/class-admin.php:107
+#: includes/forms/class-admin.php:110
 msgid "Submit button"
 msgstr "Botón de enviar"
 
-#: includes/forms/class-form-tags.php:45
-#: includes/integrations/class-integration-tags.php:30
+#: includes/forms/class-form-tags.php:47
+#: includes/integrations/class-integration-tags.php:32
 msgid "Replaced with the number of subscribers on the selected list(s)"
 msgstr "Se sustituye con el número de suscriptores de la lista seleccionada (s)"
 
-#: includes/forms/class-form-tags.php:34
+#: includes/forms/class-form-tags.php:36
 msgid "Replaced with the form response (error or success messages)."
 msgstr "Sustituya la respuesta del formulario (mensajes de error ó éxito)."
 
@@ -981,107 +981,107 @@ msgstr "Le permite personalizar su formulario o sus mensajes de respuesta."
 msgid "The following list of variables can be used to <a href=\"%s\">add some dynamic content to your form or success and error messages</a>."
 msgstr "La siguiente lista de variables puede ser usada para  <a href=\"%s\">añadir algún contenido dinámico a su formulario o a sus mensajes de éxito y error</a>."
 
-#: includes/forms/views/tabs/form-messages.php:94
+#: includes/forms/views/tabs/form-messages.php:96
 msgid "HTML tags like %s are allowed in the message fields."
 msgstr "Las etiquetas HTML como %s están permitidas en los campos del mensaje."
 
-#: includes/forms/views/tabs/form-messages.php:61
+#: includes/forms/views/tabs/form-messages.php:63
 msgid "When using the unsubscribe method, this is the text that shows when the given email address is not on the selected list(s)."
 msgstr "Cuando se usa el método desuscribir, éste es el texto a mostrar cuando el email facilitado no está en la(s) lista(s) seleccionada(s)."
 
-#: includes/forms/views/tabs/form-messages.php:58
+#: includes/forms/views/tabs/form-messages.php:60
 msgid "Not subscribed"
 msgstr "No suscrito"
 
-#: includes/forms/views/tabs/form-messages.php:54
+#: includes/forms/views/tabs/form-messages.php:56
 msgid "When using the unsubscribe method, this is the text that shows when the given email address is successfully unsubscribed from the selected list(s)."
 msgstr "Cuando se usa el método desuscribir, éste es el texto a mostrar cuando el email facilitado se ha desuscrito correctamente de la(s) lista(s) seleccionada(s)."
 
-#: includes/forms/views/tabs/form-messages.php:51
+#: includes/forms/views/tabs/form-messages.php:53
 msgid "Unsubscribed"
 msgstr "No suscrito"
 
-#: includes/forms/views/tabs/form-messages.php:47
+#: includes/forms/views/tabs/form-messages.php:49
 msgid "The text that shows when a general error occured."
 msgstr "Texto a mostrar cuando ocurra un error general."
 
-#: includes/forms/views/tabs/form-messages.php:44
+#: includes/forms/views/tabs/form-messages.php:46
 msgid "General error"
 msgstr "Error general"
 
-#: includes/forms/views/tabs/form-messages.php:40
+#: includes/forms/views/tabs/form-messages.php:42
 msgid "The text that shows when the given email is already subscribed to the selected list(s)."
 msgstr "Texto a mostrar cuando el email dado ya está suscrito a la(s) lista(s) seleccionada(s)."
 
-#: includes/forms/views/tabs/form-messages.php:37
+#: includes/forms/views/tabs/form-messages.php:39
 msgid "Already subscribed"
 msgstr "Ya está suscrito"
 
-#: includes/forms/views/tabs/form-messages.php:33
+#: includes/forms/views/tabs/form-messages.php:35
 msgid "The text that shows when a required field for the selected list(s) is missing."
 msgstr "Texto a mostrar cuando falta un campo obligatorio para la(s) lista(s) seleccionada(s)."
 
-#: includes/forms/views/tabs/form-messages.php:30
+#: includes/forms/views/tabs/form-messages.php:32
 msgid "Required field missing"
 msgstr "Necesita cubrir todos los campos requeridos"
 
-#: includes/forms/views/tabs/form-messages.php:26
+#: includes/forms/views/tabs/form-messages.php:28
 msgid "The text that shows when an invalid email address is given."
 msgstr "Texto a mostrar cuando una dirección email inválida es dada."
 
-#: includes/forms/views/tabs/form-messages.php:23
+#: includes/forms/views/tabs/form-messages.php:25
 msgid "Invalid email address"
 msgstr "Dirección de email no válida"
 
-#: includes/forms/views/tabs/form-messages.php:19
+#: includes/forms/views/tabs/form-messages.php:21
 msgid "The text that shows when an email address is successfully subscribed to the selected list(s)."
 msgstr "Texto a mostrar cuando una dirección email se ha suscrito correctamente a la(s) lista(s) seleccionada(s)."
 
-#: includes/forms/views/tabs/form-messages.php:16
+#: includes/forms/views/tabs/form-messages.php:18
 msgid "Successfully subscribed"
 msgstr "Suscrito con éxito"
 
-#: includes/forms/views/tabs/form-settings.php:151
+#: includes/forms/views/tabs/form-settings.php:153
 msgid "Leave empty or enter <code>0</code> for no redirect. Otherwise, use complete (absolute) URLs, including <code>http://</code>."
 msgstr "Déjalo vacío o introduce <code>0</code> para no hacer ninguna redirección. En caso contrario usa URLs completas (absolutas), incluyendo <code>http://</code>."
 
-#: includes/forms/views/tabs/form-settings.php:149
+#: includes/forms/views/tabs/form-settings.php:151
 msgid "Example: %s"
 msgstr "Ejemplo: %s"
 
-#: includes/forms/views/tabs/form-settings.php:147
+#: includes/forms/views/tabs/form-settings.php:149
 msgid "Redirect to URL after successful sign-ups"
 msgstr "Redireccionar a una URL tras suscribirse satisfactoriamente."
 
-#: includes/forms/views/tabs/form-settings.php:142
+#: includes/forms/views/tabs/form-settings.php:144
 msgid "Select \"yes\" to hide the form fields after a successful sign-up."
 msgstr "Selecciona \"Sí \" para ocultar los campos de formulario después de un registro satisfactorio."
 
-#: includes/forms/views/tabs/form-settings.php:131
+#: includes/forms/views/tabs/form-settings.php:133
 msgid "Hide form after a successful sign-up?"
 msgstr "¿Ocultar formulario después de un registro registro satisfactorio?"
 
-#: includes/forms/views/tabs/form-settings.php:83
-#: includes/integrations/views/integration-settings.php:271
+#: includes/forms/views/tabs/form-settings.php:85
+#: includes/integrations/views/integration-settings.php:269
 msgid "Replace interest groups?"
 msgstr "¿Se sustituyen los grupos de interés?"
 
-#: includes/forms/views/tabs/form-settings.php:62
-#: includes/integrations/views/integration-settings.php:246
-#: integrations/ninja-forms/class-action.php:48
+#: includes/forms/views/tabs/form-settings.php:64
+#: includes/integrations/views/integration-settings.php:244
+#: integrations/ninja-forms/class-action.php:51
 msgid "Update existing subscribers?"
 msgstr "¿Actualizar los suscriptores existentes?"
 
-#: includes/forms/views/edit-form.php:67
+#: includes/forms/views/edit-form.php:66
 #: includes/forms/views/tabs/form-fields.php:39
 msgid "Use the shortcode %s to display this form inside a post, page or text widget."
 msgstr "Utiliza el código corto %s para mistrar este formulario dentro de una entrada, artículo o un widget de texto."
 
-#: includes/forms/views/tabs/form-settings.php:39
+#: includes/forms/views/tabs/form-settings.php:41
 msgid "Select the list(s) to which people who submit this form should be subscribed."
 msgstr "Elige la(s) lista(s) a la(s) que las personas que usen este formulario deben ser suscritas."
 
-#: includes/forms/views/tabs/form-settings.php:15
+#: includes/forms/views/tabs/form-settings.php:17
 msgid "Lists this form subscribes to"
 msgstr "Los formularios de esta lista suscriben a"
 
@@ -1113,62 +1113,62 @@ msgstr "Tema claro"
 msgid "After billing details"
 msgstr "Detalles tras la factura"
 
-#: includes/integrations/views/integration-settings.php:212
+#: includes/integrations/views/integration-settings.php:210
 msgid "Select \"yes\" if the checkbox appears in a weird place."
 msgstr "Seleccione \"sí \" si la casilla de verificación aparece en un lugar inapropiado"
 
-#: includes/integrations/views/integration-settings.php:208
+#: includes/integrations/views/integration-settings.php:206
 msgid "Load some default CSS?"
 msgstr "¿Cargamos algunos CSS por defecto?"
 
-#: includes/integrations/views/integration-settings.php:175
-#: integrations/gravity-forms/class-gravity-forms.php:121
+#: includes/integrations/views/integration-settings.php:173
+#: integrations/gravity-forms/class-gravity-forms.php:124
 msgid "Pre-check the checkbox?"
 msgstr "¿Dejamos pre-marcada la casilla de verificación?"
 
-#: includes/integrations/views/integration-settings.php:159
+#: includes/integrations/views/integration-settings.php:157
 msgid "HTML tags like %s are allowed in the label text."
 msgstr "La etiquetas HTML como %s están permitidas en el texto de la etiqueta."
 
-#: includes/integrations/views/integration-settings.php:156
+#: includes/integrations/views/integration-settings.php:154
 msgid "Checkbox label text"
 msgstr "Texto a mostrar junto a la casilla de verificación."
 
-#: includes/integrations/views/integration-settings.php:234
-#: integrations/gravity-forms/class-gravity-forms.php:116
+#: includes/integrations/views/integration-settings.php:232
+#: integrations/gravity-forms/class-gravity-forms.php:119
 msgid "Select \"yes\" if you want people to confirm their email address before being subscribed (recommended)"
 msgstr "Selecciona \"sí \" si quieres que los suscriptores confirmen su dirección de correo electrónico antes de suscribirse (recomendado)"
 
-#: includes/integrations/views/integration-settings.php:223
-#: integrations/gravity-forms/class-gravity-forms.php:109
+#: includes/integrations/views/integration-settings.php:221
+#: integrations/gravity-forms/class-gravity-forms.php:112
 msgid "Double opt-in?"
 msgstr "¿Doble opt-in?"
 
-#: includes/integrations/views/integration-settings.php:136
-#: integrations/gravity-forms/class-gravity-forms.php:104
+#: includes/integrations/views/integration-settings.php:134
+#: integrations/gravity-forms/class-gravity-forms.php:107
 msgid "Select the list(s) to which people who check the checkbox should be subscribed."
 msgstr "Selecciona la lista(s) a la que se registrarán las personas que marquen las casillas de verificación."
 
-#: includes/forms/views/tabs/form-settings.php:20
-#: includes/integrations/views/integration-settings.php:140
+#: includes/forms/views/tabs/form-settings.php:22
+#: includes/integrations/views/integration-settings.php:138
 msgid "No lists found, <a href=\"%s\">are you connected to Mailchimp</a>?"
 msgstr "No se han encontrado listas, ¿<a href=\"%s\">está conectado a MailChimp</a>?"
 
-#: includes/integrations/views/integration-settings.php:122
+#: includes/integrations/views/integration-settings.php:118
 msgid "Mailchimp Lists"
 msgstr "Listas de MailChimp"
 
-#: includes/views/parts/lists-overview.php:22
+#: includes/views/parts/lists-overview.php:20
 msgid "A total of %d lists were found in your Mailchimp account."
 msgstr "Se encontraron un total de %d listas en tu cuenta MailChimp."
 
-#: includes/views/parts/lists-overview.php:19
+#: includes/views/parts/lists-overview.php:17
 msgid "No lists were found in your Mailchimp account"
 msgstr "No se encontró ninguna lista en su cuenta de MailChimp"
 
-#: includes/admin/class-admin.php:291
+#: includes/admin/class-admin.php:300
 #: includes/forms/views/parts/add-fields-help.php:58
-#: includes/views/parts/lists-overview.php:10
+#: includes/views/parts/lists-overview.php:8
 msgid "Renew Mailchimp lists"
 msgstr "Renovar las listas de MailChimp"
 
@@ -1196,75 +1196,75 @@ msgstr "CONECTADO"
 msgid "API Settings"
 msgstr "Configuración de la API"
 
-#: integrations/gravity-forms/class-field.php:38
+#: integrations/gravity-forms/class-field.php:40
 msgid "Mailchimp for WordPress"
 msgstr "MailChimp for WordPress"
 
-#: includes/forms/views/tabs/form-settings.php:55
-#: includes/forms/views/tabs/form-settings.php:70
-#: includes/forms/views/tabs/form-settings.php:91
-#: includes/forms/views/tabs/form-settings.php:139
-#: includes/integrations/views/integration-settings.php:67
-#: includes/integrations/views/integration-settings.php:91
-#: includes/integrations/views/integration-settings.php:178
-#: includes/integrations/views/integration-settings.php:211
-#: includes/integrations/views/integration-settings.php:231
-#: includes/integrations/views/integration-settings.php:254
-#: includes/integrations/views/integration-settings.php:279
-#: integrations/contact-form-7/class-contact-form-7.php:74
-#: integrations/gravity-forms/class-gravity-forms.php:113
-#: integrations/gravity-forms/class-gravity-forms.php:125
-#: integrations/wpforms/class-field.php:247
+#: includes/forms/views/tabs/form-settings.php:57
+#: includes/forms/views/tabs/form-settings.php:72
+#: includes/forms/views/tabs/form-settings.php:93
+#: includes/forms/views/tabs/form-settings.php:141
+#: includes/integrations/views/integration-settings.php:62
+#: includes/integrations/views/integration-settings.php:87
+#: includes/integrations/views/integration-settings.php:176
+#: includes/integrations/views/integration-settings.php:209
+#: includes/integrations/views/integration-settings.php:229
+#: includes/integrations/views/integration-settings.php:252
+#: includes/integrations/views/integration-settings.php:277
+#: integrations/contact-form-7/class-contact-form-7.php:77
+#: integrations/gravity-forms/class-gravity-forms.php:116
+#: integrations/gravity-forms/class-gravity-forms.php:128
+#: integrations/wpforms/class-field.php:253
 msgid "No"
 msgstr "No"
 
-#: includes/forms/views/tabs/form-settings.php:51
-#: includes/forms/views/tabs/form-settings.php:66
-#: includes/forms/views/tabs/form-settings.php:87
-#: includes/forms/views/tabs/form-settings.php:135
-#: includes/integrations/views/integration-settings.php:66
-#: includes/integrations/views/integration-settings.php:90
-#: includes/integrations/views/integration-settings.php:177
-#: includes/integrations/views/integration-settings.php:210
-#: includes/integrations/views/integration-settings.php:227
-#: includes/integrations/views/integration-settings.php:250
-#: includes/integrations/views/integration-settings.php:275
-#: integrations/contact-form-7/class-contact-form-7.php:74
-#: integrations/gravity-forms/class-gravity-forms.php:112
-#: integrations/gravity-forms/class-gravity-forms.php:124
-#: integrations/wpforms/class-field.php:247
+#: includes/forms/views/tabs/form-settings.php:53
+#: includes/forms/views/tabs/form-settings.php:68
+#: includes/forms/views/tabs/form-settings.php:89
+#: includes/forms/views/tabs/form-settings.php:137
+#: includes/integrations/views/integration-settings.php:61
+#: includes/integrations/views/integration-settings.php:86
+#: includes/integrations/views/integration-settings.php:175
+#: includes/integrations/views/integration-settings.php:208
+#: includes/integrations/views/integration-settings.php:225
+#: includes/integrations/views/integration-settings.php:248
+#: includes/integrations/views/integration-settings.php:273
+#: integrations/contact-form-7/class-contact-form-7.php:77
+#: integrations/gravity-forms/class-gravity-forms.php:115
+#: integrations/gravity-forms/class-gravity-forms.php:127
+#: integrations/wpforms/class-field.php:253
 msgid "Yes"
 msgstr "Sí"
 
-#: config/default-form-messages.php:17
+#: config/default-form-messages.php:18
 msgid "Given email address is not subscribed."
 msgstr "El correo proporcionado no está suscrito."
 
-#: config/default-form-messages.php:13
+#: config/default-form-messages.php:14
 msgid "You were successfully unsubscribed."
 msgstr "Has sido borrado correctamente."
 
-#: config/default-form-messages.php:33
+#: config/default-form-messages.php:34
 msgid "Please fill in the required fields."
 msgstr "Por favor rellena los campos solicitados."
 
-#: config/default-form-messages.php:29
+#: config/default-form-messages.php:30
 msgid "Given email address is already subscribed, thank you!"
 msgstr "La dirección de correo electrónico facilitada ya está suscrita, ¡gracias!"
 
-#: config/default-form-messages.php:25
+#: config/default-form-messages.php:26
 msgid "Please provide a valid email address."
 msgstr "Por favor, introduce un correo electrónico válido."
 
-#: config/default-form-messages.php:21
+#: config/default-form-messages.php:22
 msgid "Oops. Something went wrong. Please try again later."
 msgstr "¡Vaya! Algo ha ido mal. Por favor, inténtalo de nuevo más tarde."
 
-#: config/default-form-messages.php:5
+#: config/default-form-messages.php:6
 msgid "Thank you, your sign-up request was successful! Please check your email inbox to confirm."
 msgstr "¡Gracias, tu petición de suscripción fue completada! Por favor revisa tu correo electrónico para confirmarla."
 
-#: includes/integrations/class-integration.php:79
+#: includes/integrations/class-integration.php:80
 msgid "Sign me up for the newsletter!"
 msgstr "¡Suscríbeme a la lista de correo!"
 
@@ -1276,11 +1276,11 @@ msgstr "Registro"
 msgid "Your email address"
 msgstr "Tu dirección de correo electrónico"
 
-#: includes/forms/class-widget.php:96
+#: includes/forms/class-widget.php:98
 msgid "You can edit your sign-up form in the <a href=\"%s\">Mailchimp for WordPress form settings</a>."
 msgstr "Puede editar su formulario de suscripción en el <a href=\"%s\">formulario de configuración de Mailchimp para Wordpress</a>"
 
-#: includes/forms/class-widget.php:79
+#: includes/forms/class-widget.php:81
 msgid "Title:"
 msgstr "Título:"
 
@@ -1292,24 +1292,24 @@ msgstr "Boletín"
 msgid "Displays your Mailchimp for WordPress sign-up form"
 msgstr "Muestra tu formulario de suscripción de MailChimp para WordPress"
 
-#: includes/forms/class-admin.php:462 includes/forms/class-widget.php:31
+#: includes/forms/class-admin.php:478 includes/forms/class-widget.php:31
 msgid "Mailchimp Sign-Up Form"
 msgstr "Formulario de suscripción de MailChimp"
 
-#: config/default-form-content.php:3 includes/class-mailchimp.php:250
-#: includes/forms/class-admin.php:82
+#: config/default-form-content.php:3 includes/class-mailchimp.php:254
+#: includes/forms/class-admin.php:85
 msgid "Email address"
 msgstr "Dirección de correo electrónico"
 
-#: includes/forms/class-admin.php:106
+#: includes/forms/class-admin.php:109
 msgid "Subscribe"
 msgstr "Suscribir"
 
-#: includes/forms/class-admin.php:89
+#: includes/forms/class-admin.php:92
 msgid "Initial value"
 msgstr "Valor inicial"
 
-#: includes/forms/class-admin.php:123 includes/forms/views/edit-form.php:24
+#: includes/forms/class-admin.php:127 includes/forms/views/edit-form.php:24
 msgid "Forms"
 msgstr "Formularios"
 
@@ -1317,19 +1317,19 @@ msgstr "Formularios"
 msgid "Form Settings"
 msgstr "Propiedades del formulario"
 
-#: includes/forms/class-admin.php:75
+#: includes/forms/class-admin.php:78
 msgid "Checkboxes"
 msgstr "Casillas de verificación"
 
-#: integrations/ninja-forms-2/class-ninja-forms.php:33
-#: integrations/ninja-forms/class-action.php:21
+#: integrations/ninja-forms-2/class-ninja-forms.php:34
+#: integrations/ninja-forms/class-action.php:24
 msgid "Mailchimp"
 msgstr "MailChimp"
 
-#: includes/admin/class-admin.php:320
+#: includes/admin/class-admin.php:330
 msgid "Mailchimp API Settings"
 msgstr "Configuración de API de Mailchimp"
 
-#: includes/admin/class-admin-texts.php:66 includes/forms/views/edit-form.php:6
+#: includes/admin/class-admin-texts.php:70 includes/forms/views/edit-form.php:6
 msgid "Settings"
 msgstr "Ajustes"
