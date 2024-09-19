@@ -1,2 +1,0 @@
-<?= \Roots\view('woocommerce.checkout.review-order', $data ?? get_defined_vars())->render(); ?>
-<?php /**PATH /srv/www/futurabasura.com/current/web/app/themes/sage/resources/views/woocommerce/checkout/review-order.blade.php ENDPATH**/ ?>

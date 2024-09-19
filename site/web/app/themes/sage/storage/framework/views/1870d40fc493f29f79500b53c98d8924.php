@@ -7,12 +7,12 @@
     <?php (wp_head()); ?>
   </head>
 
-  <body <?php (body_class('bg-fondo-medio bg-10px')); ?>>
+  <body <?php (body_class()); ?>>
     <?php (wp_body_open()); ?>
 
     <div id="app">
       <a class="sr-only focus:not-sr-only" href="#main">
-        <?php echo e(__('Skip to content')); ?>
+        <?php echo e(__('Skip to content', 'sage')); ?>
 
       </a>
 

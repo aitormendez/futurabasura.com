@@ -9,7 +9,6 @@
   },
   "type": "module",
   "scripts": {
-    "bud:doctor": "bud doctor",
     "dev": "bud dev",
     "build": "bud build",
     "translate": "npm run translate:pot && npm run translate:update",
@@ -20,33 +19,8 @@
     "translate:mo": "wp i18n make-mo ./resources/lang ./resources/lang"
   },
   "devDependencies": {
-    "@prettier/plugin-php": "^0.22.2",
-    "@roots/bud": "^6.23.2",
-    "@roots/bud-tailwindcss": "^6.23.2",
-    "@roots/sage": "^6.23.2",
-    "@tailwindcss/typography": "^0.5.13",
-    "prettier": "^3.3.3"
-  },
-  "dependencies": {
-    "@alpinejs/collapse": "^3.14.1",
-    "@devnomic/marquee": "^1.0.2",
-    "@glidejs/glide": "^3.6.1",
-    "@vidstack/react": "^1.11.25",
-    "@wordpress/blocks": "^13.2.0",
-    "@wordpress/element": "^6.2.0",
-    "@wordpress/icons": "^10.2.0",
-    "alpinejs": "^3.14.1",
-    "animejs": "^3.2.2",
-    "gsap": "^3.12.5",
-    "hls.js": "^1.5.13",
-    "infinite-scroll": "^4.0.1",
-    "lightgallery": "^2.7.2",
-    "lucide-react": "^0.407.0",
-    "media-icons": "^1.1.4",
-    "prop-types": "^15.8.1",
-    "radix-ui": "^1.0.1",
-    "react-feather": "^2.0.10",
-    "scrambling-text": "^1.2.0",
-    "swiper": "^11.1.9"
+    "@roots/bud": "6.23.2",
+    "@roots/bud-tailwindcss": "6.23.2",
+    "@roots/sage": "6.23.2"
   }
 }

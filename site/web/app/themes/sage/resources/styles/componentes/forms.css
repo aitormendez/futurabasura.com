@@ -1,7 +1,0 @@
-input:focus,
-input:focus-visible,
-input {
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-}

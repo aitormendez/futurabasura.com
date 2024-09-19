@@ -1,2 +1,0 @@
-<?= \Roots\view('woocommerce.emails.email-styles', $data ?? get_defined_vars())->render(); ?>
-<?php /**PATH /srv/www/futurabasura.com/current/web/app/themes/sage/resources/views/woocommerce/emails/email-styles.blade.php ENDPATH**/ ?>

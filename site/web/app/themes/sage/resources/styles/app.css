@@ -1,31 +1,3 @@
-@import 'tailwindcss/base';
-
-@import 'common/global';
-@import 'common/variables';
-
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
-@import 'fonts/fonts';
-@import 'layouts/header';
-@import 'layouts/front-page';
-@import 'layouts/slider';
-@import 'layouts/artists';
-@import 'layouts/shop';
-@import 'layouts/cart';
-@import 'layouts/contact';
-@import 'layouts/newsletter';
-@import 'layouts/checkout';
-@import 'layouts/single-product';
-@import 'layouts/single-variable-product';
-@import 'componentes/select';
-@import 'componentes/forms';
-@import 'componentes/lightgallery';
-
-@import '@glidejs/glide/dist/css/glide.core.min.css';
-/* @import '@glidejs/glide/dist/css/glide.theme.min.css'; */
-
-/* $lg-path-fonts: 'https://cdn.jsdelivr.net/npm/lightgallery@2.1.2/fonts';
-$lg-path-images: 'https://cdn.jsdelivr.net/npm/lightgallery@2.1.2/images'; */
-
-/* @import 'lightgallery/css/lightgallery-bundle.css'; */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
