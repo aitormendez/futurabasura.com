@@ -75,7 +75,7 @@
             </div>
 
             
-            <?php do_action('woocommerce_checkout_after_order_review'); ?>
+
         </div>
         <div class="ticket-head w-full">
             <div class="h-10 w-full bg-allo-claro"></div>

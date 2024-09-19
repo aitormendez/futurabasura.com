@@ -1,4 +1,4 @@
-@php
+<?php
     /**
      * Thankyou page
      *
@@ -16,12 +16,12 @@
      */
 
     defined('ABSPATH') || exit();
-@endphp
+?>
 
 <div class="woocommerce-order">
 
 
-    @if ($order)
+    <?php if($order): ?>
         <div class="ticket">
             <div class="ticket-head w-full">
                 <div class="ticket-triangulo w-full bg-tk-triangulo"></div>
@@ -29,9 +29,9 @@
             </div>
 
             <div class="ticket-body bg-allo-claro">
-                @php do_action( 'woocommerce_before_thankyou', $order->get_id() ) @endphp
+                <?php do_action( 'woocommerce_before_thankyou', $order->get_id() ) ?>
 
-                @if ($order->has_status('failed'))
+                <?php if($order->has_status('failed')): ?>
 
                     <div class="p-4">
                         <p class="woocommerce-notice woocommerce-notice--error woocommerce-thankyou-order-failed">
@@ -44,7 +44,7 @@
                             <?php endif; ?>
                         </p>
                     </div>
-                @else
+                <?php else: ?>
                     <div class="p-4">
                         <p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received">
                             <?php echo apply_filters('woocommerce_thankyou_order_received_text', esc_html__('Thank you. Your order has been received.', 'woocommerce'), $order); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
@@ -52,44 +52,49 @@
                         <ul class="woocommerce-order-overview woocommerce-thankyou-order-details order_details">
 
                             <li class="woocommerce-order-overview__order order">
-                                {{ __('Order number:', 'woocommerce') }}
-                                <strong>{!! $order->get_order_number() !!}</strong>
-                                {{-- phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> --}}
+                                <?php echo e(__('Order number:', 'woocommerce')); ?>
+
+                                <strong><?php echo $order->get_order_number(); ?></strong>
+                                
                             </li>
 
                             <li class="woocommerce-order-overview__date date">
-                                {{ __('Date:', 'woocommerce') }}
-                                <strong>{{ wc_format_datetime($order->get_date_created()) }}</strong>
-                                {{-- phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> --}}
+                                <?php echo e(__('Date:', 'woocommerce')); ?>
+
+                                <strong><?php echo e(wc_format_datetime($order->get_date_created())); ?></strong>
+                                
                             </li>
 
-                            @if (is_user_logged_in() && $order->get_user_id() === get_current_user_id() && $order->get_billing_email())
+                            <?php if(is_user_logged_in() && $order->get_user_id() === get_current_user_id() && $order->get_billing_email()): ?>
                                 <li class="woocommerce-order-overview__email email">
-                                    {{ __('Email:', 'woocommerce') }}
-                                    <strong>{{ $order->get_billing_email() }}</strong>
-                                    {{-- phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> --}}
+                                    <?php echo e(__('Email:', 'woocommerce')); ?>
+
+                                    <strong><?php echo e($order->get_billing_email()); ?></strong>
+                                    
                                 </li>
-                            @endif
+                            <?php endif; ?>
 
                             <li class="woocommerce-order-overview__total total">
-                                {{ __('Total:', 'woocommerce') }}
-                                <strong>{!! $order->get_formatted_order_total() !!}</strong>
-                                {{-- phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> --}}
+                                <?php echo e(__('Total:', 'woocommerce')); ?>
+
+                                <strong><?php echo $order->get_formatted_order_total(); ?></strong>
+                                
                             </li>
 
-                            @if ($order->get_payment_method_title())
+                            <?php if($order->get_payment_method_title()): ?>
                                 <li class="woocommerce-order-overview__payment-method method">
-                                    {{ __('Payment method:', 'woocommerce') }}
-                                    <strong>{!! wp_kses_post($order->get_payment_method_title()) !!} </strong>
+                                    <?php echo e(__('Payment method:', 'woocommerce')); ?>
+
+                                    <strong><?php echo wp_kses_post($order->get_payment_method_title()); ?> </strong>
                                 </li>
-                            @endif
+                            <?php endif; ?>
 
                         </ul>
                     </div>
-                @endif
+                <?php endif; ?>
 
-                @php do_action( 'woocommerce_thankyou_' . $order->get_payment_method(), $order->get_id() ) @endphp
-                @php do_action( 'woocommerce_thankyou', $order->get_id() ) @endphp
+                <?php do_action( 'woocommerce_thankyou_' . $order->get_payment_method(), $order->get_id() ) ?>
+                <?php do_action( 'woocommerce_thankyou', $order->get_id() ) ?>
             </div>
 
 
@@ -98,15 +103,16 @@
                 <div class="ticket-triangulo w-full bg-tk-triangulo-down"></div>
             </div>
         </div>
-    @else
+    <?php else: ?>
         <p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received">
-            {!! apply_filters(
+            <?php echo apply_filters(
                 'woocommerce_thankyou_order_received_text',
                 esc_html__('Thank you. Your order has been received.', 'woocommerce'),
                 null,
-            ) !!} </p>
-        {{--  phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped --}}
+            ); ?> </p>
+        
 
-    @endif
+    <?php endif; ?>
 
 </div>
+<?php /**PATH /srv/www/futurabasura.com/current/web/app/themes/sage/resources/views/woocommerce/checkout/thankyou.blade.php ENDPATH**/ ?>

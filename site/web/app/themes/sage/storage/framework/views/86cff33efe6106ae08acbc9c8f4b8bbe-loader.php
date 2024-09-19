@@ -1,0 +1,2 @@
+<?= \Roots\view('woocommerce.checkout.thankyou', $data ?? get_defined_vars())->render(); ?>
+<?php /**PATH /srv/www/futurabasura.com/current/web/app/themes/sage/resources/views/woocommerce/checkout/thankyou.blade.php ENDPATH**/ ?>
