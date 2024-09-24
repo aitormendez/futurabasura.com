@@ -89,3 +89,4 @@
 
     </div>
 </div>
+<?php /**PATH /srv/www/futurabasura.com/current/web/app/themes/sage/resources/views/partials/mailchimp-form.blade.php ENDPATH**/ ?>

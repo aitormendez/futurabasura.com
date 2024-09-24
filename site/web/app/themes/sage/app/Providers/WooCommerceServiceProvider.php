@@ -281,9 +281,9 @@ class WooCommerceServiceProvider extends ServiceProvider
         // Comprueba si hay artistas asignados y los imprime
         if (!empty($artist_ids)) {
             if (wp_is_mobile()) {
-                echo '<div class="font-bugrino text-lg my-3">' . join(', ', $artist_ids) . '</div>';
+                echo '<div class="uppercase font-bugrino my-3 tracking-widest text-center">' . join(', ', $artist_ids) . '</div>';
             } else {
-                echo '<div class="font-bugrino text-[1.5vw] mt-3">' . join(', ', $artist_ids) . '</div>';
+                echo '<div class="uppercase font-bugrino text-[1.2vw] mt-3 tracking-wide text-center">' . join(', ', $artist_ids) . '</div>';
             }
         }
     }
@@ -314,9 +314,9 @@ class WooCommerceServiceProvider extends ServiceProvider
 
                 // Determinar el estilo basado en si el usuario está en un dispositivo móvil
                 if (wp_is_mobile()) {
-                    echo '<div class="uppercase text-sm text-gray-400 text-center mb-2 w-full">' . $product_type . '</div>';
+                    echo '<div class="uppercase font-fk text-sm text-center mb-2 w-full tracking-wider">' . $product_type . '</div>';
                 } else {
-                    echo '<div class="uppercase text-[1.1vw] text-center border-b border-black w-full">' . $product_type . '</div>';
+                    echo '<div class="uppercase font-fk text-[1.1vw] lg:text-[0.9vw] text-center border-b border-x-negro-fb w-full tracking-wider">' . $product_type . '</div>';
                 }
             }
         }
@@ -368,9 +368,9 @@ class WooCommerceServiceProvider extends ServiceProvider
 
                 // HTML para mostrar los atributos
                 if (wp_is_mobile()) {
-                    echo '<li class="flex w-full justify-between border-t border-black px-2 last:border-b text-sm tracking-wider">';
+                    echo '<li class="flex uppercase font-fk w-full justify-between border-t border-black px-2 pt-1 last:border-b text-sm tracking-wider">';
                 } else {
-                    echo '<li class="flex w-full justify-between border-t border-black px-2 last:border-b text-[1vw] tracking-wider">';
+                    echo '<li class="flex uppercase font-fk w-full justify-between border-t border-black px-2 pt-1 last:border-b text-[1.1vw] lg:text-[0.9vw] tracking-wider">';
                 }
 
                 echo '<span class="grow">' . $attributes_str . '</span>';
@@ -378,6 +378,7 @@ class WooCommerceServiceProvider extends ServiceProvider
                 // Precios
                 $price = $variation_obj->get_regular_price();
                 $sale_price = $variation_obj->get_sale_price();
+
                 if (!empty($sale_price) && $sale_price < $price) {
                     echo '<span class="mr-2"><del>' . wc_price($price) . '</del></span>';
                     echo '<span class="text-red-600">' . wc_price($sale_price) . '</span>';
@@ -422,9 +423,9 @@ class WooCommerceServiceProvider extends ServiceProvider
 
             // HTML para mostrar los atributos
             if (wp_is_mobile()) {
-                echo '<li class="flex w-full justify-between border-y border-black px-2 text-sm tracking-wider">';
+                echo '<li class="flex uppercase font-fk w-full justify-between border-y border-black px-2 pt-1 text-sm tracking-wider">';
             } else {
-                echo '<li class="flex w-full justify-between border-y border-black px-2 text-[1vw] tracking-wider">';
+                echo '<li class="flex uppercase font-fk w-full justify-between border-y border-black px-2 pt-1 text-[1.1vw] lg:text-[0.9vw] tracking-wider">';
             }
 
             echo '<span class="grow">' . $attributes_str . '</span>';
@@ -449,11 +450,12 @@ class WooCommerceServiceProvider extends ServiceProvider
     private function woocommerce_template_loop_product_title()
     {
         if (wp_is_mobile()) {
-            echo '<h2 class="text-sm leading-tight uppercase text-center px-2 mb-20 items-center tracking-wider ' . esc_attr(apply_filters('woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title')) . '">' . get_the_title() . '</h2>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo '<h2 class="text-sm font-fk leading-tight uppercase text-center px-2 mb-20 items-center tracking-wider ' . esc_attr(apply_filters('woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title')) . '">' . get_the_title() . '</h2>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         } else {
-            echo '<h2 class="text-[1.2vw] leading-tight uppercase text-center px-2 grow flex items-center tracking-wider ' . esc_attr(apply_filters('woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title')) . '">' . get_the_title() . '</h2>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo '<h2 class="font-fk text-[1.1vw] lg:text-[0.9vw] leading-tight uppercase text-center px-2 grow flex items-center tracking-wider ' . esc_attr(apply_filters('woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title')) . '">' . get_the_title() . '</h2>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         }
     }
+
 
     /**
      * Renderizar thumbnail dentro de un div card-front.
@@ -495,7 +497,7 @@ class WooCommerceServiceProvider extends ServiceProvider
         echo $this->mostrar_artista_producto();
         $this->woocommerce_template_loop_product_title();
         echo $this->mostrar_tipo_producto();
-        echo '<ul class="w-full mb-4">';
+        echo '<ul class="w-full mb-4 fk-display">';
         echo $this->mostrar_informacion_producto();
         echo '</ul>';
         echo '</div>';
@@ -507,7 +509,7 @@ class WooCommerceServiceProvider extends ServiceProvider
         echo $this->mostrar_tipo_producto();
         echo $this->mostrar_artista_producto();
         $this->woocommerce_template_loop_product_title();
-        echo '<ul class="w-full mb-4">';
+        echo '<ul class="w-full mb-4 fk-display">';
         echo $this->mostrar_informacion_producto();
         echo '</ul>';
         echo '</div>';
