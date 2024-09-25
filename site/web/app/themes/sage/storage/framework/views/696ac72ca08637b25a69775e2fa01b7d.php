@@ -61,8 +61,8 @@
         </div>
     <?php endif; ?>
 
-
-    <div class="relative order-2 flex w-full items-center justify-center p-6 md:order-none md:w-1/2 md:bg-white">
+    <div class="relative order-2 flex w-full items-center justify-center p-6 md:order-none md:w-1/2"
+        style="background-color:<?php echo e(get_field('single_product_thumbnail_bg_color')); ?>">
         <div class="absolute left-6 top-6 w-full uppercase"><?php echo e($product->get_attribute('Product Type')); ?></div>
         <?php if(has_post_thumbnail($post->ID)): ?>
             <?php

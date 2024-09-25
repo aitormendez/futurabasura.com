@@ -3,7 +3,8 @@
 namespace App\Fields\Partials;
 
 use Log1x\AcfComposer\Partial;
-use StoutLogic\AcfBuilder\FieldsBuilder;
+// use StoutLogic\AcfBuilder\FieldsBuilder;
+use Log1x\AcfComposer\Builder;
 
 class Portada extends Partial
 {
@@ -14,7 +15,7 @@ class Portada extends Partial
      */
     public function fields()
     {
-        $aportada = new FieldsBuilder('destacar_en_portada');
+        $aportada = Builder::make('destacar_en_portada');
 
         $aportada
             ->addTrueFalse('mostrar_en_portada', [
@@ -33,14 +34,14 @@ class Portada extends Partial
                 'required' => 0,
                 'default_value' => '',
             ])
-                ->conditional('mostrar_en_portada', '==', '1')
+            ->conditional('mostrar_en_portada', '==', '1')
             ->addColorPicker('color_de_texto', [
                 'label' => 'Color de texto',
                 'instructions' => '',
                 'required' => 0,
                 'default_value' => '',
             ])
-                ->conditional('mostrar_en_portada', '==', '1')
+            ->conditional('mostrar_en_portada', '==', '1')
             ->addRadio('contenido_formato', [
                 'label' => 'Formato de contenido',
                 'instructions' => 'elige el formato con el que se mostrará el contenido en portada',
@@ -56,7 +57,7 @@ class Portada extends Partial
                 'layout' => 'horizontal',
                 'return_format' => 'value',
             ])
-                ->conditional('mostrar_en_portada', '==', '1')
+            ->conditional('mostrar_en_portada', '==', '1')
             ->addRadio('procedencia_img', [
                 'label' => 'Procedencia de la imagen',
                 'instructions' => 'Elige si la imagen se obtiene de la imagen destacada en este post o si se sube una imagen nueva',
@@ -69,8 +70,8 @@ class Portada extends Partial
                 'layout' => 'vertical',
                 'return_format' => 'value',
             ])
-                ->conditional('contenido_formato', '==', 'imagen')
-                ->or('contenido_formato', '==', 'repeticion')
+            ->conditional('contenido_formato', '==', 'imagen')
+            ->or('contenido_formato', '==', 'repeticion')
             ->addImage('contenido_imagen_portada', [
                 'label' => 'Imagen para portada',
                 'instructions' => 'Debe tener un ancho de 1500 px y, probablemente, quede mejor un formato cuadrado (1500px de alto)',
@@ -79,10 +80,10 @@ class Portada extends Partial
                 'library' => 'all',
                 'min_width' => '1500',
             ])
-                ->conditional('contenido_formato', '==', 'imagen')
-                    ->and('procedencia_img', '==', 'nueva')
-                ->or('contenido_formato', '==', 'repeticion')
-                    ->and('procedencia_img', '==', 'nueva')
+            ->conditional('contenido_formato', '==', 'imagen')
+            ->and('procedencia_img', '==', 'nueva')
+            ->or('contenido_formato', '==', 'repeticion')
+            ->and('procedencia_img', '==', 'nueva')
             ->addImage('contenido_imagen_grande_portada', [
                 'label' => 'Imagen full page para portada',
                 'instructions' => 'Debe tener un tamaño de 2000 x 1200 px',
@@ -94,7 +95,7 @@ class Portada extends Partial
                 'max_width' => '2000',
                 'max_height' => '1200',
             ])
-                ->conditional('contenido_formato', '==', 'imagen_grande')
+            ->conditional('contenido_formato', '==', 'imagen_grande')
             ->addGallery('contenido_galeria_portada', [
                 'label' => 'Galería',
                 'instructions' => 'Introduce las imágenes de la galería. 1500 px x 1500 px',
@@ -108,7 +109,7 @@ class Portada extends Partial
                 'max_width' => '2000',
                 'max_height' => '1500',
             ])
-                ->conditional('contenido_formato', '==', 'galeria')
+            ->conditional('contenido_formato', '==', 'galeria')
             ->addGallery('contenido_mosaico_portada', [
                 'label' => 'Galería',
                 'instructions' => 'Introduce las cuatro imágenes del mosaico. 1500 px x 1500 px',
@@ -122,7 +123,7 @@ class Portada extends Partial
                 'max_width' => '1500',
                 'max_height' => '1500',
             ])
-                ->conditional('contenido_formato', '==', 'mosaico')
+            ->conditional('contenido_formato', '==', 'mosaico')
         ;
 
         return $aportada;
