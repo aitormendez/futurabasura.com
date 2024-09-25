@@ -47,30 +47,47 @@
 
     @if ($artista['rand_products'])
         <div
-            class="order-1 flex w-full flex-col items-center bg-white px-6 pb-20 pt-20 text-xl md:-order-none md:border-b-2">
-            <h2 class="artista text-center font-bugrino text-2xl uppercase tracking-max md:text-3xl"><a
+            class="order-1 flex w-full flex-col items-center bg-white px-6 pb-20 pt-14 text-xl md:-order-none md:border-b-2">
+            <h2 class="artista text-center font-bugrino text-2xl uppercase tracking-widest md:text-3xl"><a
                     href="{{ $artista['link'] }}">{{ $artista['artista']->name }}</a></h2>
-            <h1 class="product_title entry-title md:text-md my-10 text-center text-[1.1rem] font-bold tracking-widest">
+            <h1 class="product_title entry-title md:text-md my-6 text-center font-fk text-[1.1rem] tracking-wider">
                 {!! get_the_title() !!}</h1>
 
-            <div class="excerpt md:text-md max-w-screen-sm text-center text-[1.1rem]">
+            <div class="excerpt md:text-md max-w-screen-md text-center font-fk text-[1.1rem]">
                 {!! $post->post_excerpt !!}
             </div>
         </div>
     @endif
 
 
-    <div
-        class="relative order-2 flex w-full items-center justify-center p-6 md:order-none md:w-1/2 md:border-r-2 md:bg-white">
+    <div class="relative order-2 flex w-full items-center justify-center p-6 md:order-none md:w-1/2 md:bg-white">
         <div class="absolute left-6 top-6 w-full uppercase">{{ $product->get_attribute('Product Type') }}</div>
         @if (has_post_thumbnail($post->ID))
             @php
                 $thumbnail_id = get_post_thumbnail_id($post->ID);
                 $image_metadata = wp_get_attachment_metadata($thumbnail_id);
                 $is_horizontal = $image_metadata['width'] > $image_metadata['height'];
+
+                // Obtener el término 'uncategorized' para obtener su ID
+                $uncategorized_term = get_term_by('slug', 'uncategorized', 'product_cat');
+                $uncategorized_term_id = $uncategorized_term ? $uncategorized_term->term_id : 0;
+
+                // Obtener las categorías del producto actual, excluyendo 'uncategorized'
+                $product_categories = wp_get_post_terms(get_the_ID(), 'product_cat', [
+                    'exclude' => [$uncategorized_term_id],
+                ]);
             @endphp
 
-            <div class="product-featured-image {{ $is_horizontal ? 'w-3/4' : 'w-[40%]' }}">
+            <div class="product-featured-image {{ $is_horizontal ? 'w-[55%]' : 'w-1/3' }}">
+                @if (!empty($product_categories) && !is_wp_error($product_categories))
+                    <ul class="absolute left-0 top-0 p-6 font-fk text-sm uppercase tracking-wider">
+                        @foreach ($product_categories as $category)
+                            <li>{{ $category->name }}</li>
+                        @endforeach
+                    </ul>
+
+                @endif
+
                 <img src="{{ get_the_post_thumbnail_url($post->ID, 'large') }}" alt="{{ get_the_title($post->ID) }}">
             </div>
         @endif
@@ -94,7 +111,7 @@
     </div>
 
 
-    <div class="order-3 flex pt-10 md:order-none">
+    <div class="order-3 flex w-full md:order-none">
         @php
             /**
              * Hook: woocommerce_single_product_summary.
