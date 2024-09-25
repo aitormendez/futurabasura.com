@@ -11,7 +11,7 @@ defined('ABSPATH') || exit();
 
 global $product;
 ?>
-<div class="woocommerce-variation-add-to-cart variations_button mt-10 w-full">
+<div class="woocommerce-variation-add-to-cart variations_button relative mt-10 w-full">
     <?php do_action('woocommerce_before_add_to_cart_button'); ?>
 
     <?php
@@ -27,7 +27,7 @@ global $product;
     ?>
 
     <div class="inline-block">
-        <div class="my-3 mr-6 flex justify-between bg-white text-sm">
+        <div class="mr-6 flex justify-between bg-white text-sm">
             <div class="quantity flex">
                 <div id="quantityInput_remove"
                     class="inline-flex h-full cursor-pointer select-none items-center border-r-2 px-6 text-2xl hover:bg-gris-claro-fb">
@@ -50,7 +50,7 @@ global $product;
     </div>
 
     <button type="submit"
-        class="transition-colors<?php echo esc_attr(wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : ''); ?> bg-azul px-10 py-3 uppercase tracking-max text-white clip-path-elipse hover:bg-allo hover:text-black"><?php echo esc_html($product->single_add_to_cart_text()); ?></button>
+        class="transition-colors<?php echo esc_attr(wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : ''); ?> -translate-x-1/2 -translate-y-1/2 bg-azul px-10 py-3 uppercase tracking-max text-white clip-path-elipse hover:bg-allo hover:text-black md:absolute md:left-1/2 md:top-1/2"><?php echo esc_html($product->single_add_to_cart_text()); ?></button>
 
     <?php do_action('woocommerce_after_add_to_cart_button'); ?>
 

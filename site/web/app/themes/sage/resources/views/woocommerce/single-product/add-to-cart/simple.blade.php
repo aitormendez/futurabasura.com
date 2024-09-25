@@ -1,5 +1,4 @@
 @php
-
     /**
      * Simple product add to cart
      *
@@ -25,8 +24,6 @@
     }
 
 @endphp
-
-{!! wc_get_stock_html($product) !!}
 
 
 @if ($product->is_in_stock())
@@ -65,7 +62,8 @@
                 @if ($precio['is_on_sale'])
                     <div class="price-on-sale flex items-center px-4 text-2xl text-rojo">
                         <del>{{ $precio['regular_price'] }}</del> <del
-                            class="woocommerce_price_euro_letter block">&nbsp;EUR</del></div>
+                            class="woocommerce_price_euro_letter block">&nbsp;EUR</del>
+                    </div>
                 @endif
                 <div class="px-8 py-4 text-2xl text-gris-fb">
                     {!! $precio['price'] !!} <span>€</span>
@@ -94,7 +92,7 @@
         {{-- termina tabla nueva --}}
 
         <button type="submit" name="add-to-cart" value="{{ $product->get_id() }}"
-            class="bg-azul px-20 py-3 uppercase tracking-max text-white transition-colors clip-path-elipse hover:bg-allo hover:text-black">{{ $product->single_add_to_cart_text() }}</button>
+            class="bg-azul px-10 py-3 uppercase tracking-max text-white transition-colors clip-path-elipse hover:bg-allo hover:text-black">{{ $product->single_add_to_cart_text() }}</button>
 
         @php do_action( 'woocommerce_after_add_to_cart_button' ); @endphp
     </form>

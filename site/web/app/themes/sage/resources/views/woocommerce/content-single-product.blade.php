@@ -60,7 +60,7 @@
     @endif
 
     <div class="relative order-2 flex w-full items-center justify-center p-6 md:order-none md:w-1/2"
-        style="background-color:{{ get_field('single_product_thumbnail_bg_color') }}">
+        style="background-color: {{ get_field('single_product_thumbnail_bg_color') ?: '#ffffff' }}">
         <div class="absolute left-6 top-6 w-full uppercase">{{ $product->get_attribute('Product Type') }}</div>
         @if (has_post_thumbnail($post->ID))
             @php
@@ -121,8 +121,8 @@
              * @hooked woocommerce_template_single_price - 10 REMOVED
              * @hooked woocommerce_template_single_excerpt - 20 REMOVED
              * @hooked woocommerce_template_single_add_to_cart - 30
-             * @hooked woocommerce_template_single_meta - 40
-             * @hooked woocommerce_template_single_sharing - 50
+             * @hooked woocommerce_template_single_meta - 40 REMOVED
+             * @hooked woocommerce_template_single_sharing - 50 REMOVED
              * @hooked WC_Structured_Data::generate_product_data() - 60
              */
             do_action('woocommerce_single_product_summary');
