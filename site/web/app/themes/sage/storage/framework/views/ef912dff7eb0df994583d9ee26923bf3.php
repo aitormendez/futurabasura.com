@@ -30,7 +30,7 @@
 
     <?php do_action( 'woocommerce_before_add_to_cart_form' ) ?>
 
-    <form class="cart" action="<?php echo esc_url(apply_filters('woocommerce_add_to_cart_form_action', $product->get_permalink())); ?>" method="post" enctype='multipart/form-data'>
+    <form class="cart relative" action="<?php echo esc_url(apply_filters('woocommerce_add_to_cart_form_action', $product->get_permalink())); ?>" method="post" enctype='multipart/form-data'>
 
         <?php do_action( 'woocommerce_before_add_to_cart_button' ) ?>
 
@@ -57,8 +57,8 @@
         <?php do_action( 'woocommerce_after_add_to_cart_quantity' ) ?>
 
         
-        <div class="inline-block">
-            <div class="my-3 mr-6 flex justify-between bg-white text-sm">
+        <div class="md:inline-block">
+            <div class="my-3 flex justify-between bg-white text-sm md:mr-6">
                 <?php if($precio['is_on_sale']): ?>
                     <div class="price-on-sale flex items-center px-4 text-2xl text-rojo">
                         <del><?php echo e($precio['regular_price']); ?></del> <del
@@ -92,7 +92,7 @@
         
 
         <button type="submit" name="add-to-cart" value="<?php echo e($product->get_id()); ?>"
-            class="bg-azul px-10 py-3 uppercase tracking-max text-white transition-colors clip-path-elipse hover:bg-allo hover:text-black"><?php echo e($product->single_add_to_cart_text()); ?></button>
+            class="absolute left-1/2 block -translate-x-1/2 translate-y-1/2 bg-azul px-10 py-3 uppercase tracking-max text-white transition-colors clip-path-elipse hover:bg-allo hover:text-black"><?php echo e($product->single_add_to_cart_text()); ?></button>
 
         <?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
     </form>
