@@ -151,7 +151,7 @@ class Mbe_Shipping_Model_Ws
 		$wsPassword = $this->helper->getWsPassword();
 		$system = $this->helper->getCountry();
 
-		$result = false;
+		$result = [];
 
 		if ($wsUrl && $wsUsername && $wsPassword) {
 			$items = $this->setItems($weight);
@@ -196,6 +196,7 @@ class Mbe_Shipping_Model_Ws
 			}
 		}
 
+		if (empty($result)) {$result = false;} // to keep result retro-compatible
 		return $result;
 	}
 

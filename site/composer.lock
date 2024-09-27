@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "68c76b7371bb122d3f91a0308fe024d2",
+    "content-hash": "a893dfb5fe73528d4885b0fbc06f2e0d",
     "packages": [
         {
             "name": "brick/math",
@@ -3033,6 +3033,68 @@
                 }
             ],
             "time": "2024-06-05T23:34:45+00:00"
+        },
+        {
+            "name": "log1x/sage-html-forms",
+            "version": "v1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Log1x/sage-html-forms.git",
+                "reference": "53c76630b39ae7eb359c291aac5ce41286a3790a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Log1x/sage-html-forms/zipball/53c76630b39ae7eb359c291aac5ce41286a3790a",
+                "reference": "53c76630b39ae7eb359c291aac5ce41286a3790a",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "squizlabs/php_codesniffer": "^3.5"
+            },
+            "type": "package",
+            "extra": {
+                "acorn": {
+                    "providers": [
+                        "Log1x\\HtmlForms\\HtmlFormsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Log1x\\HtmlForms\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brandon Nifong",
+                    "email": "brandon@tendency.me"
+                }
+            ],
+            "description": "Create forms using HTMLForms.io and Sage 10 Blade components",
+            "keywords": [
+                "htmlforms",
+                "roots",
+                "sage",
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/log1x/sage-html-forms/issues",
+                "source": "https://github.com/Log1x/sage-html-forms/tree/v1.0.6"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/Log1x",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-11-16T23:06:21+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
@@ -6948,6 +7010,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/favicon-by-realfavicongenerator/"
+        },
+        {
+            "name": "wpackagist-plugin/html-forms",
+            "version": "1.4.0",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/html-forms/",
+                "reference": "tags/1.4.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/html-forms.1.4.0.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/html-forms/"
         },
         {
             "name": "wpackagist-plugin/query-monitor",

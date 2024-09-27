@@ -2,10 +2,12 @@
 /*
 	Plugin Name: MBE eShip
 	Description: Mail Boxes Etc. Online MBE Plugin integration for main Ecommerce platforms.
-	Version: 2.2.3
+	Version: 2.2.4
 	Author: MBE Worldwide S.p.A.
 	Author URI: https://www.mbeglobal.com/
 	Text Domain: mail-boxes-etc
+    WC requires at least: 6.2
+    WC tested up to: 8.2
 	Domain Path: /languages
 */
 
@@ -21,8 +23,8 @@ if ( ! defined( 'MBE_ESHIP_PLUGIN_URL' ) ) {
 	define( "MBE_ESHIP_PLUGIN_URL", plugin_dir_url( __FILE__ ) );
 }
 
-if ( ! defined( 'MBE_ESHIP_PLUGIN_LOG_DIR' ) ) {
-	define( "MBE_ESHIP_PLUGIN_LOG_DIR", MBE_ESHIP_PLUGIN_DIR . 'log' );
+if ( ! defined( 'MBE_ESHIP_PLUGIN_OLD_LOG_DIR' ) ) {
+	define( "MBE_ESHIP_PLUGIN_OLD_LOG_DIR", MBE_ESHIP_PLUGIN_DIR . 'log' );
 }
 
 if ( ! function_exists( 'get_plugin_data' ) ) {
@@ -317,6 +319,17 @@ function mbe_eship_update_db_check() {
 	}
 }
 
+function declare_compatibility() {
+//    HPOS
+	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+	}
+//    BLOCK CHECKOUT
+	if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', __FILE__, false );
+	}
+}
+
 register_uninstall_hook( __FILE__, 'mbe_eship_uninstall_db_options' );
 register_activation_hook( __FILE__, 'mbe_eship_activation_check' );
 register_activation_hook( __FILE__, 'mbe_eship_install_db' );
@@ -327,6 +340,7 @@ register_activation_hook( __FILE__, 'mbe_eship_install_db' );
 add_action( 'plugins_loaded', 'mbe_eship_update_db_check', 9 );
 add_action( 'plugins_loaded', 'mbe_eship_update_new_settings_check', 10 );
 add_action( 'plugins_loaded', 'mbe_eship_check_log_folder_htaccess', 10 );
+add_action( 'before_woocommerce_init', 'declare_compatibility');
 
 
 /**
@@ -517,7 +531,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 						'wf_mbe_delivery_point_set_shipping_address'
 					) );
 
-					// Set Delivery Point shipment metafield value
+					// Set Delivery Point shipment metafield value for the "old" shortcode checkout
 					add_action( 'woocommerce_checkout_update_order_meta', array(
 						$this,
 						'wf_mbe_delivery_point_set_meta_field'
@@ -539,10 +553,16 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 					add_action( 'woocommerce_cart_emptied', array($this,'wf_mbe_remove_delivery_point_session_variable') );
 					add_action( 'woocommerce_cart_is_empty', array($this,'wf_mbe_remove_delivery_point_session_variable') );
 
-					// Set Custom Mapping metafield value
+					// Set Custom Mapping metafield value for the "old" shortcode checkout
 					add_action('woocommerce_checkout_update_order_meta', array(
 						$this,
 						'wf_mbe_wooCommerce_shipping_custom_mapping_meta_field'
+					) );
+
+					// Set Custom Mapping metafield value for the "new" blocks checkout
+					add_action('woocommerce_store_api_checkout_update_order_meta', array(
+						$this,
+						'wf_mbe_wooCommerce_shipping_custom_mapping_meta_field_checkout_block'
 					) );
 
 					// Add track ID to transational emails
@@ -560,7 +580,7 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
                     // Set or update pickup data on shipment creation
 					add_action(MBE_ESHIP_ID.'_before_create_pickup', array($this, 'mbe_edit_pickup_data' ));
 
-                    // Show Tax and Duties in Checkout
+                    // Show Tax and Duties in Checkout shortcodes
                     add_action('woocommerce_review_order_before_submit', array($this, 'mbe_show_tax_and_duties_checkout_message' ));
 
                     add_action( 'woocommerce_cart_calculate_fees', array($this, 'mbe_eship_add_tax_and_duties_fee' ) );
@@ -1265,6 +1285,18 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 					}
 				}
 			}
+
+			function wf_mbe_wooCommerce_shipping_custom_mapping_meta_field_checkout_block( WC_Order $order ) {
+				if ( $this->helper->isMbeShippingCustomMapping( $this->helper->getShippingMethod( $order ) ) ) {
+					if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
+						$order->update_meta_data(woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_CUSTOM_MAPPING, 'yes');
+						$order->save();
+					} else {
+						update_post_meta( $order->get_id(), woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_CUSTOM_MAPPING, 'yes' );
+					}
+				}
+            }
+
 
 			function mbe_woocommerce_email_track_id( $order, $sent_to_admin, $plain_text, $email ) {
 				$mailArray   = [ 'customer_invoice', 'customer_completed_order' ];

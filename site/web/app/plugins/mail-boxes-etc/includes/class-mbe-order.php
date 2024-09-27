@@ -615,6 +615,7 @@ class Mbe_E_Link_Order_List_Table extends WP_List_Table
 				    )
 			    )
 		    );
+			// TODO : wc_get_orders must be used only for HPOS, as for legacy it discards meta_query and field_query
 		    $mbeOrders = wc_get_orders( $order_query_args );
 
 //		    $newOrders = wc_get_orders( $order_query_args );
@@ -632,7 +633,7 @@ class Mbe_E_Link_Order_List_Table extends WP_List_Table
 		    $max_num_pages = $mbeOrders->max_num_pages;
 //	        $total_items = $mbeOrders->total??0;
 		    // $total_items = count($mbeOrders);
-		    $this->items = $mbeOrders;
+		    $this->items = []; // this will be overwritten below
 
 		    // Check in case the user has attempted to page beyond the available range of orders.
 		    if ( 0 === $max_num_pages && $order_query_args['page'] > 1 ) {

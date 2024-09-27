@@ -58,7 +58,7 @@ class Mbe_Shipping_CsvShippingToTable extends Mbe_Shipping_CsvFileToTable
 
 		$i      = 1;
 
-		$allowedShipmentServicesArray = $this->shippingHelper->getAllowedShipmentServices();
+		$allowedShipmentServicesArray = $this->shippingHelper->getAllowedShipmentServicesArray();
 		$maxShipmentWeight            = $this->shippingHelper->getMaxShipmentWeight();
 
 		$errors=false;

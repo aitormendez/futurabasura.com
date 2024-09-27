@@ -35,7 +35,7 @@ class Mbe_Settings extends WC_Settings_Page {
 		$this->csv_package_to_table         = new Mbe_Shipping_CsvPackageToTable();
 		$this->csv_package_product_to_table = new Mbe_Shipping_CsvPackageProductToTable();
 		$this->customer                     = $this->ws->getCustomer();
-		$this->selectedServices             = $this->helper->getAllowedShipmentServices();
+		$this->selectedServices             = $this->helper->getAllowedShipmentServicesArray();
 		$this->availableShipping            = $this->ws->getAllowedShipmentServices( $this->customer );
 
         $this->mbeAvailableCountries = [

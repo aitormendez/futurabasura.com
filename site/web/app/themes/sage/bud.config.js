@@ -16,7 +16,7 @@ export default async (app) => {
   app
     .entry('app', ['@scripts/app', '@styles/app'])
     .entry('editor', ['@scripts/editor', '@styles/editor'])
-    .assets(['images', 'svg']);
+    .assets(['images']);
 
   /**
    * Set public path
@@ -35,7 +35,7 @@ export default async (app) => {
   app
     .setUrl('http://localhost:3000')
     .setProxyUrl('https://futurabasura.test')
-    .watch(['app', 'resources']);
+    .watch(['resources/views', 'app']);
 
   /**
    * Generate WordPress `theme.json`
@@ -47,21 +47,6 @@ export default async (app) => {
    */
   app.wpjson
     .setSettings({
-      layout: {
-        contentSize: '800px',
-        wideSize: '1200px',
-      },
-      spacing: {
-        margin: true,
-        padding: true,
-        blockGap: null,
-        units: ['px', 'em', 'rem', 'vh', 'vw'],
-        spacingSizes: [
-          { name: 'Small', slug: 'small', size: '8px' },
-          { name: 'Medium', slug: 'medium', size: '16px' },
-          { name: 'Large', slug: 'large', size: '32px' },
-        ],
-      },
       background: {
         backgroundImage: true,
       },
@@ -75,47 +60,21 @@ export default async (app) => {
         duotone: [],
       },
       custom: {
+        spacing: {},
         typography: {
           'font-size': {},
           'line-height': {},
         },
       },
+      spacing: {
+        padding: true,
+        units: ['px', '%', 'em', 'rem', 'vw', 'vh'],
+      },
       typography: {
         customFontSize: false,
-      },
-      appearanceTools: true,
-      border: {
-        color: true,
-        radius: true,
-        style: true,
-        width: true,
-      },
-      color: {
-        link: true,
-        palette: [
-          {
-            name: 'Black',
-            slug: 'black',
-            color: '#000000',
-          },
-          {
-            name: 'White',
-            slug: 'white',
-            color: '#FFFFFF',
-          },
-        ],
-      },
-      spacing: {
-        blockGap: true,
-        margin: true,
-        padding: true,
-      },
-      typography: {
-        lineHeight: true,
       },
     })
     .useTailwindColors()
     .useTailwindFontFamily()
-    .useTailwindFontSize()
-    .enable();
+    .useTailwindFontSize();
 };

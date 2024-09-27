@@ -1,2 +1,0 @@
-<?= \Roots\view('woocommerce.content-single-product', $data ?? get_defined_vars())->render(); ?>
-<?php /**PATH /srv/www/futurabasura.com/current/web/app/themes/sage/resources/views/woocommerce/content-single-product.blade.php ENDPATH**/ ?>

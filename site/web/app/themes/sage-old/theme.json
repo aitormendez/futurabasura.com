@@ -1,0 +1,204 @@
+{
+  "__generated__": "⚠️ This file is generated. Do not edit.",
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 2,
+  "settings": {
+    "layout": {
+      "contentSize": "800px",
+      "wideSize": "1200px"
+    },
+    "spacing": {
+      "blockGap": true,
+      "margin": true,
+      "padding": true
+    },
+    "background": {
+      "backgroundImage": true
+    },
+    "color": {
+      "link": true,
+      "palette": [
+        {
+          "color": "#3e2b2f",
+          "name": "Negro-fb",
+          "slug": "negro-fb"
+        },
+        {
+          "color": "#ada3a4",
+          "name": "Gris-fb",
+          "slug": "gris-fb"
+        },
+        {
+          "color": "#dfd1d2",
+          "name": "Gris-claro-fb",
+          "slug": "gris-claro-fb"
+        },
+        {
+          "color": "#ffff00",
+          "name": "Allo",
+          "slug": "allo"
+        },
+        {
+          "color": "#dbffe9",
+          "name": "Allo-claro",
+          "slug": "allo-claro"
+        },
+        {
+          "color": "#0000ff",
+          "name": "Azul",
+          "slug": "azul"
+        },
+        {
+          "color": "#00ffff",
+          "name": "Azul-claro",
+          "slug": "azul-claro"
+        },
+        {
+          "color": "#af0000",
+          "name": "Rojo",
+          "slug": "rojo"
+        },
+        {
+          "color": "transparent",
+          "name": "Transparent",
+          "slug": "transparent"
+        },
+        {
+          "color": "white",
+          "name": "White",
+          "slug": "white"
+        },
+        {
+          "color": "black",
+          "name": "Black",
+          "slug": "black"
+        },
+        {
+          "color": "rgb(var(--media-brand) / 1)",
+          "name": "Media-brand",
+          "slug": "media-brand"
+        },
+        {
+          "color": "rgb(var(--media-focus) / 1)",
+          "name": "Media-focus",
+          "slug": "media-focus"
+        }
+      ]
+    },
+    "custom": {
+      "typography": {
+        "font-size": {},
+        "line-height": {}
+      }
+    },
+    "typography": {
+      "lineHeight": true,
+      "fontFamilies": [
+        {
+          "fontFamily": "arial,sans-serif",
+          "name": "Arial",
+          "slug": "sans"
+        },
+        {
+          "fontFamily": "times-new-roman,times,serif",
+          "name": "Times-new-roman",
+          "slug": "serif"
+        },
+        {
+          "fontFamily": "ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,\"Liberation Mono\",\"Courier New\",monospace",
+          "name": "Ui-monospace",
+          "slug": "mono"
+        },
+        {
+          "fontFamily": "Bugrino,sans-serif",
+          "name": "Bugrino",
+          "slug": "bugrino"
+        },
+        {
+          "fontFamily": "FK Display,sans-serif",
+          "name": "FK Display",
+          "slug": "fk"
+        },
+        {
+          "fontFamily": "ArialBlack,sans-serif",
+          "name": "ArialBlack",
+          "slug": "arialblack"
+        }
+      ],
+      "fontSizes": [
+        {
+          "name": "xs",
+          "size": "0.75rem",
+          "slug": "xs"
+        },
+        {
+          "name": "sm",
+          "size": "0.875rem",
+          "slug": "sm"
+        },
+        {
+          "name": "base",
+          "size": "1rem",
+          "slug": "base"
+        },
+        {
+          "name": "lg",
+          "size": "1.125rem",
+          "slug": "lg"
+        },
+        {
+          "name": "xl",
+          "size": "1.25rem",
+          "slug": "xl"
+        },
+        {
+          "name": "2xl",
+          "size": "1.5rem",
+          "slug": "2xl"
+        },
+        {
+          "name": "3xl",
+          "size": "1.875rem",
+          "slug": "3xl"
+        },
+        {
+          "name": "4xl",
+          "size": "2.25rem",
+          "slug": "4xl"
+        },
+        {
+          "name": "5xl",
+          "size": "3rem",
+          "slug": "5xl"
+        },
+        {
+          "name": "6xl",
+          "size": "3.75rem",
+          "slug": "6xl"
+        },
+        {
+          "name": "7xl",
+          "size": "4.5rem",
+          "slug": "7xl"
+        },
+        {
+          "name": "8xl",
+          "size": "6rem",
+          "slug": "8xl"
+        },
+        {
+          "name": "9xl",
+          "size": "8rem",
+          "slug": "9xl"
+        }
+      ]
+    },
+    "appearanceTools": true,
+    "border": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    }
+  }
+}

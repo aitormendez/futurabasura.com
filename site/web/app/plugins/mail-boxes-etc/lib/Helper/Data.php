@@ -977,6 +977,9 @@ class Mbe_Shipping_Helper_Data
 	}
 
 	public function getMbeLogDir() {
+		//Check the old log files and delete it if any
+		$this->deleteOldLogs();
+
 		$mbeLogDir = $this->getOption(self::XML_PATH_MBE_LOG_FOLDER_NAME);
 
 		if(empty($mbeLogDir)) {
@@ -1608,6 +1611,7 @@ class Mbe_Shipping_Helper_Data
 
 	public function select_mbe_ids()
 	{
+		// TODO filter out status wc-checkout-draft
 		global $wpdb;
 		$postmetaTableName = $wpdb->prefix . 'postmeta';
 		$shippingMethods = MBE_ESHIP_ID.'|wf_mbe_shipping'; // search also for orders created with the old plugin
@@ -1622,6 +1626,7 @@ class Mbe_Shipping_Helper_Data
 
 	public function select_custom_mapping_ids()
 	{
+		// TODO filter out status wc-checkout-draft from main table
 		if ( \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled() ) {
 			global $wpdb;
 			return "SELECT DISTINCT order_id FROM {$wpdb->prefix}wc_orders_meta WHERE meta_key = '".woocommerce_mbe_tracking_admin::SHIPMENT_SOURCE_TRACKING_CUSTOM_MAPPING."' AND meta_value = 'yes'";
@@ -1724,7 +1729,7 @@ class Mbe_Shipping_Helper_Data
 	}
 
 	public function isEnabledDeliveryPointService( $shippingOption ) {
-		return in_array( $shippingOption->Service, MBE_ESTIMATE_DELIVERY_POINT_SERVICES ) && in_array( $shippingOption->Service, $this->getAllowedShipmentServices() );
+		return in_array( $shippingOption->Service, MBE_ESTIMATE_DELIVERY_POINT_SERVICES ) && in_array( $shippingOption->Service, $this->getAllowedShipmentServicesArray() );
 	}
 
 	public function getLowestPriceService( $currentOption, $existingOption ) {
@@ -1794,7 +1799,7 @@ class Mbe_Shipping_Helper_Data
 		if (is_array($shippingMethod)) {
 			$shippingMethod = $shippingMethod[0];
 		}
-		return preg_match( '/' . MBE_ESHIP_ID . '|wf_mbe_shipping/', $shippingMethod );
+		return preg_match( '/' . MBE_ESHIP_ID . '|wf_mbe_shipping/', $shippingMethod??'' );
 	}
 
 	/**
@@ -1814,6 +1819,25 @@ class Mbe_Shipping_Helper_Data
 
 		return true;
 
+	}
+
+	/**
+	 * @return void
+	 */
+	protected function deleteOldLogs(): void
+	{
+		if (file_exists(MBE_ESHIP_PLUGIN_OLD_LOG_DIR . DIRECTORY_SEPARATOR . 'mbe_ws.log')) {
+			wp_delete_file(MBE_ESHIP_PLUGIN_OLD_LOG_DIR . DIRECTORY_SEPARATOR . 'mbe_ws.log');
+		}
+		if (file_exists(MBE_ESHIP_PLUGIN_OLD_LOG_DIR . DIRECTORY_SEPARATOR . 'mbe_shipping.log')) {
+			wp_delete_file(MBE_ESHIP_PLUGIN_OLD_LOG_DIR . DIRECTORY_SEPARATOR . 'mbe_shipping.log');
+		}
+		if (file_exists(MBE_ESHIP_PLUGIN_OLD_LOG_DIR . DIRECTORY_SEPARATOR . '.htaccess')) {
+			wp_delete_file(MBE_ESHIP_PLUGIN_OLD_LOG_DIR . DIRECTORY_SEPARATOR . '.htaccess');
+		}
+		if (file_exists(MBE_ESHIP_PLUGIN_OLD_LOG_DIR)) {
+			rmdir(MBE_ESHIP_PLUGIN_OLD_LOG_DIR);
+		}
 	}
 
 }
