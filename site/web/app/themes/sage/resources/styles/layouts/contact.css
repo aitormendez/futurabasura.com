@@ -1,0 +1,95 @@
+.contact {
+  .wpforms-form {
+    padding-bottom: 2rem;
+
+    .wpforms-field-row-block {
+      border-bottom: 1px solid black;
+    }
+
+    .wpforms-field-name,
+    .wpforms-field-textarea,
+    .wpforms-field-email {
+      label {
+        display: none;
+
+        &.wpforms-error {
+          margin-left: 1.5rem;
+          color: red;
+        }
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 1.5rem;
+        padding-bottom: 1.5rem;
+        font-size: 2rem;
+        letter-spacing: 0.05em;
+        line-height: 1.2em;
+
+        &:focus {
+          background-color: #1b1b1b;
+          color: #fff;
+        }
+
+        &::placeholder {
+          color: #b6b6b6;
+        }
+      }
+
+      textarea {
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;
+        border-right: none;
+        border-left: none;
+
+        &:focus {
+          box-shadow: none;
+          background-color: #1b1b1b;
+          color: #fff;
+        }
+      }
+    }
+
+    .wpforms-field-checkbox {
+      padding: 1.5rem;
+
+      input {
+        border: 1px solid black !important;
+
+        &:checked {
+          border: none !important;
+        }
+      }
+
+      .wpforms-field-label-inline {
+        margin-left: 1rem;
+      }
+
+      ul {
+        li {
+          padding-left: 0;
+
+          &::before {
+            content: none;
+          }
+        }
+      }
+    }
+
+    .wpforms-recaptcha-container {
+      padding-left: 1.5rem;
+    }
+
+    .wpforms-submit-container {
+      padding: 3rem 1.5rem 1rem;
+    }
+
+    button[type='submit'] {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 1.2rem;
+    }
+  }
+}
