@@ -28,7 +28,7 @@
                 <div class="h-10 w-full bg-allo-claro"></div>
             </div>
 
-            <div class="ticket-body bg-allo-claro">
+            <div class="ticket-body bg-allo-claro pb-20">
                 @php do_action( 'woocommerce_before_thankyou', $order->get_id() ) @endphp
 
                 @if ($order->has_status('failed'))
