@@ -234,3 +234,28 @@ add_filter('redirect_canonical', function ($redirect_url) {
     }
     return $redirect_url;
 });
+
+
+/**
+ * Permitir temporalmente que el servidor de WordPress acepte solicitudes CORS desde localhost:3000
+ */
+add_action('init', function () {
+    // Verificar si el encabezado HTTP_ORIGIN está presente
+    $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+
+    // Permitir solicitudes desde localhost:3000
+    if ($origin === 'http://localhost:3000') {
+        // Añadir los encabezados CORS necesarios
+        header("Access-Control-Allow-Origin: $origin");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+        header("Access-Control-Allow-Credentials: true");
+        header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+    }
+
+    // Manejar las solicitudes OPTIONS
+    if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        // Enviar respuesta 200 OK y terminar la ejecución
+        status_header(200);
+        exit();
+    }
+});
