@@ -47,13 +47,14 @@
 
     @if ($artista['rand_products'])
         <div
-            class="order-1 flex w-full flex-col items-center bg-white px-6 pb-20 pt-14 text-xl md:-order-none md:border-b-2">
-            <h2 class="artista text-center font-bugrino text-2xl uppercase tracking-widest md:text-3xl"><a
-                    href="{{ $artista['link'] }}">{{ $artista['artista']->name }}</a></h2>
-            <h1 class="product_title entry-title md:text-md my-6 text-center font-fk text-[1.1rem] tracking-wider">
+            class="order-1 flex w-full flex-col items-center bg-white px-6 pb-20 pt-6 text-xl md:-order-none md:border-b-2 md:pt-14">
+            <h2 class="artista text-center font-bugrino text-xl uppercase tracking-wider md:text-3xl">
+                {{ $artista['artista']->name }}</h2>
+            <h1
+                class="product_title entry-title md:text-md my-6 text-center font-fk text-[1rem] uppercase tracking-wider">
                 {!! get_the_title() !!}</h1>
 
-            <div class="excerpt md:text-md max-w-screen-md text-center font-fk text-[1.1rem]">
+            <div class="excerpt md:text-md max-w-screen-md text-center font-fk text-[1rem] leading-snug">
                 {!! $post->post_excerpt !!}
             </div>
         </div>
