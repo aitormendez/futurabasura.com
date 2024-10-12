@@ -43,6 +43,10 @@
     </div>
     {{-- /desktop --}}
 
+    @if (wp_is_mobile())
+        @include('partials.mailchimp-form')
+    @endif
+
     {{-- mobile --}}
     <div class="flex w-full flex-wrap font-bugrino md:hidden">
         <div class="arriba my-4 flex h-[50vw] w-full flex-wrap">
@@ -58,7 +62,9 @@
     </div>
     {{-- /mobile --}}
 
-    @include('partials.mailchimp-form')
+    @if (!wp_is_mobile())
+        @include('partials.mailchimp-form')
+    @endif
 
     {{-- desktop --}}
     <div class="my-6 hidden w-full flex-wrap bg-white pb-6 md:flex">

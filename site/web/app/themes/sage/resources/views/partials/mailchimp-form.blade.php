@@ -1,6 +1,6 @@
-<div class="formulario mb-20 mt-12 flex w-full flex-col items-center md:!flex-row md:bg-white">
+<div class="formulario flex w-full flex-col items-center md:mb-20 md:mt-12 md:!flex-row md:bg-white">
     <div
-        class="sombra flex w-[25vw] shrink-0 grow-0 flex-col items-center justify-center py-6 text-lg leading-relaxed md:py-0">
+        class="sombra flex w-[25vw] shrink-0 grow-0 flex-col items-center justify-center py-6 text-2xl leading-tight md:py-0 md:text-lg md:leading-relaxed">
         <span>Join</span><span>newsletter</span>
     </div>
     <div class="flex w-full border-black bg-white md:border-l-2">
