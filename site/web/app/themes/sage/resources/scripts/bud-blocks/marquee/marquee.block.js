@@ -16,6 +16,7 @@ const CustomIcon = (
 );
 
 export default {
+  apiVersion: 2,
   name: `sage/marquee`,
   title: `Marquee`,
   icon: CustomIcon,

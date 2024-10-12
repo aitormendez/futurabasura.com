@@ -1,15 +1,18 @@
 export function selectorArtista() {
-  var select = '.dropdown_artist';
+  const select = document.querySelector('.dropdown_artist');
 
   function onProductTaxChange() {
-    if ($(select).val() !== '') {
-      location.href = fb.homeUrl + '/artists/' + $(select).val();
-      // location.href = fb.homeUrl+ '/shop?&artist='+$(select).val();
+    if (select && select.value !== '') {
+      window.location.href = fb.homeUrl + '/artists/' + select.value;
+      // window.location.href = fb.homeUrl + '/shop?&artist=' + select.value;
     } else {
-      location.href = fb.homeUrl + '/shop/';
+      window.location.href = fb.homeUrl + '/shop/';
     }
   }
-  $(select).change(onProductTaxChange);
+
+  if (select) {
+    select.addEventListener('change', onProductTaxChange);
+  }
 }
 
 export function dropdownFilter() {
@@ -51,7 +54,7 @@ export function dropdownFilter() {
       let newUrl;
       if (isTaxonomyPage) {
         // Si estamos viendo una taxonomía y se selecciona un artista, redirige a su página de taxonomía específica
-        newUrl = `${fb.homeUrl}/artists/${encodeURIComponent(slug)}/`; // Usando slug para construir la URL
+        newUrl = `${fb.homeUrl}/artists/${encodeURIComponent(slug)}/`;
       } else {
         // Si estamos en la tienda, aplica el filtro y permanece en la tienda
         newUrl = slug

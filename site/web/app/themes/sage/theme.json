@@ -90,18 +90,37 @@
       }
     },
     "spacing": {
+      "margin": true,
       "padding": true,
+      "blockGap": true,
       "units": [
         "px",
-        "%",
         "em",
         "rem",
-        "vw",
-        "vh"
+        "vh",
+        "vw"
+      ],
+      "spacingSizes": [
+        {
+          "name": "Small",
+          "slug": "small",
+          "size": "8px"
+        },
+        {
+          "name": "Medium",
+          "slug": "medium",
+          "size": "16px"
+        },
+        {
+          "name": "Large",
+          "slug": "large",
+          "size": "32px"
+        }
       ]
     },
     "typography": {
-      "customFontSize": false,
+      "customFontSize": true,
+      "lineHeight": true,
       "fontFamilies": [
         {
           "fontFamily": "arial,sans-serif",
@@ -201,6 +220,17 @@
           "slug": "9xl"
         }
       ]
+    },
+    "appearanceTools": true,
+    "border": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true
+    },
+    "layout": {
+      "contentSize": "800px",
+      "wideSize": "1200px"
     }
   }
 }

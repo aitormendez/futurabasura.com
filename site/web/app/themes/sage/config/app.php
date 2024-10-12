@@ -167,7 +167,6 @@ return [
          */
         App\Providers\WooCommerceServiceProvider::class,
         App\Providers\VideoServiceProvider::class,
-        App\Providers\DropboxServiceProvider::class,
     ])->toArray(),
 
     /*

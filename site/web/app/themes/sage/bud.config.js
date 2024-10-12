@@ -67,11 +67,33 @@ export default async (app) => {
         },
       },
       spacing: {
+        margin: true,
         padding: true,
-        units: ['px', '%', 'em', 'rem', 'vw', 'vh'],
+        blockGap: null,
+        units: ['px', 'em', 'rem', 'vh', 'vw'],
+        spacingSizes: [
+          { name: 'Small', slug: 'small', size: '8px' },
+          { name: 'Medium', slug: 'medium', size: '16px' },
+          { name: 'Large', slug: 'large', size: '32px' },
+        ],
+        blockGap: true,
+        margin: true,
+        padding: true,
       },
       typography: {
-        customFontSize: false,
+        customFontSize: true,
+        lineHeight: true,
+      },
+      appearanceTools: true,
+      border: {
+        color: true,
+        radius: true,
+        style: true,
+        width: true,
+      },
+      layout: {
+        contentSize: '800px',
+        wideSize: '1200px',
       },
     })
     .useTailwindColors()

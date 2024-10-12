@@ -259,3 +259,21 @@ add_action('init', function () {
         exit();
     }
 });
+
+/**
+ * Enable support for block alignments.
+ */
+add_action('init', function () {
+    $block_registry = \WP_Block_Type_Registry::get_instance();
+
+    // Verificar si el bloque core/shortcode está registrado
+    if ($block_registry->is_registered('core/shortcode')) {
+        // Obtener el bloque registrado
+        $block_type = $block_registry->get_registered('core/shortcode');
+
+        // Añadir soporte de alineación
+        if ($block_type) {
+            $block_type->supports['align'] = ['wide', 'full'];
+        }
+    }
+});
