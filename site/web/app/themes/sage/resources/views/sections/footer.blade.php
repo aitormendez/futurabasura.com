@@ -1,28 +1,28 @@
 <footer class="mt-20 flex flex-wrap">
 
-    <div class="flex w-full flex-wrap bg-white font-bugrino font-light md:w-1/2 md:text-xl lg:text-2xl">
-        <ul class="h-[40vw] w-1/2 border-b-2 border-r-2 border-black p-6 md:h-[20vw]">
+    <div class="flex w-full flex-wrap bg-white font-bugrino text-sm font-light md:w-1/2 md:text-xl lg:text-2xl">
+        <ul class="h-[40vw] w-1/2 border-b-2 border-r-2 border-black p-3 md:h-[20vw] md:p-6">
             @foreach ($contents_nav as $item)
                 <li>
                     <a href="{{ $item->url }}" class="font-light hover:text-azul">{{ $item->label }}</a>
                 </li>
             @endforeach
         </ul>
-        <ul class="h-[40vw] w-1/2 border-b-2 border-black p-6 md:h-[20vw]">
+        <ul class="h-[40vw] w-1/2 border-b-2 border-black p-3 md:h-[20vw] md:p-6">
             @foreach ($shop_nav as $item)
                 <li>
                     <a href="{{ $item->url }}" class="hover:text-azul">{{ $item->label }}</a>
                 </li>
             @endforeach
         </ul>
-        <ul class="h-[40vw] w-1/2 border-r-2 border-black p-6 md:h-[20vw]">
+        <ul class="h-[40vw] w-1/2 border-r-2 border-black p-3 md:h-[20vw] md:p-6">
             @foreach ($social_nav as $item)
                 <li>
                     <a href="{{ $item->url }}" class="hover:text-azul">{{ $item->label }}</a>
                 </li>
             @endforeach
         </ul>
-        <ul class="h-[40vw] w-1/2 p-6 md:h-[20vw]">
+        <ul class="h-[40vw] w-1/2 p-3 md:h-[20vw] md:p-6">
             @foreach ($footer_pages_nav as $item)
                 <li>
                     <a href="{{ $item->url }}" class="hover:text-azul">{{ $item->label }}</a>
