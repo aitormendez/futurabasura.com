@@ -314,7 +314,7 @@ class WooCommerceServiceProvider extends ServiceProvider
 
                 // Determinar el estilo basado en si el usuario está en un dispositivo móvil
                 if (wp_is_mobile()) {
-                    echo '<div class="uppercase font-fk text-sm text-center mb-2 w-full tracking-wider">' . $product_type . '</div>';
+                    echo '<div class="uppercase font-fk text-sm text-center mb-2 w-full tracking-wider text-gris-fb">' . $product_type . '</div>';
                 } else {
                     echo '<div class="uppercase font-fk text-[1.1vw] lg:text-[0.9vw] text-center border-b border-x-negro-fb w-full tracking-wider">' . $product_type . '</div>';
                 }
