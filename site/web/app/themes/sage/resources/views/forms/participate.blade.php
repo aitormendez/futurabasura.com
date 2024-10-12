@@ -18,7 +18,8 @@
     <textarea name="MESSAGE" placeholder="Message" required id="participate-MESSAGE" rows="5" class="mb-2 w-full p-4"></textarea>
 
     <label for="participate-DOWNLOAD_LINK" class="mb-0 font-fk font-bold">Download Link</label>
-    <p id="download-link-description" class="mt-0 text-sm">Provides a download link for a zip file.</p>
+    <p id="download-link-description" class="mt-0 text-sm">Provide a download link for the material you want to send us.
+    </p>
     <input type="url" name="DOWNLOAD_LINK" placeholder="https://example.com/myfile.zip" required
         id="participate-DOWNLOAD_LINK" class="mb-2 w-full p-4" aria-describedby="download-link-description">
 

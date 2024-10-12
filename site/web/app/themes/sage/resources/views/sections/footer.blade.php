@@ -1,10 +1,10 @@
 <footer class="mt-20 flex flex-wrap">
 
-    <div class="font-bugrino flex w-full flex-wrap bg-white font-light md:w-1/2 md:text-xl lg:text-2xl">
+    <div class="flex w-full flex-wrap bg-white font-bugrino font-light md:w-1/2 md:text-xl lg:text-2xl">
         <ul class="h-[40vw] w-1/2 border-b-2 border-r-2 border-black p-6 md:h-[20vw]">
             @foreach ($contents_nav as $item)
                 <li>
-                    <a href="{{ $item->url }}" class="hover:text-azul font-light">{{ $item->label }}</a>
+                    <a href="{{ $item->url }}" class="font-light hover:text-azul">{{ $item->label }}</a>
                 </li>
             @endforeach
         </ul>
@@ -32,10 +32,10 @@
     </div>
 
     {{-- desktop --}}
-    <div class="font-bugrino hidden w-1/2 flex-col items-center justify-between border-l-2 border-black p-6 md:flex"
+    <div class="hidden w-1/2 flex-col items-center justify-between border-l-2 border-black p-6 font-bugrino md:flex"
         style="background-color: {{ get_field('footer_color', 'option') }}">
         <div class="mt-[5vw] w-1/3">
-            {!! file_get_contents(get_theme_file_path('resources/images/logo-fb.svg')) !!}
+            <img class="w-1/2" src="@asset('images/logo-fb.svg')">
         </div>
         <div class="mb-[3vw] text-center text-xl font-light">
             {!! wpautop(get_field('footer_texto_mancha', 'option')) !!}
@@ -44,7 +44,7 @@
     {{-- /desktop --}}
 
     {{-- mobile --}}
-    <div class="font-bugrino flex w-full flex-wrap md:!hidden">
+    <div class="flex w-full flex-wrap font-bugrino md:hidden">
         <div class="arriba my-4 flex h-[50vw] w-full flex-wrap">
             <div class="izq flex w-1/2 items-stretch justify-end bg-white">
                 <div class="w-[10vw] border-r-2 border-black"
@@ -52,17 +52,7 @@
             </div>
             <div class="der flex w-1/2 items-center justify-center"
                 style="background-color: {{ get_field('footer_color', 'option') }}">
-                {!! file_get_contents(get_theme_file_path('resources/images/logo-fb.svg')) !!}
-            </div>
-        </div>
-        <div class="abajo flex h-[50vw] w-full flex-wrap">
-            <div class="izq flex w-1/2 items-stretch justify-end bg-white">
-                <div class="w-[10vw] border-r-2 border-black"
-                    style="background-color: {{ get_field('footer_color', 'option') }}"></div>
-            </div>
-            <div class="der flex w-1/2 p-4 text-sm"
-                style="background-color: {{ get_field('footer_color', 'option') }}">
-                {!! wpautop(get_field('footer_texto_mancha', 'option')) !!}
+                <img class="w-1/2" src="@asset('images/logo-fb.svg')">
             </div>
         </div>
     </div>
@@ -72,10 +62,10 @@
 
     {{-- desktop --}}
     <div class="my-6 hidden w-full flex-wrap bg-white pb-6 md:flex">
-        <ul class="font-bugrino mb-20 flex w-full justify-center gap-4 p-6 text-xl">
+        <ul class="mb-20 flex w-full justify-center gap-4 p-6 font-bugrino text-xl">
             @foreach ($legal_nav as $item)
                 <li class="">
-                    <a href="{{ $item->url }}" class="hover:text-azul font-light">{{ $item->label }}</a>
+                    <a href="{{ $item->url }}" class="font-light hover:text-azul">{{ $item->label }}</a>
                 </li>
             @endforeach
         </ul>
@@ -99,7 +89,7 @@
                 <x-fab-instagram class="w-8" alt="instagram" />
             </a>
             <a href="mailto:alwaysopen@futurabasura.com"
-                class="email font-arialblack hover:text-azul text-xl">alwaysopen@futurabasura.com</a>
+                class="email font-arialblack text-xl hover:text-azul">alwaysopen@futurabasura.com</a>
         </div>
 
         <div class="iconos mt-16 flex w-full justify-center gap-8">
@@ -125,10 +115,10 @@
             </div>
         </div>
 
-        <ul class="font-bugrino flex w-1/2 flex-col px-6">
+        <ul class="flex w-1/2 flex-col px-6 font-bugrino">
             @foreach ($legal_nav as $item)
                 <li class="">
-                    <a href="{{ $item->url }}" class="hover:text-azul font-light">{{ $item->label }}</a>
+                    <a href="{{ $item->url }}" class="font-light hover:text-azul">{{ $item->label }}</a>
                 </li>
             @endforeach
         </ul>
