@@ -368,7 +368,7 @@ class WooCommerceServiceProvider extends ServiceProvider
 
                 // HTML para mostrar los atributos
                 if (wp_is_mobile()) {
-                    echo '<li class="flex uppercase font-fk w-full justify-between border-t border-black px-2 pt-1 last:border-b text-sm tracking-wider">';
+                    echo '<li class="flex uppercase font-fk justify-between border-t border-black px-4 pt-1 last:border-b text-sm tracking-wider -mx-4 bg-white" style="width: calc(100% + 2 rem);>';
                 } else {
                     echo '<li class="flex uppercase font-fk w-full justify-between border-t border-black px-2 pt-1 last:border-b text-[1.1vw] lg:text-[0.9vw] tracking-wider">';
                 }
