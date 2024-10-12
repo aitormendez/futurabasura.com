@@ -121,7 +121,7 @@
             </div>
         </div>
 
-        <ul class="flex w-1/2 flex-col px-6 font-bugrino">
+        <ul class="mt-2 flex flex-col px-6 font-bugrino md:mt-0 md:w-1/2">
             @foreach ($legal_nav as $item)
                 <li class="">
                     <a href="{{ $item->url }}" class="font-light hover:text-azul">{{ $item->label }}</a>
@@ -140,10 +140,10 @@
             <x-fab-cc-mastercard class="w-12" alt="Mastercard" />
             <x-fab-apple-pay class="w-14" alt="Apple Pay" />
             <x-fab-google-pay class="w-14" alt="Google Pay" />
-            <x-custom-bizum class="w-20" alt="Bizum" />
+            {{-- <x-custom-bizum class="w-20" alt="Bizum" /> --}}
         </div>
 
-        <div class="w-full p-6 text-xs">
+        <div class="w-full p-6 text-sm">
             <div>
                 {!! wpautop(get_field('footer_texto_legal', 'option')) !!}
             </div>
