@@ -37,6 +37,10 @@ export default async (app) => {
     .setProxyUrl('https://futurabasura.test')
     .watch(['resources/views', 'app']);
 
+  // .proxy('https://futurabasura.test')
+  // .setUrl('http://0.0.0.0:3000')
+  // .watch(['resources/views', 'app', 'resources/styles']);
+
   /**
    * Generate WordPress `theme.json`
    *

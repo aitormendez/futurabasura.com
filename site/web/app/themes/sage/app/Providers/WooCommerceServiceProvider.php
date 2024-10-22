@@ -49,7 +49,7 @@ class WooCommerceServiceProvider extends ServiceProvider
 
             HTML;
 
-            // EL SCRIPT ESTÁ EN SHOP.JS (dropdownFilter).
+            // EL SCRIPT ESTÁ EN SHOP.JS.
 
             //Si tu función JavaScript está inline, inclúyela aquí. De lo contrario, asegúrate de que está en un archivo JS que se encola correctamente.
             // echo <<<SCRIPT
@@ -60,8 +60,7 @@ class WooCommerceServiceProvider extends ServiceProvider
         }, 25);
 
         // desplegable ordenar
-        add_action('woocommerce_before_shop_loop', function () {
-?>
+        add_action('woocommerce_before_shop_loop', function () { ?>
             <div x-data="dropdownSort()" x-init="init()" class="relative md:min-w-80 text-center">
                 <!-- Aplicar @click.away en este nivel asegura que cualquier clic fuera del desplegable cerrará las opciones -->
                 <div @click.away="open = false" @click="open = !open" class="cursor-pointer uppercase tracking-[0.2em] w-full">
