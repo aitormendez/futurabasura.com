@@ -1,21 +1,21 @@
 <footer class="mt-20 flex flex-wrap">
 
     <div class="flex w-full flex-wrap bg-white font-bugrino text-sm font-light md:w-1/2 md:text-xl lg:text-2xl">
-        <ul class="h-[40vw] w-1/2 border-b-2 border-r-2 border-black p-3 md:h-[20vw] md:p-6">
+        <ul class="h-[40vw] w-1/2 border-b border-r border-black p-3 md:h-[20vw] md:border-b-2 md:border-r-2 md:p-6">
             @foreach ($contents_nav as $item)
                 <li>
                     <a href="{{ $item->url }}" class="font-light hover:text-azul">{{ $item->label }}</a>
                 </li>
             @endforeach
         </ul>
-        <ul class="h-[40vw] w-1/2 border-b-2 border-black p-3 md:h-[20vw] md:p-6">
+        <ul class="h-[40vw] w-1/2 border-b border-black p-3 md:h-[20vw] md:border-b-2 md:p-6">
             @foreach ($shop_nav as $item)
                 <li>
                     <a href="{{ $item->url }}" class="hover:text-azul">{{ $item->label }}</a>
                 </li>
             @endforeach
         </ul>
-        <ul class="h-[40vw] w-1/2 border-r-2 border-black p-3 md:h-[20vw] md:p-6">
+        <ul class="h-[40vw] w-1/2 border-r border-black p-3 md:h-[20vw] md:border-r-2 md:p-6">
             @foreach ($social_nav as $item)
                 <li>
                     <a href="{{ $item->url }}" class="hover:text-azul">{{ $item->label }}</a>
@@ -51,7 +51,7 @@
     <div class="flex w-full flex-wrap font-bugrino md:hidden">
         <div class="arriba my-4 flex h-[50vw] w-full flex-wrap">
             <div class="izq flex w-1/2 items-stretch justify-end bg-white">
-                <div class="w-[10vw] border-r-2 border-black"
+                <div class="w-[10vw] border-r border-black"
                     style="background-color: {{ get_field('footer_color', 'option') }}"></div>
             </div>
             <div class="der flex w-1/2 items-center justify-center"
@@ -113,7 +113,7 @@
     <div class="flex w-full flex-wrap bg-white md:!hidden">
         <div class="arriba flex h-[20px] w-full flex-wrap">
             <div class="izq flex w-1/2 items-stretch justify-end bg-white">
-                <div class="w-[10vw] border-r-2 border-black"
+                <div class="w-[10vw] border-r border-black"
                     style="background-color: {{ get_field('footer_color', 'option') }}"></div>
             </div>
             <div class="der flex w-1/2 items-center justify-center"
