@@ -22,7 +22,7 @@ export function marquee() {
 
       let repeated = text;
       while (textWidth < containerWidth) {
-        repeated += ' ' + text;
+        repeated += ' • ' + text;
         const tempDiv = document.createElement('div');
         tempDiv.style.position = 'absolute';
         tempDiv.style.whiteSpace = 'nowrap';
@@ -74,7 +74,7 @@ export function marquee() {
     const text = element.getAttribute('data-text');
     const backgroundColor = element.getAttribute('data-background-color');
     const pillBackgroundColor = element.getAttribute(
-      'data-pill-background-color'
+      'data-pill-background-color',
     );
     const textColor = element.getAttribute('data-text-color');
     const speed = parseFloat(element.getAttribute('data-speed')) || 10;
@@ -90,7 +90,7 @@ export function marquee() {
         speed={speed}
         fontFamily={fontFamily}
         linkUrl={linkUrl}
-      />
+      />,
     );
   });
 }
