@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client'; // Cambiamos la importación de 'react-dom' a 'react-dom/client'
 import VideoPlayer from './VideoPlayer';
 
 document.querySelectorAll('[id^="video-player-"]').forEach((el) => {
@@ -11,7 +11,10 @@ document.querySelectorAll('[id^="video-player-"]').forEach((el) => {
   const controls = el.getAttribute('data-controls') === 'true';
   const playsInline = el.getAttribute('data-playsInline') === 'true';
 
-  ReactDOM.render(
+  // Creamos una raíz usando createRoot
+  const root = ReactDOM.createRoot(el);
+
+  root.render(
     <VideoPlayer
       videoId={videoId}
       thumbnailUrl={thumbnailUrl}
@@ -21,6 +24,5 @@ document.querySelectorAll('[id^="video-player-"]').forEach((el) => {
       controls={controls}
       playsInline={playsInline}
     />,
-    el
   );
 });
