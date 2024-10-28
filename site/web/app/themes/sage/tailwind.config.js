@@ -20,6 +20,9 @@ const config = {
         fb: {
           css: {
             '--tw-prose-links': theme('colors.azul'),
+            '*': {
+              'line-height': '1.3',
+            },
           },
         },
         DEFAULT: {
