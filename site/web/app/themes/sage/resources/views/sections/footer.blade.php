@@ -43,10 +43,6 @@
     </div>
     {{-- /desktop --}}
 
-    @if (wp_is_mobile())
-        @include('partials.mailchimp-form')
-    @endif
-
     {{-- mobile --}}
     <div class="flex w-full flex-wrap font-bugrino md:hidden">
         <div class="arriba my-4 flex h-[50vw] w-full flex-wrap">
@@ -62,9 +58,7 @@
     </div>
     {{-- /mobile --}}
 
-    @if (!wp_is_mobile())
-        @include('partials.mailchimp-form')
-    @endif
+    @include('partials.mailchimp-form')
 
     {{-- desktop --}}
     <div class="my-6 hidden w-full flex-wrap bg-white pb-6 md:flex">
@@ -111,20 +105,10 @@
 
     {{-- mobile --}}
     <div class="flex w-full flex-wrap bg-white md:!hidden">
-        <div class="arriba flex h-[20px] w-full flex-wrap">
-            <div class="izq flex w-1/2 items-stretch justify-end bg-white">
-                <div class="w-[10vw] border-r border-black"
-                    style="background-color: {{ get_field('footer_color', 'option') }}"></div>
-            </div>
-            <div class="der flex w-1/2 items-center justify-center"
-                style="background-color: {{ get_field('footer_color', 'option') }}">
-            </div>
-        </div>
-
-        <ul class="mt-2 flex flex-col px-6 font-bugrino md:mt-0 md:w-1/2">
+        <ul class="mt-8 flex flex-col px-6 md:mt-0 md:w-1/2">
             @foreach ($legal_nav as $item)
                 <li class="">
-                    <a href="{{ $item->url }}" class="font-light hover:text-azul">{{ $item->label }}</a>
+                    <a href="{{ $item->url }}" class="font-light">{{ $item->label }}</a>
                 </li>
             @endforeach
         </ul>
@@ -134,7 +118,17 @@
                 class="email font-arialblack hover:text-azul">alwaysopen@futurabasura.com</a>
         </div>
 
-        <div class="iconos mt-16 flex w-full justify-center gap-4 px-6">
+        <div class="w-full p-6 text-sm">
+            <div>
+                {!! wpautop(get_field('footer_texto_legal', 'option')) !!}
+            </div>
+            <div class="mt-12 max-w-[600px] text-xs uppercase">
+                {!! get_field('footer_creditos', 'option') !!}
+                {!! get_field('footer_creditos_2col', 'option') !!}
+            </div>
+        </div>
+
+        <div class="iconos mb-16 flex w-full justify-center gap-4 px-6">
             <x-fab-cc-visa class="w-12" alt="Visa" />
             <x-custom-paypal class="w-16" alt="Bizum" />
             <x-fab-cc-mastercard class="w-12" alt="Mastercard" />
@@ -142,19 +136,8 @@
             <x-fab-google-pay class="w-14" alt="Google Pay" />
             {{-- <x-custom-bizum class="w-20" alt="Bizum" /> --}}
         </div>
-
-        <div class="w-full p-6 text-sm">
-            <div>
-                {!! wpautop(get_field('footer_texto_legal', 'option')) !!}
-            </div>
-            <div class="mt-12 max-w-[600px] text-xs uppercase">
-                {!! get_field('footer_creditos', 'option') !!}
-            </div>
-            <div class="mt-12 max-w-[600px] text-xs uppercase">
-                {!! get_field('footer_creditos_2col', 'option') !!}
-            </div>
-        </div>
     </div>
+
     {{-- /mobile --}}
 
 </footer>

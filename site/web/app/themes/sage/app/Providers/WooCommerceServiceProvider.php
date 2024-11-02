@@ -482,7 +482,7 @@ class WooCommerceServiceProvider extends ServiceProvider
             if ($width > $height) {
                 echo '<div class="horizontal">' . woocommerce_get_product_thumbnail('large') . '</div>';
             } else {
-                echo '<div class="px-4">' . woocommerce_get_product_thumbnail('large') . '</div>';
+                echo '<div class="px-4 overflow-visible relative z-10">' . woocommerce_get_product_thumbnail('large') . '</div>';
             }
         } else {
             // No hay imagen, podría renderizar un placeholder o dejar el espacio en blanco
