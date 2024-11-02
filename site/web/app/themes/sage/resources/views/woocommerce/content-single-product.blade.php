@@ -60,7 +60,7 @@
         </div>
     @endif
 
-    <div class="relative order-2 flex w-full items-center justify-center p-6 md:order-none md:w-1/2"
+    <div class="relative order-2 flex w-full items-center justify-center p-6 pt-14 md:order-none md:w-1/2 md:pt-6"
         style="background-color: {{ get_field('single_product_thumbnail_bg_color') ?: '#ffffff' }}">
         <div class="absolute left-6 top-6 w-full uppercase">{{ $product->get_attribute('Product Type') }}</div>
         @if (has_post_thumbnail($post->ID))

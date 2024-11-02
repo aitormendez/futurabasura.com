@@ -66,10 +66,6 @@
             }
           }
 
-          .cfvsw-label-option {
-            /* padding: 0.8em 1em 0.6em; */
-          }
-
           .cfvsw-selected-swatch {
             .cfvsw-swatch-inner {
               border-color: blue;
@@ -109,6 +105,10 @@
 
         > div {
           display: inline-block;
+        }
+
+        .woocommerce-variation-availability {
+          display: none;
         }
 
         del {
