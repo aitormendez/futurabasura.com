@@ -29,11 +29,11 @@
 
 <div class="woocommerce-shipping-totals shipping table-row">
     <!-- Encabezado de la fila -->
-    @if (isset($package_name))
+    @if (isset($package_name) && !is_cart())
         <div class="table-cell border-b-2 border-black py-4 pl-4 font-bold">{!! $package_name !!}</div>
     @endif
     <!-- Contenido de la celda -->
-    <div class="table-cell border-b-2 border-black py-4" data-title="{!! $package_name !!}">
+    <div class="{{ is_cart() ? '' : 'border-b-2 border-black' }} table-cell py-4" data-title="{!! $package_name !!}">
         @if (!empty($available_methods) && is_array($available_methods))
             <div id="shipping_method" class="woocommerce-shipping-methods">
                 @foreach ($available_methods as $method)
