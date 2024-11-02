@@ -177,3 +177,9 @@ body.woocommerce-checkout {
     @apply bg-azul text-white p-6 text-lg text-center w-full rounded-lg my-6;
   }
 }
+
+/* Mailchimp form */
+
+.mce_inline_error[for='mce-EMAIL'] {
+  position: absolute;
+}

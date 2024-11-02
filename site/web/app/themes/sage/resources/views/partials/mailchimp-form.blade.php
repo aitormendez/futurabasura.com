@@ -15,8 +15,8 @@
                         <div class="izquierda w-[50vw] shrink-0">
                             <div class="mc-field-group h-full"><label class="hidden" for="mce-EMAIL">Email
                                     Address<span class="asterisk">*</span></label><input type="email" name="EMAIL"
-                                    class="required email h-full w-full bg-azul-claro p-6 font-bugrino text-2xl"
-                                    id="mce-EMAIL" required="" value="" placeholder="Email">
+                                    class="required email w-full bg-azul-claro p-6 font-bugrino text-2xl" id="mce-EMAIL"
+                                    required="" value="" placeholder="Email">
                             </div>
 
                             <div id="mce-responses" class="clear foot">
