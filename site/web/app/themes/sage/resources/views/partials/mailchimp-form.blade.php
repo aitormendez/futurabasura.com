@@ -1,10 +1,10 @@
-<div class="formulario flex w-full flex-col items-center md:mb-20 md:mt-12 md:!flex-row md:bg-white">
+<div class="formulario flex w-full flex-col items-center">
     <div
-        class="sombra flex w-[25vw] shrink-0 grow-0 flex-col items-center justify-center py-6 text-2xl leading-tight md:py-0 md:text-lg md:leading-relaxed">
-        <span>Join</span><span>newsletter</span>
+        class="sombra flex w-[25vw] shrink-0 grow-0 flex-col items-center justify-center py-6 text-center text-2xl leading-tight md:text-lg md:leading-relaxed">
+        Join newsletter
     </div>
-    <div class="flex w-full border-black bg-white md:border-l-2">
 
+    <div class="flex w-full border-y border-azul bg-azul-claro">
         <div id="mc_embed_shell" class="w-full">
             <div id="mc_embed_signup" class="h-full">
                 <form class="h-full w-full"
@@ -13,10 +13,10 @@
                     target="_blank">
                     <div id="mc_embed_signup_scroll" class="flex h-full">
                         <div class="izquierda w-[50vw] shrink-0">
-                            <div class="mc-field-group h-full"><label class="hidden" for="mce-EMAIL">Email
+                            <div class="mc-field-group h-full text-azul"><label class="hidden" for="mce-EMAIL">Email
                                     Address<span class="asterisk">*</span></label><input type="email" name="EMAIL"
-                                    class="required email w-full bg-azul-claro p-6 font-bugrino text-2xl" id="mce-EMAIL"
-                                    required="" value="" placeholder="Email">
+                                    class="required email w-full bg-azul-claro px-6 py-2 font-bugrino text-2xl"
+                                    id="mce-EMAIL" required="" value="" placeholder="Email">
                             </div>
 
                             <div id="mce-responses" class="clear foot">
@@ -32,10 +32,12 @@
                             </div>
                         </div>
 
-                        <div class="clear foot shrink-1 w-full grow-0">
-                            <input type="submit" name="subscribe" id="mc-embedded-subscribe"
-                                class="button h-full w-full cursor-pointer !bg-azul text-white hover:!bg-allo hover:!text-black"
-                                value="Subscribe">
+                        <div class="clear foot shrink-1 flex w-full grow-0 justify-center py-1 pr-6">
+                            <div class="h-full w-full overflow-hidden rounded-elipse border border-azul md:w-56">
+                                <input type="submit" name="subscribe" id="mc-embedded-subscribe"
+                                    class="button h-full w-full cursor-pointer !bg-white text-azul transition-colors hover:!bg-azul hover:!text-white"
+                                    value="Subscribe">
+                            </div>
                         </div>
 
                     </div>

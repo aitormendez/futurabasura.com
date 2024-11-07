@@ -19,6 +19,9 @@ const config = {
       boxShadow: {
         abajo: '0 10px 10px -10px rgba(0, 0, 0, 0.5)',
       },
+      borderRadius: {
+        elipse: '50%',
+      },
       typography: ({ theme }) => ({
         fb: {
           css: {

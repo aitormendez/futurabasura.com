@@ -61,7 +61,7 @@
     @include('partials.mailchimp-form')
 
     {{-- desktop --}}
-    <div class="my-6 hidden w-full flex-wrap bg-white pb-6 md:flex">
+    <div class="mb-6 hidden w-full flex-wrap bg-white pb-6 md:flex">
         <ul class="mb-20 flex w-full justify-center gap-4 p-6 font-bugrino text-xl">
             @foreach ($legal_nav as $item)
                 <li class="">
