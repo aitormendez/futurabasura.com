@@ -35,7 +35,7 @@
     <div class="hidden w-1/2 flex-col items-center justify-between border-l-2 border-black p-6 font-bugrino md:flex"
         style="background-color: {{ get_field('footer_color', 'option') }}">
         <div class="mt-[5vw] w-1/3">
-            <img class="w-1/2" src="@asset('images/logo-fb.svg')">
+            <img class="w-full" src="@asset('images/logo-fb.svg')">
         </div>
         <div class="mb-[3vw] text-center text-xl font-light">
             {!! wpautop(get_field('footer_texto_mancha', 'option')) !!}
