@@ -98,7 +98,7 @@
             <x-fab-cc-mastercard class="w-12" alt="Mastercard" />
             <x-fab-apple-pay class="w-14" alt="Apple Pay" />
             <x-fab-google-pay class="w-14" alt="Google Pay" />
-            <x-custom-bizum class="w-20" alt="Bizum" />
+            {{-- <x-custom-bizum class="w-20" alt="Bizum" /> --}}
         </div>
     </div>
     {{-- /desktop --}}
@@ -130,7 +130,7 @@
 
         <div class="iconos mb-16 flex w-full justify-center gap-4 px-6">
             <x-fab-cc-visa class="w-12" alt="Visa" />
-            <x-custom-paypal class="w-16" alt="Bizum" />
+            <x-custom-paypal class="w-16" alt="Paypal" />
             <x-fab-cc-mastercard class="w-12" alt="Mastercard" />
             <x-fab-apple-pay class="w-14" alt="Apple Pay" />
             <x-fab-google-pay class="w-14" alt="Google Pay" />
