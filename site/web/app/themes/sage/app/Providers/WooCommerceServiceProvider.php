@@ -281,7 +281,7 @@ class WooCommerceServiceProvider extends ServiceProvider
         // Comprueba si hay artistas asignados y los imprime
         if (!empty($artist_ids)) {
             if (wp_is_mobile()) {
-                echo '<div class="uppercase font-bugrino my-3 tracking-widest text-center">' . join(', ', $artist_ids) . '</div>';
+                echo '<div class="uppercase font-bugrino my-3 tracking-wider text-center text-lg">' . join(', ', $artist_ids) . '</div>';
             } else {
                 echo '<div class="uppercase font-bugrino text-[1.2vw] mt-3 tracking-wide text-center">' . join(', ', $artist_ids) . '</div>';
             }
