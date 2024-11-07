@@ -2,8 +2,7 @@
   #destacados {
     article {
       a:link {
-        /* transition: background-color 0s; */
-        color: #000;
+        color: #000 !important;
       }
 
       &.galeria {
