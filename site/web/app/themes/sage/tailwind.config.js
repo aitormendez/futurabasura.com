@@ -16,6 +16,9 @@ const config = {
       fill: (theme) => ({
         rojo: theme('colors.rojo'),
       }),
+      boxShadow: {
+        abajo: '0 10px 10px -10px rgba(0, 0, 0, 0.5)',
+      },
       typography: ({ theme }) => ({
         fb: {
           css: {

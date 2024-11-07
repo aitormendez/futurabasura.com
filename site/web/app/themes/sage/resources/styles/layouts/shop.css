@@ -40,13 +40,13 @@
     }
   }
 
-  @media (width < 786px) {
+  /* @media (width < 786px) {
     .product .card-inner {
       img {
         box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
       }
     }
-  }
+  } */
 
   @media (width > 1024px) {
     .product .card-front {

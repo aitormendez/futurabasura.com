@@ -264,10 +264,11 @@ class WooCommerceServiceProvider extends ServiceProvider
             if (wp_is_mobile()) {
                 echo '<span class="absolute top-0 left-4 uppercase tracking-wider bg-yellow-300 px-2 pt-[0.2em]">New</span>';
             } else {
-                echo '<span class="absolute top-0 left-0 uppercase tracking-wider bg-yellow-300 px-2 pt-[0.2em]">New</span>';
+                echo '<span class="absolute top-0 left-0 uppercase tracking-wider bg-allo px-2 pt-[0.2em] font-fk text-[1.1vw] lg:text-[0.9vw]">New</span>';
             }
         }
     }
+
 
     /**
      * Mostrar artista en los productos de la portada de la tienda.
@@ -352,11 +353,6 @@ class WooCommerceServiceProvider extends ServiceProvider
                     // El valor original se debe buscar en los términos del atributo si es que existen
                     $term = get_term_by('slug', $attribute_value, str_replace('attribute_', '', $attribute_name));
                     $attribute_value_formatted = $term ? esc_html($term->name) : esc_html($attribute_value); // Usa el nombre del término si está disponible, de lo contrario usa el valor del atributo
-
-                    // Añade "cm" si el atributo es 'pa_format'
-                    if ($attribute_name == 'attribute_pa_format') {
-                        $attribute_value_formatted .= ' cm';
-                    }
 
                     // Concatena este atributo con los anteriores
                     if (!empty($attributes_str)) {
@@ -472,17 +468,19 @@ class WooCommerceServiceProvider extends ServiceProvider
 
     public function woocommerce_template_loop_product_thumbnail_mobile()
     {
+        $show_shadow = get_field('single_product_thumbnail_shadow');
         $thumbnail_id = get_post_thumbnail_id();
         $thumbnail_url = wp_get_attachment_image_src($thumbnail_id, 'full');
 
         if ($thumbnail_url) {
             $width = $thumbnail_url[1];
             $height = $thumbnail_url[2];
+            $shadow_class = $show_shadow ? 'shadow-abajo' : '';
 
             if ($width > $height) {
-                echo '<div class="horizontal">' . woocommerce_get_product_thumbnail('large') . '</div>';
+                echo '<div class="horizontal">' . get_the_post_thumbnail(get_the_ID(), 'large', array('class' => $shadow_class)) . '</div>';
             } else {
-                echo '<div class="px-4 overflow-visible relative z-10">' . woocommerce_get_product_thumbnail('large') . '</div>';
+                echo '<div class="px-4 overflow-visible relative z-10">' . get_the_post_thumbnail(get_the_ID(), 'large', array('class' => $shadow_class)) . '</div>';
             }
         } else {
             // No hay imagen, podría renderizar un placeholder o dejar el espacio en blanco

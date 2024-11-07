@@ -45,7 +45,7 @@
 
     {{-- mobile --}}
     <div class="flex w-full flex-wrap font-bugrino md:hidden">
-        <div class="arriba my-4 flex h-[50vw] w-full flex-wrap">
+        <div class="arriba mt-4 flex h-[50vw] w-full flex-wrap">
             <div class="izq flex w-1/2 items-stretch justify-end bg-white">
                 <div class="w-[10vw] border-r border-black"
                     style="background-color: {{ get_field('footer_color', 'option') }}"></div>

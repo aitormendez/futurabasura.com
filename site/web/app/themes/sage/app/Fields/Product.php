@@ -26,6 +26,15 @@ class Product extends Field
                 'enable_opacity' => 0,
                 'return_format' => 'string',
                 'default_value' => 'rgba(255,255,255,1)',
+            ])
+            ->addTrueFalse('single_product_thumbnail_shadow', [
+                'label' => 'Sombra miniatura móvil',
+                'instructions' => 'Añade una sombra a la miniatura por la parte de abajo en dispositivo móvil',
+                'message' => '',
+                'default_value' => 1,
+                'ui' => 1,
+                'ui_on_text' => 'Sí',
+                'ui_off_text' => 'No',
             ]);
 
         return $builder->build();
