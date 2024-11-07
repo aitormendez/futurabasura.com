@@ -2,15 +2,6 @@
   form.cart {
     width: 100%;
 
-    .ftbs_variationsTableRowColumn {
-      display: flex;
-      align-items: center;
-    }
-
-    .ftbs_variationsTableRowColumn_quantityInput {
-      width: 4rem;
-    }
-
     .single_add_to_cart_button {
       display: block;
       width: 100%;
@@ -95,9 +86,9 @@
       margin-top: 2rem;
 
       .woocommerce-variation-price {
-        padding: 1rem;
+        padding: 0.87rem 1rem;
         background-color: #fff;
-        font-size: 2rem;
+        font-size: 1.2rem;
       }
 
       .woocommerce-variation {

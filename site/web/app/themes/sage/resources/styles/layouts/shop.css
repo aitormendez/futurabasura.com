@@ -40,14 +40,6 @@
     }
   }
 
-  /* @media (width < 786px) {
-    .product .card-inner {
-      img {
-        box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
-      }
-    }
-  } */
-
   @media (width > 1024px) {
     .product .card-front {
       img {
@@ -71,18 +63,18 @@
   select[name='orderby'] {
     font-size: 16px;
     padding: 8px 16px;
-    background-color: white; /* Color de fondo */
-    cursor: pointer; /* Cursor en forma de mano */
+    background-color: white;
+    cursor: pointer;
     text-transform: uppercase;
     text-align: center;
     letter-spacing: 0.2em;
-    appearance: none; /* Deshabilitar la apariencia por defecto */
+    appearance: none;
   }
 
   /* Estilizar el desplegable al pasar el ratón por encima */
   select[name='filtro_artist']:hover,
   select[name='orderby']:hover {
-    background-color: #cf0; /* Cambiar el color del borde al pasar el ratón */
+    background-color: #cf0;
   }
 
   /* Estilizar el desplegable al estar enfocado */
