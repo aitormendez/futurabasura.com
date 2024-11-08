@@ -61,7 +61,7 @@
     @include('partials.mailchimp-form')
 
     {{-- desktop --}}
-    <div class="mb-6 hidden w-full flex-wrap bg-white pb-6 md:flex">
+    {{-- <div class="mb-6 hidden w-full flex-wrap bg-white pb-6 md:flex">
         <ul class="mb-20 flex w-full justify-center gap-4 p-6 font-bugrino text-xl">
             @foreach ($legal_nav as $item)
                 <li class="">
@@ -98,14 +98,14 @@
             <x-fab-cc-mastercard class="w-12" alt="Mastercard" />
             <x-fab-apple-pay class="w-14" alt="Apple Pay" />
             <x-fab-google-pay class="w-14" alt="Google Pay" />
-            {{-- <x-custom-bizum class="w-20" alt="Bizum" /> --}}
+            <x-custom-bizum class="w-20" alt="Bizum" />
         </div>
-    </div>
+    </div> --}}
     {{-- /desktop --}}
 
     {{-- mobile --}}
-    <div class="flex w-full flex-wrap bg-white md:!hidden">
-        <ul class="mt-8 flex flex-col px-6 md:mt-0 md:w-1/2">
+    <div class="flex w-full flex-wrap bg-white">
+        <ul class="mt-8 flex flex-col px-6 text-sm md:!flex-row md:gap-4">
             @foreach ($legal_nav as $item)
                 <li class="">
                     <a href="{{ $item->url }}" class="font-light">{{ $item->label }}</a>

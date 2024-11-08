@@ -284,9 +284,9 @@ class WooCommerceServiceProvider extends ServiceProvider
         // Comprueba si hay artistas asignados y los imprime
         if (!empty($artist_display_name)) {
             if (wp_is_mobile()) {
-                echo '<div class="uppercase font-bugrino my-3 tracking-wider text-center text-lg">' .  $artist_display_name . '</div>';
+                echo '<div class="uppercase font-bugrino my-3 tracking-wider text-center text-lg leading-tight">' .  $artist_display_name . '</div>';
             } else {
-                echo '<div class="uppercase font-bugrino text-[1.2vw] mt-3 tracking-wide text-center max-w-[90%]">' . $artist_display_name . '</div>';
+                echo '<div class="uppercase font-bugrino text-[1.2vw] mt-3 tracking-wide text-center max-w-[90%] leading-tight">' . $artist_display_name . '</div>';
             }
         }
     }

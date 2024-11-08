@@ -27,8 +27,12 @@
         @if ($artista['rand_products'])
             <h2 class="m-6 mt-10 text-center font-bold uppercase tracking-widest">By {{ $artista['artista']->name }}</h2>
             @foreach ($artista['rand_products'] as $product)
-                <h3 class="bg-white px-6 py-1"><a href="{{ $product['permalink'] }}">{{ $product['title'] }} by
-                        {{ $artista['artista']->name }}</a></h3>
+                @if ($artista)
+                    <h3 class="bg-white px-6 py-1">
+                        <a href="{{ $product['permalink'] }}">{{ $product['title'] }} by
+                            {{ $artista['artista']->name }}</a>
+                    </h3>
+                @endif
 
                 <div id="glide-{{ $product['product_id'] }}-art" class="glide g-by-artist">
                     <div class="glide__track" data-glide-el="track">

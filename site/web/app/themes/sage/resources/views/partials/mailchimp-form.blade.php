@@ -1,6 +1,6 @@
 <div class="formulario flex w-full flex-col items-center">
     <div
-        class="sombra flex w-[25vw] shrink-0 grow-0 flex-col items-center justify-center py-6 text-center text-2xl leading-tight md:text-lg md:leading-relaxed">
+        class="sombra flex w-[25vw] shrink-0 grow-0 flex-col items-center justify-center py-6 text-center text-2xl leading-tight md:w-full md:leading-relaxed">
         Join newsletter
     </div>
 
