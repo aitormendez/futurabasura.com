@@ -35,6 +35,10 @@ class Product extends Field
                 'ui' => 1,
                 'ui_on_text' => 'Sí',
                 'ui_off_text' => 'No',
+            ])
+            ->addText('single_product_alt_name', [
+                'label' => 'Nombre alternativo',
+                'instructions' => 'Si este campo no está vacío, se usará su contenido para los lugares donde aparece el artista, es decir, en sustitución del artista',
             ]);
 
         return $builder->build();

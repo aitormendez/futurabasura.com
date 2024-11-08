@@ -44,12 +44,12 @@
         do_action('woocommerce_before_single_product_summary');
     @endphp
 
-
     @if ($artista['rand_products'])
         <div
             class="order-1 flex w-full flex-col items-center bg-white px-6 pb-20 pt-6 text-xl md:-order-none md:border-b-2 md:pt-14">
             <h2 class="artista text-center font-bugrino text-xl uppercase tracking-wider md:text-3xl">
-                {{ $artista['artista']->name }}</h2>
+                {{ $alt_name ?: $artista['artista']->name }}
+            </h2>
             <h1
                 class="product_title entry-title md:text-md my-6 text-center font-fk text-[1rem] uppercase tracking-wider">
                 {!! get_the_title() !!}</h1>

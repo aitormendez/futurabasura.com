@@ -273,12 +273,20 @@ class WooCommerceServiceProvider extends ServiceProvider
     {
         global $product;
         $artist_ids = wp_get_post_terms($product->get_id(), 'artist', ['fields' => 'names']);
+        $product_id = $product->get_id();
+
+        // Obtener el nombre alternativo del campo ACF
+        $alt_name = get_field('single_product_alt_name', $product_id);
+
+        // Determinar qué nombre mostrar
+        $artist_display_name = !empty($alt_name) ? $alt_name : join(', ', $artist_ids);
+
         // Comprueba si hay artistas asignados y los imprime
-        if (!empty($artist_ids)) {
+        if (!empty($artist_display_name)) {
             if (wp_is_mobile()) {
-                echo '<div class="uppercase font-bugrino my-3 tracking-wider text-center text-lg">' . join(', ', $artist_ids) . '</div>';
+                echo '<div class="uppercase font-bugrino my-3 tracking-wider text-center text-lg">' .  $artist_display_name . '</div>';
             } else {
-                echo '<div class="uppercase font-bugrino text-[1.2vw] mt-3 tracking-wide text-center max-w-[90%]">' . join(', ', $artist_ids) . '</div>';
+                echo '<div class="uppercase font-bugrino text-[1.2vw] mt-3 tracking-wide text-center max-w-[90%]">' . $artist_display_name . '</div>';
             }
         }
     }

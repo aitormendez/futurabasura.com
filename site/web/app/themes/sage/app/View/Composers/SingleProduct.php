@@ -19,6 +19,7 @@ class SingleProduct extends Composer
             'galeria' => $this->galeria(),
             'artista' => $this->artista(),
             'precio' => $this->precio(),
+            'alt_name' => $this->alt_name(),
             // 'variaciones' => $this->variaciones(),
         ];
     }
@@ -41,6 +42,12 @@ class SingleProduct extends Composer
         }
 
         return $output;
+    }
+
+    public function alt_name()
+    {
+        global $product;
+        return get_field('single_product_alt_name', $product->get_id());
     }
 
     public function artista()
