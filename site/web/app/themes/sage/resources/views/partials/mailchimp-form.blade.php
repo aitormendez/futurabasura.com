@@ -4,7 +4,7 @@
         Join newsletter
     </div>
 
-    <div class="flex w-full border-y border-azul bg-azul-claro">
+    <div class="flex w-full border-y border-azul bg-azul-claro md:border-y-2">
         <div id="mc_embed_shell" class="w-full">
             <div id="mc_embed_signup" class="h-full">
                 <form class="h-full w-full"
@@ -33,7 +33,8 @@
                         </div>
 
                         <div class="clear foot shrink-1 flex w-full grow-0 justify-center py-1 pr-6">
-                            <div class="h-full w-full overflow-hidden rounded-elipse border border-azul md:w-56">
+                            <div
+                                class="h-full w-full overflow-hidden rounded-elipse border border-azul md:w-56 md:border-2">
                                 <input type="submit" name="subscribe" id="mc-embedded-subscribe"
                                     class="button h-full w-full cursor-pointer !bg-white text-azul transition-colors hover:!bg-azul hover:!text-white"
                                     value="Subscribe">
