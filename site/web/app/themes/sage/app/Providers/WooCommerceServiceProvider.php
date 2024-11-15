@@ -408,11 +408,6 @@ class WooCommerceServiceProvider extends ServiceProvider
                 // Separa múltiples valores con comas
                 $attribute_values_formatted = implode(', ', array_map('esc_html', explode(', ', $attribute_values)));
 
-                // Añade " cm" si el atributo es 'format' o 'pa_format'
-                if ($attribute_name == 'format' || $attribute_name == 'pa_format') {
-                    $attribute_values_formatted .= ' cm';
-                }
-
                 // Concatena este atributo con los anteriores, solo si $attributes_str no está vacío
                 if (!empty($attributes_str)) {
                     $attributes_str .= ', '; // Añade coma entre atributos solo si ya hay contenido en la cadena
