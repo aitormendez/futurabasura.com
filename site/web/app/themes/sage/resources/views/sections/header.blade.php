@@ -1,5 +1,5 @@
 <div id="solapa"
-    class="pointer-events-none fixed top-0 z-40 flex h-screen w-screen flex-col flex-wrap items-center justify-center bg-white md:flex-row">
+    class="pointer-events-none fixed top-0 z-40 flex h-screen w-screen flex-col flex-wrap items-center justify-center bg-white opacity-0 md:flex-row">
     <ul class="contenidos my-4 flex flex-col items-center md:mx-12">
         @if (!empty($contents_nav))
             @foreach ($contents_nav as $item)
@@ -10,17 +10,6 @@
             @endforeach
         @endif
     </ul>
-    {{-- <ul class="my-4 shop flex flex-col items-center md:mx-12">
-        @if (!empty($shop_nav))
-        @foreach ($shop_nav as $item)
-        <li class="border border-black">
-            <a href="{{ $item->url }}"
-                class="inline-block px-4 pt-3 pb-2 text-sm tracking-widest text-black bg-white hover:bg-allo uppercase sm:text-xl">{{
-                $item->label }}</a>
-        </li>
-        @endforeach
-        @endif
-    </ul> --}}
     <ul class="social my-4 flex flex-col items-center md:mx-12">
         @if (!empty($social_nav))
         @endif
@@ -32,17 +21,6 @@
         @endforeach
 
     </ul>
-    {{-- <ul class="my-4 info  flex flex-col items-center md:mx-12">
-        @if (!empty($info_nav))
-        @foreach ($info_nav as $item)
-        <li class="border border-black">
-            <a href="{{ $item->url }}"
-                class="inline-block px-4 pt-3 pb-2 text-sm tracking-widest text-black bg-white hover:bg-allo uppercase sm:text-xl">{{
-                $item->label }}</a>
-        </li>
-        @endforeach
-        @endif
-    </ul> --}}
     <a id="btn-close" href="#" class="btn absolute right-8 top-8 inline-block hover:bg-allo">CLOSE</a>
 </div>
 

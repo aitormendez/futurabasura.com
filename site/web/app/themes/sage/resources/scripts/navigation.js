@@ -6,15 +6,6 @@ export function navigation() {
   const btnCloseJS = document.getElementById('btn-close');
   const solapa = document.getElementById('solapa');
 
-  gsap.set('#solapa', {
-    opacity: 0,
-  });
-
-  gsap.set('#solapa li', {
-    opacity: 0,
-    rotate: () => (Math.random() - 0.5) * 2 * 600,
-  });
-
   btnMenuJS.addEventListener('click', function () {
     abreSolapa();
   });

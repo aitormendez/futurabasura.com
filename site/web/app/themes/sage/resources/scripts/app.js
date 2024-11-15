@@ -4,6 +4,7 @@ import scramble from './scramble.js';
 import './components/video/video-player.js';
 import Alpine from 'alpinejs';
 import collapse from '@alpinejs/collapse';
+import { gsap, random } from 'gsap';
 Alpine.plugin(collapse);
 
 /**
@@ -11,6 +12,15 @@ Alpine.plugin(collapse);
  */
 domReady(async () => {
   const mdMin = window.matchMedia('(min-width: 768px)');
+
+  gsap.set('#solapa', {
+    opacity: 0,
+  });
+
+  gsap.set('#solapa li', {
+    opacity: 0,
+    rotate: () => (Math.random() - 0.5) * 2 * 600,
+  });
 
   navigation();
   scramble();
