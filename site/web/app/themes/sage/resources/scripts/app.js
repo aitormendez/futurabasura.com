@@ -40,11 +40,6 @@ domReady(async () => {
     marquee();
   }
 
-  // if (document.body.classList.contains('tax-artist')) {
-  //   const { desplegarArtista } = await import('./shop.js');
-  //   desplegarArtista();
-  // }
-
   if (
     document.body.classList.contains('post-type-archive-story') ||
     document.body.classList.contains('post-type-archive-project')

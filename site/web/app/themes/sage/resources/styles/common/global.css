@@ -32,12 +32,6 @@ body {
   @apply font-sans text-negro-fb;
 }
 
-#fondo {
-  @apply fixed inset-0 bg-fondo-medio;
-
-  background-size: 10px 10px;
-}
-
 #app {
   @apply relative;
 }
