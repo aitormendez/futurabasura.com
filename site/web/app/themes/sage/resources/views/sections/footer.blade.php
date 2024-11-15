@@ -113,16 +113,21 @@
             @endforeach
         </ul>
 
-        <div class="mt-6 w-full pl-6 text-sm">
+        <div class="mt-6 w-full justify-between px-6 text-sm md:flex">
             <a href="mailto:alwaysopen@futurabasura.com"
                 class="email font-arialblack hover:text-azul">alwaysopen@futurabasura.com</a>
+            <a class="mt-4 block hover:text-azul md:mt-0" target="_blank"
+                href="https://www.instagram.com/futurabasura/">
+                <x-fab-instagram class="w-8" alt="instagram" />
+            </a>
         </div>
+
 
         <div class="w-full p-6 text-sm">
             <div>
                 {!! wpautop(get_field('footer_texto_legal', 'option')) !!}
             </div>
-            <div class="mt-12 max-w-[600px] text-xs uppercase">
+            <div class="mt-12 max-w-[600px] text-xs uppercase md:text-[0.65rem]">
                 {!! get_field('footer_creditos', 'option') !!}
                 {!! get_field('footer_creditos_2col', 'option') !!}
             </div>
