@@ -19,6 +19,7 @@ class WooCommerceServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+
         add_filter('woocommerce_show_variation_price', function () {
             return true;
         });

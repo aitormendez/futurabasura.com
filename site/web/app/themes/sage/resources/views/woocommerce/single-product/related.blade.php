@@ -90,27 +90,30 @@
 
             <h3 class="bg-white px-6 py-1">
                 <a href="{{ $product_permalink }}">{{ $product_title }} by
-                    {{ $artist[0]->name }}</a>
-            </h3>
+                    @if ($artist)
+                        {{ $artist[0]->name }}
+                </a>
+        @endif
+        </h3>
 
-            <div id="glide-{{ $product_id }}-rel" class="glide g-related g-related-{{ $product_id }}">
-                <div class="glide__track" data-glide-el="track">
-                    <ul class="glide__slides">
-                        @foreach ($output as $item)
-                            <li class="glide__slide">
-                                <img class="block" src="{!! $item['att_url'] !!}" srcset="{!! $item['att_srcset'] !!}"
-                                    @if ($item['has_alt']) alt="{!! $item['alt'][0] !!}" @endif
-                                    sizes="(max-width: 792px) 100%, 20%">
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
+        <div id="glide-{{ $product_id }}-rel" class="glide g-related g-related-{{ $product_id }}">
+            <div class="glide__track" data-glide-el="track">
+                <ul class="glide__slides">
+                    @foreach ($output as $item)
+                        <li class="glide__slide">
+                            <img class="block" src="{!! $item['att_url'] !!}" srcset="{!! $item['att_srcset'] !!}"
+                                @if ($item['has_alt']) alt="{!! $item['alt'][0] !!}" @endif
+                                sizes="(max-width: 792px) 100%, 20%">
+                        </li>
+                    @endforeach
+                </ul>
             </div>
-        @endforeach
+        </div>
+@endforeach
 
-        @php woocommerce_product_loop_end() @endphp
+@php woocommerce_product_loop_end() @endphp
 
-    </section>
+</section>
 @endif
 
 @php wp_reset_postdata() @endphp
