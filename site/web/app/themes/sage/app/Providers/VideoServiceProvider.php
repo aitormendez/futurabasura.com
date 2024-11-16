@@ -14,7 +14,7 @@ class VideoServiceProvider extends ServiceProvider
     {
         // Register the service in the container
         $this->app->singleton('VideoService', function ($app) {
-            return new self();
+            return new static($app);
         });
     }
 
@@ -37,46 +37,45 @@ class VideoServiceProvider extends ServiceProvider
     {
         $videoId = $data->get_param('video_id');
         $libraryId = $data->get_param('library_id') ?? 265348;
-    
+
         if (!$videoId) {
             return new WP_Error('no_video_id', 'No video ID provided', ['status' => 400]);
         }
-    
+
         $videoDetails = $this->getVideoDetails($videoId, $libraryId);
         if (empty($videoDetails)) {
             return new WP_Error('no_encodings', 'No video resolutions found', ['status' => 404]);
         }
-    
+
         return rest_ensure_response($videoDetails);
     }
-    
+
 
     public function getVideoDetails($videoId, $libraryId)
     {
         $apiKey = getenv('BUNNY_KEY');
         $pullZoneUrl = 'vz-9a0bcf65-610';
-    
+
         $response = wp_remote_get("https://video.bunnycdn.com/library/{$libraryId}/videos/{$videoId}", [
             'headers' => [
                 'AccessKey' => $apiKey,
             ],
         ]);
-    
+
         if (is_wp_error($response)) {
             return [];
         }
-    
+
         $body = wp_remote_retrieve_body($response);
         $data = json_decode($body, true);
-    
+
         if (isset($data['availableResolutions'])) {
             return [
                 'hlsUrl' => "https://{$pullZoneUrl}.b-cdn.net/{$videoId}/playlist.m3u8",
                 'thumbnailUrl' => "https://{$pullZoneUrl}.b-cdn.net/{$videoId}/thumbnail.jpg",
             ];
         }
-    
+
         return [];
     }
-    
 }
