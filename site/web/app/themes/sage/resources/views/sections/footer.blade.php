@@ -60,50 +60,6 @@
 
     @include('partials.mailchimp-form')
 
-    {{-- desktop --}}
-    {{-- <div class="mb-6 hidden w-full flex-wrap bg-white pb-6 md:flex">
-        <ul class="mb-20 flex w-full justify-center gap-4 p-6 font-bugrino text-xl">
-            @foreach ($legal_nav as $item)
-                <li class="">
-                    <a href="{{ $item->url }}" class="font-light hover:text-azul">{{ $item->label }}</a>
-                </li>
-            @endforeach
-        </ul>
-
-        <div class="w-2/3 pl-6">
-            <div class="text-lg">
-                {!! wpautop(get_field('footer_texto_legal', 'option')) !!}
-            </div>
-
-            <div class="mt-12 flex flex-col gap-4 tracking-widest md:!flex-row">
-                <div class="max-w-[600px] text-xs uppercase">
-                    {!! get_field('footer_creditos', 'option') !!}
-                </div>
-                <div class="max-w-[600px] text-xs uppercase">
-                    {!! get_field('footer_creditos_2col', 'option') !!}
-                </div>
-            </div>
-        </div>
-        <div class="flex w-1/3 flex-col items-end justify-between pr-6">
-            <a class="hover:text-azul" href="https://www.instagram.com/futurabasura/">
-                <x-fab-instagram class="w-8" alt="instagram" />
-            </a>
-            <a href="mailto:alwaysopen@futurabasura.com"
-                class="email font-arialblack text-xl hover:text-azul">alwaysopen@futurabasura.com</a>
-        </div>
-
-        <div class="iconos mt-16 flex w-full justify-center gap-8">
-            <x-fab-cc-visa class="w-12" alt="Visa" />
-            <x-custom-paypal class="w-16" alt="Bizum" />
-            <x-fab-cc-mastercard class="w-12" alt="Mastercard" />
-            <x-fab-apple-pay class="w-14" alt="Apple Pay" />
-            <x-fab-google-pay class="w-14" alt="Google Pay" />
-            <x-custom-bizum class="w-20" alt="Bizum" />
-        </div>
-    </div> --}}
-    {{-- /desktop --}}
-
-    {{-- mobile --}}
     <div class="flex w-full flex-wrap bg-white">
         <ul class="mt-8 flex flex-col px-6 text-sm md:!flex-row md:gap-4">
             @foreach ($legal_nav as $item)
@@ -118,13 +74,13 @@
                 class="email font-arialblack hover:text-azul">alwaysopen@futurabasura.com</a>
             <a class="mt-4 block hover:text-azul md:mt-0" target="_blank"
                 href="https://www.instagram.com/futurabasura/">
-                <x-fab-instagram class="w-8" alt="instagram" />
+                <x-fab-instagram class="w-7" alt="instagram" />
             </a>
         </div>
 
 
         <div class="w-full p-6 text-sm">
-            <div>
+            <div class="max-w-[55%]">
                 {!! wpautop(get_field('footer_texto_legal', 'option')) !!}
             </div>
             <div class="mt-12 max-w-[600px] text-xs uppercase md:text-[0.65rem]">
@@ -134,15 +90,13 @@
         </div>
 
         <div class="iconos mb-16 flex w-full justify-center gap-4 px-6">
-            <x-fab-cc-visa class="w-12" alt="Visa" />
-            <x-custom-paypal class="w-16" alt="Paypal" />
-            <x-fab-cc-mastercard class="w-12" alt="Mastercard" />
-            <x-fab-apple-pay class="w-14" alt="Apple Pay" />
-            <x-fab-google-pay class="w-14" alt="Google Pay" />
+            <x-fab-cc-visa class="w-10" alt="Visa" />
+            <x-custom-paypal class="w-14" alt="Paypal" />
+            <x-fab-cc-mastercard class="w-10" alt="Mastercard" />
+            <x-fab-apple-pay class="w-12" alt="Apple Pay" />
+            <x-fab-google-pay class="w-12" alt="Google Pay" />
             {{-- <x-custom-bizum class="w-20" alt="Bizum" /> --}}
         </div>
     </div>
-
-    {{-- /mobile --}}
 
 </footer>
