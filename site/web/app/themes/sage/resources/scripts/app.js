@@ -26,13 +26,16 @@ domReady(async () => {
   scramble();
 
   if (mdMin.matches && document.body.classList.contains('home')) {
-    const { sliderHome } = await import('./sliderHome.js');
     const { ajustarAltoCupones, sliderContenidos, destacadoRepetido } =
       await import('./frontPage.js');
-    sliderHome();
     ajustarAltoCupones();
     sliderContenidos();
     destacadoRepetido();
+  }
+
+  if (document.body.classList.contains('home')) {
+    const { sliderHome } = await import('./sliderHome.js');
+    sliderHome();
   }
 
   if (document.body.classList.contains('page')) {

@@ -19,7 +19,6 @@
 @import 'layouts/single-product';
 @import 'layouts/single-variable-product';
 @import 'componentes/select';
-@import 'componentes/forms';
 @import 'componentes/lightgallery';
 
 @import '@glidejs/glide/dist/css/glide.core.min.css';

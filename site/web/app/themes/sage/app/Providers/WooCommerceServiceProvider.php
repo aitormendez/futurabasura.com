@@ -367,7 +367,7 @@ class WooCommerceServiceProvider extends ServiceProvider
 
                 // HTML para mostrar los atributos
                 if (wp_is_mobile()) {
-                    echo '<li class="flex uppercase font-fk justify-between border-t border-black px-4 pt-[1px] last:border-b text-sm tracking-wider -mx-4 bg-white" style="width: calc(100% + 2 rem)>';
+                    echo '<li class="flex uppercase font-fk justify-between border-t border-black px-4 pt-[1px] last:border-b text-sm tracking-wider -mx-4 bg-white" style="width: calc(100% + 2 rem")>';
                 } else {
                     echo '<li class="flex uppercase font-fk w-full justify-between border-t border-black px-2 pt-[1px] last:border-b text-[1.1vw] lg:text-[0.9vw] tracking-wider">';
                 }
@@ -380,7 +380,7 @@ class WooCommerceServiceProvider extends ServiceProvider
 
                 if (!empty($sale_price) && $sale_price < $price) {
                     echo '<span class="mr-2"><del>' . wc_price($price) . '</del></span>';
-                    echo '<span class="text-red-600">' . wc_price($sale_price) . '</span>';
+                    echo '<span class="text-rojo">' . wc_price($sale_price) . '</span>';
                 } else {
                     echo '<span></span>'; // Espacio para mantener la estructura cuando no hay precio de oferta
                     echo '<span>' . wc_price($price) . '</span>';
@@ -417,7 +417,7 @@ class WooCommerceServiceProvider extends ServiceProvider
 
             // HTML para mostrar los atributos
             if (wp_is_mobile()) {
-                echo '<li class="flex uppercase font-fk justify-between border-y border-black -mx-4 bg-white px-4 text-sm tracking-wider" style="width: calc(100% + 2 rem)">';
+                echo '<li class="flex uppercase font-fk justify-between border-y border-black -mx-4 bg-white px-4 pt-[1px] text-sm tracking-wider" style="width: calc(100% + 2 rem)">';
             } else {
                 echo '<li class="flex uppercase font-fk w-full justify-between border-y border-black px-2 pt-[1px] text-[1.1vw] lg:text-[0.9vw] tracking-wider">';
             }
