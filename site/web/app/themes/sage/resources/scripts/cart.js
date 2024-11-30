@@ -61,15 +61,26 @@ export function carrito() {
   // inicializar selectWoo por mi cuentas porque no funciona en staging
 
   jQuery(function ($) {
-    $(':input.wc-enhanced-select')
-      .filter(':not(.enhanced)')
-      .each(function () {
-        const select2Args = {
-          minimumResultsForSearch: 10,
-          placeholder: $(this).attr('placeholder'),
-          // Otros parámetros según tus necesidades
-        };
-        $(this).selectWoo(select2Args).addClass('enhanced');
+    jQuery(function ($) {
+      // Selecciona los dos select específicos por sus IDs
+      const selects = [
+        '#calc_shipping_country', // País
+        '#calc_shipping_state', // Estado/Región
+      ];
+
+      selects.forEach(function (selector) {
+        const $select = $(selector);
+        if ($select.length > 0) {
+          $select
+            .selectWoo({
+              minimumResultsForSearch: 10,
+              placeholder:
+                $select.attr('data-placeholder') || 'Select an option…',
+              // Otros parámetros de configuración
+            })
+            .addClass('enhanced');
+        }
       });
+    });
   });
 }
