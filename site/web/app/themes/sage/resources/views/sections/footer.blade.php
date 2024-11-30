@@ -79,7 +79,7 @@
         </div>
 
         <div class="w-full p-6 text-sm">
-            <div class="max-w-[55%]">
+            <div class="md:max-w-[55%]">
                 {!! wpautop(get_field('footer_texto_legal', 'option')) !!}
             </div>
             <div class="mt-12 max-w-[600px] text-xs uppercase md:text-[0.65rem]">
