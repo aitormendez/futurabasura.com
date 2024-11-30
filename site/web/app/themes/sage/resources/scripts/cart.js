@@ -34,7 +34,7 @@ export function carrito() {
   document.querySelectorAll('.cartQuantityInput').forEach(function (input) {
     input.addEventListener('change', function () {
       const updateCartButton = document.querySelector(
-        'button[name="update_cart"]'
+        'button[name="update_cart"]',
       );
       if (updateCartButton) {
         updateCartButton.disabled = false; // Forzar la habilitación del botón
@@ -56,5 +56,20 @@ export function carrito() {
       // Redirigir a la URL de eliminación para que WooCommerce procese la eliminación
       window.location.href = this.href;
     });
+  });
+
+  // inicializar selectWoo por mi cuentas porque no funciona en staging
+
+  jQuery(function ($) {
+    $(':input.wc-enhanced-select')
+      .filter(':not(.enhanced)')
+      .each(function () {
+        const select2Args = {
+          minimumResultsForSearch: 10,
+          placeholder: $(this).attr('placeholder'),
+          // Otros parámetros según tus necesidades
+        };
+        $(this).selectWoo(select2Args).addClass('enhanced');
+      });
   });
 }
