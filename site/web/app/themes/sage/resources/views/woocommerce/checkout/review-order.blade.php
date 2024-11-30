@@ -50,7 +50,7 @@
                     apply_filters('woocommerce_checkout_cart_item_visible', true, $cart_item, $cart_item_key))
                 <div
                     class="{{ esc_attr(apply_filters('woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key)) }} table-row">
-                    <div class="product-name table-cell border-b-2 border-black bg-white p-4">
+                    <div class="product-name table-cell w-[150px] border-b-2 border-black bg-white p-4 md:w-auto">
                         {!! wp_kses_post(apply_filters('woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key)) !!}&nbsp;
                         {!! apply_filters(
                             'woocommerce_checkout_cart_item_quantity',

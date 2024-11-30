@@ -14,7 +14,7 @@ body.checkout {
   }
 
   label {
-    display: block;
+    display: inline-block;
     margin-bottom: 0.2em;
     font-size: small;
     font-weight: bold;
@@ -73,5 +73,9 @@ body.checkout {
       padding: 0.2em 0.4em;
       background-color: #b8daff;
     }
+  }
+
+  label[for='payment_method_square_credit_card'] {
+    gap: 1rem;
   }
 }
