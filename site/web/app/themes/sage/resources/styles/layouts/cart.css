@@ -166,4 +166,8 @@ body.cart {
       max-width: 20rem;
     }
   }
+
+  .woocommerce-shipping-calculator button[name='calc_shipping'] {
+    @apply inline-block px-4 py-2 my-6 bg-white border-2 border-black uppercase text-xs tracking-widest;
+  }
 }
