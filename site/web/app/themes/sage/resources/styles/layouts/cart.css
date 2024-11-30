@@ -43,6 +43,8 @@ body.cart {
   }
 
   .select2-container--default {
+    width: 100%;
+
     .select2-selection {
       box-shadow: 0;
       background-color: #fff;
