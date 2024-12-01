@@ -57,10 +57,9 @@ global $product;
         </div>
     @else
         <button type="submit"
-            class="<?php echo esc_attr(wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : ''); ?> -translate-x-1/2 -translate-y-1/2 bg-azul px-10 py-6 text-sm uppercase tracking-widest text-white transition-colors clip-path-elipse hover:bg-allo hover:text-black md:absolute md:left-1/2 md:top-1/2"><?php echo esc_html($product->single_add_to_cart_text()); ?>
+            class="<?php echo esc_attr(wc_wp_theme_get_element_class_name('button') ? ' ' . wc_wp_theme_get_element_class_name('button') : ''); ?> -translate-x-1/2 bg-azul px-10 py-6 text-sm uppercase tracking-widest text-white transition-colors clip-path-elipse hover:bg-allo hover:text-black md:absolute md:left-1/2 md:top-1/2 md:-translate-y-1/2"><?php echo esc_html($product->single_add_to_cart_text()); ?>
         </button>
     @endif
-
 
     <?php do_action('woocommerce_after_add_to_cart_button'); ?>
 

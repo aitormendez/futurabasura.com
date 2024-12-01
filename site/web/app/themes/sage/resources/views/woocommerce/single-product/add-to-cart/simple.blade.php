@@ -92,7 +92,7 @@
         {{-- termina tabla nueva --}}
 
         <button type="submit" name="add-to-cart" value="{{ $product->get_id() }}"
-            class="absolute left-1/2 block -translate-x-1/2 translate-y-1/2 bg-azul px-10 py-3 uppercase tracking-max text-white transition-colors clip-path-elipse hover:bg-allo hover:text-black">{{ $product->single_add_to_cart_text() }}</button>
+            class="absolute left-1/2 block -translate-x-1/2 translate-y-1/2 whitespace-nowrap bg-azul px-20 py-6 text-sm uppercase tracking-widest text-white transition-colors clip-path-elipse hover:bg-allo hover:text-black">{{ $product->single_add_to_cart_text() }}</button>
 
         @php do_action( 'woocommerce_after_add_to_cart_button' ); @endphp
     </form>
