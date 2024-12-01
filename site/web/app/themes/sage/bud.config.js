@@ -6,6 +6,9 @@
  *
  * @type {import('@roots/bud').Config}
  */
+
+import tailwindConfig from './tailwind.config.mjs';
+
 export default async (app) => {
   /**
    * Application assets & entrypoints
@@ -102,5 +105,15 @@ export default async (app) => {
     })
     .useTailwindColors()
     .useTailwindFontFamily()
-    .useTailwindFontSize();
+    .useTailwindFontSize()
+    .setStyles({
+      blocks: {
+        'core/button': {
+          color: {
+            background: tailwindConfig.theme.colors.azul,
+            text: `${tailwindConfig.theme.colors.white} !important`,
+          },
+        },
+      },
+    });
 };
