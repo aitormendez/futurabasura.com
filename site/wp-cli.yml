@@ -6,7 +6,7 @@ server:
   ssh: $USER@lima-futurabasura.com
   path: /srv/www/futurabasura.com/current/web/wp
 @production:
-  ssh: web@165.227.234.177:22
+  ssh: web@178.62.65.133:22
   path: /srv/www/futurabasura.com/current/web/wp
 @staging:
   ssh: web@165.227.234.177:22
