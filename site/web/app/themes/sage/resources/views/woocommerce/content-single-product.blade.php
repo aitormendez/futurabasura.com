@@ -109,7 +109,7 @@
     </div>
 
     @if (!$product->is_type('simple'))
-        <div class="text-azul w-full border-t-2 border-black bg-white p-3 text-center">
+        <div class="text-azul order-3 w-full border-t-2 border-black bg-white p-3 text-center md:-order-none">
             Select product attributes to know the price
         </div>
     @endif
