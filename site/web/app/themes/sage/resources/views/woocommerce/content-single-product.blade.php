@@ -46,13 +46,13 @@
 
     <div
         class="order-1 flex w-full flex-col items-center bg-white px-6 pb-20 pt-6 text-xl md:-order-none md:border-b-2 md:pt-14">
-        <h2 class="artista text-center font-bugrino text-xl uppercase tracking-wider md:text-3xl">
+        <h2 class="artista font-bugrino text-center text-xl uppercase tracking-wider md:text-3xl">
             {{ $alt_name ?: $artista['artista']->name }}
         </h2>
-        <h1 class="product_title entry-title md:text-md my-6 text-center font-fk text-[1rem] uppercase tracking-wider">
+        <h1 class="product_title entry-title md:text-md font-fk my-6 text-center text-[1rem] uppercase tracking-wider">
             {!! get_the_title() !!}</h1>
 
-        <div class="excerpt md:text-md max-w-screen-md text-center font-fk text-[1rem] leading-snug">
+        <div class="excerpt md:text-md font-fk max-w-screen-md text-center text-[1rem] leading-snug">
             {!! $post->post_excerpt !!}
         </div>
     </div>
@@ -78,7 +78,7 @@
 
             <div class="product-featured-image {{ $is_horizontal ? 'w-[55%]' : 'w-1/3' }}">
                 @if (!empty($product_categories) && !is_wp_error($product_categories))
-                    <ul class="absolute left-0 top-0 p-6 font-fk text-sm uppercase tracking-wider">
+                    <ul class="font-fk absolute left-0 top-0 p-6 text-sm uppercase tracking-wider">
                         @foreach ($product_categories as $category)
                             <li>{{ $category->name }}</li>
                         @endforeach
@@ -106,6 +106,10 @@
             </div>
             <div id="indice" class="absolute bottom-0 right-0 w-20 bg-white p-3 text-center"></div>
         </div>
+    </div>
+
+    <div class="text-azul w-full border-t-2 border-black bg-white p-3 text-center">
+        Select product attributes to know the price
     </div>
 
 
