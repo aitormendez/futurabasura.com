@@ -108,9 +108,11 @@
         </div>
     </div>
 
-    <div class="text-azul w-full border-t-2 border-black bg-white p-3 text-center">
-        Select product attributes to know the price
-    </div>
+    @if ($product->is_type('simple'))
+        <div class="text-azul w-full border-t-2 border-black bg-white p-3 text-center">
+            Select product attributes to know the price
+        </div>
+    @endif
 
 
     <div class="order-3 flex w-full md:order-none">
