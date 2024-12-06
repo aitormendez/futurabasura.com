@@ -54,11 +54,15 @@
                 </div>
 
                 @if (!empty($artists_terms) && !is_wp_error($artists_terms))
-                    <div class="mx-4 mb-3 grow-0 font-arialblack text-sm text-black md:text-base">
+                    <div class="font-arialblack mx-4 mb-3 grow-0 text-sm text-black md:text-base">
                         <span>{{ $name }} by </span>
                         @foreach ($artists_terms as $term)
                             <span>{{ $term->name }}</span>
                         @endforeach
+                    </div>
+                @else
+                    <div class="font-arialblack mx-4 mb-3 grow-0 text-sm text-black md:text-base">
+                        <span>{{ $name }}</span>
                     </div>
                 @endif
             </a>
@@ -72,9 +76,9 @@
                 <div style="background-color: {{ $data->backgroundColor ?? '#ffffff' }}"
                     class="flex w-full flex-col justify-between p-6 md:w-1/2">
                     <div class="font-bugrino font-light">{{ $post_type_label }}</div>
-                    <div class="my-6 text-center font-arialblack text-sm">
+                    <div class="font-arialblack my-6 text-center text-sm">
                         {{ $name }}</div>
-                    <div class="text-center font-fk text-sm">
+                    <div class="font-fk text-center text-sm">
                         {!! $excerpt !!}
                     </div>
                 </div>
