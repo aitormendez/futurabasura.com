@@ -23,8 +23,8 @@ do_action('woocommerce_before_cart'); ?>
     {{-- ticket --}}
     <div class="ticket">
         <div class="ticket-head w-full">
-            <div class="ticket-triangulo w-full bg-tk-triangulo"></div>
-            <div class="mb-2 h-10 w-full bg-allo-claro"></div>
+            <div class="ticket-triangulo bg-tk-triangulo w-full"></div>
+            <div class="bg-allo-claro mb-2 h-10 w-full"></div>
         </div>
 
         <div class="tk-body">
@@ -58,7 +58,10 @@ do_action('woocommerce_before_cart'); ?>
                         $_product->get_name(),
                         $cart_item,
                         $cart_item_key,
-                ); @endphp @if (
+                    );
+                @endphp
+
+                @if (
                     $_product &&
                         $_product->exists() &&
                         $cart_item['quantity'] > 0 &&
@@ -74,7 +77,7 @@ do_action('woocommerce_before_cart'); ?>
 
                     {{-- row --}}
                     <div
-                        class="text-gray-600 tk-row woocommerce-cart-form__cart-item {{ apply_filters('woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key) }} mb-2 flex justify-between bg-allo-claro font-sans tracking-wider">
+                        class="tk-row woocommerce-cart-form__cart-item {{ apply_filters('woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key) }} bg-allo-claro mb-2 flex justify-between font-sans tracking-wider text-gray-600">
                         <div class="md:nowrap col-1 flex w-full flex-wrap justify-between md:justify-start">
                             {{-- thumbnail --}}
                             <div class="tk-cell product-thumbnail w-1/4 p-6">
@@ -189,11 +192,11 @@ do_action('woocommerce_before_cart'); ?>
 
                                 <div class="botones-qty flex flex-col text-2xl">
                                     <div
-                                        class="product-quantity-add cursor-pointer select-none px-2 py-1.5 text-center leading-none hover:text-azul">
+                                        class="product-quantity-add hover:text-azul cursor-pointer select-none px-2 py-1.5 text-center leading-none">
                                         &plus;
                                     </div>
                                     <div
-                                        class="product-quantity-remove cursor-pointer select-none px-2 py-1.5 leading-none hover:text-azul">
+                                        class="product-quantity-remove hover:text-azul cursor-pointer select-none px-2 py-1.5 leading-none">
                                         &minus;
                                     </div>
                                 </div>
@@ -217,7 +220,7 @@ do_action('woocommerce_before_cart'); ?>
                         <div class="col-2 product-remove flex items-center justify-center">
                             <a href="{!! esc_url(wc_get_cart_remove_url($cart_item_key)) !!}" aria-label="{!! esc_html__('Remove this item', 'woocommerce') !!}"
                                 data-product_id="{!! esc_attr($product_id) !!}" data-product_sku="{!! esc_attr($_product->get_sku()) !!}"
-                                class="border-red-600 flex h-full w-full items-center border p-3">
+                                class="flex h-full w-full items-center border border-red-600 p-3">
                                 {!! file_get_contents(get_theme_file_path('resources/images/waste.svg')) !!}
                             </a>
                         </div>
@@ -240,7 +243,7 @@ do_action('woocommerce_before_cart'); ?>
                                         for="coupon_code">{{ esc_attr(translate('Coupon', 'woocommerce')) }}</label>
 
                                     <input type="text" name="coupon_code"
-                                        class="input-text h-36 w-full bg-transparent text-center font-bold tracking-wider text-rojo"
+                                        class="input-text text-rojo h-36 w-full bg-transparent text-center font-bold tracking-wider"
                                         id="coupon_code" value=""
                                         placeholder="{{ esc_attr(translate('Coupon code', 'woocommerce')) }}" />
 
@@ -286,8 +289,8 @@ do_action('woocommerce_before_cart'); ?>
         </div>
 
         <div class="ticket-head w-full">
-            <div class="h-10 w-full bg-allo-claro"></div>
-            <div class="ticket-triangulo w-full bg-tk-triangulo-down"></div>
+            <div class="bg-allo-claro h-10 w-full"></div>
+            <div class="ticket-triangulo bg-tk-triangulo-down w-full"></div>
         </div>
     </div>
 

@@ -4,6 +4,10 @@ body.cart {
       height: 30px;
     }
   }
+
+  .product-remove svg {
+    @apply fill-rojo;
+  }
   .cart-collaterals {
     .cart_totals {
       h2 {
