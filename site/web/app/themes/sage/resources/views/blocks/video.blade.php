@@ -31,7 +31,7 @@
     $borderWidth = $data->style['border']['width'] ?? '1px';
 @endphp
 
-<div class="video-block {{ isset($data->align) ? $data->align : '' }} {{ isset($data->className) ? $data->className : '' }} overflow-hidden"
+<div class="video-block not-prose {{ isset($data->align) ? $data->align : '' }} {{ isset($data->className) ? $data->className : '' }} overflow-hidden"
     style="border-color: {{ $borderColor }}; border-radius: {{ $borderRadius }}; border-style: {{ $borderStyle }}; border-width: {{ $borderWidth }};">
     @if ($videoDetails && !empty($videoDetails['hlsUrl']))
         <div id="video-player-{{ $videoId }}" data-video-id="{{ $videoId }}"

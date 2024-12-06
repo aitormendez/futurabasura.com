@@ -1,5 +1,5 @@
 @if (is_front_page())
-    <div class="contenido md:px-none prose prose-fb bg-white py-6 text-xl md:pb-20 md:pt-0">
+    <div class="contenido md:px-none prose prose-fb bg-white pb-6 pt-0 text-xl md:pb-20">
         @php(the_content())
     </div>
 @else
