@@ -57,46 +57,4 @@ export function carrito() {
       window.location.href = this.href;
     });
   });
-
-  // inicializar selectWoo por mi cuenta porque no funciona en staging
-
-  jQuery(function ($) {
-    const selects = [
-      '#calc_shipping_country', // País
-      '#calc_shipping_state', // Estado/Región
-    ];
-
-    // Inicializa selectWoo en ambos selects
-    selects.forEach(function (selector) {
-      const $select = $(selector);
-      if ($select.length > 0) {
-        $select
-          .selectWoo({
-            minimumResultsForSearch: 10,
-            placeholder:
-              $select.attr('data-placeholder') || 'Select an option…',
-          })
-          .addClass('enhanced');
-      }
-    });
-
-    // Escucha cambios en #calc_shipping_country
-    $('#calc_shipping_country').on('change', function () {
-      // Espera a que WooCommerce actualice las opciones de #calc_shipping_state
-      setTimeout(function () {
-        const $stateSelect = $('#calc_shipping_state');
-        if ($stateSelect.length > 0) {
-          // Destruir y volver a inicializar selectWoo en #calc_shipping_state
-          $stateSelect.selectWoo('destroy'); // Destruir el selectWoo existente
-          $stateSelect
-            .selectWoo({
-              minimumResultsForSearch: 10,
-              placeholder:
-                $stateSelect.attr('data-placeholder') || 'Select an option…',
-            })
-            .addClass('enhanced');
-        }
-      }, 100); // Timeout para asegurarse de que WooCommerce actualizó las opciones
-    });
-  });
 }
