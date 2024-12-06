@@ -60,27 +60,27 @@ export function carrito() {
 
   // inicializar selectWoo por mi cuenta porque no funciona en staging
 
-  // jQuery(function ($) {
-  //   jQuery(function ($) {
-  //     // Selecciona los dos select específicos por sus IDs
-  //     const selects = [
-  //       '#calc_shipping_country', // País
-  //       '#calc_shipping_state', // Estado/Región
-  //     ];
+  jQuery(function ($) {
+    jQuery(function ($) {
+      // Selecciona los dos select específicos por sus IDs
+      const selects = [
+        '#calc_shipping_country', // País
+        '#calc_shipping_state', // Estado/Región
+      ];
 
-  //     selects.forEach(function (selector) {
-  //       const $select = $(selector);
-  //       if ($select.length > 0) {
-  //         $select
-  //           .selectWoo({
-  //             minimumResultsForSearch: 10,
-  //             placeholder:
-  //               $select.attr('data-placeholder') || 'Select an option…',
-  //             // Otros parámetros de configuración
-  //           })
-  //           .addClass('enhanced');
-  //       }
-  //     });
-  //   });
-  // });
+      selects.forEach(function (selector) {
+        const $select = $(selector);
+        if ($select.length > 0) {
+          $select
+            .selectWoo({
+              minimumResultsForSearch: 10,
+              placeholder:
+                $select.attr('data-placeholder') || 'Select an option…',
+              // Otros parámetros de configuración
+            })
+            .addClass('enhanced');
+        }
+      });
+    });
+  });
 }
