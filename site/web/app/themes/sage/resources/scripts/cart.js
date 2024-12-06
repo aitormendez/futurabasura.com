@@ -57,4 +57,30 @@ export function carrito() {
       window.location.href = this.href;
     });
   });
+
+  // inicializar selectWoo por mi cuenta porque no funciona en staging
+
+  jQuery(function ($) {
+    // Inicializa selectWoo en el país y el estado
+    $('#calc_shipping_country, #calc_shipping_state').selectWoo({
+      minimumResultsForSearch: 10,
+      placeholder: 'Select an option…',
+    });
+
+    // Escucha el evento de actualización de WooCommerce
+    $(document.body).on('country_to_state_changed', function () {
+      const $stateSelect = $('#calc_shipping_state');
+      if ($stateSelect.length > 0) {
+        // Destruye selectWoo si ya está inicializado
+        if ($stateSelect.hasClass('select2-hidden-accessible')) {
+          $stateSelect.selectWoo('destroy');
+        }
+        // Reinicializa selectWoo con las nuevas opciones
+        $stateSelect.selectWoo({
+          minimumResultsForSearch: 10,
+          placeholder: 'Select an option…',
+        });
+      }
+    });
+  });
 }
