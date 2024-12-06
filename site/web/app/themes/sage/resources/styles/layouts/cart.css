@@ -177,10 +177,15 @@ body.cart {
     @apply inline-block px-4 py-2 my-6 bg-white border-2 border-black uppercase text-xs tracking-widest;
   }
 
+  #calc_shipping_country_field {
+    padding-right: 1rem;
+  }
+
   #calc_shipping_country,
   #calc_shipping_state {
     background-color: white;
     padding: 1rem;
     margin-bottom: 1rem;
+    width: 100%;
   }
 }
