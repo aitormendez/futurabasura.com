@@ -26,8 +26,8 @@ const config = {
         fb: {
           css: {
             '--tw-prose-links': theme('colors.azul'),
-            '*': {
-              'line-height': '1.3',
+            'h1, h2, h3, h4, h5, h6': {
+              lineHeight: '1.3',
             },
           },
         },
@@ -43,6 +43,9 @@ const config = {
               '&:hover': {
                 color: '#000',
               },
+            },
+            'h1, h2, h3, h4, h5, h6': {
+              lineHeight: '1.3',
             },
           },
         },
