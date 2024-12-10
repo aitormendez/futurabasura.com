@@ -58,12 +58,12 @@ export default async (app) => {
         backgroundImage: true,
       },
       color: {
-        custom: false,
+        custom: true,
         customDuotone: false,
-        customGradient: false,
-        defaultDuotone: false,
-        defaultGradients: false,
-        defaultPalette: false,
+        customGradient: true,
+        defaultDuotone: true,
+        defaultGradients: true,
+        defaultPalette: true,
         duotone: [],
       },
       custom: {
