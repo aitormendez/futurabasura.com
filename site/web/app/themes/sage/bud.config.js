@@ -106,6 +106,17 @@ export default async (app) => {
     .useTailwindColors()
     .useTailwindFontFamily()
     .useTailwindFontSize()
+    .setSettings({
+      // Sobrescribir colores después de .useTailwindColors
+      color: {
+        custom: true, // Habilita colores personalizados
+        customDuotone: false,
+        customGradient: false,
+        defaultDuotone: false,
+        defaultGradients: false,
+        defaultPalette: true, // Opcional: habilita la paleta predeterminada de WP
+      },
+    });
     .setStyles({
       blocks: {
         'core/button': {
