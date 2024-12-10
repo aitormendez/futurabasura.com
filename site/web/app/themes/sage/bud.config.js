@@ -116,7 +116,7 @@ export default async (app) => {
         defaultGradients: false,
         defaultPalette: true, // Opcional: habilita la paleta predeterminada de WP
       },
-    });
+    })
     .setStyles({
       blocks: {
         'core/button': {
