@@ -53,6 +53,9 @@ export default async (app) => {
    * @see {@link https://developer.wordpress.org/block-editor/how-to-guides/themes/theme-json}
    */
   app.wpjson
+    .useTailwindColors()
+    .useTailwindFontFamily()
+    .useTailwindFontSize()
     .setSettings({
       background: {
         backgroundImage: true,
@@ -101,20 +104,6 @@ export default async (app) => {
       layout: {
         contentSize: '800px',
         wideSize: '1200px',
-      },
-    })
-    .useTailwindColors()
-    .useTailwindFontFamily()
-    .useTailwindFontSize()
-    .setSettings({
-      // Sobrescribir colores después de .useTailwindColors
-      color: {
-        custom: true, // Habilita colores personalizados
-        customDuotone: false,
-        customGradient: false,
-        defaultDuotone: false,
-        defaultGradients: false,
-        defaultPalette: true, // Opcional: habilita la paleta predeterminada de WP
       },
     })
     .setStyles({
