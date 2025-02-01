@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb0ba2b82768f8c4c2606e45baf9f4ed",
+    "content-hash": "e5e2b1d3fc61d78d30f8ab78826cbe01",
     "packages": [
         {
             "name": "brick/math",
@@ -7514,6 +7514,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/query-monitor/"
+        },
+        {
+            "name": "wpackagist-plugin/redis-cache",
+            "version": "2.5.4",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/redis-cache/",
+                "reference": "tags/2.5.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/redis-cache.2.5.4.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/redis-cache/"
         },
         {
             "name": "wpackagist-plugin/variation-swatches-woo",
