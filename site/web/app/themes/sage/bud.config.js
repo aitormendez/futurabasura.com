@@ -77,9 +77,6 @@ export default async (app) => {
         },
       },
       spacing: {
-        margin: true,
-        padding: true,
-        blockGap: null,
         units: ['px', 'em', 'rem', 'vh', 'vw'],
         spacingSizes: [
           { name: 'Small', slug: 'small', size: '8px' },

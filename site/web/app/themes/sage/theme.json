@@ -90,9 +90,6 @@
       }
     },
     "spacing": {
-      "margin": true,
-      "padding": true,
-      "blockGap": true,
       "units": [
         "px",
         "em",
@@ -116,7 +113,10 @@
           "slug": "large",
           "size": "32px"
         }
-      ]
+      ],
+      "blockGap": true,
+      "margin": true,
+      "padding": true
     },
     "typography": {
       "customFontSize": true,
