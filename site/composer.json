@@ -70,7 +70,8 @@
     "log1x/sage-html-forms": "^1.0",
     "spatie/dropbox-api": "^1.22",
     "league/oauth2-client": "^2.7",
-    "wpackagist-plugin/pixelyoursite": "^10.0"
+    "wpackagist-plugin/pixelyoursite": "^10.0",
+    "wpackagist-plugin/complianz-gdpr": "*"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.7.1",
