@@ -5,9 +5,10 @@
 
     if ($videoId) {
         $siteUrl = home_url();
-        $response = wp_remote_get("{$siteUrl}/wp-json/fb/v1/video-resolutions?video_id={$videoId}", [
+        $response = wp_remote_get(rest_url('fb/v1/video-resolutions') . '?video_id=' . $videoId, [
             'sslverify' => false,
         ]);
+
         if (!is_wp_error($response)) {
             $body = wp_remote_retrieve_body($response);
             $videoDetails = json_decode($body, true);
