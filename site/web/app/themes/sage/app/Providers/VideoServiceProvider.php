@@ -39,16 +39,25 @@ class VideoServiceProvider extends ServiceProvider
         $libraryId = $data->get_param('library_id') ?? 265348;
 
         if (!$videoId) {
-            return new WP_Error('no_video_id', 'No video ID provided', ['status' => 400]);
+            return new \WP_Error('no_video_id', 'No video ID provided', ['status' => 400]);
         }
 
         $videoDetails = $this->getVideoDetails($videoId, $libraryId);
         if (empty($videoDetails)) {
-            return new WP_Error('no_encodings', 'No video resolutions found', ['status' => 404]);
+            return new \WP_Error('no_encodings', 'No video resolutions found', ['status' => 404]);
         }
 
-        return rest_ensure_response($videoDetails);
+        // Creamos la respuesta con tu contenido
+        $response = rest_ensure_response($videoDetails);
+
+        // Añadimos las cabeceras de no-caché
+        $response->header('Cache-Control', 'no-cache, no-store, must-revalidate');
+        $response->header('Pragma', 'no-cache');
+        $response->header('Expires', '0');
+
+        return $response;
     }
+
 
 
     public function getVideoDetails($videoId, $libraryId)
