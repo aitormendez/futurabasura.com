@@ -9,5 +9,5 @@ server:
   ssh: web@178.62.65.133:22
   path: /srv/www/futurabasura.com/current/web/wp
 @staging:
-  ssh: web@165.227.234.177:22
-  path: /srv/www/stage.futurabasura.com/current/web/wp
+  ssh: web@178.128.168.215:22
+  path: /srv/www/futurabasura.com/current/web/wp
