@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Query Monitor &#8211; The developer tools panel for WordPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2024-04-22 14:50:03+0000\n"
+"PO-Revision-Date: 2024-11-28 07:28:34+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,10 @@ msgstr ""
 "X-Generator: GlotPress/4.0.1\n"
 "Language: es\n"
 "Project-Id-Version: Plugins - Query Monitor &#8211; The developer tools panel for WordPress - Stable (latest release)\n"
+
+#: output/html/environment.php:281
+msgid "Basic Auth"
+msgstr "Identificación básica"
 
 #: output/html/assets.php:53
 msgid "Module"
@@ -81,7 +85,7 @@ msgid "Doing it Wrong"
 msgstr "Haciéndolo mal"
 
 #. translators: %s: Name of WordPress filter
-#: dispatchers/Html.php:595
+#: dispatchers/Html.php:607
 msgid "The file link format for your editor is set by the %s filter."
 msgstr "El formato del enlace del archivo para tu editor está establecido por el filtro %s."
 
@@ -196,26 +200,26 @@ msgstr "Closure desconocido"
 msgid "%s Language"
 msgstr "Idioma de %s"
 
-#: dispatchers/Html.php:611
+#: dispatchers/Html.php:623
 msgctxt "colour scheme"
 msgid "Dark"
 msgstr "Oscuro"
 
-#: dispatchers/Html.php:610
+#: dispatchers/Html.php:622
 msgctxt "colour scheme"
 msgid "Light"
 msgstr "Claro"
 
-#: dispatchers/Html.php:609
+#: dispatchers/Html.php:621
 msgctxt "colour scheme"
 msgid "Auto"
 msgstr "Automático"
 
-#: dispatchers/Html.php:606
+#: dispatchers/Html.php:618
 msgid "Your browser color scheme is respected by default. You can override it here."
 msgstr "El esquema de color de tu navegador se respeta por defecto. Puedes sustituirlo aqui."
 
-#: dispatchers/Html.php:604
+#: dispatchers/Html.php:616
 msgid "Appearance"
 msgstr "Apariencia"
 
@@ -300,12 +304,12 @@ msgstr "No se han puesto en cola archivos JavaScript."
 msgid "Non-WordPress Core"
 msgstr "No es del núcleo de WordPress"
 
-#: dispatchers/Html.php:651
+#: dispatchers/Html.php:663
 msgid "Allow the wp-content/db.php file symlink to be put into place during activation. Set to false to prevent the symlink creation."
 msgstr "Permite que el enlace simbólico del archivo wp-content/db.php se coloque durante la activación. Poner en false para evitar la creación del enlace simbólico."
 
 #. translators: %s: Number of hooks
-#: dispatchers/Html.php:383
+#: dispatchers/Html.php:389
 msgid "Hooks in Use (%s)"
 msgstr "Ganchos en uso (%s)"
 
@@ -366,7 +370,7 @@ msgstr "No se han registrado datos. <a href=\"%s\">Lee sobre el registro de vari
 msgid "Environment Type"
 msgstr "Tipo de entorno"
 
-#: dispatchers/Html.php:639
+#: dispatchers/Html.php:651
 msgid "Hide Query Monitor itself from various panels. Set to false if you want to see how Query Monitor hooks into WordPress."
 msgstr "Ocultar «Query Monitor» en varios paneles. Establécelo en «false» si quieres ver cómo «Query Monitor» se engancha en WordPress."
 
@@ -384,19 +388,19 @@ msgstr "Los archivos de activos de «Query Monitor» se deben generar. Ejecuta %
 msgid "This message was triggered by %s."
 msgstr "Este mensaje ha sido activado por %s."
 
-#: dispatchers/Html.php:591
+#: dispatchers/Html.php:603
 msgid "Saved! Reload to apply changes."
 msgstr "¡Guardado! Recarga para aplicar los cambios."
 
-#: dispatchers/Html.php:587
+#: dispatchers/Html.php:599
 msgid "Set editor cookie"
 msgstr "Establecer la cookie del editor"
 
-#: dispatchers/Html.php:565
+#: dispatchers/Html.php:577
 msgid "You can set your editor here, so that when you click on stack trace links the file opens in your editor."
 msgstr "Puedes establecer aquí tu editor, de forma que, cuando hagas clic en la pila de enlaces de rastreo, el archivo se abra en tu editor."
 
-#: dispatchers/Html.php:562
+#: dispatchers/Html.php:574
 msgid "Editor"
 msgstr "Editor"
 
@@ -470,7 +474,7 @@ msgid "Request Data"
 msgstr "Solicitar datos"
 
 #. translators: %s: Default value for a PHP constant
-#: dispatchers/Html.php:694
+#: dispatchers/Html.php:706
 msgid "Default value: %s"
 msgstr "Valor por defecto: %s"
 
@@ -555,7 +559,7 @@ msgstr "Tiempo de procesamiento"
 msgid "Twig Template Files"
 msgstr "Archivos de plantilla de Twig"
 
-#: dispatchers/Html.php:480
+#: dispatchers/Html.php:492
 msgid "Toggle panel position"
 msgstr "Alternar posición del panel"
 
@@ -591,7 +595,7 @@ msgstr "Sin límite de memoria. La configuración de directiva %1$s de PHP está
 msgid "No execution time limit. The %1$s PHP configuration directive is set to %2$s."
 msgstr "Sin límite de tiempo de ejecución. La configuración de directiva %1$s de PHP está establecida en %2$s."
 
-#: classes/Collector_Assets.php:474
+#: classes/Collector_Assets.php:469
 msgid "Insecure content"
 msgstr "Contenido inseguro"
 
@@ -708,56 +712,56 @@ msgid "Sequence"
 msgstr "Secuencia"
 
 #. translators: %s: Current value for a PHP constant
-#: dispatchers/Html.php:708
+#: dispatchers/Html.php:720
 msgid "Current value: %s"
 msgstr "Valor actual: %s"
 
 #. translators: %s: Name of the config file
-#: dispatchers/Html.php:674
+#: dispatchers/Html.php:686
 msgid "The following PHP constants can be defined in your %s file in order to control the behavior of Query Monitor:"
 msgstr "Las siguientes constantes de PHP se pueden definir en tu archivo %s para controlar el comportamiento de Query Monitor:"
 
-#: dispatchers/Html.php:670
+#: dispatchers/Html.php:682
 msgid "Configuration"
 msgstr "Configuración"
 
-#: dispatchers/Html.php:647
+#: dispatchers/Html.php:659
 msgid "In the Hooks & Actions panel, show every hook that has an action or filter attached (instead of every action hook that fired during the request)."
 msgstr "Muestra cada gancho que tenga una acción o filtro adjunto en el panel de «Ganchos y acciones» (en lugar de los gancho de acción que se dispare durante la solicitud)."
 
-#: dispatchers/Html.php:643
+#: dispatchers/Html.php:655
 msgid "Don't specify jQuery as a dependency of Query Monitor. If jQuery isn't enqueued then Query Monitor will still operate, but with some reduced functionality."
 msgstr "No especifiques jQuery como una dependencia de Query Monitor. Si jQuery no está en cola, Query Monitor seguirá funcionando, pero con funcionalidad reducida."
 
-#: dispatchers/Html.php:635
+#: dispatchers/Html.php:647
 msgid "Hide WordPress core on the Hooks & Actions panel."
 msgstr "Oculta el núcleo de WordPress en el panel «Ganchos y acciones»"
 
-#: dispatchers/Html.php:631
+#: dispatchers/Html.php:643
 msgid "Enable the Capability Checks panel."
 msgstr "Activa el panel de comprobación de permisos."
 
-#: dispatchers/Html.php:627
+#: dispatchers/Html.php:639
 msgid "Disable the handling of PHP errors."
 msgstr "Desactiva el manejo de errores de PHP."
 
-#: dispatchers/Html.php:623
+#: dispatchers/Html.php:635
 msgid "Disable Query Monitor entirely."
 msgstr "Desactiva Query Monitor por completo."
 
-#: dispatchers/Html.php:619
+#: dispatchers/Html.php:631
 msgid "If an individual database query takes longer than this time to execute, it's considered \"slow\" and triggers a warning."
 msgstr "Si una consulta individual a la base de datos tarda en ejecutarse más de este tiempo, se considera «lenta» y se activa una advertencia."
 
-#: dispatchers/Html.php:556
+#: dispatchers/Html.php:568
 msgid "Authentication cookie is set"
 msgstr "La cookie de identificación está establecida."
 
-#: dispatchers/Html.php:549
+#: dispatchers/Html.php:561
 msgid "You can set an authentication cookie which allows you to view Query Monitor output when you&rsquo;re not logged in, or when you&rsquo;re logged in as a different user."
 msgstr "Puedes establecer una cookie de identificación que te permita ver los resultados de Query Monitor cuando no estés conectado o cuando te hayas conectado como un usuario diferente."
 
-#: dispatchers/Html.php:487
+#: dispatchers/Html.php:499
 msgid "Query Monitor Menu"
 msgstr "Menú de Query Monitor"
 
@@ -940,12 +944,12 @@ msgstr "Clase:"
 msgid "List Table"
 msgstr "Lista de tablas"
 
-#: dispatchers/Html.php:482
+#: dispatchers/Html.php:494
 msgid "Close Panel"
 msgstr "Cerrar panel"
 
-#: classes/QueryMonitor.php:60 dispatchers/Html.php:467
-#: dispatchers/Html.php:478 dispatchers/Html.php:543
+#: classes/QueryMonitor.php:60 dispatchers/Html.php:479
+#: dispatchers/Html.php:490 dispatchers/Html.php:555
 msgid "Settings"
 msgstr "Ajustes"
 
@@ -966,22 +970,22 @@ msgstr "Tiempo de duración"
 msgid "Current Network: #%d"
 msgstr "Red actual: #%d"
 
-#: collectors/php_errors.php:405
+#: collectors/php_errors.php:429
 msgctxt "Silenced PHP error level"
 msgid "Deprecated (Silenced)"
 msgstr "Obsoleto (silenciado)"
 
-#: collectors/php_errors.php:404
+#: collectors/php_errors.php:428
 msgctxt "Silenced PHP error level"
 msgid "Strict (Silenced)"
 msgstr "Estricto (silenciado)"
 
-#: collectors/php_errors.php:403
+#: collectors/php_errors.php:427
 msgctxt "Silenced PHP error level"
 msgid "Notice (Silenced)"
 msgstr "Aviso (silenciado)"
 
-#: collectors/php_errors.php:402
+#: collectors/php_errors.php:426
 msgctxt "Silenced PHP error level"
 msgid "Warning (Silenced)"
 msgstr "Advertencia (silenciada)"
@@ -1112,22 +1116,22 @@ msgstr "%1$s%% tasa de aciertos (%2$s aciertos, %3$s fallos)"
 msgid "Template Hierarchy"
 msgstr "Jerarquía de plantilla"
 
-#: collectors/php_errors.php:399
+#: collectors/php_errors.php:423
 msgctxt "Suppressed PHP error level"
 msgid "Deprecated (Suppressed)"
 msgstr "Obsoleto (suprimido)"
 
-#: collectors/php_errors.php:398
+#: collectors/php_errors.php:422
 msgctxt "Suppressed PHP error level"
 msgid "Strict (Suppressed)"
 msgstr "Estricto (suprimido)"
 
-#: collectors/php_errors.php:397
+#: collectors/php_errors.php:421
 msgctxt "Suppressed PHP error level"
 msgid "Notice (Suppressed)"
 msgstr "Aviso (suprimido)"
 
-#: collectors/php_errors.php:396
+#: collectors/php_errors.php:420
 msgctxt "Suppressed PHP error level"
 msgid "Warning (Suppressed)"
 msgstr "Advertencia (suprimida)"
@@ -1166,22 +1170,22 @@ msgstr "Página individual de %1$s: #%2$d"
 msgid "Current Site: #%d"
 msgstr "Sitio actual: #%d"
 
-#: collectors/php_errors.php:393
+#: collectors/php_errors.php:417
 msgctxt "PHP error level"
 msgid "Deprecated"
 msgstr "Obsoleto"
 
-#: collectors/php_errors.php:392
+#: collectors/php_errors.php:416
 msgctxt "PHP error level"
 msgid "Strict"
 msgstr "Estricto"
 
-#: collectors/php_errors.php:391
+#: collectors/php_errors.php:415
 msgctxt "PHP error level"
 msgid "Notice"
 msgstr "Aviso"
 
-#: collectors/php_errors.php:390
+#: collectors/php_errors.php:414
 msgctxt "PHP error level"
 msgid "Warning"
 msgstr "Advertencia"
@@ -1517,15 +1521,15 @@ msgctxt "\"All\" option for filters"
 msgid "All"
 msgstr "Todos"
 
-#: dispatchers/Html.php:538
+#: dispatchers/Html.php:550
 msgid "Clear authentication cookie"
 msgstr "Vaciar cookie de identificación"
 
-#: dispatchers/Html.php:539
+#: dispatchers/Html.php:551
 msgid "Set authentication cookie"
 msgstr "Establecer cookie de identificación"
 
-#: dispatchers/Html.php:547
+#: dispatchers/Html.php:559
 msgid "Authentication"
 msgstr "Identificación"
 
@@ -1535,7 +1539,7 @@ msgstr "Errores de PHP en respuesta de Ajax"
 
 #. Plugin Name of the plugin
 #: query-monitor.php classes/QueryMonitor.php:196 classes/QueryMonitor.php:229
-#: dispatchers/Html.php:147 dispatchers/Html.php:437 dispatchers/Html.php:825
+#: dispatchers/Html.php:147 dispatchers/Html.php:449 dispatchers/Html.php:840
 #: dispatchers/WP_Die.php:132
 msgid "Query Monitor"
 msgstr "Query Monitor"
@@ -1572,7 +1576,7 @@ msgstr "Solicitud"
 msgid "PHP Errors"
 msgstr "Errores de PHP"
 
-#: dispatchers/Html.php:444 dispatchers/Html.php:493
+#: dispatchers/Html.php:456 dispatchers/Html.php:505
 #: output/html/overview.php:30
 msgid "Overview"
 msgstr "Resumen"
@@ -1623,10 +1627,10 @@ msgid "Closure on line %1$d of %2$s"
 msgstr "Cierre en la línea %1$d de %2$s"
 
 #: classes/Backtrace.php:240 classes/Util.php:250
-#: collectors/environment.php:278 output/html/db_queries.php:344
+#: collectors/environment.php:279 output/html/db_queries.php:344
 #: output/html/db_queries.php:440 output/html/environment.php:70
 #: output/html/environment.php:77 output/html/environment.php:85
-#: output/html/environment.php:171 output/html/environment.php:292
+#: output/html/environment.php:171 output/html/environment.php:293
 #: output/html/overview.php:143 output/html/php_errors.php:170
 #: output/html/request.php:153 output/html/theme.php:128
 #: output/html/theme.php:254

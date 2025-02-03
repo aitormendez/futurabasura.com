@@ -10,7 +10,7 @@ DEVSITE="https://futurabasura.test"
 PRODDIR="web@futurabasura.com:/srv/www/futurabasura.com/shared/uploads/"
 PRODSITE="https://futurabasura.com"
 
-STAGDIR="web@stage.futurabasura.com:/srv/www/stage.futurabasura.com/shared/uploads/"
+STAGDIR="web@stage.futurabasura.com:/srv/www/futurabasura.com/shared/uploads/"
 STAGSITE="https://stage.futurabasura.com"
 
 LOCAL=false

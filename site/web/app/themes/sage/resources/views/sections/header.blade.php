@@ -5,23 +5,23 @@
             @foreach ($contents_nav as $item)
                 <li class="border border-black">
                     <a href="{{ $item->url }}"
-                        class="inline-block bg-white px-4 pb-2 pt-3 text-sm uppercase tracking-widest text-black hover:bg-allo sm:text-xl">{{ $item->label }}</a>
+                        class="hover:bg-allo inline-block bg-white px-4 pb-2 pt-3 text-sm uppercase tracking-widest text-black sm:text-xl">{{ $item->label }}</a>
                 </li>
             @endforeach
         @endif
     </ul>
     <ul class="social my-4 flex flex-col items-center md:mx-12">
         @if (!empty($social_nav))
+            @foreach ($social_nav as $item)
+                <li class="border border-black">
+                    <a href="{{ $item->url }}"
+                        class="hover:bg-allo inline-block bg-white px-4 pb-2 pt-3 text-sm uppercase tracking-widest text-black sm:text-xl">{{ $item->label }}</a>
+                </li>
+            @endforeach
         @endif
-        @foreach ($social_nav as $item)
-            <li class="border border-black">
-                <a href="{{ $item->url }}"
-                    class="inline-block bg-white px-4 pb-2 pt-3 text-sm uppercase tracking-widest text-black hover:bg-allo sm:text-xl">{{ $item->label }}</a>
-            </li>
-        @endforeach
 
     </ul>
-    <a id="btn-close" href="#" class="btn absolute right-8 top-8 inline-block hover:bg-allo">CLOSE</a>
+    <a id="btn-close" href="#" class="btn hover:bg-allo absolute right-8 top-8 inline-block">CLOSE</a>
 </div>
 
 <header class="banner top-0 z-30 flex w-full font-sans">
@@ -40,13 +40,13 @@
                 @endforeach
             @endif
             <li class="li-cart">
-                <a href="/cart" class="cart-link nav-item flex hover:text-allo">
+                <a href="/cart" class="cart-link nav-item hover:text-allo flex">
                     <div
                         class="cart flex flex-shrink flex-grow items-center justify-end bg-white pl-8 pr-8 sm:items-start sm:pt-8">
                         <span>cart</span>
                     </div>
                     <div class="hole flex flex-col">
-                        <div class="num-items bg-white text-center font-serif font-bold text-azul">
+                        <div class="num-items text-azul bg-white text-center font-serif font-bold">
                             {{ $items_cart }}
                         </div>
                         <div class="hole-cell">
@@ -58,7 +58,7 @@
                 </a>
             </li>
             <li id="li-btn-menu" class="li-menu absolute block sm:static sm:pt-6">
-                <a href="#" id="btn-menu" class="btn block hover:bg-allo">MENU</a>
+                <a href="#" id="btn-menu" class="btn hover:bg-allo block">MENU</a>
             </li>
         </ul>
     </nav>

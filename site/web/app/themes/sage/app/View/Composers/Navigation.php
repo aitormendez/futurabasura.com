@@ -128,7 +128,7 @@ class Navigation extends Composer
     public function itemsInCart()
     {
         global $woocommerce;
-        return $woocommerce->cart->cart_contents_count;
+        // return $woocommerce->cart->cart_contents_count;
     }
 
     /**
@@ -144,12 +144,9 @@ class Navigation extends Composer
             $frases_array = [];
             foreach ($frases as $frase) {
                 $frases_array[] = $frase['frase'];
-            }
-            ;
+            };
         }
 
         return $frases_array[array_rand($frases_array)];
     }
-
-
 }

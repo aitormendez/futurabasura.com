@@ -1,38 +1,46 @@
 <footer class="mt-20 flex flex-wrap">
 
-    <div class="flex w-full flex-wrap bg-white font-bugrino text-sm font-light md:w-1/2 md:text-xl lg:text-2xl">
+    <div class="font-bugrino flex w-full flex-wrap bg-white text-sm font-light md:w-1/2 md:text-xl lg:text-2xl">
         <ul class="h-[40vw] w-1/2 border-b border-r border-black p-3 md:h-[20vw] md:border-b-2 md:border-r-2 md:p-6">
-            @foreach ($contents_nav as $item)
-                <li>
-                    <a href="{{ $item->url }}" class="font-light hover:text-azul">{{ $item->label }}</a>
-                </li>
-            @endforeach
+            @if (!empty($contents_nav))
+                @foreach ($contents_nav as $item)
+                    <li>
+                        <a href="{{ $item->url }}" class="hover:text-azul font-light">{{ $item->label }}</a>
+                    </li>
+                @endforeach
+            @endif
         </ul>
         <ul class="h-[40vw] w-1/2 border-b border-black p-3 md:h-[20vw] md:border-b-2 md:p-6">
-            @foreach ($shop_nav as $item)
-                <li>
-                    <a href="{{ $item->url }}" class="hover:text-azul">{{ $item->label }}</a>
-                </li>
-            @endforeach
+            @if (!empty($shop_nav))
+                @foreach ($shop_nav as $item)
+                    <li>
+                        <a href="{{ $item->url }}" class="hover:text-azul">{{ $item->label }}</a>
+                    </li>
+                @endforeach
+            @endif
         </ul>
         <ul class="h-[40vw] w-1/2 border-r border-black p-3 md:h-[20vw] md:border-r-2 md:p-6">
-            @foreach ($social_nav as $item)
-                <li>
-                    <a href="{{ $item->url }}" class="hover:text-azul">{{ $item->label }}</a>
-                </li>
-            @endforeach
+            @if (!empty($social_nav))
+                @foreach ($social_nav as $item)
+                    <li>
+                        <a href="{{ $item->url }}" class="hover:text-azul">{{ $item->label }}</a>
+                    </li>
+                @endforeach
+            @endif
         </ul>
         <ul class="h-[40vw] w-1/2 p-3 md:h-[20vw] md:p-6">
-            @foreach ($footer_pages_nav as $item)
-                <li>
-                    <a href="{{ $item->url }}" class="hover:text-azul">{{ $item->label }}</a>
-                </li>
-            @endforeach
+            @if (!empty($footer_pages_nav))
+                @foreach ($footer_pages_nav as $item)
+                    <li>
+                        <a href="{{ $item->url }}" class="hover:text-azul">{{ $item->label }}</a>
+                    </li>
+                @endforeach
+            @endif
         </ul>
     </div>
 
     {{-- desktop --}}
-    <div class="hidden w-1/2 flex-col items-center justify-between border-l-2 border-black p-6 font-bugrino md:flex"
+    <div class="font-bugrino hidden w-1/2 flex-col items-center justify-between border-l-2 border-black p-6 md:flex"
         style="background-color: {{ get_field('footer_color', 'option') }}">
         <div class="mt-[5vw] w-1/3">
             <img class="w-full" src="@asset('images/logo-fb.svg')">
@@ -44,7 +52,7 @@
     {{-- /desktop --}}
 
     {{-- mobile --}}
-    <div class="flex w-full flex-wrap font-bugrino md:!hidden">
+    <div class="font-bugrino flex w-full flex-wrap md:!hidden">
         <div class="arriba mt-4 flex h-[50vw] w-full flex-wrap">
             <div class="izq flex w-1/2 items-stretch justify-end bg-white">
                 <div class="w-[10vw] border-r border-black"
@@ -62,17 +70,19 @@
 
     <div class="flex w-full flex-wrap bg-white">
         <ul class="mt-8 flex flex-col px-6 text-sm md:!flex-row md:gap-4">
-            @foreach ($legal_nav as $item)
-                <li class="">
-                    <a href="{{ $item->url }}" class="font-light">{{ $item->label }}</a>
-                </li>
-            @endforeach
+            @if (!empty($legal_nav))
+                @foreach ($legal_nav as $item)
+                    <li class="">
+                        <a href="{{ $item->url }}" class="font-light">{{ $item->label }}</a>
+                    </li>
+                @endforeach
+            @endif
         </ul>
 
         <div class="mt-6 w-full justify-between px-6 text-sm md:flex">
             <a href="mailto:alwaysopen@futurabasura.com"
                 class="email font-arialblack hover:text-azul">alwaysopen@futurabasura.com</a>
-            <a class="mt-4 block hover:text-azul md:mt-0" target="_blank"
+            <a class="hover:text-azul mt-4 block md:mt-0" target="_blank"
                 href="https://www.instagram.com/futurabasura/">
                 <x-fab-instagram class="w-7" alt="instagram" />
             </a>
