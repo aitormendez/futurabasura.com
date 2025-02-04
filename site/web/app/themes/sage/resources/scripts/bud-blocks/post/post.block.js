@@ -32,6 +32,18 @@ export default {
       type: 'string',
       default: '#ffff00',
     },
+    backgroundInteriorColor: {
+      type: 'string',
+      default: '#ffffff',
+    },
+    textColor: {
+      type: 'string',
+      default: '#000000',
+    },
+    borderColor: {
+      type: 'string',
+      default: '#3e2b2f',
+    },
   },
   supports: {
     align: ['wide', 'full'],

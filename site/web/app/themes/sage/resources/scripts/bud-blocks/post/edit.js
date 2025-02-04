@@ -24,6 +24,9 @@ const Edit = ({ attributes, setAttributes }) => {
     contentType = 'product',
     layout = 'layout1',
     backgroundColor = '#ffffff',
+    backgroundInteriorColor = '#ffffff',
+    borderColor = '#3e2b2f',
+    textColor = '#000000',
     image_url = 'https://via.placeholder.com/150',
     align = '',
   } = attributes;
@@ -43,6 +46,18 @@ const Edit = ({ attributes, setAttributes }) => {
   // Función para manejar el cambio del color de fondo
   const handleBackgroundColorChange = (newColor) => {
     setAttributes({ backgroundColor: newColor });
+  };
+
+  const handleBackgroundInteriorColorChange = (newColor) => {
+    setAttributes({ backgroundInteriorColor: newColor });
+  };
+
+  const handleTextColorChange = (newColor) => {
+    setAttributes({ textColor: newColor });
+  };
+
+  const handleBorderColorChange = (newColor) => {
+    setAttributes({ borderColor: newColor });
   };
 
   useEffect(() => {
@@ -207,6 +222,36 @@ const Edit = ({ attributes, setAttributes }) => {
                 value: backgroundColor,
                 onChange: handleBackgroundColorChange,
                 label: __('Background Color', 'sage'),
+              },
+            ]}
+          />
+          <PanelColorSettings
+            title={__('Background Interior Color', 'sage')}
+            colorSettings={[
+              {
+                value: backgroundInteriorColor,
+                onChange: handleBackgroundInteriorColorChange,
+                label: __('Background Interior Color', 'sage'),
+              },
+            ]}
+          />
+          <PanelColorSettings
+            title={__('Text Color', 'sage')}
+            colorSettings={[
+              {
+                value: textColor,
+                onChange: handleTextColorChange,
+                label: __('Text Color', 'sage'),
+              },
+            ]}
+          />
+          <PanelColorSettings
+            title={__('Border Color', 'sage')}
+            colorSettings={[
+              {
+                value: borderColor,
+                onChange: handleBorderColorChange,
+                label: __('Border Color', 'sage'),
               },
             ]}
           />

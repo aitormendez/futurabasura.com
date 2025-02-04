@@ -44,17 +44,20 @@
     @if ($layout === 'layout1')
         <div class="flex aspect-[50/60] w-full !max-w-none md:aspect-[100/50]">
             <div class="col-left w-[10%] border-r-2 border-black md:w-[30%]"
-                style="background-color: {{ $data->backgroundColor ?? '#ffffff' }}"></div>
-
+                style="background-color: {{ $data->backgroundColor ?? '#ffffff' }}; border-color: {{ $data->borderColor ?? '#3e2b2f' }}">
+            </div>
             <a href="{{ get_permalink($post_id) }}"
-                class="col-center filtro-azul flex w-[80%] flex-col justify-between md:w-[40%]">
+                class="col-center filtro-azul flex w-[80%] flex-col justify-between md:w-[40%]"
+                style="background-color: {{ $data->backgroundInteriorColor ?? '#ffffff' }}">
                 <div class="flex h-full items-center justify-center">
                     <img src="{{ $image_url }}" srcset="{{ $image_srcset }}" sizes="(max-width: 768px) 80%, 50%"
-                        alt="{{ $name }}" class="{{ $image_orientation === 'horizontal' ? 'w-full' : 'w-2/3' }}">
+                        alt="{{ $name }}"
+                        class="{{ $image_orientation === 'horizontal' ? 'w-full' : 'w-2/3' }}">
                 </div>
 
                 @if (!empty($artists_terms) && !is_wp_error($artists_terms))
-                    <div class="font-arialblack mx-4 mb-3 grow-0 text-sm text-black md:text-base">
+                    <div class="font-arialblack mx-4 mb-3 grow-0 text-sm text-black md:text-base"
+                        style="color: {{ $data->textColor ?? '#ffffff' }}">
                         <span>{{ $name }} by </span>
                         @foreach ($artists_terms as $term)
                             <span>{{ $term->name }}</span>
@@ -68,7 +71,8 @@
             </a>
 
             <div class="col-right w-[10%] border-l-2 border-black md:w-[30%]"
-                style="background-color: {{ $data->backgroundColor ?? '#ffffff' }}"></div>
+                style="background-color: {{ $data->backgroundColor ?? '#ffffff' }}; border-color: {{ $data->borderColor ?? '#3e2b2f' }}">
+            </div>
         </div>
     @elseif($layout === 'layout2')
         @if (isset($post))
