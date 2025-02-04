@@ -38,7 +38,10 @@ domReady(async () => {
     sliderHome();
   }
 
-  if (document.body.classList.contains('page')) {
+  if (
+    document.body.classList.contains('page') ||
+    document.body.classList.contains('single')
+  ) {
     const { marquee } = await import('./marquee.js');
     marquee();
   }

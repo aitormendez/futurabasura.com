@@ -1,5 +1,5 @@
-<div class="marquee p-4 {{ isset($data->align) ? $data->align : '' }}" 
-    data-text="{{ isset($data->marqueeText) ? $data->marqueeText : 'Test text' }}" 
+<div class="marquee {{ isset($data->align) ? $data->align : '' }} px-12 py-4"
+    data-text="{{ isset($data->marqueeText) ? $data->marqueeText : 'Test text' }}"
     data-pill-background-color="{{ isset($data->pillBackgroundColor) ? $data->pillBackgroundColor : '#fff' }}"
     data-text-color="{{ isset($data->textColor) ? $data->textColor : '#000' }}"
     data-speed="{{ isset($data->speed) ? $data->speed : 10 }}"
