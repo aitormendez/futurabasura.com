@@ -57,7 +57,7 @@
 
                 @if (!empty($artists_terms) && !is_wp_error($artists_terms))
                     <div class="font-arialblack mx-4 mb-3 grow-0 text-sm text-black md:text-base"
-                        style="color: {{ $data->textColor ?? '#ffffff' }}">
+                        style="color: {{ $data->textColor ?? '#3e2b2f' }}">
                         <span>{{ $name }} by </span>
                         @foreach ($artists_terms as $term)
                             <span>{{ $term->name }}</span>
