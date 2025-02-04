@@ -58,6 +58,10 @@ http {
   server_tokens off;
   {% endblock %}
 
+  # Define resolvers for DNS lookups (using IPv4 only)
+  resolver 8.8.8.8 8.8.4.4 valid=300s;
+  resolver_timeout 5s;
+
   {% block cache -%}
   # Setup the fastcgi cache.
   fastcgi_buffers {{ nginx_fastcgi_buffers }};
