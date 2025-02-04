@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 // import { Marquee } from '@devnomic/marquee';
-import '@devnomic/marquee/dist/index.css';
+// import '@devnomic/marquee/dist/index.css';
 
 export function marquee() {
   const MarqueeBlock = ({
@@ -20,9 +20,9 @@ export function marquee() {
       const containerWidth = containerRef.current.offsetWidth;
       const textWidth = textRef.current.offsetWidth;
 
-      let repeated = text;
+      let repeated = `<span class="mx-10">${text}</span>`;
       while (textWidth < containerWidth) {
-        repeated += ' • ' + text;
+        repeated += `<span class="mx-10">${text}</span>`;
         const tempDiv = document.createElement('div');
         tempDiv.style.position = 'absolute';
         tempDiv.style.whiteSpace = 'nowrap';
@@ -48,22 +48,21 @@ export function marquee() {
           className="group flex overflow-hidden flex-row gap-[0.5rem]"
           style={{ '--duration': `${speed}s` }}
         >
-          <div className="flex justify-around gap-[1rem] [--gap:1rem] shrink-0 animate-marquee-left flex-row group-hover:[animation-play-state:paused]">
+          <div className="flex justify-around [--gap:0rem] shrink-0 animate-marquee-left flex-row group-hover:[animation-play-state:paused]">
             <p
               ref={textRef}
               className="text-2xl inline-block"
               style={{ color: textColor, fontFamily: fontFamily }}
-            >
-              {repeatedText}
-            </p>
+              dangerouslySetInnerHTML={{ __html: repeatedText }}
+            ></p>
           </div>
-          <div className="flex justify-around gap-[1rem] [--gap:1rem] shrink-0 animate-marquee-left flex-row group-hover:[animation-play-state:paused]">
+          <div className="flex justify-around [--gap:0rem] shrink-0 animate-marquee-left flex-row group-hover:[animation-play-state:paused]">
             <p
+              ref={textRef}
               className="text-2xl inline-block"
               style={{ color: textColor, fontFamily: fontFamily }}
-            >
-              {repeatedText}
-            </p>
+              dangerouslySetInnerHTML={{ __html: repeatedText }}
+            ></p>
           </div>
         </div>
       </a>

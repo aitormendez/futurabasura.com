@@ -184,3 +184,16 @@ body.woocommerce-checkout {
   padding: 3px 5px;
   color: #fff;
 }
+
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+.animate-marquee-left {
+  animation: marquee-left var(--duration, 40s) linear infinite;
+}
