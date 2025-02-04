@@ -1,5 +1,5 @@
 <div id="solapa"
-    class="pointer-events-none fixed top-0 z-40 flex h-screen w-screen flex-col flex-wrap items-center justify-center bg-white opacity-0 md:flex-row">
+    class="bg-fondo-medio bg-10px pointer-events-none fixed top-0 z-40 flex h-screen w-screen flex-col flex-wrap items-center justify-center bg-white opacity-0 md:flex-row">
     <ul class="contenidos my-4 flex flex-col items-center md:mx-12">
         @if (!empty($contents_nav))
             @foreach ($contents_nav as $item)
