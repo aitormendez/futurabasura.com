@@ -149,11 +149,11 @@ iframe:not([width]):not([height]) {
   width: 100% !important;
 }
 
-.filtro-azul:hover * {
+/* .filtro-azul:hover * {
   img {
     filter: brightness(50%) sepia(100%) hue-rotate(190deg) saturate(500%);
   }
-}
+} */
 
 body.woocommerce-checkout {
   label[for='payment_method_square_credit_card'] {

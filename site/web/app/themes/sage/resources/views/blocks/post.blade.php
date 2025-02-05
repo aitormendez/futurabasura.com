@@ -47,12 +47,12 @@
                 style="background-color: {{ $data->backgroundColor ?? '#ffffff' }}; border-color: {{ $data->borderColor ?? '#3e2b2f' }}">
             </div>
             <a href="{{ get_permalink($post_id) }}"
-                class="col-center filtro-azul flex w-[80%] flex-col justify-between md:w-[40%]"
+                class="col-center group flex w-[80%] flex-col justify-between md:w-[40%]"
                 style="background-color: {{ $data->backgroundInteriorColor ?? '#ffffff' }}">
                 <div class="flex h-full items-center justify-center">
                     <img src="{{ $image_url }}" srcset="{{ $image_srcset }}" sizes="(max-width: 768px) 80%, 50%"
                         alt="{{ $name }}"
-                        class="{{ $image_orientation === 'horizontal' ? 'w-full' : 'w-2/3' }}">
+                        class="{{ $image_orientation === 'horizontal' ? 'w-full' : 'w-2/3' }} filter transition-all duration-300 group-hover:brightness-75 group-hover:hue-rotate-[180deg] group-hover:saturate-150">
                 </div>
 
                 @if (!empty($artists_terms) && !is_wp_error($artists_terms))
@@ -76,7 +76,7 @@
         </div>
     @elseif($layout === 'layout2')
         <a href="{{ get_permalink($post_id) }}" style="border-color: {{ $data->borderColor ?? '#3e2b2f' }}"
-            class="not-prose {{ $align }} mx-6 my-6 flex border-y-2 py-4 md:flex-row">
+            class="not-prose {{ $align }} group mx-6 my-6 flex border-y-2 py-4 md:flex-row">
             <div style="background-color: {{ $data->backgroundColor ?? '#ffffff' }}"
                 class="flex w-full flex-col justify-between p-6 md:w-1/2">
                 <div class="font-bugrino font-light">{{ $post_type_label }}</div>
@@ -88,7 +88,8 @@
             </div>
             <div class="flex h-full w-full items-center justify-center md:w-1/2">
                 <img src="{{ $image_url }}" srcset="{{ $image_srcset }}" sizes="(max-width: 768px) 100%, 50%"
-                    alt="{{ $name }}" class="{{ $image_orientation === 'horizontal' ? 'w-full' : 'w-2/3' }}">
+                    alt="{{ $name }}"
+                    class="{{ $image_orientation === 'horizontal' ? 'w-full' : 'w-2/3' }} filter transition-all duration-300 group-hover:brightness-75 group-hover:hue-rotate-[180deg] group-hover:saturate-150">
             </div>
         </a>
     @elseif($layout === 'layout3')
