@@ -300,6 +300,7 @@ const Edit = ({ attributes, setAttributes }) => {
             options={[
               { label: __('Layout 1', 'sage'), value: 'layout1' },
               { label: __('Layout 2', 'sage'), value: 'layout2' },
+              { label: __('Layout 3', 'sage'), value: 'layout3' },
             ]}
             onChange={(selectedLayout) =>
               setAttributes({ layout: selectedLayout })

@@ -33,7 +33,7 @@
         'post' => 'Posts',
         'page' => 'Pages',
         'project' => 'Projects',
-        'story' => 'Stories',
+        'story' => 'News',
         'product' => 'Products',
     ];
 
@@ -93,6 +93,23 @@
                 </div>
             </div>
         @endif
+    @elseif($layout === 'layout3')
+        <a href="{{ get_permalink($post_id) }}"
+            class="not-prose {{ $align }} relative flex flex-col items-center justify-center">
+            <img src="{{ $image_url }}" srcset="{{ $image_srcset }}" sizes="(max-width: 768px) 100%, 50%"
+                alt="{{ $name }}"
+                class="{{ $image_orientation === 'horizontal' ? 'horizontal' : 'vertical' }}">
+            <div class="p-6 pb-14 transition-opacity duration-500 md:absolute md:w-1/2 md:max-w-lg md:hover:opacity-0"
+                style="background-color: {{ $data->backgroundColor ?? '#ffffff' }}">
+                <div class="font-bugrino font-light" style="color: {{ $data->textColor ?? '#3e2b2f' }}">
+                    {{ $post_type_label }}</div>
+                <h3 class="font-arialblack my-14 text-center" style="color: {{ $data->textColor ?? '#3e2b2f' }}">
+                    {{ $name }}</h3>
+                <div class="font-fk text-center text-sm" style="color: {{ $data->textColor ?? '#3e2b2f' }}">
+                    {!! $excerpt !!}
+                </div>
+            </div>
+        </a>
     @endif
 @else
     <p>Post not found.</p>
