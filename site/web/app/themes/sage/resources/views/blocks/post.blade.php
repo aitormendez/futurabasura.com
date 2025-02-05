@@ -78,12 +78,14 @@
         <a href="{{ get_permalink($post_id) }}" style="border-color: {{ $data->borderColor ?? '#3e2b2f' }}"
             class="not-prose {{ $align }} group mx-6 my-6 flex border-y-2 py-4 md:flex-row">
             <div style="background-color: {{ $data->backgroundColor ?? '#ffffff' }}"
-                class="flex w-full flex-col justify-between p-6 md:w-1/2">
-                <div class="font-bugrino font-light">{{ $post_type_label }}</div>
-                <div class="font-arialblack my-6 text-center text-sm">
-                    {{ $name }}</div>
-                <div class="font-fk text-center text-sm">
-                    {!! $excerpt !!}
+                class="flex justify-center p-6 pb-10 md:w-1/2">
+                <div class="flex h-full w-full max-w-lg flex-col justify-between">
+                    <div class="font-bugrino font-light">{{ $post_type_label }}</div>
+                    <div class="font-arialblack my-6 text-center text-sm md:text-base">
+                        {{ $name }}</div>
+                    <div class="font-fk text-center text-sm md:text-base">
+                        {!! $excerpt !!}
+                    </div>
                 </div>
             </div>
             <div class="flex h-full w-full items-center justify-center md:w-1/2">
