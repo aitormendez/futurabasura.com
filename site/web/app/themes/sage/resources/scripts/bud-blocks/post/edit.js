@@ -265,6 +265,9 @@ const Edit = ({ attributes, setAttributes }) => {
           image_url={image_url}
           image_orientation={image_orientation}
           backgroundColor={backgroundColor}
+          backgroundInteriorColor={backgroundInteriorColor}
+          textColor={textColor}
+          borderColor={borderColor}
           excerpt={excerpt}
           align={align}
           post_type_label={postTypeLabel}

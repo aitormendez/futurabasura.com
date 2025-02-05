@@ -7,6 +7,9 @@ const Preview = ({
   image_url = 'https://via.placeholder.com/150',
   image_orientation = 'horizontal',
   backgroundColor = '#ffffff',
+  backgroundInteriorColor = '#ffffff',
+  textColor = '#3e2b2f',
+  borderColor = '#3e2b2f',
   artists_terms = [],
   excerpt = 'This is a sample excerpt.',
   align = '',
@@ -17,11 +20,14 @@ const Preview = ({
       {layout === 'layout1' && (
         <div className="product-block flex aspect-[50/60] w-full !max-w-none md:aspect-[100/50]">
           <div
-            className="col-left w-[10%] border-r-2 border-black md:w-[30%]"
-            style={{ backgroundColor }}
+            className="col-left w-[10%] border-r-2 md:w-[30%]"
+            style={{ backgroundColor, borderColor }}
           ></div>
 
-          <div className="col-center filtro-azul flex w-[80%] flex-col justify-between md:w-[40%]">
+          <div
+            className="col-center flex w-[80%] flex-col justify-between md:w-[40%]"
+            style={{ backgroundColor: backgroundInteriorColor }}
+          >
             <div className="flex h-full items-center justify-center">
               <img
                 src={image_url}
@@ -32,39 +38,64 @@ const Preview = ({
               />
             </div>
 
-            {artists_terms.length > 0 && (
-              <div className="mx-4 mb-3 grow-0 font-arialblack text-sm text-black md:text-base">
-                <span>{name} by </span>
-                {artists_terms.map((term, index) => (
-                  <span key={index}>{term.name}</span>
-                ))}
-              </div>
-            )}
+            <div
+              className="mx-4 mb-3 grow-0 font-arialblack text-sm md:text-base"
+              style={{ color: textColor }}
+            >
+              {artists_terms.length > 0 ? (
+                <>
+                  <span>{name} by </span>
+                  {artists_terms.map((term, index) => (
+                    <span key={index}>{term.name}</span>
+                  ))}
+                </>
+              ) : (
+                <span>{name}</span>
+              )}
+            </div>
           </div>
 
           <div
-            className="col-right w-[10%] border-l-2 border-black md:w-[30%]"
-            style={{ backgroundColor }}
+            className="col-right w-[10%] border-l-2 md:w-[30%]"
+            style={{ backgroundColor, borderColor }}
           ></div>
         </div>
       )}
 
       {layout === 'layout2' && (
         <div
-          className={`not-prose ${align} mx-6 flex border-y-2 border-black py-4 md:flex-row`}
+          className={`not-prose ${align} mx-6 flex border-y-2 py-4 md:flex-row`}
+          style={{ borderColor }}
         >
           <div
             style={{ backgroundColor }}
             className="flex flex-col justify-between p-6  w-full md:w-1/2"
           >
-            <div className="font-bugrino font-light">{post_type_label}</div>
-            <div className="my-6 text-center font-arialblack text-sm">
+            <div
+              style={{ color: textColor }}
+              className="font-bugrino font-light"
+            >
+              {post_type_label}
+            </div>
+            <div
+              style={{ color: textColor }}
+              className="my-6 text-center font-arialblack text-sm"
+            >
               {name}
             </div>
             <div
-              className="text-center font-fk text-sm"
-              dangerouslySetInnerHTML={{ __html: excerpt }}
-            ></div>
+              className="excerpt text-center font-fk text-sm"
+              style={{
+                color: textColor,
+              }}
+            >
+              <style>{`
+                .excerpt * {
+                  color: ${textColor} !important;
+                }
+              `}</style>
+              <div dangerouslySetInnerHTML={{ __html: excerpt }} />
+            </div>
           </div>
           <div className="flex h-full items-center justify-center  w-full md:w-1/2">
             <img
@@ -74,6 +105,55 @@ const Preview = ({
                 image_orientation === 'horizontal' ? 'w-full' : 'w-2/3'
               }
             />
+          </div>
+        </div>
+      )}
+
+      {layout === 'layout3' && (
+        <div
+          className={`not-prose ${align} relative flex flex-col items-center justify-center`}
+        >
+          <img
+            src={image_url}
+            alt={name}
+            className={
+              image_orientation === 'horizontal' ? 'horizontal' : 'vertical'
+            }
+          />
+          <div
+            className={
+              'p-6 pb-14 transition-opacity duration-500 md:absolute md:w-1/2 md:max-w-lg md:hover:opacity-0'
+            }
+            style={{ backgroundColor }}
+          >
+            {/* Post Type Label */}
+            <div
+              className="font-bugrino font-light"
+              style={{ color: textColor }}
+            >
+              {post_type_label}
+            </div>
+
+            {/* Post Title */}
+            <h3
+              className="font-arialblack my-14 text-center"
+              style={{ color: textColor }}
+            >
+              {name}
+            </h3>
+
+            {/* Post Excerpt con solución del layout 2 */}
+            <div
+              className="excerpt font-fk text-center text-sm"
+              style={{ color: textColor }}
+            >
+              <style>{`
+          .excerpt * {
+            color: ${textColor} !important;
+          }
+        `}</style>
+              <div dangerouslySetInnerHTML={{ __html: excerpt }} />
+            </div>
           </div>
         </div>
       )}

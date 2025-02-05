@@ -43,7 +43,7 @@
 @if (isset($post))
     @if ($layout === 'layout1')
         <div class="flex aspect-[50/60] w-full !max-w-none md:aspect-[100/50]">
-            <div class="col-left w-[10%] border-r-2 border-black md:w-[30%]"
+            <div class="col-left w-[10%] border-r-2 md:w-[30%]"
                 style="background-color: {{ $data->backgroundColor ?? '#ffffff' }}; border-color: {{ $data->borderColor ?? '#3e2b2f' }}">
             </div>
             <a href="{{ get_permalink($post_id) }}"
@@ -70,7 +70,7 @@
                 @endif
             </a>
 
-            <div class="col-right w-[10%] border-l-2 border-black md:w-[30%]"
+            <div class="col-right w-[10%] border-l-2 md:w-[30%]"
                 style="background-color: {{ $data->backgroundColor ?? '#ffffff' }}; border-color: {{ $data->borderColor ?? '#3e2b2f' }}">
             </div>
         </div>
