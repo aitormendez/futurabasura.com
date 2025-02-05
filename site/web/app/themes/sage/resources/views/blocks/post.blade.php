@@ -56,7 +56,7 @@
                 </div>
 
                 @if (!empty($artists_terms) && !is_wp_error($artists_terms))
-                    <div class="font-arialblack mx-4 mb-3 grow-0 text-sm text-black md:text-base"
+                    <div class="font-arialblack mx-4 mb-3 grow-0 text-sm md:text-base"
                         style="color: {{ $data->textColor ?? '#3e2b2f' }}">
                         <span>{{ $name }} by </span>
                         @foreach ($artists_terms as $term)
@@ -64,8 +64,8 @@
                         @endforeach
                     </div>
                 @else
-                    <div class="font-arialblack mx-4 mb-3 grow-0 text-sm text-black md:text-base">
-                        <span>{{ $name }}</span>
+                    <div class="font-arialblack mx-4 mb-3 grow-0 text-sm md:text-base">
+                        <span style="color: {{ $data->textColor ?? '#3e2b2f' }}">{{ $name }}</span>
                     </div>
                 @endif
             </a>
@@ -75,24 +75,22 @@
             </div>
         </div>
     @elseif($layout === 'layout2')
-        @if (isset($post))
-            <div class="not-prose {{ $align }} mx-6 flex border-y-2 border-black py-4 md:flex-row">
-                <div style="background-color: {{ $data->backgroundColor ?? '#ffffff' }}"
-                    class="flex w-full flex-col justify-between p-6 md:w-1/2">
-                    <div class="font-bugrino font-light">{{ $post_type_label }}</div>
-                    <div class="font-arialblack my-6 text-center text-sm">
-                        {{ $name }}</div>
-                    <div class="font-fk text-center text-sm">
-                        {!! $excerpt !!}
-                    </div>
-                </div>
-                <div class="flex h-full w-full items-center justify-center md:w-1/2">
-                    <img src="{{ $image_url }}" srcset="{{ $image_srcset }}" sizes="(max-width: 768px) 100%, 50%"
-                        alt="{{ $name }}"
-                        class="{{ $image_orientation === 'horizontal' ? 'w-full' : 'w-2/3' }}">
+        <a href="{{ get_permalink($post_id) }}" style="border-color: {{ $data->borderColor ?? '#3e2b2f' }}"
+            class="not-prose {{ $align }} mx-6 my-6 flex border-y-2 py-4 md:flex-row">
+            <div style="background-color: {{ $data->backgroundColor ?? '#ffffff' }}"
+                class="flex w-full flex-col justify-between p-6 md:w-1/2">
+                <div class="font-bugrino font-light">{{ $post_type_label }}</div>
+                <div class="font-arialblack my-6 text-center text-sm">
+                    {{ $name }}</div>
+                <div class="font-fk text-center text-sm">
+                    {!! $excerpt !!}
                 </div>
             </div>
-        @endif
+            <div class="flex h-full w-full items-center justify-center md:w-1/2">
+                <img src="{{ $image_url }}" srcset="{{ $image_srcset }}" sizes="(max-width: 768px) 100%, 50%"
+                    alt="{{ $name }}" class="{{ $image_orientation === 'horizontal' ? 'w-full' : 'w-2/3' }}">
+            </div>
+        </a>
     @elseif($layout === 'layout3')
         <a href="{{ get_permalink($post_id) }}"
             class="not-prose {{ $align }} relative flex flex-col items-center justify-center">
