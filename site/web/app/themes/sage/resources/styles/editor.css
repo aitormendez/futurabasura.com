@@ -5,12 +5,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'ArialBlack';
-  src: url('../fonts/arialblack/ArialBlack.woff2') format('woff2'),
-    url('../fonts/arialblack/ArialBlack.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
+.editor-styles-wrapper {
+  @apply prose;
 }
 
 :root {

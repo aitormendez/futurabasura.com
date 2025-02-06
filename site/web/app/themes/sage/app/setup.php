@@ -48,19 +48,6 @@ add_action('wp_enqueue_scripts', function () {
     ]);
 }, 100);
 
-/*
- * Add frontend styles as editor styles.
- *
- * @return void
- */
-// add_action('after_setup_theme', function () {
-//     // add app frontend styles as editor styles
-//     bundle('app')->editorStyles();
-
-//     // enqueue app editor-only styles, extracted from app frontend styles
-//     $relEditorAppOnlyCssPath = asset('editor/app.css')->relativePath(get_theme_file_path());
-//     add_editor_style($relEditorAppOnlyCssPath);
-// });
 
 /**
  * Register the theme assets with the block editor.
@@ -147,6 +134,11 @@ add_action('after_setup_theme', function () {
      * @link https://developer.wordpress.org/reference/functions/add_theme_support/#customize-selective-refresh-widgets
      */
     add_theme_support('customize-selective-refresh-widgets');
+
+    /**
+     * ▶︎ Importante: Habilitar los estilos básicos de bloques
+     */
+    add_theme_support('wp-block-styles');
 }, 20);
 
 /**

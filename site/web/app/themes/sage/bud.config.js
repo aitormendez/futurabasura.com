@@ -102,6 +102,13 @@ export default async (app) => {
         contentSize: '800px',
         wideSize: '1200px',
       },
+      position: {
+        sticky: true,
+      },
+      align: {
+        wide: true,
+        full: true,
+      },
     })
     .setStyles({
       blocks: {

@@ -8,6 +8,22 @@ const config = {
     './app/**/*.php',
     './resources/**/*.{php,vue,js,jsx,ts,tsx}',
   ],
+  safelist: [
+    'alignfull',
+    'alignwide',
+    'not-prose',
+    'is-position-top-left',
+    'is-position-top-center',
+    'is-position-top-right',
+    'is-position-center-left',
+    'is-position-center-center',
+    'is-position-center-right',
+    'is-position-bottom-left',
+    'is-position-bottom-center',
+    'is-position-bottom-right',
+    'has-custom-content-position',
+    'wp-block-cover__inner-container',
+  ],
   theme: {
     fill: (theme) => ({
       red: theme('colors.red.600'),
@@ -101,7 +117,7 @@ const config = {
   },
   plugins: [
     typography,
-    plugin(function ({ addComponents }) {
+    plugin(function ({ addComponents, addUtilities }) {
       const textos = {
         '.sombra': {
           textShadow: '0.1em 0.1em 0 #000',
@@ -146,9 +162,52 @@ const config = {
           color: '#fff',
         },
       };
-      addComponents([textos, botones]);
-    }),
-    plugin(function ({ addUtilities }) {
+      const coverPositionClasses = {
+        '.is-position-top-left': {
+          alignItems: 'flex-start',
+          justifyContent: 'flex-start',
+        },
+        '.is-position-top-center': {
+          alignItems: 'flex-start',
+          justifyContent: 'center',
+        },
+        '.is-position-top-right': {
+          alignItems: 'flex-start',
+          justifyContent: 'flex-end',
+        },
+        '.is-position-center-left': {
+          alignItems: 'center',
+          justifyContent: 'flex-start',
+        },
+        '.is-position-center-center': {
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+        '.is-position-center-right': {
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+        },
+        '.is-position-bottom-left': {
+          alignItems: 'flex-end',
+          justifyContent: 'flex-start',
+        },
+        '.is-position-bottom-center': {
+          alignItems: 'flex-end',
+          justifyContent: 'center',
+        },
+        '.is-position-bottom-right': {
+          alignItems: 'flex-end',
+          justifyContent: 'flex-end',
+        },
+        '.has-custom-content-position': {
+          display: 'flex',
+          position: 'relative',
+        },
+        '.wp-block-cover__inner-container': {
+          position: 'absolute',
+        },
+      };
+      addComponents([textos, botones, coverPositionClasses]);
       const newUtilities = {
         '.clip-path-elipse': {
           clipPath: 'ellipse(50% 50% at 50% 50%)',
