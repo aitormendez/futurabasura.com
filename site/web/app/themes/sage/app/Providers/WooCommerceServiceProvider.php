@@ -95,12 +95,17 @@ class WooCommerceServiceProvider extends ServiceProvider
                 </div>
             HTML;
 
-            // Obtener las categorías excluyendo "uncategorized"
+            // Obtener el término "uncategorized"
+            $uncategorized = get_term_by('slug', 'uncategorized', 'product_cat');
+            $uncategorized_id = $uncategorized ? $uncategorized->term_id : null;
+
+            // Obtener las categorías excluyendo "uncategorized" si existe
             $categories = get_terms([
                 'taxonomy' => 'product_cat',
                 'hide_empty' => true,
-                'exclude' => [get_term_by('slug', 'uncategorized', 'product_cat')->term_id], // Excluir el término "uncategorized"
+                'exclude' => $uncategorized_id ? [$uncategorized_id] : [], // Excluir solo si se encontró el término
             ]);
+
 
             $categories_js = array_map(function ($category) {
                 return [
