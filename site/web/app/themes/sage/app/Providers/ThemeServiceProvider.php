@@ -24,9 +24,5 @@ class ThemeServiceProvider extends SageServiceProvider
     public function boot()
     {
         parent::boot();
-
-        add_action('init', function () {
-            load_textdomain('woocommerce-square', WP_LANG_DIR . '/plugins/woocommerce-square-' . get_locale() . '.mo');
-        });
     }
 }
