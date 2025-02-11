@@ -73,6 +73,7 @@
     "wpackagist-plugin/pixelyoursite": "^10.0",
     "wpackagist-plugin/redis-cache": "*",
     "wpackagist-plugin/complianz-gdpr": "*",
+    "wpackagist-plugin/woocommerce-payments": "*",
     "generoi/sage-woocommerce": "^1.1"
   },
   "require-dev": {
