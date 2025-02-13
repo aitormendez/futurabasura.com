@@ -22,8 +22,3 @@
         {!! get_the_posts_navigation() !!}
     </main>
 @endsection
-
-{{-- @section('sidebar')
-  @include('sections.sidebar')
-
-@endsection --}}
