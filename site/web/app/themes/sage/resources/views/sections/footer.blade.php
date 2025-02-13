@@ -100,7 +100,7 @@
 
         <div class="iconos mb-16 flex w-full justify-center gap-4 px-6">
             <x-fab-cc-visa class="w-10" alt="Visa" />
-            <x-custom-paypal class="w-14" alt="Paypal" />
+            {{-- <x-custom-paypal class="w-14" alt="Paypal" /> --}}
             <x-fab-cc-mastercard class="w-10" alt="Mastercard" />
             <x-fab-apple-pay class="w-12" alt="Apple Pay" />
             <x-fab-google-pay class="w-12" alt="Google Pay" />

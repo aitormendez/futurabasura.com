@@ -128,7 +128,7 @@ class Navigation extends Composer
     public function itemsInCart()
     {
         global $woocommerce;
-        // return $woocommerce->cart->cart_contents_count;
+        return $woocommerce->cart->cart_contents_count;
     }
 
     /**
