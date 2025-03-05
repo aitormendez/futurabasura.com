@@ -75,7 +75,9 @@
     "wpackagist-plugin/redis-cache": "*",
     "wpackagist-plugin/complianz-gdpr": "*",
     "generoi/sage-woocommerce": "^1.1",
-    "psr/log": "^3.0"
+    "psr/log": "^3.0",
+    "blade-ui-kit/blade-icons": "^1.8",
+    "owenvoke/blade-fontawesome": "^2.9"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.7.1",
