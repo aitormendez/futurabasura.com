@@ -59,7 +59,6 @@
     "wpackagist-plugin/easy-wp-smtp": "*",
     "wpackagist-plugin/favicon-by-realfavicongenerator": "*",
     "wpackagist-plugin/variation-swatches-woo": "*",
-    "wpackagist-plugin/woocommerce-square": "*",
     "wpackagist-plugin/query-monitor": "*",
     "wpackagist-plugin/html-forms": "*",
     "wpackagist-plugin/woocommerce-payments": "*",
@@ -68,15 +67,13 @@
     "mobiledetect/mobiledetectlib": "^4.8",
     "roots/acorn-prettify": "^1.0",
     "log1x/sage-html-forms": "^1.0",
-    "spatie/dropbox-api": "^1.22",
     "league/oauth2-client": "^2.7",
     "wpackagist-plugin/pixelyoursite": "^10.0",
-    "wpackagist-plugin/redis-cache": "*",
-    "wpackagist-plugin/complianz-gdpr": "*",
     "generoi/sage-woocommerce": "^1.1",
     "psr/log": "^3.0",
     "blade-ui-kit/blade-icons": "^1.8",
-    "owenvoke/blade-fontawesome": "^2.9"
+    "owenvoke/blade-fontawesome": "^2.9",
+    "log1x/poet": "^2.1"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.7.1",
