@@ -7,4 +7,3 @@ vendor/roles
 .trellis/*
 !.trellis/cli.yml
 trellis.cli.local.yml
-.vault_pass

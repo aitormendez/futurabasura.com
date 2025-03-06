@@ -1,6 +1,5 @@
-# Documentation: https://roots.io/trellis/docs/remote-server-setup/
-# `wordpress_sites` options: https://roots.io/trellis/docs/wordpress-sites
-# Define accompanying passwords/secrets in group_vars/staging/vault.yml
+# Created by trellis-cli v1.13.0
+# Documentation: https://roots.io/trellis/docs/wordpress-sites/
 
 wordpress_sites:
   futurabasura.com:
