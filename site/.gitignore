@@ -1,10 +1,8 @@
 # Application
 web/app/plugins/*
-!web/app/plugins/clover
-!web/app/plugins/mail-boxes-etc
 !web/app/plugins/.gitkeep
 web/app/mu-plugins/*/
-web/app/themes/twentytwentythree/
+web/app/themes/twentytwentyfive/
 web/app/upgrade
 web/app/uploads/*
 !web/app/uploads/.gitkeep
@@ -24,7 +22,7 @@ web/.htaccess
 
 # Composer
 /vendor
+auth.json
 
 # WP-CLI
 wp-cli.local.yml
-*_development*.sql

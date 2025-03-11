@@ -10,7 +10,11 @@
  */
 
 use Roots\WPConfig\Config;
+
 use function Env\env;
+
+// USE_ENV_ARRAY + CONVERT_* + STRIP_QUOTES
+Env\Env::$options = 31;
 
 /**
  * Directory containing all of the site's files
@@ -35,8 +39,13 @@ if (file_exists($root_dir . '/.env')) {
         ? ['.env', '.env.local']
         : ['.env'];
 
-    $dotenv = Dotenv\Dotenv::createUnsafeImmutable($root_dir, $env_files, false);
+    $repository = Dotenv\Repository\RepositoryBuilder::createWithNoAdapters()
+        ->addAdapter(Dotenv\Repository\Adapter\EnvConstAdapter::class)
+        ->addAdapter(Dotenv\Repository\Adapter\PutenvAdapter::class)
+        ->immutable()
+        ->make();
 
+    $dotenv = Dotenv\Dotenv::create($repository, $root_dir, $env_files, false);
     $dotenv->load();
 
     $dotenv->required(['WP_HOME', 'WP_SITEURL']);
@@ -54,7 +63,7 @@ define('WP_ENV', env('WP_ENV') ?: 'production');
 /**
  * Infer WP_ENVIRONMENT_TYPE based on WP_ENV
  */
-if (!env('WP_ENVIRONMENT_TYPE') && in_array(WP_ENV, ['production', 'staging', 'development'])) {
+if (!env('WP_ENVIRONMENT_TYPE') && in_array(WP_ENV, ['production', 'staging', 'development', 'local'])) {
     Config::define('WP_ENVIRONMENT_TYPE', WP_ENV);
 }
 
@@ -122,11 +131,14 @@ Config::define('DISALLOW_FILE_MODS', true);
 // Limit the number of post revisions
 Config::define('WP_POST_REVISIONS', env('WP_POST_REVISIONS') ?? true);
 
+// Disable script concatenation
+Config::define('CONCATENATE_SCRIPTS', false);
+
 /**
  * Debugging Settings
  */
-Config::define('WP_DEBUG_DISPLAY', true);
-Config::define('WP_DEBUG_LOG', true);
+Config::define('WP_DEBUG_DISPLAY', false);
+Config::define('WP_DEBUG_LOG', false);
 Config::define('SCRIPT_DEBUG', false);
 ini_set('display_errors', '0');
 
@@ -143,12 +155,6 @@ $env_config = __DIR__ . '/environments/' . WP_ENV . '.php';
 if (file_exists($env_config)) {
     require_once $env_config;
 }
-
-/**
- * Memory Limit
- */
-Config::define('WP_MEMORY_LIMIT', '512M');
-Config::define('WP_MAX_MEMORY_LIMIT', '768');
 
 Config::apply();
 
