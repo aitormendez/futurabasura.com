@@ -1,0 +1,51 @@
+@font-face {
+  font-family: Bugrino;
+  src: url('../fonts/bugrino/Bugrino-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: Bugrino;
+  src: url('../fonts/bugrino/Bugrino-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: Bugrino;
+  src: url('../fonts/bugrino/Bugrino-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: Bugrino;
+  src: url('../fonts/bugrino/Bugrino-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: Bugrino;
+  src: url('../fonts/bugrino/Bugrino-Thin.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: Bugrino;
+  src: url('../fonts/bugrino/Bugrino-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FK Display';
+  src: url('../fonts/fkdisplay/FKDisplay-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ArialBlack';
+  src: url('../fonts/arialblack/ArialBlack.woff2') format('woff2'),
+    url('../fonts/arialblack/ArialBlack.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

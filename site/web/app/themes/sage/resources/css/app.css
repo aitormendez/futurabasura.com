@@ -1,3 +1,165 @@
-@import "tailwindcss" theme(static);
+@import 'tailwindcss';
 @source "../views/";
-@source "../../app/";
+@source "../../app";
+@source "../safelist.txt";
+
+@import './common/typography.css';
+
+@theme {
+  --color-negro-fb: #3e2b2f;
+  --color-gris-fb: #ada3a4;
+  --color-gris-claro-fb: #dfd1d2;
+  --color-allo: #ffff00;
+  --color-allo-claro: #dbffe9;
+  --color-azul: #0000ff;
+  --color-azul-claro: #00ffff;
+  --color-rojo: #af0000;
+  --color-transparent: transparent;
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --font-sans: Arial, sans-serif;
+  --font-serif: 'Times New Roman', Times, serif;
+  --font-bugrino: Bugrino, sans-serif;
+  --font-fk: 'FK Display', sans-serif;
+  --font-arialblack: 'Arial Black', sans-serif;
+
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+
+  --safelist: clip-path-elipse text-shadow btn btn-cart...;
+
+  /*
+   | D) Breakpoints, si deseas generar sm:, md:, etc.
+   | Ejemplo (opcional):
+   --breakpoint-sm: 40rem;
+   --breakpoint-md: 48rem;
+   etc.
+   */
+
+  /*
+   | E) Si tenías variables como:
+   |   --media-brand: 'rgb(var(--media-brand) / <alpha-value>)',
+   | Asegúrate de que sean realmente necesarias
+   | y preferiblemente sin comillas si quieres usarlas como color real
+   */
+}
+
+@layer components {
+  .sombra {
+    text-shadow: 0.1em 0.1em 0 #000;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    line-height: 1em;
+    color: #fff;
+  }
+  .nav-item {
+    text-shadow: 0.1em 0.1em 0 #000;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    letter-spacing: 0.2em;
+    line-height: 1em;
+    color: #fff;
+  }
+  .page-header-font {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 3rem;
+    letter-spacing: -0.03em;
+    color: #3e2b2f;
+  }
+  .btn {
+    font-family: Arial, sans-serif;
+    border: 1px solid #000;
+    background-color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-weight: bold;
+    font-size: 0.8rem;
+    color: #000;
+    padding: 0.7em 1em 0.6em;
+  }
+  .btn-cart {
+    background-color: #0000ff;
+    letter-spacing: 0.05em;
+    text-align: center;
+    padding: 1em 1.5em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .is-position-top-left {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .is-position-top-center {
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .is-position-top-right {
+    align-items: flex-start;
+    justify-content: flex-end;
+  }
+  .is-position-center-left {
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .is-position-center-center {
+    align-items: center;
+    justify-content: center;
+  }
+  .is-position-center-right {
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .is-position-bottom-left {
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+  .is-position-bottom-center {
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .is-position-bottom-right {
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+  .has-custom-content-position {
+    display: flex;
+    position: relative;
+  }
+  .wp-block-cover__inner-container {
+    position: absolute;
+  }
+}
+
+@layer utilities {
+  .clip-path-elipse {
+    clip-path: ellipse(50% 50% at 50% 50%);
+  }
+  .text-shadow {
+    text-shadow: 0.1em 0.1em 0 #000;
+  }
+}
+
+/* Resto de imports */
+@import './common/global.css';
+@import './common/variables';
+@import './fonts/fonts.css';
+@import './layouts/header.css';
+@import './layouts/front-page.css';
+@import './layouts/slider.css';
+@import './layouts/artists.css';
+@import './layouts/shop.css';
+@import './layouts/cart.css';
+@import './layouts/contact.css';
+@import './layouts/newsletter.css';
+@import './layouts/checkout.css';
+@import './layouts/single-product.css';
+@import './layouts/single-variable-product.css';
+@import './layouts/blocks.css';
+@import './componentes/select.css';
+@import './componentes/lightgallery.css';
+@import '@glidejs/glide/dist/css/glide.core.min.css';

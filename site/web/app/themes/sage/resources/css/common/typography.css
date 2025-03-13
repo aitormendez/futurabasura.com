@@ -1,0 +1,9 @@
+@layer utilities {
+  .prose {
+    max-width: 65ch;
+  }
+
+  .not-prose {
+    all: unset;
+  }
+}

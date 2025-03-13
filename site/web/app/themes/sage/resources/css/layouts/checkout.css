@@ -1,0 +1,81 @@
+body.checkout {
+  .ticket-triangulo {
+    height: 30px;
+  }
+
+  h3 {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+
+    label {
+      font-size: 1.2rem;
+    }
+  }
+
+  label {
+    display: inline-block;
+    margin-bottom: 0.2em;
+    font-size: small;
+    font-weight: bold;
+  }
+
+  #shipping_method label {
+    font-size: medium;
+    font-weight: normal;
+  }
+
+  input[type='text'],
+  input[type='tel'],
+  input[type='email'],
+  textarea {
+    padding: 0.2em 0.8em;
+    margin-bottom: 0.5em;
+    width: 100%;
+    border: 1px solid rgb(172, 172, 172) !important;
+  }
+
+  .select2-container--default {
+    font-family: Arial, sans-serif;
+
+    .select2-selection {
+      box-shadow: 0;
+      background-color: #fff;
+      border: 0;
+      border-radius: 0;
+      outline: 0;
+      min-height: 3rem;
+      text-align: left;
+      margin-bottom: 1rem;
+
+      .select2-selection__rendered,
+      .select2-selection__arrow {
+        display: block;
+        padding: 0.8rem 1.5rem;
+      }
+
+      .select2-selection__arrow {
+        margin-top: 0.5rem;
+      }
+    }
+
+    .select2-results__option--highlighted[aria-selected],
+    .select2-results__option--highlighted[data-selected] {
+      background-color: #ffff00;
+      color: #000000;
+    }
+  }
+
+  .select2-container--open .select2-dropdown {
+    border: none;
+
+    .select2-search__field {
+      padding: 0.2em 0.4em;
+      background-color: #b8daff;
+    }
+  }
+
+  label[for='payment_method_square_credit_card'] {
+    gap: 1rem;
+  }
+}

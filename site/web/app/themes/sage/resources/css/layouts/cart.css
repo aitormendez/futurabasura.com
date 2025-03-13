@@ -1,0 +1,191 @@
+body.cart {
+  .ticket-head {
+    .ticket-triangulo {
+      height: 30px;
+    }
+  }
+
+  .product-remove svg {
+    @apply fill-rojo;
+  }
+  .cart-collaterals {
+    .cart_totals {
+      h2 {
+        @apply text-2xl text-center mb-6;
+      }
+
+      .checkout-button {
+        color: #fff;
+      }
+
+      .woocommerce-shipping-calculator {
+        .shipping-calculator-button {
+          @apply inline-block px-4 py-2 my-6 bg-white border-2 border-black uppercase text-xs tracking-widest;
+        }
+
+        .shipping-calculator-form {
+          margin-top: 1rem;
+        }
+
+        input[type='text'] {
+          @apply px-4 py-2 mb-4;
+        }
+      }
+    }
+  }
+
+  .woocommerce-customer-details {
+    @apply p-6;
+  }
+
+  .select2-dropdown {
+    border: none !important;
+
+    li {
+      padding: 0.8rem 1.5rem;
+    }
+  }
+
+  .select2-container--default {
+    width: 100% !important;
+
+    .select2-selection {
+      box-shadow: 0;
+      background-color: #fff;
+      border: 0;
+      border-radius: 0;
+      outline: 0;
+      min-height: 3rem;
+      text-align: left;
+      margin-bottom: 1rem;
+
+      .select2-selection__rendered,
+      .select2-selection__arrow {
+        display: block;
+        padding: 0.8rem 1.5rem;
+      }
+
+      .select2-selection__arrow {
+        margin-top: 0.5rem;
+      }
+    }
+
+    .select2-results__option--highlighted[aria-selected],
+    .select2-results__option--highlighted[data-selected] {
+      background-color: #ffff00;
+      color: #000000;
+    }
+  }
+
+  .ticket {
+    .tk-row {
+      .product-remove {
+        width: 90px;
+        padding: 14px;
+      }
+
+      .tk-cell {
+        &.product-thumbnail {
+          align-self: flex-start;
+          flex-grow: 0;
+          flex-shrink: 0;
+
+          a {
+            img {
+              max-width: 7rem;
+              max-height: 7rem;
+              width: auto;
+              height: auto;
+            }
+          }
+        }
+
+        &.product-subtotal {
+          .woocommerce-Price-currencySymbol {
+            margin-left: 0.3em;
+          }
+        }
+
+        &.product-quantity {
+          .quantity {
+            height: 100%;
+            width: 4em;
+          }
+
+          input[type='number'] {
+            appearance: textfield;
+            width: 100%;
+            display: block;
+            padding: 1em;
+            -moz-appearance: textfield;
+            appearance: textfield;
+
+            &::-webkit-inner-spin-button,
+            &::-webkit-outer-spin-button {
+              -webkit-appearance: none;
+              margin: 0;
+            }
+          }
+        }
+
+        &.actions {
+          .coupon {
+            .central {
+              width: 20rem;
+            }
+
+            .lateral {
+              width: calc(50% - 10rem);
+            }
+          }
+        }
+      }
+
+      @media (width < 786px) {
+        .tk-cell {
+          &.product-thumbnail {
+            flex-grow: 0;
+            flex-shrink: 0;
+
+            a img {
+              max-width: 10rem;
+              max-height: 10rem;
+            }
+          }
+
+          &.product-data {
+            flex-grow: 0;
+            flex-shrink: 0;
+          }
+
+          &.product-subtotal {
+            flex-grow: 0;
+            flex-shrink: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .cart_totals {
+    .subt-tabla {
+      max-width: 20rem;
+    }
+  }
+
+  .woocommerce-shipping-calculator button[name='calc_shipping'] {
+    @apply inline-block px-4 py-2 my-6 bg-white border-2 border-black uppercase text-xs tracking-widest;
+  }
+
+  #calc_shipping_country_field {
+    padding-right: 1rem;
+  }
+
+  #calc_shipping_country,
+  #calc_shipping_state {
+    background-color: white;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
+}
