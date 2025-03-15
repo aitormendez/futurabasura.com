@@ -1,0 +1,3 @@
+[submodule "site/web/app/plugins/fb-blocks"]
+	path = site/web/app/plugins/fb-blocks
+	url = git@github.com:aitormendez/fb-blocks.git
