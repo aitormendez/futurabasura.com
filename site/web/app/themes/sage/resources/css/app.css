@@ -145,8 +145,8 @@
 }
 
 /* Resto de imports */
-@import './common/global.css';
 @import './common/variables';
+@import './common/global.css';
 @import './fonts/fonts.css';
 @import './layouts/header.css';
 @import './layouts/front-page.css';

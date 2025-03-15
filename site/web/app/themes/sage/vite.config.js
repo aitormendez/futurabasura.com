@@ -2,10 +2,12 @@ import { defineConfig } from 'vite';
 import tailwindcss from '@tailwindcss/vite';
 import laravel from 'laravel-vite-plugin';
 import { wordpressPlugin, wordpressThemeJson } from '@roots/vite-plugin';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   base: '/app/themes/sage/public/build/',
   plugins: [
+    react(),
     tailwindcss(),
     laravel({
       input: [
@@ -27,6 +29,46 @@ export default defineConfig({
       disableTailwindFontSizes: false,
     }),
   ],
+  optimizeDeps: {
+    include: [
+      '@vidstack/react',
+      '@radix-ui/react-tooltip',
+      '@radix-ui/react-dismissable-layer',
+      '@radix-ui/react-portal',
+      '@radix-ui/react-popper',
+      '@radix-ui/react-presence',
+      '@radix-ui/react-dropdown-menu',
+      '@radix-ui/react-menu',
+      '@radix-ui/react-collection',
+      '@radix-ui/react-focus-guards',
+      '@radix-ui/react-focus-scope',
+      '@radix-ui/react-roving-focus',
+    ],
+    esbuildOptions: {
+      target: 'esnext',
+    },
+  },
+  build: {
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('@vidstack')) {
+              return 'vidstack'; // Separa Vidstack en su propio bundle
+            }
+            if (id.includes('@radix-ui')) {
+              return 'radix-ui'; // Separa Radix UI en otro bundle
+            }
+            return 'vendor'; // Todo lo demás de node_modules
+          }
+        },
+      },
+    },
+    chunkSizeWarningLimit: 700, // Opcional: ajusta el límite de tamaño
+  },
   resolve: {
     alias: {
       '@scripts': '/resources/js',

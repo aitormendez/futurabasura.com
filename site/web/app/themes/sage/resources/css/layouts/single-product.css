@@ -65,7 +65,7 @@
         }
       }
 
-      @screen md {
+      @media (width >= 768px) {
         tbody > tr {
           .label {
             min-width: 200px;
@@ -118,25 +118,25 @@
     }
   }
 
-  @screen md {
+  @media (width >= 768px) {
     .entry-summary {
       padding: 2rem 3vw;
     }
   }
 
-  @screen lg {
+  @media (width >= 1024px) {
     .entry-summary {
       padding: 2rem 5vw;
     }
   }
 
-  @screen xl {
+  @media (width >= 1280px) {
     .entry-summary {
       padding: 2rem 7vw;
     }
   }
 
-  @screen xl {
+  @media (width >= 1536px) {
     .entry-summary {
       padding: 2rem 9vw;
     }

@@ -58,7 +58,7 @@
     }
   }
 
-  @screen sm {
+  @media (width >= 640px) {
     position: fixed;
 
     nav ul {

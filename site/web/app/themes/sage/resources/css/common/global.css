@@ -1,9 +1,13 @@
 html {
   font-size: 1rem;
 
-  @screen sm {
+  @media (width >= 640px) {
     font-size: calc(0.5vw + 0.7rem);
   }
+}
+
+a {
+  text-decoration: none;
 }
 
 .main {
@@ -28,10 +32,6 @@ html {
   }
 }
 
-body {
-  @apply font-sans text-negro-fb;
-}
-
 #app {
   @apply relative;
 }
@@ -44,11 +44,7 @@ main {
   a:link {
     @apply text-azul;
     transition: color 0.5s, background-color 0.5s;
-
-    &:hover {
-      /* color: theme('colors.negro-fb'); */
-      text-decoration: none;
-    }
+    text-decoration: none;
 
     &:visited {
       color: #6c7399;
@@ -110,11 +106,6 @@ main {
   margin-bottom: 2rem;
   margin-left: 1rem;
   margin-right: 1rem;
-
-  /* @screen md {
-    margin-left: 0;
-    margin-right: 0;
- } */
 
   a {
     @apply text-azul;
