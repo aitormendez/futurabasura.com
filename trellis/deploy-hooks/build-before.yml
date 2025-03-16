@@ -13,6 +13,12 @@
   args:
     chdir: "{{ project_local_path }}/web/app/themes/sage"
 
+- name: Create Composer auth.json
+  template:
+    src: templates/auth.json.j2
+    dest: "{{ deploy_helper.new_release_path }}/auth.json"
+  no_log: false
+
 - name: Install Composer dependencies
   command: composer install --no-ansi --no-dev --no-interaction --no-progress --optimize-autoloader --no-scripts --classmap-authoritative
   args:
