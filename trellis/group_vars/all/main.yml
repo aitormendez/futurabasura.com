@@ -19,6 +19,8 @@ php_extensions_custom:
   php8.2-soap: "{{ apt_package_state }}"
 apt_packages:
   mailutils: present
+repo_subtree: false
+clone_submodules: true
 
 # Values of raw_vars will be wrapped in `{% raw %}` to avoid templating problems if values include `{%` and `{{`.
 # Will recurse dicts/lists. `*` is wildcard for one or more dict keys, list indices, or strings. Example:
