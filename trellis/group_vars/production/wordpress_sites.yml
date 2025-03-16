@@ -4,22 +4,17 @@
 wordpress_sites:
   futurabasura.com:
     site_hosts:
-      - canonical: futurabasura.com
-        redirects:
-          - www.futurabasura.com
+    - canonical: futurabasura.com
+      redirects:
+      - www.futurabasura.com
     local_path: ../site
-    branch: main
-    repo: git@github.com:aitormendez/futurabasura.com.git
+    branch: master
+    repo: git@github.com:example/example.com.git
     repo_subtree_path: site
     multisite:
       enabled: false
     ssl:
-      enabled: true
+      enabled: false
       provider: letsencrypt
     cache:
-      enabled: true
-      duration: 30s
-      skip_cache_uri: "/wp-admin/|/wp-json/.*|/xmlrpc.php|wp-.*.php|/feed/|index.php|sitemap(_index)?.xml|/store.*|/cart.*|/my-account.*|/checkout.*|/addons.*|/checkout/"
-      skip_cache_cookie: comment_author|wordpress_[a-f0-9]+|wp-postpass|wordpress_no_cache|wordpress_logged_in|woocommerce_cart_hash|woocommerce_items_in_cart|wp_woocommerce_session_|edd_items_in_cart
-    xmlrpc:
       enabled: false
