@@ -15,7 +15,7 @@ class CustomPostTypeServiceProvider extends ServiceProvider
     {
         add_action('init', [$this, 'registerPostTypes']);
         add_action('init', [$this, 'registerTaxonomies']);
-        add_action('init', [$this, 'registerBlocks']);
+        // add_action('init', [$this, 'registerBlocks']);
         add_action('init', [$this, 'registerBlockCategories']);
         add_action('init', [$this, 'registerBlockPatterns']);
         add_action('admin_menu', [$this, 'modifyAdminMenu']);
@@ -65,16 +65,6 @@ class CustomPostTypeServiceProvider extends ServiceProvider
             'show_in_rest' => true,
         ]);
     }
-
-    public function registerBlocks()
-    {
-        register_block_type('sage/post', [
-            'render_callback' => function ($attributes, $content) {
-                return view('blocks.post', compact('attributes', 'content'))->render();
-            },
-        ]);
-    }
-
 
     /**
      * Registra categorías de bloques personalizadas

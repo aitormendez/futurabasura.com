@@ -1,6 +1,10 @@
 import domReady from '@wordpress/dom-ready';
-import './blocks/post';
 
 domReady(() => {
   //
 });
+
+// registerBlockCollection('fb', {
+//   title: 'Futura Basura',
+//   icon: 'star-filled',
+// });

@@ -1,7 +1,6 @@
 import.meta.glob(['../images/**', '../fonts/**']);
 import { navigation } from './navigation.js';
 import scramble from './scramble.js';
-import './components/video/video-player.jsx';
 import Alpine from 'alpinejs';
 import collapse from '@alpinejs/collapse';
 import { gsap } from 'gsap';
@@ -41,14 +40,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (document.body.classList.contains('home')) {
     const { sliderHome } = await import('./sliderHome.js');
     sliderHome();
-  }
-
-  if (
-    document.body.classList.contains('page') ||
-    document.body.classList.contains('single')
-  ) {
-    const { marquee } = await import('./marquee.jsx');
-    marquee();
   }
 
   if (

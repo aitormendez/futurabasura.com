@@ -3,6 +3,8 @@ import tailwindcss from '@tailwindcss/vite';
 import laravel from 'laravel-vite-plugin';
 import { wordpressPlugin, wordpressThemeJson } from '@roots/vite-plugin';
 import react from '@vitejs/plugin-react';
+import path from 'path';
+import fs from 'fs';
 
 export default defineConfig({
   base: '/app/themes/sage/public/build/',
@@ -29,6 +31,15 @@ export default defineConfig({
       disableTailwindFontSizes: false,
     }),
   ],
+  server: {
+    watch: {
+      usePolling: true,
+      interval: 100, // Ajusta el intervalo de refresco si es necesario
+    },
+    fs: {
+      strict: false,
+    },
+  },
   optimizeDeps: {
     include: [
       '@vidstack/react',
@@ -49,6 +60,12 @@ export default defineConfig({
     },
   },
   build: {
+    watch: {
+      include: [
+        path.resolve(__dirname, '../../plugins/fb-blocks/src/**/*'), // Observa cambios en el plugin
+        path.resolve(__dirname, '../../plugins/fb-blocks/build/**/*'),
+      ],
+    },
     commonjsOptions: {
       transformMixedEsModules: true,
     },

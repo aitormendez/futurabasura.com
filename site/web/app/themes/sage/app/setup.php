@@ -9,6 +9,42 @@ namespace App;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Vite;
 
+add_action('wp_head', function () {
+    $frases = get_field('frases', 'option');
+
+    $frases_array = [];
+    if ($frases) {
+        foreach ($frases as $frase) {
+            $frases_array[] = $frase['frase'];
+        }
+    }
+
+    $terms = get_terms([
+        'taxonomy' => 'artist',
+        'hide_empty' => false,
+    ]);
+
+    $artists = array_map(function ($term) {
+        return ['name' => $term->name, 'slug' => $term->slug];
+    }, $terms);
+
+    $fb_data = [
+        'fondos' => [
+            'f50x70v' => get_field('fondo_50x70v', 'option')['url'],
+            'f50x70h' => get_field('fondo_50x70h', 'option')['url'],
+            'f61x91v' => get_field('fondo_61x91v', 'option')['url'],
+            'f61x91h' => get_field('fondo_61x91h', 'option')['url'],
+        ],
+        'homeUrl' => get_bloginfo('url'),
+        'frases' => $frases_array,
+        'artists' => $artists,
+    ];
+
+    echo '<script>window.fb = ' . json_encode($fb_data) . ';</script>';
+}, 5);
+
+
+
 /**
  * Inject styles into the block editor.
  *
