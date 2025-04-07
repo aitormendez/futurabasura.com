@@ -160,6 +160,7 @@
 @import './layouts/single-product.css';
 @import './layouts/single-variable-product.css';
 @import './layouts/blocks.css';
+@import './layouts/slider.css';
 @import './componentes/select.css';
 @import './componentes/lightgallery.css';
 @import '@glidejs/glide/dist/css/glide.core.min.css';

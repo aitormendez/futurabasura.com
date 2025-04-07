@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   navigation();
   scramble();
 
-  // Ejemplo: carga condicional para .home en pantallas mdMin
   if (mdMin.matches && document.body.classList.contains('home')) {
     const { ajustarAltoCupones, sliderContenidos, destacadoRepetido } =
       await import('./frontPage.js');
@@ -36,7 +35,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     destacadoRepetido();
   }
 
-  // Resto de checks condicionales
   if (document.body.classList.contains('home')) {
     const { sliderHome } = await import('./sliderHome.js');
     sliderHome();

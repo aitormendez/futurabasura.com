@@ -145,8 +145,12 @@ add_action('after_setup_theme', function () {
      */
     register_nav_menus([
         'primary_navigation' => __('Primary Navigation', 'sage'),
+        'social_navigation' => __('Social Navigation', 'sage'),
+        'shop_navigation' => __('Shop Navigation', 'sage'),
+        'contents_navigation' => __('Contents Navigation', 'sage'),
+        'footer_pages_navigation' => __('Footer Pages Navigation', 'sage'),
+        'legal_navigation' => __('Legal Navigation', 'sage'),
     ]);
-
     /**
      * Disable the default block patterns.
      *

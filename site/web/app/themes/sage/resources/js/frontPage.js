@@ -3,6 +3,7 @@ import Glide, {
   Autoplay,
   Keyboard,
 } from '@glidejs/glide/dist/glide.modular.esm.js';
+import { gsap } from 'gsap';
 // import anime from 'animejs';
 // import Plyr from 'plyr';
 
@@ -43,89 +44,39 @@ export function sliderContenidos() {
 }
 
 export function destacadoRepetido() {
-  // ajustar alto de contenido con formato "repetido"
-  // ----------------------------------------------------
+  // Ajustar alto de contenido con formato "repetido"
+  // ------------------------------------------------
 
-  let repetidos = document.querySelectorAll('.repeticion');
-  repetidos.forEach(function (element) {
-    // Encontrar la primera imagen dentro del elemento actual
-    let img = element.querySelector('img');
+  const repetidos = document.querySelectorAll('.repeticion');
 
-    // Encontrar el primer elemento con la clase 'clip' dentro del elemento actual
-    let clip = element.querySelector('.clip');
+  repetidos.forEach((element) => {
+    const img = element.querySelector('img');
+    const clip = element.querySelector('.clip');
 
     if (img && clip) {
-      // Obtener la altura de la imagen
-      let alto = img.clientHeight;
-
-      // Establecer la altura del elemento 'clip' igual a la altura de la imagen
-      clip.style.height = alto + 'px';
+      const alto = img.clientHeight;
+      clip.style.height = `${alto}px`;
     }
   });
 
   // Animación título de contenido con formato "repetido"
-  // ----------------------------------------------------
+  // -----------------------------------------------------
 
-  let titulos = document.getElementsByClassName('title-repetido');
+  const titulos = document.querySelectorAll('.title-repetido');
 
-  for (let i = 0; i < titulos.length; i++) {
-    const element = titulos[i];
-    element.addEventListener('mouseover', function () {
-      let randX = Math.floor(Math.random() * 100 - 50);
-      let randY = Math.floor(Math.random() * 100 - 50);
-      let rotate = Math.floor(Math.random() * 360 - 180);
+  titulos.forEach((element) => {
+    element.addEventListener('mouseover', () => {
+      const randX = Math.floor(Math.random() * 100 - 50);
+      const randY = Math.floor(Math.random() * 100 - 50);
+      const rotate = Math.floor(Math.random() * 360 - 180);
 
-      anime({
-        targets: this,
-        translateY: randY,
-        translateX: randX,
-        rotate: rotate,
-        duration: 1000,
+      gsap.to(element, {
+        x: randX,
+        y: randY,
+        rotation: rotate,
+        duration: 1,
+        ease: 'power2.out',
       });
     });
-  }
-
-  // Animación color de autor en contenido con formato "repetido"
-  // ----------------------------------------------------
-
-  // let artistas = document.getElementsByClassName('artista-producto');
-
-  // let R, G, B, dur;
-
-  // const setVars = () => {
-  //   R = Math.floor((Math.random() * 255)),
-  //     G = Math.floor((Math.random() * 255)),
-  //     B = Math.floor((Math.random() * 255)),
-  //     dur = Math.floor((Math.random() * 4000));
-  // }
-
-  // const getColor = () => {
-  //   setVars();
-  //   return `rgb(${R}, ${G}, ${B})`;
-  // };
-
-  // setVars();
-
-  // for (let i = 0; i < artistas.length; i++) {
-  //   const element = artistas[i];
-
-  //   element.addEventListener('mouseover', function (event) {
-
-  //     anime({
-  //       targets: this,
-  //       color: getColor,
-  //       duration: dur,
-  //       loop: true,
-  //       easing: 'linear',
-  //       loopBegin: (anim) => {
-  //         getColor();
-  //       },k
-  //     });
-
-  //   });
-
-  // element.addEventListener('mouseout', function (event) {
-  //   colors.pause;
-  // });
-  // }
+  });
 }
