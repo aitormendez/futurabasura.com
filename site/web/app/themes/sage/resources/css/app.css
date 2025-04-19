@@ -31,8 +31,6 @@
   --spacing-5: 1.25rem;
   --spacing-6: 1.5rem;
 
-  --safelist: clip-path-elipse text-shadow btn btn-cart...;
-
   /*
    | D) Breakpoints, si deseas generar sm:, md:, etc.
    | Ejemplo (opcional):
@@ -136,6 +134,9 @@
 }
 
 @layer utilities {
+  .is-content-width > *:not(.alignwide):not(.alignfull) {
+    @apply max-w-[800px] mx-auto px-6 md:px-0;
+  }
   .clip-path-elipse {
     clip-path: ellipse(50% 50% at 50% 50%);
   }

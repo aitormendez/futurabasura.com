@@ -1,7 +1,3 @@
-@php(the_content())
-
-@if ($pagination)
-    <nav class="page-nav" aria-label="Page">
-        {!! $pagination !!}
-    </nav>
-@endif
+<main class="main is-content-width" id="main">
+    @php the_content() @endphp
+</main>
