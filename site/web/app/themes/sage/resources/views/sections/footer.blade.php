@@ -61,7 +61,7 @@
             </div>
             <div class="der flex w-1/2 items-center justify-center"
                 style="background-color: {{ get_field('footer_color', 'option') }}">
-                <img class="w-1/2" src="@asset('images/logo-fb.svg')">
+                <img class="w-1/2" src="{{ Vite::asset('resources/images/logo-fb.svg') }}">
             </div>
         </div>
     </div>
