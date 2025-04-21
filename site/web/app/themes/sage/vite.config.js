@@ -4,7 +4,6 @@ import laravel from 'laravel-vite-plugin';
 import { wordpressPlugin, wordpressThemeJson } from '@roots/vite-plugin';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import fs from 'fs';
 
 export default defineConfig({
   base: '/app/themes/sage/public/build/',

@@ -10,7 +10,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body @php(body_class('font-sans text-negro-fb'))>
+<body @php(body_class('font-sans text-negro-fb bg-fixed bg-fondo-medio bg-10px'))>
     @php(wp_body_open())
 
     <div id="app">

@@ -36,8 +36,29 @@ a {
   @apply relative;
 }
 
-.sombra {
-  text-shadow: 0.1em 0.1em 0 #000;
+.bg-fondo-medio {
+  background-image: url('../../images/bg-medio.svg');
+  background-size: 10px;
+}
+
+.bg-fondo {
+  background-image: url('../../images/bg.svg');
+}
+
+.bg-tk-triangulo {
+  background-image: url('../../images/triangulo-ticket.svg');
+}
+
+.bg-tk-triangulo-down {
+  background-image: url('../../images/triangulo-ticket-down.svg');
+}
+
+.bg-fondo-claro {
+  background-image: url('../../images/bg-claro.svg');
+}
+
+.bg-punteado {
+  background-image: url('../../images/punteado-cupon.svg');
 }
 
 main {
