@@ -20,6 +20,8 @@
 
         @include('sections.header')
 
+        {{ env('WP_ENV') }}
+
         @yield('content')
 
         @hasSection('sidebar')
