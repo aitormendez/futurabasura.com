@@ -53,19 +53,17 @@ class WooCustomizationServiceProvider extends ServiceProvider
         $link = apply_filters('woocommerce_loop_product_link', get_the_permalink(), $product);
 
         echo '<div class="card">';
-        echo '<div class="card-inner">';
+
+        // ABRIMOS el <a> aquí, envolviendo todo lo que antes estaba dentro de card-inner
+        echo '<a href="' . esc_url($link) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link card-inner !text-black">';
 
         // Card Front
         echo '<div class="card-front">';
-        echo '<a href="' . esc_url($link) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link !text-black">';
-
         if (wp_is_mobile()) {
             $this->renderThumbnailMobile();
         } else {
             echo woocommerce_get_product_thumbnail('large');
         }
-
-        echo '</a>';
         echo '</div>'; // End card-front
 
         // Card Back (desktop) o metadatos móviles
@@ -75,9 +73,11 @@ class WooCustomizationServiceProvider extends ServiceProvider
             $this->renderCardBack();
         }
 
-        echo '</div>'; // End card-inner
+        echo '</a>'; // CERRAMOS el <a> después de todo el contenido
+
         echo '</div>'; // End card
     }
+
 
     /**
      * Renderizar miniatura para móvil.
