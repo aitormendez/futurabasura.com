@@ -29,67 +29,61 @@
     height: 100%;
   }
 
-  @media (width > 786px) {
-    .product .card-front {
-      img {
-        width: auto;
-        height: auto;
-        max-width: 50vw;
-        max-height: 50vw;
-      }
+  @media (min-width: 768px) {
+    .product .card-front img {
+      width: auto;
+      height: auto;
+      max-width: 50vw;
+      max-height: 50vw;
+      margin-left: auto;
+      margin-right: auto;
     }
   }
 
-  @media (width > 1024px) {
-    .product .card-front {
-      img {
-        max-width: 33.3vw;
-        max-height: 33.3vw;
-      }
+  @media (min-width: 1024px) {
+    .product .card-front img {
+      max-width: 33.3vw;
+      max-height: 33.3vw;
     }
   }
 
-  @media (width > 1280px) {
-    .product .card-front {
-      img {
-        max-width: 25vw;
-        max-height: 25vw;
-      }
+  @media (min-width: 1280px) {
+    .product .card-front img {
+      max-width: 25vw;
+      max-height: 25vw;
     }
   }
+}
 
-  /* Estilizar el desplegable */
-  select[name='filtro_artist'],
-  select[name='orderby'] {
-    font-size: 16px;
-    padding: 8px 16px;
-    background-color: white;
-    cursor: pointer;
-    text-transform: uppercase;
-    text-align: center;
-    letter-spacing: 0.2em;
-    appearance: none;
-  }
+/* Aquí comienza independiente el estilo de los select */
+select[name='filtro_artist'],
+select[name='orderby'] {
+  font-size: 16px;
+  padding: 8px 16px;
+  background-color: white;
+  cursor: pointer;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.2em;
+  appearance: none;
+}
 
-  /* Estilizar el desplegable al pasar el ratón por encima */
-  select[name='filtro_artist']:hover,
-  select[name='orderby']:hover {
-    background-color: #cf0;
-  }
+select[name='filtro_artist']:hover,
+select[name='orderby']:hover {
+  background-color: #cf0;
+}
 
-  /* Estilizar el desplegable al estar enfocado */
-  select[name='filtro_artist']:focus,
-  select[name='orderby']:focus {
-    border: 1px solid #000;
-  }
+select[name='filtro_artist']:focus,
+select[name='orderby']:focus {
+  border: 1px solid #000;
+}
 
-  select[name='filtro_artist'] option,
-  select[name='orderby'] option {
-    background-color: #fff; /* Color de fondo para las opciones */
-  }
+select[name='filtro_artist'] option,
+select[name='orderby'] option {
+  background-color: #fff;
+}
 
-  select[name='filtro_artist'] option:hover,
-  select[name='orderby'] option:hover {
-    background-color: #e6ff02;
-  }
+select[name='filtro_artist'] option:hover,
+select[name='orderby'] option:hover {
+  background-color: #e6ff02;
 }
