@@ -25,9 +25,22 @@ class WooCustomizationServiceProvider extends ServiceProvider
 
         add_filter('woocommerce_enqueue_styles', '__return_empty_array');
 
-
         // Renderizado del producto completo
         add_action('woocommerce_before_shop_loop_item', [$this, 'renderProductCard'], 10);
+
+        /**
+         * Rodear filtros de la tienda con un div.filtros -- inicio.
+         */
+        add_action('woocommerce_before_shop_loop', function () {
+            echo '<div class="relative flex flex-wrap justify-center p-6 filtros md:pt-12 md:pb-20">';
+        }, 20);
+
+        /**
+         * Rodear filtros de la tienda con un div.filtros -- fin
+         */
+        add_action('woocommerce_before_shop_loop', function () {
+            echo '</div><div id="desplegable" class="relative"></div>';
+        }, 30);
     }
 
     /**

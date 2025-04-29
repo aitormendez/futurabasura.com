@@ -10,7 +10,8 @@ a {
   text-decoration: none;
 }
 
-.main {
+.main,
+.site-main {
   a {
     @apply text-azul;
 

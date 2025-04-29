@@ -48,7 +48,8 @@ the readme will list any important changes.
          *
          * @hooked woocommerce_product_taxonomy_archive_header - 10
          */
-        do_action('woocommerce_shop_loop_header');
+        // do_action('woocommerce_shop_loop_header');
+
     @endphp
 
     @if (woocommerce_product_loop())
