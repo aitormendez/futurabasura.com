@@ -88,8 +88,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const { infiniteScrollShop } = await import('./infiniteScroll.js');
     infiniteScrollShop();
     const { dropdownFilter, dropdownSort } = await import('./shop.js');
-    window.dropdownFilter = dropdownFilter;
-    window.dropdownSort = dropdownSort;
+    // window.dropdownFilter = dropdownFilter;
+    // window.dropdownSort = dropdownSort;
   }
 
   if (

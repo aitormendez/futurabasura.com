@@ -76,6 +76,13 @@ class WooCustomizationServiceProvider extends ServiceProvider
         echo '</a>'; // CERRAMOS el <a> después de todo el contenido
 
         echo '</div>'; // End card
+
+        add_filter('post_class', function ($classes, $class, $post_id) {
+            if (is_shop() || is_tax('artist')) {
+                $classes[] = 'infinite-scroll-item';
+            }
+            return $classes;
+        }, 10, 3);
     }
 
 
