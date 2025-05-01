@@ -118,7 +118,7 @@
     }
   }
 
-  @media (width >= 768px) {
+  /* @media (width >= 768px) {
     .entry-summary {
       padding: 2rem 3vw;
     }
@@ -140,5 +140,5 @@
     .entry-summary {
       padding: 2rem 9vw;
     }
-  }
+  } */
 }

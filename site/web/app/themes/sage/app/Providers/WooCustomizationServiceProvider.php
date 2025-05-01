@@ -41,6 +41,22 @@ class WooCustomizationServiceProvider extends ServiceProvider
         add_action('woocommerce_before_shop_loop', function () {
             echo '</div><div id="desplegable" class="relative"></div>';
         }, 30);
+
+        /**
+         * Añadir clase simple/variable/etc en body de single-product.
+         */
+
+        add_action('template_redirect', function () {
+            if (!is_admin() && is_product()) {
+                add_filter('body_class', function ($classes) {
+                    global $post;
+                    $product = wc_get_product($post->ID);
+                    $tipo = $product->get_type();
+
+                    return array_merge($classes, [$tipo]);
+                });
+            }
+        });
     }
 
     /**

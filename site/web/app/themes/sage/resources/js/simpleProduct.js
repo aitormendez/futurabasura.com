@@ -3,33 +3,55 @@ import {
   ftbs_product_quantity_decrease,
 } from './exports.js';
 
-export function anadirAlCarroSimple() {
-  // Cantidad de productos a añadir al carro
-  // ----------------------------------------------------
+console.log('🔄 simpleProduct.js loaded');
 
-  // Encuentra los botones de aumento y disminución
+export function anadirAlCarroSimple() {
   const btnAdd = document.getElementById('quantityInput_add');
   const btnRemove = document.getElementById('quantityInput_remove');
+  const inputVisible = document.querySelector('.quantityInput');
+  const inputHidden = document.querySelector('input[name="quantity"]');
 
-  // Añade eventos de clic para aumentar y disminuir
+  function syncQuantity() {
+    console.log(
+      `🔢 Sync quantity: visible=${inputVisible.value} → hidden=${inputHidden.value}`
+    );
+
+    if (inputVisible && inputHidden) {
+      inputHidden.value = inputVisible.value;
+    }
+  }
+
   if (btnAdd) {
     btnAdd.addEventListener('click', function () {
       ftbs_product_quantity_increase();
+      syncQuantity();
     });
   }
 
   if (btnRemove) {
     btnRemove.addEventListener('click', function () {
       ftbs_product_quantity_decrease();
+      syncQuantity();
     });
+  }
+
+  // Si el usuario edita manualmente
+  if (inputVisible) {
+    inputVisible.addEventListener('input', syncQuantity);
   }
 }
 
 export function resetearHiddenInput() {
-  var quantityInput = document.querySelector('.quantity input');
+  console.log('🔄 Reset visible & hidden quantity to 1');
 
-  // Restablecer el valor a 1 al cargar la página
-  if (quantityInput) {
-    quantityInput.value = 1;
+  const inputVisible = document.querySelector('.quantityInput');
+  const inputHidden = document.querySelector('input[name="quantity"]');
+
+  if (inputVisible) {
+    inputVisible.value = 1;
+  }
+
+  if (inputHidden) {
+    inputHidden.value = 1;
   }
 }
