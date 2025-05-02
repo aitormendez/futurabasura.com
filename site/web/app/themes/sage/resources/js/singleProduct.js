@@ -8,14 +8,24 @@ import Glide, {
 export function singleProductGallery() {
   // galería de imágenes con Glide
   // ----------------------------------------------------
-  let g = document.getElementById('glide'),
-    s = g.getElementsByClassName('slide'),
-    slidesReales = Array.from(s).filter(
-      (slide) => !slide.classList.contains('glide__slide--clone'),
-    ),
-    i = document.getElementById('indice');
+  const gallery = document.getElementById('glide');
+  const indiceEl = document.getElementById('indice');
 
-  var glide = new Glide('.g-gallery', {
+  if (!gallery || !indiceEl) {
+    console.warn('singleProductGallery: elementos requeridos no encontrados');
+    return;
+  }
+
+  const slides = Array.from(gallery.getElementsByClassName('slide')).filter(
+    (slide) => !slide.classList.contains('glide__slide--clone')
+  );
+
+  if (slides.length === 0) {
+    console.warn('singleProductGallery: sin slides reales');
+    return;
+  }
+
+  const glide = new Glide('.g-gallery', {
     type: 'carousel',
     autoplay: false,
     animationDuration: 0,
@@ -23,29 +33,27 @@ export function singleProductGallery() {
     gap: 0,
   });
 
-  glide.on('run', function () {
-    indice();
-  });
-
-  glide.on('mount.before', function () {
-    indice();
-  });
-
-  glide.mount({
-    Controls,
-    Autoplay,
-    Keyboard,
-  });
-
-  function indice() {
-    i.innerHTML = glide.index + 1 + ' / ' + slidesReales.length;
+  function actualizarIndice() {
+    try {
+      indiceEl.innerHTML = `${glide.index + 1} / ${slides.length}`;
+    } catch (e) {
+      console.error('Error actualizando índice del slide:', e);
+    }
   }
 
-  function avanza() {
+  glide.on('run', actualizarIndice);
+  glide.on('mount.after', actualizarIndice);
+
+  try {
+    glide.mount({ Controls, Autoplay, Keyboard });
+  } catch (e) {
+    console.error('Fallo al montar Glide en galería de producto:', e);
+    return;
+  }
+
+  gallery.addEventListener('click', () => {
     glide.go('>');
-  }
-
-  g.addEventListener('click', avanza);
+  });
 }
 
 export function sliderProductosRelacionadosArtista() {
@@ -53,36 +61,36 @@ export function sliderProductosRelacionadosArtista() {
   // del mismo artista
   // ----------------------------------------------------
 
-  let slidesA = document.getElementsByClassName('g-by-artist');
+  const carousels = document.querySelectorAll('.g-by-artist');
 
-  for (const c of slidesA) {
-    let gid = '#' + c.id;
-    let dur = Math.floor(Math.random() * 10000 + 1000);
+  for (const carousel of carousels) {
+    const track = carousel.querySelector('.glide__track');
+    const slides = carousel.querySelectorAll('.glide__slide');
 
-    new Glide(gid, {
+    if (!track || slides.length === 0) {
+      console.warn('Carrusel de artista ignorado:', carousel);
+      continue;
+    }
+
+    const glide = new Glide(carousel, {
       type: 'carousel',
       autoplay: 10,
-      animationDuration: dur,
+      animationDuration: Math.floor(Math.random() * 10000 + 1000),
       animationTimingFunc: 'linear',
       perView: 6,
       breakpoints: {
-        1280: {
-          perView: 5,
-        },
-        1024: {
-          perView: 4,
-        },
-        768: {
-          perView: 3,
-        },
-        640: {
-          perView: 2,
-        },
+        1280: { perView: 5 },
+        1024: { perView: 4 },
+        768: { perView: 3 },
+        640: { perView: 2 },
       },
-    }).mount({
-      Autoplay,
-      Breakpoints,
     });
+
+    try {
+      glide.mount({ Autoplay, Breakpoints });
+    } catch (e) {
+      console.error('Fallo al montar Glide en .g-by-artist:', carousel, e);
+    }
   }
 }
 
@@ -90,36 +98,35 @@ export function sliderProductosRelacionados() {
   // galería de imágenes con Glide para productos relacionados
   // ----------------------------------------------------
 
-  let slides = document.getElementsByClassName('g-related');
+  const carousels = document.querySelectorAll('.g-related');
 
-  for (const c of slides) {
-    let list = '.g-related-' + c.classList;
-    let clase = '.' + list.split(' ').slice(2).toString();
-    let dur = Math.floor(Math.random() * 10000 + 1000);
+  for (const carousel of carousels) {
+    const track = carousel.querySelector('.glide__track');
+    const slides = carousel.querySelectorAll('.glide__slide');
 
-    new Glide(clase, {
+    if (!track || slides.length === 0) {
+      console.warn('Carousel ignorado por falta de slides:', carousel);
+      continue;
+    }
+
+    const glide = new Glide(carousel, {
       type: 'carousel',
       autoplay: 10,
-      animationDuration: dur,
+      animationDuration: Math.floor(Math.random() * 10000 + 1000),
       animationTimingFunc: 'linear',
       perView: 5,
       breakpoints: {
-        1280: {
-          perView: 5,
-        },
-        1024: {
-          perView: 4,
-        },
-        768: {
-          perView: 3,
-        },
-        640: {
-          perView: 2,
-        },
+        1280: { perView: 5 },
+        1024: { perView: 4 },
+        768: { perView: 3 },
+        640: { perView: 2 },
       },
-    }).mount({
-      Autoplay,
-      Breakpoints,
     });
+
+    try {
+      glide.mount({ Autoplay, Breakpoints });
+    } catch (e) {
+      console.error('Fallo al montar Glide en .g-related:', carousel, e);
+    }
   }
 }
