@@ -1,4 +1,4 @@
-default ansible_host=127.0.0.1 ansible_port=61624 ansible_user=aitor
+default ansible_host=127.0.0.1 ansible_port=49401 ansible_user=aitor
  ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 
 [development]

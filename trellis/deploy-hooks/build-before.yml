@@ -30,6 +30,18 @@
   args:
     chdir: "{{ project_local_path }}/web/app/themes/sage"
 
+- name: Install fb-blocks dependencies
+  command: npm install
+  delegate_to: localhost
+  args:
+    chdir: "{{ project_local_path }}/web/app/plugins/fb-blocks"
+
+- name: Build fb-blocks
+  command: npm run build
+  delegate_to: localhost
+  args:
+    chdir: "{{ project_local_path }}/web/app/plugins/fb-blocks"
+
 - name: Check for manifest
   stat:
     path: "{{ project_local_path }}/web/app/themes/sage/public/build/manifest.json"
