@@ -3,10 +3,8 @@ import { navigation } from './navigation.js';
 import scramble from './scramble.js';
 import Alpine from 'alpinejs';
 import collapse from '@alpinejs/collapse';
+Alpine.plugin(collapse);
 import { gsap } from 'gsap';
-
-// Opcionalmente, elimina `random` si no lo usas
-// import { gsap, random } from 'gsap';
 
 Alpine.plugin(collapse);
 
@@ -88,8 +86,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const { infiniteScrollShop } = await import('./infiniteScroll.js');
     infiniteScrollShop();
     const { dropdownFilter, dropdownSort } = await import('./shop.js');
-    // window.dropdownFilter = dropdownFilter;
-    // window.dropdownSort = dropdownSort;
+    window.dropdownFilter = dropdownFilter;
+    window.dropdownSort = dropdownSort;
   }
 
   if (

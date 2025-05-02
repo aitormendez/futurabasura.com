@@ -152,6 +152,7 @@
 @import './layouts/header.css';
 @import './layouts/front-page.css';
 @import './layouts/slider.css';
+@import './layouts/select.css';
 @import './layouts/artists.css';
 @import './layouts/shop.css';
 @import './layouts/cart.css';
