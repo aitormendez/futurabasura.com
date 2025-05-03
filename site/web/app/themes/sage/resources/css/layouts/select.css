@@ -11,7 +11,7 @@
     }
 
     .select2-selection {
-      @apply border-none !rounded-none text-sm;
+      @apply border-none !rounded-none text-[16px];
 
       &__rendered {
         color: black !important;
@@ -19,7 +19,7 @@
     }
 
     .select2-results__option {
-      @apply text-sm;
+      @apply text-[16px];
     }
 
     .select2-results__option--highlighted {

@@ -34,8 +34,9 @@
             th {
               @apply bg-white pl-4;
             }
+
             td {
-              @apply block md:table-cell border-b border-gray-200 py-3 md:py-8 px-3 bg-white;
+              @apply block md:table-cell border-b border-gray-200 py-3 md:py-4 px-3 bg-white;
 
               &::before {
                 content: attr(data-title);
@@ -50,27 +51,23 @@
                 }
               }
 
-              /* &.product-thumbnail img {
-                @apply mx-auto max-w-[100px] md:max-w-[80px];
-              } */
-
-              /* &.product-name a {
-                @apply font-medium !text-black;
-              } */
+              &.product-name {
+                @apply text-[16px] align-top md:pl-0 pl-4;
+              }
 
               &.product-price {
-                @apply text-negro-fb;
+                @apply text-negro-fb text-[16px];
               }
 
               &.product-subtotal {
-                @apply text-negro-fb mb-6 font-bold text-xl;
+                @apply text-negro-fb mb-6 font-bold text-[16px];
               }
 
               &.product-quantity {
                 @apply pt-3;
 
                 input.qty {
-                  @apply border w-full py-2 text-2xl border-gray-300 text-center;
+                  @apply border w-full py-2 text-[16px] border-gray-300 text-center;
                 }
               }
 
@@ -85,16 +82,16 @@
                   }
 
                   input[name='coupon_code'] {
-                    @apply w-full bg-gray-200 px-4 py-4 text-center mb-1 text-negro-fb text-2xl placeholder:text-white;
+                    @apply w-full bg-gray-200 px-4 py-4 text-center mb-1 text-negro-fb text-[20px] placeholder:text-white;
                   }
 
                   button[name='apply_coupon'] {
-                    @apply w-full border-negro-fb border px-4 pb-2 pt-3 text-negro-fb hover:bg-allo hover:text-negro-fb uppercase;
+                    @apply w-full border-negro-fb border px-4 pb-2 pt-3 text-negro-fb hover:bg-allo hover:text-negro-fb uppercase text-[16px] !tracking-wider;
                   }
                 }
 
                 button[name='update_cart'] {
-                  @apply border-negro-fb border px-4 pb-2 pt-3 text-negro-fb hover:bg-allo hover:text-negro-fb uppercase;
+                  @apply border-negro-fb border px-4 pb-2 pt-3 text-negro-fb hover:bg-allo hover:text-negro-fb uppercase  text-[16px] !tracking-wider;
                 }
               }
             }
@@ -114,7 +111,7 @@
         }
 
         table.shop_table {
-          @apply block md:table w-full text-sm border-t border-gray-300;
+          @apply block md:table w-full text-[16px] border-t border-gray-300;
 
           tbody {
             @apply block md:table-row-group w-full;
@@ -128,11 +125,11 @@
             }
 
             td {
-              @apply py-4 text-lg font-semibold text-negro-fb;
+              @apply py-4 text-[24px] font-semibold text-negro-fb;
             }
 
             &.order-total td {
-              @apply text-2xl font-bold text-negro-fb;
+              @apply text-[32px] font-bold text-negro-fb;
             }
           }
         }
@@ -142,14 +139,14 @@
         }
 
         .shipping-calculator-button {
-          @apply block w-full border-negro-fb border px-4 py-2 !text-negro-fb hover:bg-allo uppercase text-sm mt-9 text-center font-normal;
+          @apply block w-full border-negro-fb border px-4 pt-[8px] pb-[6px] tracking-wider !text-negro-fb hover:bg-allo uppercase text-[16px] mt-9 text-center font-normal;
         }
 
         .shipping-calculator-form {
           @apply mt-6 grid gap-4;
 
           label {
-            @apply block mb-1 font-semibold text-sm text-negro-fb;
+            @apply block mb-1 font-semibold text-[16px] text-negro-fb;
           }
 
           select,
@@ -162,7 +159,7 @@
           }
 
           button[name='calc_shipping'] {
-            @apply border-negro-fb border px-4 py-2 !text-negro-fb hover:bg-allo hover:text-negro-fb uppercase text-sm text-center font-normal;
+            @apply border-negro-fb border px-4 pt-[8px] pb-[6px] tracking-wider !text-negro-fb hover:bg-allo hover:text-negro-fb uppercase text-[16px] text-center font-normal cursor-pointer;
           }
         }
 
@@ -170,7 +167,7 @@
           @apply mt-8 flex justify-center;
 
           a.checkout-button {
-            @apply block text-center bg-azul !text-white uppercase px-6 py-4 rounded hover:bg-allo hover:!text-negro-fb tracking-wider w-64 leading-5 text-base;
+            @apply block text-center bg-azul !text-white uppercase px-6 py-4 rounded hover:bg-allo hover:!text-negro-fb tracking-wider w-64 leading-5 text-[18px];
             clip-path: ellipse(50% 50% at 50% 50%);
           }
         }
@@ -179,7 +176,7 @@
 
     input[name='calc_shipping_city'],
     input[name='calc_shipping_postcode'] {
-      @apply text-base !rounded-none;
+      @apply text-[16px] !rounded-none;
     }
   }
 }
