@@ -109,6 +109,7 @@ class WooCustomizationServiceProvider extends ServiceProvider
             // SCRIPT;
         }, 25);
 
+        // habilita la url de filtro por artista
         add_action('pre_get_posts', function ($query) {
             // Solo modifica la consulta en la tienda o páginas de archivo de productos
             if (
@@ -196,6 +197,17 @@ class WooCustomizationServiceProvider extends ServiceProvider
                 }
             </script>";
         }, 24);
+
+        // imagen original en el carrito en lugar del thumbnail cuadrado por defecto de WC
+        add_filter('woocommerce_cart_item_thumbnail', function ($image_html, $cart_item, $cart_item_key) {
+            $product = $cart_item['data'];
+
+            if ($product && $product->get_image_id()) {
+                return wp_get_attachment_image($product->get_image_id(), 'medium');
+            }
+
+            return $image_html;
+        }, 10, 3);
     }
 
     /**

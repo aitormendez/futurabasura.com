@@ -48,7 +48,7 @@
     }
 
     img {
-      @apply my-4 max-w-full h-auto rounded-md;
+      @apply my-4 max-w-full h-auto;
     }
 
     pre {

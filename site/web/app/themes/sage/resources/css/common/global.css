@@ -137,11 +137,6 @@ main {
 .woocommerce-Price-currencySymbol {
   margin-left: 0.3em;
 }
-
-/* .clip-path-elipse {
-  clip-path: ellipse(50% 50% at 50% 50%);
-} */
-
 /* Bloque de video bunny.net */
 
 [data-media-player][data-view-type='video'] {
