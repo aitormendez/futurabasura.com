@@ -126,6 +126,11 @@
 
             td {
               @apply py-4 text-[24px] font-semibold text-negro-fb;
+
+              label,
+              .woocommerce-shipping-destination {
+                @apply text-[16px] text-negro-fb;
+              }
             }
 
             &.order-total td {
