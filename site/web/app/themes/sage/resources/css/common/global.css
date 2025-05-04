@@ -155,29 +155,6 @@ iframe:not([width]):not([height]) {
   width: 100% !important;
 }
 
-/* .filtro-azul:hover * {
-  img {
-    filter: brightness(50%) sepia(100%) hue-rotate(190deg) saturate(500%);
-  }
-} */
-
-body.woocommerce-checkout {
-  label[for='payment_method_square_credit_card'] {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
-  }
-  .payment_box.payment_method_square_credit_card {
-    p {
-      margin-top: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
-  }
-  button[type='submit'] {
-    @apply bg-azul text-white p-6 text-lg text-center w-full rounded-lg my-6;
-  }
-}
-
 /* Mailchimp form */
 
 .mce_inline_error[for='mce-EMAIL'] {

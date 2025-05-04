@@ -1,81 +1,147 @@
 body.checkout {
-  .ticket-triangulo {
-    height: 30px;
-  }
+  @apply font-sans text-[16px] text-negro-fb;
 
   h3 {
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
+    @apply font-bold text-[20px] mb-4;
 
     label {
-      font-size: 1.2rem;
+      @apply font-bold text-[20px];
+    }
+  }
+
+  .col2-set {
+    @apply md:flex gap-6;
+
+    .col-1 {
+      @apply md:w-1/2 mb-6;
+
+      .woocommerce-billing-fields__field-wrapper {
+        @apply bg-white p-4;
+
+        p {
+          @apply mb-4;
+        }
+      }
+    }
+
+    .col-2 {
+      @apply md:w-1/2;
+
+      .woocommerce-shipping-fields {
+        @apply mb-4;
+
+        .woocommerce-shipping-fields__field-wrapper {
+          @apply bg-white p-4;
+
+          p {
+            @apply mb-4;
+          }
+        }
+      }
     }
   }
 
   label {
-    display: inline-block;
-    margin-bottom: 0.2em;
-    font-size: small;
-    font-weight: bold;
+    @apply inline-block  text-[16px] font-bold mt-4 mb-2;
+
+    &.checkbox {
+      input[type='checkbox'] {
+        @apply relative appearance-none border-2 border-negro-fb w-[25px] h-[25px] align-middle;
+
+        &:checked {
+          @apply bg-azul border-0;
+
+          &::after {
+            content: '●';
+            @apply text-white text-sm absolute left-[3px] top-[-10px] text-[30px];
+          }
+        }
+      }
+
+      span {
+        @apply inline-block align-middle;
+      }
+    }
   }
 
-  #shipping_method label {
+  /* #shipping_method label {
     font-size: medium;
     font-weight: normal;
-  }
+  } */
 
   input[type='text'],
   input[type='tel'],
   input[type='email'],
   textarea {
-    padding: 0.2em 0.8em;
-    margin-bottom: 0.5em;
-    width: 100%;
-    border: 1px solid rgb(172, 172, 172) !important;
+    @apply border !border-gray-300 w-full py-2 px-3 text-[16px];
   }
 
-  .select2-container--default {
-    font-family: Arial, sans-serif;
+  #order_comments {
+    @apply mb-0 min-h-[86px];
+  }
 
-    .select2-selection {
-      box-shadow: 0;
-      background-color: #fff;
-      border: 0;
-      border-radius: 0;
-      outline: 0;
-      min-height: 3rem;
-      text-align: left;
-      margin-bottom: 1rem;
+  .woocommerce-additional-fields {
+    @apply bg-white p-4;
+  }
 
-      .select2-selection__rendered,
-      .select2-selection__arrow {
-        display: block;
-        padding: 0.8rem 1.5rem;
+  h3 {
+    @apply mt-4;
+  }
+  .woocommerce-checkout-review-order {
+    table {
+      @apply flex flex-col md:table bg-white w-full mb-4;
+
+      thead {
+        @apply hidden md:table-header-group;
+        th {
+          @apply text-[16px] uppercase tracking-wider p-2 border-b-2;
+        }
       }
 
-      .select2-selection__arrow {
-        margin-top: 0.5rem;
+      tbody {
+        tr {
+          @apply flex flex-col md:table-row;
+          td {
+            @apply md:border-b p-4 text-[20px] border-gris-claro-fb;
+
+            &.product-total {
+              @apply text-right border-b;
+            }
+          }
+        }
+      }
+
+      tfoot {
+        @apply text-[20px];
+
+        tr {
+          th {
+            @apply text-left px-4 py-1 md:pl-72;
+          }
+
+          &.cart-subtotal {
+            td,
+            th {
+              @apply pt-6;
+            }
+          }
+
+          &.order-total {
+            td,
+            th {
+              @apply py-6 font-bold text-[24px] md:text-[32px];
+            }
+
+            th {
+              @apply text-left;
+            }
+          }
+        }
       }
     }
 
-    .select2-results__option--highlighted[aria-selected],
-    .select2-results__option--highlighted[data-selected] {
-      background-color: #ffff00;
-      color: #000000;
+    .woocommerce-checkout-payment {
+      @apply bg-white p-4 text-[16px];
     }
-  }
-
-  .select2-container--open .select2-dropdown {
-    border: none;
-
-    .select2-search__field {
-      padding: 0.2em 0.4em;
-      background-color: #b8daff;
-    }
-  }
-
-  label[for='payment_method_square_credit_card'] {
-    gap: 1rem;
   }
 }

@@ -11,11 +11,11 @@
     }
 
     .select2-selection {
-      @apply border-none !rounded-none text-[16px];
+      @apply border-none !rounded-none text-[16px] min-h-[40px];
+    }
 
-      &__rendered {
-        color: black !important;
-      }
+    .select2-selection--single {
+      @apply !border-gris-claro-fb;
     }
 
     .select2-results__option {
@@ -30,8 +30,9 @@
       background-color: #fff !important;
     }
 
+    .select2-selection__rendered,
     .select2-selection__arrow {
-      display: none;
+      @apply py-[7px];
     }
   }
 }
