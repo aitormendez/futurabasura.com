@@ -1,8 +1,40 @@
 body.checkout {
   @apply font-sans text-[16px] text-negro-fb;
 
+  .checkout_coupon {
+    @apply flex flex-col items-center mb-12;
+
+    p {
+      @apply flex flex-col mb-4 items-center;
+
+      .coupon-error-notice {
+        @apply block py-2 text-rojo;
+      }
+    }
+
+    input[type='text'] {
+      @apply !border-2 !border-negro-fb text-center text-[24px] w-full md:w-[400px];
+    }
+
+    button[type='submit'] {
+      @apply !border-2 !border-negro-fb text-center text-[24px] w-full md:w-[400px] py-2 cursor-pointer;
+
+      &:hover {
+        @apply bg-allo;
+      }
+    }
+  }
+
   h3 {
     @apply font-bold text-[20px] mb-4;
+
+    &#ship-to-different-address {
+      @apply mt-0;
+
+      label {
+        @apply mb-0;
+      }
+    }
 
     label {
       @apply font-bold text-[20px];

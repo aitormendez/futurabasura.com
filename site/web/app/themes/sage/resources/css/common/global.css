@@ -10,6 +10,10 @@ a {
   text-decoration: none;
 }
 
+:focus {
+  @apply outline-2 outline-gris-fb outline-offset-8;
+}
+
 .main,
 .site-main {
   a {
