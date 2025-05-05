@@ -10,7 +10,7 @@ a {
   text-decoration: none;
 }
 
-:focus {
+:focus-visible {
   @apply outline-2 outline-gris-fb outline-offset-8;
 }
 

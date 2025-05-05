@@ -1,6 +1,6 @@
 @php $count = count($slider); @endphp
 
-<div class="slide-wrapper relative mb-6 flex justify-center bg-white">
+<div class="slide-wrapper alignfull relative mb-6 flex justify-center bg-white">
     <div id="fondo-slider" class="absolute w-screen bg-cover sm:w-3/4"></div>
     <div class="glide w-screen sm:!w-3/4">
         <div data-glide-el="track" class="glide__track">

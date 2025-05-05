@@ -1,6 +1,19 @@
 @if (is_front_page())
     <main id="main" class="main is-content-width md:px-none pb-6 pt-0 text-xl md:pb-20">
         @php the_content() @endphp
+
+        @include('partials.cupones')
+
+
+        @include('partials.slider')
+
+        @if ($destacados['has_posts'] = true)
+            <section id="destacados" class="alignfull">
+                @foreach ($destacados['posts'] as $destacado)
+                    @include('partials.destacados-portada')
+                @endforeach
+            </section>
+        @endif
     </main>
 @elseif (is_page('cart') || is_page('checkout'))
     <main id="main" class="main is-content-width md:px-none w-full py-6 text-xl md:py-20">
