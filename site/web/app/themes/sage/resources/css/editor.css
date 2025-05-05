@@ -1,11 +1,13 @@
 @import 'tailwindcss';
+@import './common/theme.css';
+@import './common/typography.css';
 
 @import '@glidejs/glide/dist/css/glide.core.min.css';
 @import '@glidejs/glide/dist/css/glide.theme.min.css';
 
-/* .editor-styles-wrapper {
+.editor-styles-wrapper {
   @apply prose;
-} */
+}
 
 :root {
   --media-brand: 245 245 245;

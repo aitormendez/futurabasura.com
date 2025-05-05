@@ -1,0 +1,41 @@
+@theme {
+  --color-negro-fb: #3e2b2f;
+  --color-gris-fb: #ada3a4;
+  --color-gris-claro-fb: #dfd1d2;
+  --color-allo: #ffff00;
+  --color-allo-claro: #dbffe9;
+  --color-azul: #0000ff;
+  --color-azul-claro: #00ffff;
+  --color-rojo: #af0000;
+  --color-transparent: transparent;
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --font-sans: Arial, sans-serif;
+  --font-serif: 'Times New Roman', Times, serif;
+  --font-bugrino: Bugrino, sans-serif;
+  --font-fk: 'FK Display', sans-serif;
+  --font-arialblack: 'Arial Black', sans-serif;
+
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+
+  /*
+     | D) Breakpoints, si deseas generar sm:, md:, etc.
+     | Ejemplo (opcional):
+     --breakpoint-sm: 40rem;
+     --breakpoint-md: 48rem;
+     etc.
+     */
+
+  /*
+     | E) Si tenías variables como:
+     |   --media-brand: 'rgb(var(--media-brand) / <alpha-value>)',
+     | Asegúrate de que sean realmente necesarias
+     | y preferiblemente sin comillas si quieres usarlas como color real
+     */
+}
