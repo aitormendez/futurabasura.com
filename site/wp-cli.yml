@@ -2,9 +2,10 @@ path: web/wp
 server:
   docroot: web
   
-@development:
-  ssh: $USER@lima-futurabasura.com
+"@development":
+  ssh: futurabasura.test
   path: /srv/www/futurabasura.com/current/web/wp
+  wp:  /usr/local/bin/wp
 @production:
   ssh: web@178.62.65.133:22
   path: /srv/www/futurabasura.com/current/web/wp

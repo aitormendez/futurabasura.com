@@ -1,0 +1,9 @@
+"@development":
+  ssh: "aitor@lima-futurabasura-com"
+  path: "/srv/www/futurabasura.com/current/web/wp"
+"@production":
+  ssh: "web@your_server_hostname:22"
+  path: "/srv/www/futurabasura.com/current/web/wp"
+"@staging":
+  ssh: "web@178.128.168.215:22"
+  path: "/srv/www/futurabasura.com/current/web/wp"

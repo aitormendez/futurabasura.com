@@ -4,13 +4,15 @@
 # Version 1.2.0
 # Copyright (c) Ben Word
 
+export WP_CLI_PHP_ARGS='-d error_reporting=E_ALL&~E_DEPRECATED&~E_USER_DEPRECATED'
+
 DEVDIR="web/app/uploads/"
 DEVSITE="https://futurabasura.test"
 
 PRODDIR="web@futurabasura.com:/srv/www/futurabasura.com/shared/uploads/"
 PRODSITE="https://futurabasura.com"
 
-STAGDIR="web@stage.futurabasura.com:/srv/www/stage.futurabasura.com/shared/uploads/"
+STAGDIR="web@stage.futurabasura.com:/srv/www/futurabasura.com/shared/uploads/"
 STAGSITE="https://stage.futurabasura.com"
 
 LOCAL=false
@@ -134,19 +136,19 @@ if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
   echo "Syncing database..."
     # Export/import database, run search & replace
     if [[ "$LOCAL" = true && $TO == "development" ]]; then
-      wp db export --default-character-set=utf8mb4 --exclude_tables=wp_mailchimp_carts,wp_mailchimp_jobs &&
+      wp db export --default-character-set=utf8mb4 &&
       wp db reset --yes &&
-      wp "@$FROM" db export --default-character-set=utf8mb4 --exclude_tables=wp_mailchimp_carts,wp_mailchimp_jobs - | wp db import - &&
+      wp "@$FROM" db export --default-character-set=utf8mb4 - | wp db import - &&
       wp search-replace "$FROMSITE" "$TOSITE" --all-tables-with-prefix
     elif [[ "$LOCAL" = true && $FROM == "development" ]]; then
-      wp "@$TO" db export --default-character-set=utf8mb4 --exclude_tables=wp_mailchimp_carts,wp_mailchimp_jobs &&
+      wp "@$TO" db export --default-character-set=utf8mb4 &&
       wp "@$TO" db reset --yes &&
-      wp db export --default-character-set=utf8mb4 --exclude_tables=wp_mailchimp_carts,wp_mailchimp_jobs - | wp "@$TO" db import - &&
+      wp db export --default-character-set=utf8mb4 - | wp "@$TO" db import - &&
       wp "@$TO" search-replace "$FROMSITE" "$TOSITE" --all-tables-with-prefix
     else
-      wp "@$TO" db export --default-character-set=utf8mb4 --exclude_tables=wp_mailchimp_carts,wp_mailchimp_jobs &&
+      wp "@$TO" db export --default-character-set=utf8mb4 &&
       wp "@$TO" db reset --yes &&
-      wp "@$FROM" db export --default-character-set=utf8mb4 --exclude_tables=wp_mailchimp_carts,wp_mailchimp_jobs - | wp "@$TO" db import - &&
+      wp "@$FROM" db export --default-character-set=utf8mb4 - | wp "@$TO" db import - &&
       wp "@$TO" search-replace "$FROMSITE" "$TOSITE" --all-tables-with-prefix
     fi
   fi
