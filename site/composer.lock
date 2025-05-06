@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9bd58eb3f45d4c488e45b11c8cbba5be",
+    "content-hash": "0b5e9dd9676be36730a4848747869e1f",
     "packages": [
         {
             "name": "blade-ui-kit/blade-icons",
@@ -7345,6 +7345,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/favicon-by-realfavicongenerator/"
+        },
+        {
+            "name": "wpackagist-plugin/gdpr-cookie-compliance",
+            "version": "4.16.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/gdpr-cookie-compliance/",
+                "reference": "tags/4.16.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/gdpr-cookie-compliance.4.16.1.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/gdpr-cookie-compliance/"
         },
         {
             "name": "wpackagist-plugin/html-forms",

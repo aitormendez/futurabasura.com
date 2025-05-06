@@ -61,6 +61,7 @@
     "wpackagist-plugin/query-monitor": "*",
     "wpackagist-plugin/html-forms": "*",
     "wpackagist-plugin/woocommerce-payments": "*",
+    "wpackagist-plugin/gdpr-cookie-compliance": "*",
     "log1x/acf-composer": "^3.3",
     "log1x/navi": "^3.0.3",
     "mobiledetect/mobiledetectlib": "^4.8",
