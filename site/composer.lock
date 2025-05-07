@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0b5e9dd9676be36730a4848747869e1f",
+    "content-hash": "5ad99281ab37e1e4548c5a7dbc09d782",
     "packages": [
         {
             "name": "blade-ui-kit/blade-icons",
@@ -4515,16 +4515,16 @@
         },
         {
             "name": "roots/acorn",
-            "version": "v5.0.2",
+            "version": "v5.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/roots/acorn.git",
-                "reference": "e2a20295478915822702877a2b3118db4be2d471"
+                "reference": "95254dbef7f1c6c26ec2b4b14c0c3372763b89bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/roots/acorn/zipball/e2a20295478915822702877a2b3118db4be2d471",
-                "reference": "e2a20295478915822702877a2b3118db4be2d471",
+                "url": "https://api.github.com/repos/roots/acorn/zipball/95254dbef7f1c6c26ec2b4b14c0c3372763b89bd",
+                "reference": "95254dbef7f1c6c26ec2b4b14c0c3372763b89bd",
                 "shasum": ""
             },
             "require": {
@@ -4616,7 +4616,7 @@
             "support": {
                 "forum": "https://discourse.roots.io/",
                 "issues": "https://github.com/roots/acorn/issues",
-                "source": "https://github.com/roots/acorn/tree/v5.0.2"
+                "source": "https://github.com/roots/acorn/tree/v5.0.3"
             },
             "funding": [
                 {
@@ -4624,7 +4624,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-27T00:24:56+00:00"
+            "time": "2025-05-06T18:30:43+00:00"
         },
         {
             "name": "roots/bedrock-autoloader",
@@ -7384,15 +7384,15 @@
         },
         {
             "name": "wpackagist-plugin/pixelyoursite",
-            "version": "10.2.0.2",
+            "version": "10.2.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/pixelyoursite/",
-                "reference": "trunk"
+                "reference": "tags/10.2.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/pixelyoursite.zip?timestamp=1744794329"
+                "url": "https://downloads.wordpress.org/plugin/pixelyoursite.10.2.1.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -7438,21 +7438,39 @@
         },
         {
             "name": "wpackagist-plugin/woocommerce",
-            "version": "9.8.3",
+            "version": "9.8.4",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/woocommerce/",
-                "reference": "tags/9.8.3"
+                "reference": "tags/9.8.4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/woocommerce.9.8.3.zip"
+                "url": "https://downloads.wordpress.org/plugin/woocommerce.9.8.4.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/woocommerce/"
+        },
+        {
+            "name": "wpackagist-plugin/woocommerce-gateway-stripe",
+            "version": "9.4.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/woocommerce-gateway-stripe/",
+                "reference": "tags/9.4.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/woocommerce-gateway-stripe.9.4.1.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/woocommerce-gateway-stripe/"
         },
         {
             "name": "wpackagist-plugin/woocommerce-payments",
