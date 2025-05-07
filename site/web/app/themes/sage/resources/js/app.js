@@ -1,3 +1,4 @@
+window.$ = $;
 import.meta.glob(['../images/**', '../fonts/**']);
 import { navigation } from './navigation.js';
 import scramble from './scramble.js';
@@ -5,8 +6,6 @@ import Alpine from 'alpinejs';
 import collapse from '@alpinejs/collapse';
 Alpine.plugin(collapse);
 import { gsap } from 'gsap';
-
-Alpine.plugin(collapse);
 
 /**
  * Application entrypoint (reemplaza `domReady`)

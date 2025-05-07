@@ -7,7 +7,7 @@ server:
   path: /srv/www/futurabasura.com/current/web/wp
   wp:  /usr/local/bin/wp
 @production:
-  ssh: web@178.62.65.133:22
+  ssh: web@165.232.47.117:22
   path: /srv/www/futurabasura.com/current/web/wp
 @staging:
   ssh: web@178.128.168.215:22
