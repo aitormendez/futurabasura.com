@@ -1,4 +1,3 @@
-window.$ = $;
 import.meta.glob(['../images/**', '../fonts/**']);
 import { navigation } from './navigation.js';
 import scramble from './scramble.js';
