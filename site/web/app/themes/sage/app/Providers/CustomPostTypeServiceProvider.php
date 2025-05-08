@@ -92,10 +92,10 @@ class CustomPostTypeServiceProvider extends ServiceProvider
             'description' => __('Video estilo retro', 'sage'),
             'categories' => ['all', 'fb'],
             'content' => '<!-- wp:group {"align":"full"} -->
-<div class="wp-block-group alignfull">
-<!-- wp:sage/video {"videoId":"54055946-fab4-474a-9195-e35272f7e265","align":"full"} /-->
-</div>
-<!-- /wp:group -->',
+    <div class="wp-block-group alignfull">
+    <!-- wp:sage/video {"videoId":"54055946-fab4-474a-9195-e35272f7e265","align":"full"} /-->
+    </div>
+    <!-- /wp:group -->',
         ]);
     }
 

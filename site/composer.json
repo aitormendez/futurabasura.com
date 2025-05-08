@@ -63,6 +63,7 @@
     "wpackagist-plugin/woocommerce-payments": "*",
     "wpackagist-plugin/woocommerce-gateway-stripe": "*",
     "wpackagist-plugin/gdpr-cookie-compliance": "*",
+    "wpackagist-plugin/mail-boxes-etc": "*",
     "log1x/acf-composer": "^3.3",
     "log1x/navi": "^3.0.3",
     "mobiledetect/mobiledetectlib": "^4.8",
