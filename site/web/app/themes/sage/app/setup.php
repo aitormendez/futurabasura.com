@@ -201,3 +201,8 @@ add_action('after_setup_theme', function () {
      */
     add_theme_support('customize-selective-refresh-widgets');
 }, 20);
+
+
+add_action('plugins_loaded', function () {
+    remove_action('init', [\Automattic\WooCommerce\Blocks\BlockPatterns::class, 'register_block_patterns'], 10);
+}, 5);

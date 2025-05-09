@@ -173,7 +173,54 @@ body.checkout {
     }
 
     .woocommerce-checkout-payment {
-      @apply bg-white p-4 text-[16px];
+      @apply bg-white p-4 text-[16px] prose font-sans;
+
+      li {
+        @apply list-none;
+
+        input {
+          @apply relative top-[4px] mr-2;
+        }
+
+        label {
+          img {
+            @apply inline-block;
+          }
+        }
+      }
+
+      /* Cambiar tamaño y color del radio */
+      input.input-radio[type='radio'] {
+        width: 20px;
+        height: 20px;
+        accent-color: #000; /* Soporte moderno para el color del "check" */
+        cursor: pointer;
+      }
+
+      button[name='woocommerce_checkout_place_order'] {
+        @apply block text-center bg-azul !text-white px-6 py-4 hover:bg-allo hover:!text-negro-fb tracking-wider w-64 leading-5 text-[18px] uppercase mx-auto my-12 cursor-pointer;
+        clip-path: ellipse(50% 50% at 50% 50%);
+      }
+    }
+  }
+
+  .woocommerce-order {
+    @apply bg-white p-4 prose font-sans;
+
+    .woocommerce-notice {
+      @apply text-lg text-center p-6 font-bold bg-allo;
+    }
+
+    .order_details {
+      @apply p-0;
+
+      li {
+        @apply list-none border-b border-gris-claro-fb py-2 m-0;
+
+        &:first-child {
+          @apply border-t;
+        }
+      }
     }
   }
 }

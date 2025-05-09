@@ -129,27 +129,40 @@ if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
   };
   availto
 
-  if [ "$SKIP_DB" = false ]
-  then
+if [ "$SKIP_DB" = false ]
+then
   echo "Syncing database..."
-    # Export/import database, run search & replace
-    if [[ "$LOCAL" = true && $TO == "development" ]]; then
-      wp db export --default-character-set=utf8mb4 &&
-      wp db reset --yes &&
-      wp "@$FROM" db export --default-character-set=utf8mb4 - | wp db import - &&
-      wp search-replace "$FROMSITE" "$TOSITE" --all-tables-with-prefix
-    elif [[ "$LOCAL" = true && $FROM == "development" ]]; then
-      wp "@$TO" db export --default-character-set=utf8mb4 &&
-      wp "@$TO" db reset --yes &&
-      wp db export --default-character-set=utf8mb4 - | wp "@$TO" db import - &&
-      wp "@$TO" search-replace "$FROMSITE" "$TOSITE" --all-tables-with-prefix
-    else
-      wp "@$TO" db export --default-character-set=utf8mb4 &&
-      wp "@$TO" db reset --yes &&
-      wp "@$FROM" db export --default-character-set=utf8mb4 - | wp "@$TO" db import - &&
-      wp "@$TO" search-replace "$FROMSITE" "$TOSITE" --all-tables-with-prefix
-    fi
+
+  if [[ "$LOCAL" = true && $TO == "development" ]]; then
+    wp db export --default-character-set=utf8mb4 &&
+    wp db reset --yes &&
+    wp "@$FROM" db export --default-character-set=utf8mb4 - | wp db import -
+
+    # 🔥 Eliminar la transient ANTES de que WP cargue cosas como WooCommerce
+    wp db query "DELETE FROM wp_options WHERE option_name = '_site_transient_woocommerce_blocks_patterns';"
+
+    wp search-replace "$FROMSITE" "$TOSITE" --all-tables-with-prefix
+
+  elif [[ "$LOCAL" = true && $FROM == "development" ]]; then
+    wp "@$TO" db export --default-character-set=utf8mb4 &&
+    wp "@$TO" db reset --yes &&
+    wp db export --default-character-set=utf8mb4 - | wp "@$TO" db import -
+
+    wp "@$TO" db query "DELETE FROM wp_options WHERE option_name = '_site_transient_woocommerce_blocks_patterns';"
+
+    wp "@$TO" search-replace "$FROMSITE" "$TOSITE" --all-tables-with-prefix
+
+  else
+    wp "@$TO" db export --default-character-set=utf8mb4 &&
+    wp "@$TO" db reset --yes &&
+    wp "@$FROM" db export --default-character-set=utf8mb4 - | wp "@$TO" db import -
+
+    wp "@$TO" db query "DELETE FROM wp_options WHERE option_name = '_site_transient_woocommerce_blocks_patterns';"
+
+    wp "@$TO" search-replace "$FROMSITE" "$TOSITE" --all-tables-with-prefix
   fi
+fi
+
 
   if [ "$SKIP_ASSETS" = false ]
   then

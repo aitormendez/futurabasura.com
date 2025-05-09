@@ -17,7 +17,7 @@ class CustomPostTypeServiceProvider extends ServiceProvider
         add_action('init', [$this, 'registerTaxonomies']);
         // add_action('init', [$this, 'registerBlocks']);
         add_action('init', [$this, 'registerBlockCategories']);
-        add_action('init', [$this, 'registerBlockPatterns']);
+        // add_action('init', [$this, 'registerBlockPatterns']);
         add_action('admin_menu', [$this, 'modifyAdminMenu']);
     }
 
@@ -85,19 +85,19 @@ class CustomPostTypeServiceProvider extends ServiceProvider
     /**
      * Registra patrones de bloques
      */
-    public function registerBlockPatterns()
-    {
-        register_block_pattern('sage/video_retro', [
-            'title' => __('Video Retro', 'sage'),
-            'description' => __('Video estilo retro', 'sage'),
-            'categories' => ['all', 'fb'],
-            'content' => '<!-- wp:group {"align":"full"} -->
-    <div class="wp-block-group alignfull">
-    <!-- wp:sage/video {"videoId":"54055946-fab4-474a-9195-e35272f7e265","align":"full"} /-->
-    </div>
-    <!-- /wp:group -->',
-        ]);
-    }
+    // public function registerBlockPatterns()
+    // {
+    //     register_block_pattern('sage/video_retro', [
+    //         'title' => __('Video Retro', 'sage'),
+    //         'description' => __('Video estilo retro', 'sage'),
+    //         'categories' => ['all', 'fb'],
+    //         'content' => '<!-- wp:group {"align":"full"} -->
+    // <div class="wp-block-group alignfull">
+    // <!-- wp:sage/video {"videoId":"54055946-fab4-474a-9195-e35272f7e265","align":"full"} /-->
+    // </div>
+    // <!-- /wp:group -->',
+    //     ]);
+    // }
 
     /**
      * Modifica el menú de administración para mover elementos a "Herramientas"
