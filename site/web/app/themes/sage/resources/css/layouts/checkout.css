@@ -221,6 +221,14 @@ body.checkout {
           @apply border-t;
         }
       }
+
+      ul.wc-item-meta {
+        @apply pl-0;
+
+        li {
+          @apply !border-none;
+        }
+      }
     }
   }
 }
