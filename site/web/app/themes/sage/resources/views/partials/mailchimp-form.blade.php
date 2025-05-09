@@ -13,9 +13,9 @@
                     target="_blank">
                     <div id="mc_embed_signup_scroll" class="flex h-full">
                         <div class="izquierda w-[50vw] shrink-0">
-                            <div class="mc-field-group text-azul h-full"><label class="hidden" for="mce-EMAIL">Email
+                            <div class="mc-field-group text-azul h-full"><label class="!hidden" for="mce-EMAIL">Email
                                     Address<span class="asterisk">*</span></label><input type="email" name="EMAIL"
-                                    class="required email bg-azul-claro font-bugrino w-full px-6 py-2 text-2xl font-light"
+                                    class="required email bg-azul-claro font-bugrino w-full border-none px-6 py-2 !text-2xl font-light"
                                     id="mce-EMAIL" required="" value="" placeholder="Email">
                             </div>
 

@@ -131,6 +131,19 @@
               .woocommerce-shipping-destination {
                 @apply text-[16px] text-negro-fb;
               }
+
+              .woocommerce-shipping-methods {
+                li {
+                  @apply py-2 flex;
+
+                  input {
+                    @apply cursor-pointer mr-2;
+                    width: 20px;
+                    height: 20px;
+                    accent-color: #000;
+                  }
+                }
+              }
             }
 
             &.order-total td {

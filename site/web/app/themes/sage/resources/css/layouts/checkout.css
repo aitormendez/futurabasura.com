@@ -96,11 +96,6 @@ body.checkout {
     }
   }
 
-  /* #shipping_method label {
-    font-size: medium;
-    font-weight: normal;
-  } */
-
   input[type='text'],
   input[type='tel'],
   input[type='email'],
@@ -119,6 +114,7 @@ body.checkout {
   h3 {
     @apply mt-4;
   }
+
   .woocommerce-checkout-review-order {
     table {
       @apply flex flex-col md:table bg-white w-full mb-4;
