@@ -226,6 +226,14 @@ class WooCustomizationServiceProvider extends ServiceProvider
 
         // Card Front
         echo '<div class="card-front">';
+        // Mostrar etiqueta "New" si tiene la etiqueta "new-in-shop"
+        if (has_term('new-in-shop', 'product_tag', $product->get_id())) {
+            if (wp_is_mobile()) {
+                echo '<span class="absolute top-0 left-4 uppercase tracking-wider bg-yellow-300 px-2 pt-[0.2em]">New</span>';
+            } else {
+                echo '<span class="absolute top-0 left-0 uppercase tracking-wider bg-allo px-2 pt-[0.2em] font-fk text-[1.1vw] lg:text-[0.9vw]">New</span>';
+            }
+        }
         if (wp_is_mobile()) {
             $this->renderThumbnailMobile();
         } else {
