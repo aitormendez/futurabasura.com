@@ -19,6 +19,7 @@ php_extensions_custom:
   php8.2-soap: "{{ apt_package_state }}"
 apt_packages:
   mailutils: present
+  python3-pymysql: present
 repo_subtree: false
 clone_submodules: true
 

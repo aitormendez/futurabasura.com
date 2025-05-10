@@ -1,0 +1,4 @@
+- name: Clear WooCommerce block patterns cache
+  command: wp transient delete woocommerce_blocks_patterns
+  args:
+    chdir: "{{ deploy_helper.new_release_path }}"

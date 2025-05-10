@@ -40,7 +40,6 @@
                                     value="Subscribe">
                             </div>
                         </div>
-
                     </div>
                 </form>
                 <div class="email-error-container"></div>
