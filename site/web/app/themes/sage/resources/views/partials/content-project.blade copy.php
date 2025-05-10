@@ -11,7 +11,7 @@
     <div class="thumb-wrap md:bg-white">
       <div class="thumb md:ml-[20vw] md:max-w-[50vw]">
         @if (has_post_thumbnail())
-          {!! get_the_post_thumbnail(null, 'large') !!}
+        {!! get_the_post_thumbnail(null, 'large') !!}
         @endif
       </div>
     </div>
