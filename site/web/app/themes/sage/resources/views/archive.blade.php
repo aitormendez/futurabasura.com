@@ -2,7 +2,6 @@
 
 @section('content')
     <main class="main">
-
         @include('partials.page-header')
 
         <div class="infinite-scroll-container">
@@ -12,8 +11,6 @@
                 @includeFirst(['partials.content-' . get_post_type(), 'partials.content'])
             @endwhile
         </div>
-
-
         {!! get_the_posts_navigation() !!}
     </main>
 @endsection
