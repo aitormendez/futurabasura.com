@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-
-
     @if (is_front_page())
         @while (have_posts())
             @php(the_post())
