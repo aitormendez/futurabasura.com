@@ -23,7 +23,7 @@
   }
 
   p {
-    @apply text-base leading-relaxed text-negro-fb mb-4;
+    @apply text-base leading-tight text-negro-fb mb-4;
   }
 
   ul {
