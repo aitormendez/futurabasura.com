@@ -1,5 +1,5 @@
 @if (is_front_page())
-    <main id="main" class="main is-content-width md:px-none pb-6 pt-0 text-xl md:pb-20">
+    <div class="is-content-width md:px-none pb-6 pt-0 text-xl md:pb-20">
         @php the_content() @endphp
 
         @include('partials.cupones')
@@ -14,15 +14,15 @@
                 @endforeach
             </section>
         @endif
-    </main>
+    </div>
 @elseif (is_page('cart') || is_page('checkout'))
-    <main id="main" class="main is-content-width md:px-none w-full py-6 text-xl md:py-20">
+    <div class="main is-content-width md:px-none w-full py-6 md:py-20">
         @php the_content() @endphp
-    </main>
+    </div>
 @else
-    <main id="main" class="main is-content-width md:px-none prose w-full bg-white py-6 text-xl md:py-20">
+    <div class="is-content-width md:px-none prose w-full bg-white py-6 md:py-20">
         @php the_content() @endphp
-    </main>
+    </div>
 @endif
 
 @if ($pagination)
