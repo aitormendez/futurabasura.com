@@ -59,7 +59,15 @@
     dest: "{{ deploy_helper.new_release_path }}/web/app/themes/sage"
     group: no
     owner: no
-    rsync_opts: --chmod=Du=rwx,--chmod=Dg=rx,--chmod=Do=rx,--chmod=Fu=rw,--chmod=Fg=r,--chmod=Fo=r
+    rsync_opts:
+      - --exclude=hot
+      - --chmod=Du=rwx
+      - --chmod=Dg=rx
+      - --chmod=Do=rx
+      - --chmod=Fu=rw
+      - --chmod=Fg=r
+      - --chmod=Fo=r
+  delegate_to: localhost
 
 - name: Copy Git submodules manually
   synchronize:
