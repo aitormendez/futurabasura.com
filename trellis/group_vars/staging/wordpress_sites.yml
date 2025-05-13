@@ -7,7 +7,7 @@ wordpress_sites:
       - canonical: stage.futurabasura.com
     local_path: ../site
     branch: main
-    repo: git@github.com:aitormendez/futurabasura.com.git
+    repo: repo: https://github.com/aitormendez/futurabasura.com.git
     repo_subtree_path: site
     multisite:
       enabled: false
