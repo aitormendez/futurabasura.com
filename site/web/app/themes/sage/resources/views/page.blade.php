@@ -13,6 +13,8 @@
         @endwhile
     @else
         @include('partials.page-header')
+
+        <div class="bg-negro-fb h-[20px] w-[20px]"></div>
         @while (have_posts())
             @php(the_post())
             @includeFirst(['partials.content-page', 'partials.content'])
