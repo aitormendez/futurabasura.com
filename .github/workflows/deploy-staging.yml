@@ -35,5 +35,14 @@ jobs:
           yarn
           yarn build
 
+      - name: Debug SSH settings
+        run: |
+          echo "== ~/.ssh =="
+          ls -l ~/.ssh
+          echo "== known_hosts =="
+          cat ~/.ssh/known_hosts || true
+          echo "== private key permissions =="
+          ls -l ~/.ssh | grep trellis || true
+
       - name: Deploy to staging
         run: trellis deploy staging
