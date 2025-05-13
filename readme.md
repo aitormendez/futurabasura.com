@@ -55,9 +55,21 @@ El despliegue al servidor se realiza mediante workflows definidos en `.github/wo
   - `TRELLIS_DEPLOY_SSH_PRIVATE_KEY`
   - `TRELLIS_DEPLOY_SSH_KNOWN_HOSTS`
 
+### Submódulo `fb-blocks`
+
+El plugin Gutenberg personalizado `fb-blocks` está gestionado como submódulo Git en:
+
+```
+site/web/app/plugins/fb-blocks
+```
+
+Para que esté disponible durante los despliegues en GitHub Actions, se ha habilitado la opción `submodules: recursive` en el paso `actions/checkout@v3` de cada workflow. Esto permite que se clone automáticamente junto con el repositorio principal.
+
+Asegúrate de que el submódulo está actualizado y apuntando a una rama o commit válido antes de lanzar un deploy.
+
 ---
 
-## ⚒️ Makefile
+## ⚙️ Makefile
 
 El archivo `Makefile` permite ejecutar tareas recurrentes de forma simple. Debe estar ubicado en la raíz del proyecto.
 
@@ -83,7 +95,7 @@ futurabasura.com/
 ├── site/                  # Bedrock + WordPress
 │   └── web/app/
 │       ├── themes/sage/
-│       └── plugins/fb-blocks/
+│       └── plugins/fb-blocks/  # Submódulo Git
 ├── trellis/               # Configuración de servidor y despliegue
 │   └── public_keys/
 └── .github/
@@ -100,6 +112,7 @@ futurabasura.com/
 - Hacer `Run workflow` manualmente según destino deseado
 - Confirmar antes de desplegar que el entorno esté encendido
 - Validar que la compilación con `make build` funciona correctamente antes de enviar cambios
+- Asegurarse de que el submódulo `fb-blocks` esté actualizado antes del deploy
 
 ---
 
