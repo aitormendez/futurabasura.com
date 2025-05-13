@@ -9,8 +9,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repo (with submodules)
         uses: actions/checkout@v3
+        with:
+          submodules: recursive
 
       - name: Setup Trellis CLI
         uses: roots/setup-trellis-cli@v1
