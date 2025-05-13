@@ -17,20 +17,12 @@
 # Custom: Install GitHub deploy key to allow cloning via SSH
 ##################################################################
 
-- name: Ensure .ssh directory exists
-  file:
-    path: "/home/{{ web_user }}/.ssh"
-    state: directory
-    owner: "{{ web_user }}"
-    group: "{{ web_user }}"
-    mode: "0700"
-
 - name: Write GitHub deploy key from Vault
   copy:
     content: "{{ vault_github_deploy_key }}"
     dest: "/home/{{ web_user }}/.ssh/github_deploy_key"
     owner: "{{ web_user }}"
-    group: "{{ web_user }}"
+    group: "{{ web_group }}"
     mode: "0600"
 
 - name: Configure SSH to use GitHub deploy key
@@ -41,8 +33,16 @@
         IdentitiesOnly yes
     dest: "/home/{{ web_user }}/.ssh/config"
     owner: "{{ web_user }}"
-    group: "{{ web_user }}"
+    group: "{{ web_group }}"
     mode: "0644"
+
+- name: Ensure .ssh directory exists
+  file:
+    path: "/home/{{ web_user }}/.ssh"
+    state: directory
+    owner: "{{ web_user }}"
+    group: "{{ web_group }}"
+    mode: "0700"
 
 ##################################################################
 
