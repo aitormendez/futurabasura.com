@@ -26,8 +26,6 @@ jobs:
         with:
           ansible-vault-password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          trellis_deploy_ssh_private_key: ${{ secrets.TRELLIS_DEPLOY_SSH_PRIVATE_KEY }}
-          trellis_deploy_ssh_known_hosts: ${{ secrets.TRELLIS_DEPLOY_SSH_KNOWN_HOSTS }}
 
       - name: Build Sage 11 Theme
         run: |
