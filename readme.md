@@ -1,19 +1,19 @@
 # Proyecto Futurabasura.com
 
-Este proyecto usa el stack Roots (Trellis, Bedrock, Sage 11) con despliegue automatizado mediante GitHub Actions y un sistema de tareas simplificadas a través de Makefile.
+Este proyecto usa el stack Roots (Trellis, Bedrock, Sage 11) con despliegue automatizado mediante GitHub Actions y un sistema de tareas simplificadas a través de Makefile. También integra un plugin Gutenberg personalizado gestionado como submódulo Git y el uso de claves SSH seguras mediante Ansible Vault.
 
 ---
 
 ## 🚀 Despliegue automatizado con GitHub Actions
 
-El despliegue al servidor se realiza mediante workflows definidos en `.github/workflows/`, los cuales son ejecutados manualmente desde la interfaz web de GitHub o desde la terminal usando `gh`.
+El despliegue al servidor se realiza mediante workflows definidos en `.github/workflows/`, ejecutados manualmente desde la interfaz web de GitHub o desde la terminal usando `gh`.
 
 ### Entornos
 
 - `staging`: droplet en DigitalOcean con IP `178.128.168.215`
 - `production`: definido en `hosts/production`, usa la misma clave SSH del proyecto
 
-### Flujos definidos
+### Workflows disponibles
 
 #### 1. Deploy a staging
 
@@ -41,19 +41,18 @@ El despliegue al servidor se realiza mediante workflows definidos en `.github/wo
     make deploy-production
     ```
 
-### Requisitos
+### Seguridad con Ansible Vault
 
-- Tener instalado y autenticado GitHub CLI:
+La clave SSH privada utilizada por el servidor para clonar el repositorio de GitHub está almacenada en Vault de forma segura:
 
-  ```bash
-  gh auth login
-  ```
+```yaml
+vault_github_deploy_key: |
+  -----BEGIN OPENSSH PRIVATE KEY-----
+  ...
+  -----END OPENSSH PRIVATE KEY-----
+```
 
-- Secretos definidos en GitHub:
-
-  - `ANSIBLE_VAULT_PASSWORD`
-  - `TRELLIS_DEPLOY_SSH_PRIVATE_KEY`
-  - `TRELLIS_DEPLOY_SSH_KNOWN_HOSTS`
+Esta clave se escribe automáticamente en el servidor mediante tareas añadidas a `roles/deploy/tasks/main.yml`.
 
 ### Submódulo `fb-blocks`
 
@@ -97,7 +96,8 @@ futurabasura.com/
 │       ├── themes/sage/
 │       └── plugins/fb-blocks/  # Submódulo Git
 ├── trellis/               # Configuración de servidor y despliegue
-│   └── public_keys/
+│   ├── public_keys/
+│   └── roles/deploy/tasks/main.yml (modificado)
 └── .github/
     └── workflows/
         ├── deploy-staging.yml
@@ -108,11 +108,12 @@ futurabasura.com/
 
 ## 💡 Buenas prácticas
 
-- Usar `main` como rama única para staging y producción
+- Usar `main` como rama única para staging y producción (si se desea simplificar)
 - Hacer `Run workflow` manualmente según destino deseado
 - Confirmar antes de desplegar que el entorno esté encendido
 - Validar que la compilación con `make build` funciona correctamente antes de enviar cambios
 - Asegurarse de que el submódulo `fb-blocks` esté actualizado antes del deploy
+- Utilizar Vault para guardar claves privadas y no exponerlas en el repo
 
 ---
 
@@ -123,5 +124,9 @@ cd trellis
 # Solo si hace falta regenerar la clave
 trellis key generate
 # Para actualizar el entorno remoto con la clave
-trellis provision staging --tags=users
+trellis provision --tags=users staging
 ```
+
+---
+
+¡Despliegue automatizado y seguro listo para producción!
