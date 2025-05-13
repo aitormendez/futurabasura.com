@@ -13,6 +13,39 @@
   when: include_path.stat.exists
   tags: deploy-before
 
+##################################################################
+# Custom: Install GitHub deploy key to allow cloning via SSH
+##################################################################
+
+- name: Ensure .ssh directory exists
+  file:
+    path: "/home/{{ web_user }}/.ssh"
+    state: directory
+    owner: "{{ web_user }}"
+    group: "{{ web_user }}"
+    mode: "0700"
+
+- name: Write GitHub deploy key from Vault
+  copy:
+    content: "{{ vault_github_deploy_key }}"
+    dest: "/home/{{ web_user }}/.ssh/github_deploy_key"
+    owner: "{{ web_user }}"
+    group: "{{ web_user }}"
+    mode: "0600"
+
+- name: Configure SSH to use GitHub deploy key
+  copy:
+    content: |
+      Host github.com
+        IdentityFile /home/{{ web_user }}/.ssh/github_deploy_key
+        IdentitiesOnly yes
+    dest: "/home/{{ web_user }}/.ssh/config"
+    owner: "{{ web_user }}"
+    group: "{{ web_user }}"
+    mode: "0644"
+
+##################################################################
+
 - import_tasks: initialize.yml
 - import_tasks: update.yml
 - import_tasks: prepare.yml
