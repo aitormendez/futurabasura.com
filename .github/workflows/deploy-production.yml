@@ -1,40 +1,35 @@
-# .github/workflows/deploy-production.yml
-##
-# Deploy to production with Trellis
-##
-
-name: 🚀 Deploy to production
-run-name: deploy-production
+name: 🚀 Deploy to Production
 
 on:
   workflow_dispatch:
-  pull_request:
-    types: [closed]
-    branches: [main]
-
-env:
-  environment: production
 
 jobs:
-  deploy-production:
+  deploy:
+    name: Deploy to Production
     runs-on: ubuntu-latest
-    if: ${{ github.actor != 'dependabot[bot]' }}
+
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-      # Checkout the repo
-      - uses: actions/checkout@v3
+      - name: Setup Trellis CLI
+        uses: roots/setup-trellis-cli@v1
         with:
-          ref: ${{ github.event.pull_request.base.ref }}
+          ansible-vault-password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-      # Deploy site to production
-      - uses: ./.github/actions/trellis-cli
-        name: Deploy to production
-        if: github.event.pull_request.merged || github.event_name == 'workflow_dispatch' || github.repository != 'MWDelaney/trellis-template'
-        with:
-          extra-vars: '""'
-          environment: ${{ env.environment }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          trellis_site_slug: ${{ secrets.TRELLIS_SITE_SLUG }}
-          trellis_deploy_ssh_private_key: ${{ secrets.TRELLIS_DEPLOY_SSH_PRIVATE_KEY }}
-          trellis_deploy_ssh_known_hosts: ${{ secrets.TRELLIS_DEPLOY_SSH_KNOWN_HOSTS }}
-          ansible_vault_password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
+      - name: Build Sage 11 Theme
+        run: |
+          cd site/web/app/themes/sage
+          corepack enable
+          yarn
+          yarn build
+
+      - name: Build FB Blocks Plugin
+        run: |
+          cd site/web/app/plugins/fb-blocks
+          yarn
+          yarn build
+
+      - name: Deploy to production
+        run: trellis deploy production
