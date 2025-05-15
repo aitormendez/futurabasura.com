@@ -1,21 +1,43 @@
-# Variables
-BRANCH=main
+# make deploy            # deploy to staging (default)
+# make deploy ENV=production
+# make deploy-staging
+# make build-theme
 
-# Deploy a staging via GitHub CLI
-deploy-staging:
-	gh workflow run deploy-staging.yml --ref $(BRANCH)
 
-# Deploy a production via GitHub CLI
-deploy-production:
-	gh workflow run deploy-production.yml --ref $(BRANCH)
+# Variables globales
+BRANCH ?= main
+ENV ?= staging
+THEME_PATH := site/web/app/themes/sage
 
-# Compilar tema Sage localmente
+# Colores para mensajes (opcional, solo para estética)
+GREEN := \033[0;32m
+NC := \033[0m
+
+# Mostrar ayuda
+help:
+	@echo ""
+	@echo "Usage: make [target] [ENV=staging|production]"
+	@echo ""
+	@echo "Targets:"
+	@echo "  build-theme          Compile Sage theme"
+	@echo "  deploy               Deploy to specified environment (default: staging)"
+	@echo "  deploy-staging       Shortcut to deploy to staging"
+	@echo "  deploy-production    Shortcut to deploy to production"
+	@echo ""
+
+# Compilar tema Sage
 build-theme:
-	cd site/web/app/themes/sage && npm install && npm run build
+	@echo "$(GREEN)> Building Sage theme...$(NC)"
+	cd $(THEME_PATH) && npm install && npm run build
 
-# Compilar plugin Gutenberg localmente
-build-plugin:
-	cd site/web/app/plugins/fb-blocks && npm install && npm run build
+# Desplegar al entorno indicado
+deploy:
+	@echo "$(GREEN)> Deploying to $(ENV)...$(NC)"
+	gh workflow run deploy-$(ENV).yml --ref $(BRANCH)
 
-# Compilar todo localmente
-build: build-theme build-plugin
+# Atajos específicos para staging y production
+deploy-staging:
+	$(MAKE) deploy ENV=staging
+
+deploy-production:
+	$(MAKE) deploy ENV=production

@@ -25,7 +25,37 @@ Esta guía describe paso a paso cómo configurar un flujo de despliegue continuo
 
 ---
 
-## 2. Clonar e integrar los workflows desde `trellis-github-deployment`
+## 2. Uso de `npm` en todo el proyecto
+
+Aunque originalmente se usaba `yarn` (y aún puede encontrarse en algunas guías antiguas), en este proyecto se ha migrado completamente a **`npm`**, por los siguientes motivos:
+
+- `@wordpress/scripts` y otras herramientas modernas de WordPress están diseñadas y testeadas para trabajar con `npm`.
+- Sage 11 ha eliminado menciones explícitas a `yarn` en su documentación.
+- Yarn 2+ (Berry) introduce un sistema Plug'n'Play incompatible con muchas herramientas del ecosistema.
+
+### Pasos para migrar el tema y el plugin a `npm` en caso de estar usando yarn (no será así por defecto)
+
+#### A) En el tema Sage
+
+```bash
+cd site/web/app/themes/sage
+rm yarn.lock
+npm install
+```
+
+#### B) En el plugin Gutenberg (submódulo)
+
+```bash
+cd site/web/app/plugins/fb-blocks
+rm yarn.lock package-lock.json
+npm install
+```
+
+Luego, ajusta los comandos en el workflow y el Makefile.
+
+---
+
+## 3. Clonar e integrar los workflows desde `trellis-github-deployment`
 
 1. Clona el repositorio base:
 
@@ -44,7 +74,7 @@ git clone https://github.com/MWDelaney/trellis-github-deployment .github
 
 ---
 
-## 3. Generar claves SSH para GitHub Actions con Trellis CLI
+## 4. Generar claves SSH para GitHub Actions con Trellis CLI
 
 Ejecuta desde el directorio `trellis`:
 
@@ -72,21 +102,23 @@ trellis provision --tags=users staging
 
 ---
 
-## 4. Configurar secretos en GitHub
+## 5. Configurar secretos en GitHub
 
 En tu repositorio en GitHub, accede a:
 `Settings → Secrets and variables → Actions → New repository secret`
 
-Agrega los siguientes secretos **si no los ha creado automáticamente \*\*\*\*\*\*\*\*\*\*\*\*`trellis key generate`**:
+Agrega los siguientes secretos **si no los ha creado automáticamente** `trellis key generate`:
 
 - `ANSIBLE_VAULT_PASSWORD`: el contenido de tu archivo `trellis/.vault_pass`
 - `TRELLIS_DEPLOY_SSH_PRIVATE_KEY`: la clave privada deploy
 - `TRELLIS_DEPLOY_SSH_KNOWN_HOSTS`: salida de `ssh-keyscan -H github.com`
 - `GITHUB_TOKEN`: variable ya incluida por GitHub, no hace falta agregarla manualmente
 
+> 💡 **Nota:** Los valores de los secretos no son visibles una vez guardados. Si no estás seguro de haberlos añadido correctamente, puedes volver a subirlos sin problema.
+
 ---
 
-## 5. Archivo `.github/workflows/deploy-staging.yml`
+## 6. Archivo `.github/workflows/deploy-staging.yml`
 
 ```yaml
 name: 🚀 Deploy to Staging
@@ -100,11 +132,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Clona el repositorio y los submódulos
       - name: Checkout repo (with submodules)
         uses: actions/checkout@v3
         with:
           submodules: recursive
 
+      # Instala la clave SSH y known_hosts
       - name: Install SSH key and known_hosts
         uses: shimataro/ssh-key-action@v2
         with:
@@ -112,25 +146,34 @@ jobs:
           known_hosts: ${{ secrets.TRELLIS_DEPLOY_SSH_KNOWN_HOSTS }}
           if_key_exists: replace
 
+      # Instala y configura Trellis CLI
       - name: Setup Trellis CLI
         uses: roots/setup-trellis-cli@v1
         with:
           ansible-vault-password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
+      # Compila el tema Sage 11
       - name: Build Sage 11 Theme
         run: |
           cd site/web/app/themes/sage
-          corepack enable
-          yarn
-          yarn build
+          npm install
+          npm run build
 
+      # Instala dependencias PHP del tema
+      - name: Install Sage PHP dependencies
+        run: |
+          cd site/web/app/themes/sage
+          composer install --no-dev --no-interaction --optimize-autoloader
+
+      # Compila el plugin Gutenberg
       - name: Build FB Blocks Plugin
         run: |
           cd site/web/app/plugins/fb-blocks
-          yarn
-          yarn build
+          npm install
+          npm run build
 
+      # Ejecuta el deploy con Trellis
       - name: Deploy to staging
         run: trellis deploy staging
 ```
@@ -139,9 +182,7 @@ jobs:
 
 ---
 
-## 6. Añadir claves SSH al Vault global
-
-> Nota: asegúrate de que la clave coincida exactamente con la deploy key usada en GitHub, y que la indentación YAML sea correcta. Si introduces esta clave manualmente, evita espacios adicionales antes de cada línea del contenido del bloque.
+## 7. Añadir claves SSH al Vault global
 
 Editar el archivo:
 
@@ -160,7 +201,7 @@ vault_github_deploy_key: |
 
 ---
 
-## 7. Modificar tareas del rol `deploy` para escribir la clave en el servidor
+## 8. Modificar tareas del rol `deploy` para escribir la clave en el servidor
 
 Editar `trellis/roles/deploy/tasks/main.yml`:
 
@@ -197,14 +238,11 @@ Insertar justo antes de `- import_tasks: initialize.yml`:
 
 ---
 
-## 8. Asegurar que la URL del repo usa formato SSH
+## 9. Asegurar que la URL del repo usa formato SSH
 
 Edita el archivo `trellis/group_vars/staging/wordpress_sites.yml` y asegúrate de que contenga algo similar a lo siguiente:
 
 ```yaml
-# Created by trellis-cli v1.13.0
-# Documentation: https://roots.io/trellis/docs/wordpress-sites/
-
 wordpress_sites:
   futurabasura.com:
     site_hosts:
@@ -212,7 +250,6 @@ wordpress_sites:
     local_path: ../site
     branch: main
     repo: git@github.com:aitormendez/futurabasura.com.git
-    repo_accepts_https: true # <--añadir
     repo_subtree_path: site
     multisite:
       enabled: false
@@ -228,40 +265,49 @@ wordpress_sites:
 
 Haz lo mismo para `production` si lo estás usando.
 
+> 💡 **Nota:** `repo_accepts_https` no es necesario cuando usas `git@github.com:...` como URL del repositorio.
+
 ---
 
-## 9. Añadir `Makefile` para facilitar los comandos
+## 10. Añadir `Makefile` para facilitar los comandos
 
 ```makefile
+# Variables
 BRANCH=main
 
+# Deploy a staging via GitHub CLI
 deploy-staging:
 	gh workflow run deploy-staging.yml --ref $(BRANCH)
 
+# Deploy a production via GitHub CLI
 deploy-production:
 	gh workflow run deploy-production.yml --ref $(BRANCH)
 
+# Compilar tema Sage localmente
 build-theme:
-	cd site/web/app/themes/sage && yarn && yarn build
+	cd site/web/app/themes/sage && npm install && npm run build
 
+# Compilar plugin Gutenberg localmente
 build-plugin:
-	cd site/web/app/plugins/fb-blocks && yarn && yarn build
+	cd site/web/app/plugins/fb-blocks && npm install && npm run build
 
+# Compilar todo localmente
 build: build-theme build-plugin
 ```
 
 ---
 
-## 10. Buenas prácticas
+## 11. Buenas prácticas
 
 - Evita guardar claves privadas en archivos planos (usa Vault).
 - Usa submódulos con `submodules: recursive`.
 - No uses agent-forwarding con GitHub Actions.
 - Verifica siempre que staging esté encendido antes de desplegar.
+- Prefiere `npm` para máxima compatibilidad con WordPress y el ecosistema actual.
 
 ---
 
-## 11. Resultado final
+## 12. Resultado final
 
 Al ejecutar:
 
@@ -273,11 +319,8 @@ GitHub Actions:
 
 - Clona el repo
 - Compila Sage 11 y el plugin Gutenberg
+- Instala las dependencias PHP del tema
 - Provisiona la clave en el servidor
 - Despliega el sitio a staging con Trellis
 
 Todo ello **de forma segura, reproducible y automatizada**.
-
----
-
-¡Despliegue exitoso asegurado!
