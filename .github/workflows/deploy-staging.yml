@@ -30,15 +30,14 @@ jobs:
       - name: Build Sage 11 Theme
         run: |
           cd site/web/app/themes/sage
-          corepack enable
-          yarn
-          yarn build
+          npm install
+          npm run build
 
       - name: Build FB Blocks Plugin
         run: |
           cd site/web/app/plugins/fb-blocks
-          yarn
-          yarn build
+          npm install
+          npm run build
 
       - name: Deploy to staging
         run: trellis deploy staging

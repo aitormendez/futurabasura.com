@@ -11,11 +11,11 @@ deploy-production:
 
 # Compilar tema Sage localmente
 build-theme:
-	cd site/web/app/themes/sage && enable && yarn && yarn build
+	cd site/web/app/themes/sage && npm install && npm run build
 
 # Compilar plugin Gutenberg localmente
 build-plugin:
-	cd site/web/app/plugins/fb-blocks && yarn && yarn build
+	cd site/web/app/plugins/fb-blocks && npm install && npm run build
 
 # Compilar todo localmente
 build: build-theme build-plugin
