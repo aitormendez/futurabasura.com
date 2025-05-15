@@ -64,8 +64,7 @@ defined('ABSPATH') || exit();
 										</tr>
 										<tr>
 											<td id="footer-section-img">
-												<img src="{{ home_url('/app/themes/fb/public/images/email-hole.png') }}" alt="hole-logo">
-
+												<img src="{{ email_asset('resources/images/email-hole.png') }}" alt="hole logo">
 											</td>
 										</tr>
 										<tr>
