@@ -12,6 +12,7 @@ a {
 
 :focus-visible {
   @apply outline-2 outline-gris-fb outline-offset-8;
+  z-index: 1000000;
 }
 
 .main,

@@ -15,6 +15,10 @@
     <input type="text" name="IG_ACCOUNT" placeholder="IG account" id="participate-IG_ACCOUNT"
         class="mb-2 w-full bg-white p-4" />
 
+    <label for="participate-SUBJECT" class="hidden">Subject</label>
+    <input type="text" name="SUBJECT" placeholder="Subject" required id="participate-SUBJECT"
+        class="mb-2 w-full bg-white p-4" />
+
     <label for="participate-MESSAGE" class="hidden">Message</label>
     <textarea name="MESSAGE" placeholder="Message" required id="participate-MESSAGE" rows="5"
         class="mb-2 w-full bg-white p-4"></textarea>
