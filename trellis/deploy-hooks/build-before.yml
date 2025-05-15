@@ -1,6 +1,6 @@
 - name: Check for manifest
   stat:
-    path: "{{ project_path }}/web/app/themes/sage/public/build/manifest.json"
+    path: "{{ project_local_path }}/web/app/themes/sage/public/build/manifest.json"
   delegate_to: localhost
   register: entrypoints_data
 
@@ -11,7 +11,7 @@
 
 - name: Copy production assets
   synchronize:
-    src: "{{ project_path }}/web/app/themes/sage/public"
+    src: "{{ project_local_path }}/web/app/themes/sage/public"
     dest: "{{ deploy_helper.new_release_path }}/web/app/themes/sage"
     group: no
     owner: no
@@ -27,7 +27,7 @@
 
 - name: Copy Git submodules (fb-blocks)
   synchronize:
-    src: "{{ project_path }}/web/app/plugins/fb-blocks/"
+    src: "{{ project_local_path }}/web/app/plugins/fb-blocks/"
     dest: "{{ deploy_helper.new_release_path }}/web/app/plugins/"
     recursive: yes
     delete: yes
