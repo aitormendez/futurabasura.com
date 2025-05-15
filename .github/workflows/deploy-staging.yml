@@ -27,11 +27,16 @@ jobs:
           ansible-vault-password: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Sage 11 Theme
+      - name: Build Sage 11 Theme (assets)
         run: |
           cd site/web/app/themes/sage
           npm install
           npm run build
+
+      - name: Install Sage PHP dependencies
+        run: |
+          cd site/web/app/themes/sage
+          composer install --no-dev --no-interaction --optimize-autoloader
 
       - name: Build FB Blocks Plugin
         run: |

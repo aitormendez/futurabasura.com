@@ -25,6 +25,14 @@
       - --chmod=Fo=r
   delegate_to: localhost
 
+- name: Copy Sage vendor directory (PHP dependencies)
+  synchronize:
+    src: "{{ project_local_path }}/web/app/themes/sage/vendor"
+    dest: "{{ deploy_helper.new_release_path }}/web/app/themes/sage"
+    recursive: yes
+    delete: yes
+  delegate_to: localhost
+
 - name: Copy Git submodules (fb-blocks)
   synchronize:
     src: "{{ project_local_path }}/web/app/plugins/fb-blocks/"
