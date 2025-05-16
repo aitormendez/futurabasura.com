@@ -263,4 +263,3 @@ display: block;
 #footer-section-img {
 text-align: center;
 }
-<?php
